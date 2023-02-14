@@ -4,10 +4,17 @@ import { Nav, Navbar } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import { getCurrentUser, logout } from "../../services/auth.service";
 import DensityMediumIcon from '@mui/icons-material/DensityMedium';
-import logo from '../../assets/logo.png'
+import logo from '../../assets/logo.png';
+import {CollapseContextHook} from "../../hooks/custom-contexts/display-toggle-hook"
+
 export const Header = () => {
     const [currentUser, setCurrentUser] = useState(undefined);
-    const { collapseSidebar } = useProSidebar();
+    const { collapsed, collapseSidebar } = useProSidebar();
+    const { setToggle } = CollapseContextHook()
+    const handleToggle = () => {
+        collapseSidebar(!collapsed);
+        setToggle(!collapsed)
+    }
     useEffect(() => {
         const user = getCurrentUser();
         if (user) {
@@ -25,7 +32,7 @@ export const Header = () => {
                 <Navbar.Brand className="text-center">
                     <Link to={"/"}><img src={logo} style={{ height: '50px' }}></img></Link>
                 </Navbar.Brand>
-                <i onClick={collapseSidebar} >{<DensityMediumIcon/>}</i>
+                <i onClick={handleToggle} >{<DensityMediumIcon />}</i>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto"></Nav>

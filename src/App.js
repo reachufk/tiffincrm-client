@@ -10,15 +10,18 @@ import { Contact } from "./components/Contact";
 import { About } from "./components/About";
 import { Category } from "./components/Category/Caterogy";
 import { SideNav } from "./components/Sidenav/Sidenav";
-
+import { CollapseContext,CollapseProvider } from "./hooks/custom-contexts/display-toggle-hook"
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./assets/styles/layout.css"
 import 'animate.css';
+import { useContext } from "react";
 
 function App() {
+
   return (
     <Container style={{ background: '#f5f5f5', minHeight: '100vh' ,minWidth:'100%'}}>
       <ProSidebarProvider>
+    <CollapseProvider>
       <Header />
       <aside>
       <SideNav />
@@ -34,6 +37,7 @@ function App() {
         <Route path="/category/:id" element={<Category />} />
       </Routes>
       </section>
+      </CollapseProvider>
       </ProSidebarProvider>
 
     </Container>
