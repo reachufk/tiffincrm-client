@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { PublicLayoutComponent } from './layouts/public-layout/public-layout.component';
 import { UserLayoutComponent } from './layouts/user-layout/user-layout.component';
+import { AuthGuard } from './shared/guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -24,6 +25,7 @@ const routes: Routes = [
   {
     path: 'user',
     component: UserLayoutComponent,
+    canActivate:[AuthGuard],
     children: [{
       path: '',
       loadChildren: () => import('./user/user.module').then(m => m.UserModule)
@@ -32,6 +34,7 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminLayoutComponent,
+    canActivate:[AuthGuard],
     children: [{
       path: '',
       loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)

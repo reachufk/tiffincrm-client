@@ -11,6 +11,8 @@ import { NavbarComponent } from './layouts/navbar/navbar.component';
 import { SidebarComponent } from './layouts/sidebar/sidebar.component';
 import { PublicLayoutComponent } from './layouts/public-layout/public-layout.component';
 import { UserLayoutComponent } from './layouts/user-layout/user-layout.component';
+import { SharedModule } from './shared/shared.module';
+import { FormErrorMessagesDirective } from './shared/directives/form-error-messages.directive';
 
 @NgModule({
   imports: [
@@ -19,8 +21,8 @@ import { UserLayoutComponent } from './layouts/user-layout/user-layout.component
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule,
-    AppRoutingModule,
-    
+    AppRoutingModule,    
+    SharedModule
   ],
   declarations: [
     AppComponent,
@@ -29,7 +31,8 @@ import { UserLayoutComponent } from './layouts/user-layout/user-layout.component
     FooterComponent,
     SidebarComponent,
     PublicLayoutComponent,
-    UserLayoutComponent
+    UserLayoutComponent,
+    FormErrorMessagesDirective
 
   ],
   providers: [],
