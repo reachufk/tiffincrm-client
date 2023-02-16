@@ -1,0 +1,60 @@
+<div class="main-content">
+      <div class="container-fluid">
+
+            <div class="row">
+                  <div class="col-md-12">
+                        <div class="card card-chart">
+                              <div class="card-header card-header-success">
+                                    <div class="row">
+                                          <div class="col-lg-6 col-sm-12 my-auto">
+                                                <h4 class="my-auto">Users</h4>
+                                          </div>
+                                          <div class="col-lg-6 col-sm-12">
+                                                <div class="p-inputgroup">
+                                                      <button (click)="searchKeyword.reset()" type="button"
+                                                            class="p-button-danger" pButton pRipple
+                                                            icon="pi pi-refresh"></button>
+                                                      <input type="text" [formControl]="searchKeyword" pInputText
+                                                            placeholder="Keyword">
+                                                      <button (click)="GetUsers()" type="button" class="p-button-danger"
+                                                            pButton pRipple icon="pi pi-search"></button>
+                                                </div>
+                                          </div>
+                                    </div>
+                              </div>
+                              <div class="card-body">
+                                    <!-- <h4 class="card-title">Daily Sales</h4> -->
+                                    <div class="row">
+                                          <div class="col-lg-12">
+
+                                                <p-table [value]="Users | async" [tableStyle]="{'min-width': '50rem'}">
+                                                      <ng-template pTemplate="header" let-columns>
+                                                            <tr>
+                                                                  <th>Name </th>
+                                                                  <th>Email</th>
+                                                                  <th>Phone Number</th>
+                                                            </tr>
+                                                      </ng-template>
+                                                      <ng-template pTemplate="body" let-user let-columns="columns">
+                                                            <tr>
+                                                                  <td>{{user.firstName + ' ' + user.lastName}}</td>
+                                                                  <td>{{user.email}}</td>
+                                                                  <td>{{user.phoneNumber}}</td>
+                                                            </tr>
+                                                      </ng-template>
+                                                </p-table>
+
+
+
+                                          </div>
+                                    </div>
+                              </div>
+                              <div class="card-footer">
+                                    <app-paginator (JumpTo)="pageChanged($event)" (PageChange)="pageChanged($event)"
+                                     [TotalPages]="TotalPages" [CurrentPage]="CurrentPage" [TotalRecords]="TotalRecords"></app-paginator>
+                              </div>
+                        </div>
+                  </div>
+            </div>
+      </div>
+</div>

@@ -1,0 +1,23 @@
+<div class="row">
+      <div class="col-lg-4 col-sm-12">
+            <div class="p-inputgroup">
+                  <input type="number" class="p-inputtext-sm" [formControl]="PageNoControl" pInputText
+                        placeholder="Jump To Page">
+                  <button (click)="PageJumpTo()" type="button" class="p-button-danger" pButton pRipple
+                        label="Go"></button>
+            </div>
+
+      </div>
+      <div class="col-lg-4 col-sm-12 text-center">
+            <span class="counter">Total Users : {{TotalRecords}} </span>
+      </div>
+      <div class="col-lg-4 col-sm-12 text-right">
+            <span class="counter">Page {{CurrentPage}} of {{TotalPages}}</span>
+
+            <button [disabled]="CurrentPage == 1" (click)="pageChanged(-1)" type="button"
+                  class="p-button-text p-button-small" pButton pRipple icon="pi pi-arrow-left"></button>
+
+            <button [disabled]="CurrentPage == TotalPages" (click)="pageChanged(+1)" type="button"
+                  class="p-button-text p-button-small" pButton pRipple icon="pi pi-arrow-right"></button>
+      </div>
+</div>

@@ -12,8 +12,6 @@ import { SidebarComponent } from './layouts/sidebar/sidebar.component';
 import { PublicLayoutComponent } from './layouts/public-layout/public-layout.component';
 import { UserLayoutComponent } from './layouts/user-layout/user-layout.component';
 import { SharedModule } from './shared/shared.module';
-import { FormErrorMessagesDirective } from './shared/directives/form-error-messages.directive';
-
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -32,8 +30,6 @@ import { FormErrorMessagesDirective } from './shared/directives/form-error-messa
     SidebarComponent,
     PublicLayoutComponent,
     UserLayoutComponent,
-    FormErrorMessagesDirective
-
   ],
   providers: [],
   bootstrap: [AppComponent]
