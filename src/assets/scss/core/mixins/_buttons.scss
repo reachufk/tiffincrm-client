@@ -4,12 +4,6 @@
   background-color: $background;
   border-color: $border;
 
-  @include hover {
-    color: $color;
-    background-color: $focus-background;
-    border-color: $focus-border;
-  }
-
   &:focus,
   &.focus,
   &:hover{
@@ -51,10 +45,6 @@
   &:disabled {
     &:focus,
     &.focus {
-      background-color: $background;
-      border-color: $border;
-    }
-    @include hover {
       background-color: $background;
       border-color: $border;
     }

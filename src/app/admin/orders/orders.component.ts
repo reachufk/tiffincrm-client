@@ -14,6 +14,7 @@ export class OrdersComponent implements OnInit {
   }
 
   GetOrders(){
+    this.orderService.GetOrders()
   }
 
 
