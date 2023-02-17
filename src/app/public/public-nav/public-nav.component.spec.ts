@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { PublicLayoutComponent } from './public-layout.component';
+import { PublicNavComponent } from './public-nav.component';
 
 describe('PublicLayoutComponent', () => {
-  let component: PublicLayoutComponent;
-  let fixture: ComponentFixture<PublicLayoutComponent>;
+  let component: PublicNavComponent;
+  let fixture: ComponentFixture<PublicNavComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PublicLayoutComponent ]
+      declarations: [PublicNavComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
-    fixture = TestBed.createComponent(PublicLayoutComponent);
+    fixture = TestBed.createComponent(PublicNavComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

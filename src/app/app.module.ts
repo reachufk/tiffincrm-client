@@ -12,6 +12,8 @@ import { SidebarComponent } from './layouts/sidebar/sidebar.component';
 import { PublicLayoutComponent } from './layouts/public-layout/public-layout.component';
 import { UserLayoutComponent } from './layouts/user-layout/user-layout.component';
 import { SharedModule } from './shared/shared.module';
+import { PublicModule } from './public/public.module';
+
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -20,7 +22,8 @@ import { SharedModule } from './shared/shared.module';
     HttpClientModule,
     RouterModule,
     AppRoutingModule,    
-    SharedModule
+    SharedModule,
+    PublicModule
   ],
   declarations: [
     AppComponent,

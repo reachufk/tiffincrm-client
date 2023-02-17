@@ -8,11 +8,13 @@ import {MenuModule} from 'primeng/menu';
 import {TableModule} from 'primeng/table';
 import {ButtonModule} from 'primeng/button';
 import { PaginatorComponent } from './components/paginator/paginator.component';
-
+import { PoweredBy } from '../public/powered-by/powered-by.component';
+import { DividerModule} from 'primeng/divider'
 @NgModule({
   declarations: [
     FormErrorMessagesDirective,
-    PaginatorComponent
+    PaginatorComponent,
+    PoweredBy
   ],
   imports: [
     CommonModule,
@@ -20,6 +22,7 @@ import { PaginatorComponent } from './components/paginator/paginator.component';
     ReactiveFormsModule,
     ButtonModule,
     InputTextModule,
+    DividerModule
   ],
   exports: [
     InputTextModule,
@@ -28,7 +31,9 @@ import { PaginatorComponent } from './components/paginator/paginator.component';
     TableModule,
     ButtonModule,
     FormErrorMessagesDirective,
-    PaginatorComponent
+    PaginatorComponent,
+    PoweredBy,
+    DividerModule
   ]
 })
 export class SharedModule { }

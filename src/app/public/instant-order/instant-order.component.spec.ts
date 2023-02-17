@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { PublicLayoutComponent } from './public-layout.component';
+import { InstantOrder } from './instant-order.component';
 
 describe('PublicLayoutComponent', () => {
-  let component: PublicLayoutComponent;
-  let fixture: ComponentFixture<PublicLayoutComponent>;
+  let component: InstantOrder;
+  let fixture: ComponentFixture<InstantOrder>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PublicLayoutComponent ]
+      declarations: [InstantOrder]
     })
-    .compileComponents();
+      .compileComponents();
 
-    fixture = TestBed.createComponent(PublicLayoutComponent);
+    fixture = TestBed.createComponent(InstantOrder);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

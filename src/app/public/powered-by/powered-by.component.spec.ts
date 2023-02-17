@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { PublicLayoutComponent } from './public-layout.component';
+import { PoweredBy } from './powered-by.component';
 
 describe('PublicLayoutComponent', () => {
-  let component: PublicLayoutComponent;
-  let fixture: ComponentFixture<PublicLayoutComponent>;
+  let component: PoweredBy;
+  let fixture: ComponentFixture<PoweredBy>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PublicLayoutComponent ]
+      declarations: [PoweredBy]
     })
-    .compileComponents();
+      .compileComponents();
 
-    fixture = TestBed.createComponent(PublicLayoutComponent);
+    fixture = TestBed.createComponent(PoweredBy);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
