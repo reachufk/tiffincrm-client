@@ -1,0 +1,16 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <button  (click)="toggleCollapsed()" aria-controls="navbarsDefault" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#navbarsDefault" data-toggle="collapse" type="button">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="#">Navbar</a> 
+      <div class="collapse navbar-collapse" id="navbarsDefault" [ngClass]="{'collapse': collapsed, 'navbar-collapse': true}">
+          <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                  <a class="nav-link active" routerlink="/dashboard" routerlinkactive="active" ng-reflect-router-link="/dashboard" ng-reflect-router-link-active="active" href="/dashboard">Dashboard</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" routerlink="/program" routerlinkactive="active" ng-reflect-router-link="/program" ng-reflect-router-link-active="active" href="/program">Programm</a>
+              </li>          
+          </ul>
+      </div>
+</nav>
