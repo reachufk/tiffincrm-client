@@ -1,35 +1,32 @@
 <nav class="navbar navbar-expand-lg navbar-transparent  navbar-absolute fixed-top">
     <div class="container-fluid">
         <div class="navbar-wrapper">
-          <a class="navbar-brand" href="javascript:void(0)">Admin </a>
-
-                <span class="p-input-icon-left">
-                    <i class="pi pi-search"></i>
-                    <input type="text" pInputText class="p-inputtext-sm" placeholder="Search" id="search" [formControl]="searchControl" />
-                </span>
+            <a class="navbar-brand">
+             <span class="fs-4 fw-bold text-secondary">Admin</span> 
+             <span></span>  
+            </a>
 
         </div>
-        <button  class="navbar-toggler" type="button" (click)="sidebarToggle()">
+        <button class="navbar-toggler" type="button" (click)="sidebarToggle()">
             <span class="sr-only"></span>
             <span class="navbar-toggler-icon icon-bar"></span>
             <span class="navbar-toggler-icon icon-bar"></span>
             <span class="navbar-toggler-icon icon-bar"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navigation">
-          
+
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" routerLink="/admin/dashboard">
-                        <i class="pi pi-home"></i>
+                        <i class="pi pi-home fs-4"></i>
                         <p>
                             <span class="d-lg-none d-md-block">Stats</span>
                         </p>
                     </a>
                 </li>
-                <li class="nav-item dropdown">
-                   
+                <li class="nav-item">
                     <a class="nav-link show-cursor" (click)="menuNotifications.toggle($event)">
-                        <i class="pi pi-bell"></i>
+                        <i class="pi pi-bell fs-4"></i>
                         <span class="notification bg-primary">{{notificationItems?.length}}</span>
                         <p-menu #menuNotifications appendTo="body" [popup]="true" [model]="notificationItems"></p-menu>
                     </a>

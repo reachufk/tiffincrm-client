@@ -9,10 +9,15 @@ import { UsersComponent } from './users/users.component';
 import { SharedModule } from '../shared/shared.module';
 
 import { environment } from 'src/environments/environment';
-
+import { CatagoriesComponent } from './catagories/catagories.component';
+import { CatagoryItemsComponent } from './catagory-items/catagory-items.component';
+import { AdminCatagoryService } from './services/admin-catagory.service';
+import { AdminUserService } from './services/admin-user.service';
+import { AdmiOrdersService } from './services/admin-orders.service'
 
 @NgModule({
-  declarations: [DashboardComponent, OrdersComponent, UsersComponent],
+  providers: [AdminCatagoryService, AdminUserService, AdmiOrdersService],
+  declarations: [DashboardComponent, OrdersComponent, UsersComponent, CatagoriesComponent, CatagoryItemsComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,
