@@ -1,0 +1,55 @@
+<div class="row">
+      <div class="col-lg-12 px-0">
+          <p-table #dt1 [value]="CompletedOrders"
+              [globalFilterFields]="['orderAddress','orderMode']"
+              class="w-100">
+
+              <ng-template pTemplate="caption">
+                  <div class="p-d-flex">
+                      <span class="p-input-icon-left p-ml-auto">
+                          <i class="pi pi-search"></i>
+                          <input pInputText type="text"
+                              (input)="dt1.filterGlobal($event.target.value, 'contains')"
+                              placeholder="Search keyword" />
+                      </span>
+                      <span class="pull-right p-fluid">
+                          <p-multiSelect [options]="OrderTypes" appendTo="body" optionLabel="name" (onChange)="orderTypeFilter($event)" placeholder="Select Order Type" optionValue="value"></p-multiSelect>
+                      </span>
+                  </div>
+              </ng-template>
+
+              <ng-template pTemplate="header">
+                  <tr>
+                      <th>Customer</th>
+                      <th>Address</th>
+                      <th>Type</th>
+                      <th>Items</th>
+                      <th>Amount</th>
+                      <th>Action</th>
+                  </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-order>
+                  <tr>
+                      <td>{{order['userInfo']?.firstName +' '+ order['userInfo']?.lastName}}</td>
+                      <td>{{order?.orderAddress}}</td>
+                      <td>{{order?.orderType}}</td>
+                      <td>
+                          <div class="row">
+                              <div  class="col-lg-12">
+
+                              </div>
+                          </div>
+                      </td>
+                      <td></td>
+                      <td></td>
+
+                  </tr>
+              </ng-template>
+              <ng-template pTemplate="emptymessage">
+                  <tr class="text-center">
+                      <th colspan="6" class="py-4 text-danger">No completed order</th>
+                  </tr>
+              </ng-template>
+          </p-table>
+      </div>
+  </div>

@@ -1,0 +1,118 @@
+<div class="row">
+      <div class="col-lg-12 text-end mt-2">
+            <button printSectionId="invoice" ngxPrint pButton 
+            [useExistingCss]="true"
+            class="p-button-primary p-button-sm" label="Process"></button>
+      </div>
+      <!-- BEGIN INVOICE -->
+      <div #invoice id="invoice" class="col-12">
+            <div class="grid">
+                  <div class="grid-body">
+                        <div class="invoice-title">
+                              <div class="row">
+                                    <div class="col-xs-12">
+                                          <h2>Tiffin Aaw</h2>
+                                    </div>
+                              </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                              <div class="col-6">
+                                    <address>
+                                          <strong>Billed To:</strong><br>
+                                          {{OrderDetails?.userInfo?.firstName + ' ' + OrderDetails?.userInfo?.lastName
+                                          }}
+                                          <br>
+                                          {{OrderDetails?.orderAddress}}
+                                          <br>
+                                          <abbr title="Phone">Phone : </abbr>
+                                          {{OrderDetails?.userInfo?.phoneNumber}}
+                                          <br>
+                                          <abbr title="Email">Email : </abbr>
+                                          {{OrderDetails?.userInfo?.email}}
+                                    </address>
+                              </div>
+                              <div class="col-6 text-end">
+                                    <span><strong>Order ID :</strong></span>
+                                    <br>
+                                    {{OrderDetails?._id}}
+                                    <br>
+                                    <span><strong>Order Date :</strong></span>
+                                    <br>
+                                    {{OrderDetails?.createdAt | date:"dd-MM-yyyy"}}
+                                    <br>
+                                    <span><strong>Ordered At :</strong></span>
+                                    <br>
+                                    {{OrderDetails?.createdAt | date:"hh:MM a"}}
+
+                              </div>
+                        </div>
+                        <div class="row mt-4">
+                              <div class="col-6 mb-0">
+                                    <span><strong>Order For :</strong> {{OrderDetails?.orderType}}</span>
+                                    <br>
+                              </div>
+                              <div class="col-6 text-end mb-0">
+                                    <span><strong>Payment Mode :</strong></span>
+                                    <br>
+                                    {{OrderDetails?.orderPaymentMode}}
+                                    <br>
+                                    <span><strong>Payment Method :</strong></span>
+                                    <br>
+                                    UPI
+                                    <br>
+                                    <span><strong>Payment Status :</strong></span>
+                                    <br>
+                                    <span class="text-success">Paid</span>
+                              </div>
+                        </div>
+                        <hr>
+                        <div class="row mt-2">
+                              <div class="col-12">
+                                    <h5>ORDER SUMMARY</h5>
+                                    <table class="table">
+                                          <thead>
+                                                <tr class="line">
+                                                      <td><strong>#</strong></td>
+                                                      <td class="text-left"><strong>ITEM</strong></td>
+                                                      <td class="text-left"><strong>UNIT</strong></td>
+                                                      <td class="text-right"><strong>RATE</strong></td>
+                                                      <td class="text-right"><strong>SUBTOTAL</strong></td>
+                                                </tr>
+                                          </thead>
+                                          <tbody>
+
+                                                <tr *ngFor="let item of OrderDetails?.orderItems;let i = index">
+                                                      <td>{{i+1}}</td>
+                                                      <td>{{item?.itemName}}</td>
+                                                      <td class="text-center">{{item?.count}}</td>
+                                                      <td class="text-center">{{item?.itemPrice | currency:"INR"}}</td>
+                                                      <td class="text-right">{{item?.itemPrice * item?.count |
+                                                            currency:"INR"}}</td>
+                                                </tr>
+                                                <tr>
+                                                      <td colspan="3">
+                                                      </td>
+                                                      <td class="text-right"><strong>Total</strong></td>
+                                                      <td class="text-right"><strong>{{OrderDetails?.orderAmount |
+                                                                  currency:"INR"}}</strong></td>
+                                                </tr>
+                                          </tbody>
+                                    </table>
+                              </div>
+                              <!-- <div class="col-12 text-center mb-2">
+                                    <span class="fs-5">Thnak You for trusting our service</span>
+                              </div>
+                              <div class="col-12 text-center">
+                                    <span class="fw-bold">For any Queries contact :</span>
+                                    <br>
+                                    <a href="">order@tiffinaaw.com</a>
+                                    <br>
+                                    <a href="">+91-9898123129</a>
+                              </div> -->
+                        </div>
+                  </div>
+            </div>
+      </div>
+      <!-- END INVOICE -->
+</div>

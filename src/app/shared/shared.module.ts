@@ -16,6 +16,7 @@ import {InputSwitchModule} from 'primeng/inputswitch';
 import {ToastModule} from 'primeng/toast';
 import {InputNumberModule} from 'primeng/inputnumber';
 import {TabViewModule} from 'primeng/tabview';
+import {MultiSelectModule} from 'primeng/multiselect';
 @NgModule({
   declarations: [
     FormErrorMessagesDirective,
@@ -44,7 +45,8 @@ import {TabViewModule} from 'primeng/tabview';
     InputSwitchModule,
     ToastModule,
     InputNumberModule,
-    TabViewModule
+    TabViewModule,
+    MultiSelectModule
   ]
 })
 export class SharedModule { }
