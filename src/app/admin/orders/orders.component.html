@@ -1,25 +1,42 @@
 <div class="main-content">
-      <div class="container-fluid">
+    <div class="container-fluid">
 
-          <div class="row">
-              <div class="col-md-12">
-                  <div class="card card-chart">
-                      <div class="card-header card-header-success">
-                          <div class="ct-chart" id="dailySalesChart"></div>
-                      </div>
-                      <div class="card-body">
-                          <h4 class="card-title">Daily Sales</h4>
-                          <p class="card-category">
-                              <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
-                      </div>
-                      <div class="card-footer">
-                          <div class="stats">
-                              <i class="material-icons">access_time</i> updated 4 minutes ago
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-chart">
+                    <div class="card-header card-header-success">
+                        <div class="row">
+                            <div class="col-lg-12 col-sm-12">
+                                <span class="ib mt-1 fw-bold fs-5">Orders</span>
+                                <button (click)="CreateOrder()" pButton pRipple type="button" icon="pi pi-plus"
+                                    class="p-button-rounded bg-light text-dark pull-right"></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+
+                                <p-tabView>
+                                    <p-tabPanel header="Latest Orders">
+                                        <app-latest-orders></app-latest-orders>
+                                    </p-tabPanel>
+                                    <p-tabPanel header="Future Orders">
+                                        <ng-template pTemplate="content">
+                                            <app-future-orders></app-future-orders>
+                                        </ng-template>
+                                    </p-tabPanel>
+                                    <p-tabPanel header="Completed Orders">
+                                        <ng-template pTemplate="content">
+                                            <app-completed-orders></app-completed-orders>
+                                        </ng-template>
+                                    </p-tabPanel>
+                                </p-tabView>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    
+</div>
