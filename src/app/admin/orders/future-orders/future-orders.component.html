@@ -1,7 +1,7 @@
 <div class="row">
       <div class="col-lg-12 px-0">
           <p-table #dt1 [value]="FutureOrders"
-              [globalFilterFields]="['orderAddress','orderMode']"
+              [globalFilterFields]="['orderAddress','orderMode','userInfo.firstName','userInfo.lastName']"
               class="w-100">
 
               <ng-template pTemplate="caption">

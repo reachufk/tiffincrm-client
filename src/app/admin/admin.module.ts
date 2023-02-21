@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxPrintModule } from 'ngx-print';
+import { StepsModule } from 'primeng/steps';
+import { PickListModule } from 'primeng/picklist';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { OrdersComponent } from './orders/orders.component';
 import { UsersComponent } from './users/users.component';
@@ -16,17 +19,23 @@ import { FutureOrdersComponent } from './orders/future-orders/future-orders.comp
 import { LatestOrdersComponent } from './orders/latest-orders/latest-orders.component';
 import { CompletedOrdersComponent } from './orders/completed-orders/completed-orders.component';
 import { OrderInvoiceComponent } from './orders/order-invoice/order-invoice.component'
-import { NgxPrintModule } from 'ngx-print';
+import { PlaceManualOrderComponent } from './place-manual-order/place-manual-order.component';
+import { OrderCustomerInfoComponent } from './place-manual-order/order-customer-info/order-customer-info.component';
+import { OrderCatagorySelectionComponent } from './place-manual-order/order-catagory-selection/order-catagory-selection.component';
+import { OrderItemsSelectionComponent } from './place-manual-order/order-items-selection/order-items-selection.component';
+import { OrderPreviewComponent } from './place-manual-order/order-preview/order-preview.component';
 @NgModule({
   providers: [AdminCatagoryService, AdminUserService, AdmiOrdersService],
-  declarations: [DashboardComponent, OrdersComponent, UsersComponent, CatagoriesComponent, CatagoryItemsComponent, FutureOrdersComponent, LatestOrdersComponent, CompletedOrdersComponent, OrderInvoiceComponent],
+  declarations: [DashboardComponent, OrdersComponent, UsersComponent, CatagoriesComponent, CatagoryItemsComponent, FutureOrdersComponent, LatestOrdersComponent, CompletedOrdersComponent, OrderInvoiceComponent, PlaceManualOrderComponent, OrderCustomerInfoComponent, OrderCatagorySelectionComponent, OrderItemsSelectionComponent, OrderPreviewComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
-    NgxPrintModule
+    NgxPrintModule,
+    StepsModule,
+    PickListModule
   ]
 })
 export class AdminModule { }

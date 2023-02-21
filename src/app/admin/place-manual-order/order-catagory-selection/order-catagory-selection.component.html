@@ -1,0 +1,30 @@
+<div class="body p-4">
+      <div class="row">
+            <div class="col-lg-12">
+                  <h5 class="text-success"><strong>Select Catagories</strong> </h5>
+            </div>
+            <div class="col-lg-12 mt-2">
+                  <p-pickList [source]="AvailableCatagories | async" [target]="SelectedCatagories" 
+                  sourceHeader="Available Catagories " targetHeader="Selected Catagories" [dragdrop]="true"
+                  [responsive]="true" [sourceStyle]="{'min-height':'30rem'}" [targetStyle]="{'min-height':'36rem'}" filterBy="catagoryName"
+                  sourceFilterPlaceholder="Search by name" [showSourceControls]="false" [showTargetControls]="false" [showTargetFilter]="false">
+                  <ng-template let-product pTemplate="item">
+                      <div class="product-item">
+                        <div class="row">
+                              <div class="col-lg-6 col-sm-12 text-center">
+                                    <img width="120" height="100" src="{{product?.catagoryImage}}" [alt]="product?.catagoryName" class="product-image" />
+                              </div>
+                              <div class="col-lg-6 col-sm-12 my-auto">
+                                    <h5 class=""><strong>{{product.catagoryName}}</strong></h5>
+                              </div>
+                        </div>
+                      </div>
+                  </ng-template>
+              </p-pickList>
+            </div>
+            <div class="col-lg-12 col-sm-12 col-sm-12 col-xs-12 my-2">
+                  <button pButton pRipple icon="pi pi-arrow-left" label="Back" (click)="BackStep()"></button>
+                  <button class="pull-right mt-2" pButton pRipple icon="pi pi-arrow-right" label="Next" (click)="NextStep()"></button>
+            </div>
+      </div>
+</div>
