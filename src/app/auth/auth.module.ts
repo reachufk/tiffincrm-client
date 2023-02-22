@@ -8,7 +8,6 @@ import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { SignupComponent } from './signup/signup.component';
 import { RouterModule } from '@angular/router';
-import { NgOtpInputModule } from 'ng-otp-input';
 
 @NgModule({
   providers: [AuthService],
@@ -23,8 +22,7 @@ import { NgOtpInputModule } from 'ng-otp-input';
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
-    RouterModule,
-    NgOtpInputModule
+    RouterModule
   ],
   exports: [
 
