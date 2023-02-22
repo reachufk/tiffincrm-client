@@ -4,11 +4,51 @@
                   <h5 class="text-success"><strong>Customer Information</strong> </h5>
             </div>
             <div class="col-lg-12 mt-2">
-                  <form>
+                  <form [formGroup]="CustomerInfoForm">
+                        <div class="row">
+                              <div class="col-lg-6 col-sm-12 p-fluid my-3">
+                                    <span class="p-float-label">
+                                          <input id="First Name" type="text" pInputText formControlName="firstName"
+                                                appFormErrorMessages>
+                                          <label for="First Name">First Name</label>
+                                    </span>
+                              </div>
+                              <div class="col-lg-6 col-sm-12 p-fluid my-3">
+                                    <span class="p-float-label">
+                                          <input id="Last Name" type="text" pInputText formControlName="lastName"
+                                                appFormErrorMessages>
+                                          <label for="First Name">Last Name</label>
+                                    </span>
+                              </div>
 
+                              <div class="col-lg-6 col-sm-12 p-fluid my-3">
+                                    <span class="p-float-label">
+                                          <input id="email" type="text" pInputText formControlName="email"
+                                                appFormErrorMessages>
+                                          <label for="email">Email</label>
+                                    </span>
+                              </div>
+
+                              <div class="col-lg-6 col-sm-12 p-fluid my-3">
+                                    <span class="p-float-label">
+                                          <input id="Phone Number" type="text" pInputText formControlName="phoneNumber"
+                                                appFormErrorMessages>
+                                          <label for="Phone Number">Phone Number</label>
+                                    </span>
+                              </div>
+                              <div class="col-lg-12 p-fluid my-3">
+                                    <span class="p-float-label">
+                                          <textarea id="Order Address" type="text" rows="3" cols="10" pInputTextarea
+                                                [autoResize]="false" formControlName="orderAddress"
+                                                appFormErrorMessages>
+                                                </textarea>
+                                          <label for="Order Address">Order Address</label>
+                                    </span>
+                              </div>
+                        </div>
                   </form>
             </div>
-            <div class="col-lg-12 col-sm-12 col-sm-12 col-xs-12 my-2">
+            <div class="col-lg-12 col-sm-12 col-sm-12 col-xs-12 my-3">
                   <button class="pull-right mt-2" pButton pRipple icon="pi pi-arrow-right" label="Next"
                         (click)="NextStep()"></button>
             </div>
