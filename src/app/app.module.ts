@@ -13,6 +13,8 @@ import { PublicLayoutComponent } from './layouts/public-layout/public-layout.com
 import { UserLayoutComponent } from './layouts/user-layout/user-layout.component';
 import { SharedModule } from './shared/shared.module';
 import { PublicModule } from './public/public.module';
+import { AuthModule } from './auth/auth.module';
+import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 
 @NgModule({
   imports: [
@@ -21,9 +23,8 @@ import { PublicModule } from './public/public.module';
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule,
-    AppRoutingModule,    
-    SharedModule,
-    PublicModule
+    AppRoutingModule,
+    SharedModule
   ],
   declarations: [
     AppComponent,
@@ -33,6 +34,7 @@ import { PublicModule } from './public/public.module';
     SidebarComponent,
     PublicLayoutComponent,
     UserLayoutComponent,
+    AuthLayoutComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

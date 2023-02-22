@@ -1,0 +1,15 @@
+.item-category .card:hover {
+    border: 1px solid black;
+    padding: 2%;
+    box-shadow: 0.5px 0.5px green, -0.5px 0 green;
+}
+
+.card {
+    padding: 4%;
+    border: none;
+    color: white;
+}
+
+* {
+    font-family: Poppins-Regular;
+}
