@@ -1,0 +1,14 @@
+<div class="container">
+    <div class="row row-cols-2 row-cols-md-4 g-4 item-category">
+        <div class="col" *ngFor="let catagory of catagories">
+            <div class="card">
+                <img [src]="catagory.catagoryImage" class="card-img-top" [alt]="catagory.catagoryName">
+                <h3 class="card-title">{{catagory.catagoryName}}</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+rtl;
+language(multi-language);
+ltr;

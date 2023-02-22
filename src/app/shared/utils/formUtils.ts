@@ -1,4 +1,4 @@
-import {AbstractControl, FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
+import { AbstractControl, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 
 export function validateAllFormFields(control: AbstractControl) {
     if (control instanceof FormGroup) {
@@ -12,7 +12,7 @@ export function validateAllFormFields(control: AbstractControl) {
     } else if (control instanceof FormControl) {
 
     }
-    control.updateValueAndValidity({onlySelf: true, emitEvent: false});
+    control.updateValueAndValidity({ onlySelf: true, emitEvent: false });
     control.markAsDirty();
     control.markAsTouched();
 }
