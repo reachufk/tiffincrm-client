@@ -4,7 +4,6 @@ import { CatagoriesComponent } from './catagories/catagories.component';
 import { CatagoryItemsComponent } from './catagory-items/catagory-items.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { OrdersComponent } from './orders/orders.component';
-import { OrderCatagorySelectionComponent } from './place-manual-order/order-catagory-selection/order-catagory-selection.component';
 import { OrderCustomerInfoComponent } from './place-manual-order/order-customer-info/order-customer-info.component';
 import { OrderItemsSelectionComponent } from './place-manual-order/order-items-selection/order-items-selection.component';
 import { OrderPreviewComponent } from './place-manual-order/order-preview/order-preview.component';
@@ -23,7 +22,6 @@ const routes: Routes = [
     children: [
       {path:'',redirectTo:'customer-info',pathMatch:'full'},
       {path:'customer-info',component:OrderCustomerInfoComponent},
-      {path:'catagory-selection',component:OrderCatagorySelectionComponent},
       {path:'items-selection',component:OrderItemsSelectionComponent},
       {path:'order-preview',component:OrderPreviewComponent}
     ]

@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { FetchCompletedOrders, initializeFetchCompletedModel } from 'src/app/shared/interfaces/fetch-completed-orders';
+import { FetchOrderModel, initializeFetchOrderModel } from 'src/app/shared/interfaces/fetch-completed-orders';
 import { AdmiOrdersService } from '../services/admin-orders.service';
 
 @Component({
@@ -13,7 +13,7 @@ export class OrdersComponent implements OnInit {
   LatestOrders: Array<any> = [];
   TotalPages: number = 1;
   TotalRecords: number = 1;
-  FetchCompletedModel: FetchCompletedOrders = initializeFetchCompletedModel();
+  FetchCompletedModel: FetchOrderModel = initializeFetchOrderModel();
   searchKeywordControl: FormControl = new FormControl("");
   FilterdLatestOrders: Array<any> = [];
   constructor(private orderService: AdmiOrdersService) {
@@ -53,7 +53,6 @@ export class OrdersComponent implements OnInit {
     }
     const selectedValues: Array<String> = event?.value;
     this.FilterdLatestOrders = this.LatestOrders.filter((order: any) => selectedValues?.includes(order?.orderType));
-    console.log(this.FilterdLatestOrders)
   }
 
   CreateOrder() {

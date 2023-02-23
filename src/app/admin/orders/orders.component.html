@@ -7,7 +7,7 @@
                         <div class="row">
                             <div class="col-lg-12 col-sm-12">
                                 <span class="ib mt-1 fw-bold fs-5">Orders</span>
-                                <button (click)="CreateOrder()" pButton pRipple type="button" icon="pi pi-plus"
+                                <button routerLink="/admin/place-order" pButton pRipple type="button" icon="pi pi-plus"
                                     class="p-button-rounded bg-light text-dark pull-right"></button>
                             </div>
                         </div>
@@ -28,6 +28,11 @@
                                     <p-tabPanel header="Completed Orders">
                                         <ng-template pTemplate="content">
                                             <app-completed-orders></app-completed-orders>
+                                        </ng-template>
+                                    </p-tabPanel>
+                                    <p-tabPanel header="Admin Created Orders">
+                                        <ng-template pTemplate="content">
+                                            <app-admin-created-orders></app-admin-created-orders>
                                         </ng-template>
                                     </p-tabPanel>
                                 </p-tabView>

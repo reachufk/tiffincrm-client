@@ -1,33 +1,34 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { FetchOrderModel, initializeFetchOrderModel } from 'src/app/shared/interfaces/fetch-completed-orders';
 import { AdmiOrdersService } from '../../services/admin-orders.service';
 
 @Component({
-  selector: 'app-completed-orders',
-  templateUrl: './completed-orders.component.html',
-  styleUrls: ['./completed-orders.component.scss']
+  selector: 'app-admin-created-orders',
+  templateUrl: './admin-created-orders.component.html',
+  styleUrls: ['./admin-created-orders.component.scss']
 })
-export class CompletedOrdersComponent {
-  FilteredCompletedOrders: Array<any> = [];
-  CompletedOrders: Array<any> = [];
+export class AdminCreatedOrdersComponent implements OnInit {
+  AdminOrders: Array<any> = [];
   TotalPages: number = 1;
   TotalRecords: number = 1;
   FetchCompletedModel: FetchOrderModel = initializeFetchOrderModel();
   searchKeywordControl: FormControl = new FormControl("");
   OrderTypes: Array<any> = [{ name: "Lunch", value: "lunch" }, { name: "Dinner", value: "dinner" }]
+  FilteredAdminOrders: Array<any> = [];
   constructor(private orderService: AdmiOrdersService) {
 
   }
 
   ngOnInit(): void {
-    this.GetCompletedOrders()
+    this.GetAdminOrders()
   }
 
-  GetCompletedOrders() {
-    this.orderService.GetCompletedOrders(this.FetchCompletedModel).subscribe((res: any) => {
+  GetAdminOrders() {
+    this.orderService.GetAdminCreatedOrders(this.FetchCompletedModel).subscribe((res: any) => {
       if (res?.statusCode == 200) {
-        this.CompletedOrders = res?.orders;
+        this.AdminOrders = res?.orders;
+        this.FilteredAdminOrders = res?.orders
         this.TotalPages = res?.totalPages;
         this.TotalRecords = res?.totalCount
       }
@@ -36,11 +37,11 @@ export class CompletedOrdersComponent {
 
   orderTypeFilter(event) {
     if(!event?.value?.length){
-      this.FilteredCompletedOrders = this.CompletedOrders
+      this.FilteredAdminOrders = this.AdminOrders
       return
     }
     const selectedValues: Array<String> = event?.value;
-    this.FilteredCompletedOrders = this.CompletedOrders.filter((order: any) => selectedValues?.includes(order?.orderType));
+    this.FilteredAdminOrders = this.AdminOrders.filter((order: any) => selectedValues?.includes(order?.orderType));
   }
 
 }

@@ -21,12 +21,25 @@ import { CompletedOrdersComponent } from './orders/completed-orders/completed-or
 import { OrderInvoiceComponent } from './orders/order-invoice/order-invoice.component'
 import { PlaceManualOrderComponent } from './place-manual-order/place-manual-order.component';
 import { OrderCustomerInfoComponent } from './place-manual-order/order-customer-info/order-customer-info.component';
-import { OrderCatagorySelectionComponent } from './place-manual-order/order-catagory-selection/order-catagory-selection.component';
 import { OrderItemsSelectionComponent } from './place-manual-order/order-items-selection/order-items-selection.component';
 import { OrderPreviewComponent } from './place-manual-order/order-preview/order-preview.component';
+import { AdminCreatedOrdersComponent } from './orders/admin-created-orders/admin-created-orders.component';
 @NgModule({
   providers: [AdminCatagoryService, AdminUserService, AdmiOrdersService],
-  declarations: [DashboardComponent, OrdersComponent, UsersComponent, CatagoriesComponent, CatagoryItemsComponent, FutureOrdersComponent, LatestOrdersComponent, CompletedOrdersComponent, OrderInvoiceComponent, PlaceManualOrderComponent, OrderCustomerInfoComponent, OrderCatagorySelectionComponent, OrderItemsSelectionComponent, OrderPreviewComponent],
+  declarations: [DashboardComponent,
+    OrdersComponent,
+    UsersComponent,
+    CatagoriesComponent,
+    CatagoryItemsComponent,
+    FutureOrdersComponent,
+    LatestOrdersComponent,
+    CompletedOrdersComponent,
+    OrderInvoiceComponent,
+    PlaceManualOrderComponent,
+    OrderCustomerInfoComponent,
+    OrderItemsSelectionComponent,
+    OrderPreviewComponent,
+    AdminCreatedOrdersComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,

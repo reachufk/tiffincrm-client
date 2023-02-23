@@ -1,10 +1,10 @@
-export interface FetchCompletedOrders {
+export interface FetchOrderModel {
       pageNo: number,
       pageSize: number,
       keyword: string
 }
 
-export function initializeFetchCompletedModel(): FetchCompletedOrders {
+export function initializeFetchOrderModel(): FetchOrderModel {
       return {
             pageNo: 1,
             pageSize: 10,
