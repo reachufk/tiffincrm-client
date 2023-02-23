@@ -1,5 +1,4 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { map, Observable } from 'rxjs';
 import { CatagoryService } from '../services/catagory.service';
 
 @Component({
@@ -11,6 +10,7 @@ export class CategoryComponent implements OnInit {
   private catagoryService = inject(CatagoryService);
 
   catagories: any[] = [];
+  poweredByDate: number = Date.now();
 
   constructor() { }
 
