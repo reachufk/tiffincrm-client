@@ -1,15 +1,61 @@
+* {
+    font-family: Poppins-Regular;
+}
+
+
 .item-category .card:hover {
-    border: 1px solid black;
-    padding: 2%;
+    border: 1px solid green;
     box-shadow: 0.5px 0.5px green, -0.5px 0 green;
 }
 
 .card {
-    padding: 4%;
-    border: none;
-    color: white;
+    padding: 2%;
+    color: green;
+    border-radius: 16px;
+
+    img {
+        height: 16vh;
+        border-radius: 16px;
+    }
 }
 
-* {
-    font-family: Poppins-Regular;
+.catagory-image {
+    position: relative;
+}
+
+.bottom-left {
+    position: absolute;
+    bottom: 0px;
+    color: white;
+    margin: 2%;
+}
+
+.p-button-plain:hover {
+    color: green !important;
+    background-color: white !important;
+}
+
+.p-button-plain:focus {
+    box-shadow: none !important
+}
+
+.link-style {
+    text-decoration: none;
+}
+
+
+h2 {
+    font-family: Poppins-Italic;
+}
+
+.blk {
+    color: black;
+}
+
+.grn {
+    color: green;
+}
+
+.address .row {
+    margin-top: 2px;
 }

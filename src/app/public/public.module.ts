@@ -11,6 +11,7 @@ import { CarouselModule } from 'primeng/carousel';
 import { CategoryComponent } from './category/category.component';
 import { ItemComponent } from './item/item.component';
 import { CatagoryService } from './services/catagory.service';
+import { NgImageSliderModule } from 'ng-image-slider';
 
 @NgModule({
   providers: [CatagoryService],
@@ -28,7 +29,8 @@ import { CatagoryService } from './services/catagory.service';
     DropdownModule,
     FormsModule,
     ButtonModule,
-    CarouselModule
+    CarouselModule,
+    NgImageSliderModule
   ]
 })
 export class PublicModule { }
