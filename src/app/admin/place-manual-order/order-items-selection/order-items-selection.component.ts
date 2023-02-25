@@ -34,7 +34,7 @@ export class OrderItemsSelectionComponent implements OnInit, OnDestroy {
         return
       }
       this.selectedItems = items
-      console.log(this.selectedItems)
+      this.TotalAmountCalculated = this.selectedItems?.reduce((acc, curr) => acc + (curr.itemPrice * curr?.count), 0);
     })).subscribe()
 
   }
@@ -57,16 +57,7 @@ export class OrderItemsSelectionComponent implements OnInit, OnDestroy {
           }
         });
       }
-
-
     })
-  }
-
-  Selection({ data }) {
-
-  }
-  DeSelection({ data }) {
-
   }
 
   Change(event) {

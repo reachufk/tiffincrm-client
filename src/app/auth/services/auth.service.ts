@@ -12,7 +12,7 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   SignupUser(data: IUser) {
-    return this.http.post(`${environment.server}api/auth/register/user`, data)
+    return this.http.post(`${environment.server}User/RegisterUser`, data)
   }
 
   VerifyOTP(data: IOTP) {

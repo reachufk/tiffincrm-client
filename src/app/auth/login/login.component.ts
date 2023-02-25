@@ -18,7 +18,8 @@ export class LoginComponent implements OnInit {
   textList: string[] = [];
   showText: string;
   date: number = Date.now();
-
+  error=''
+  hide:boolean=true
   constructor(private authService: AuthService, @Optional() private messageService: MessageService) {
   }
 

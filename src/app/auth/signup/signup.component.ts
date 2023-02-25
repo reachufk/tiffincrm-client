@@ -49,7 +49,7 @@ export class SignupComponent implements OnInit {
   createSignupFormForm() {
     this.signupForm = new FormGroup({
       username: new FormControl(null, [Validators.required]),
-      mobile: new FormControl(null, [Validators.required]),
+      phoneNumber: new FormControl(null, [Validators.required]),
       email: new FormControl(null, [Validators.required]),
       password: new FormControl(null, [Validators.required, Validators.minLength(8)])
     })
@@ -68,7 +68,6 @@ export class SignupComponent implements OnInit {
     }
     const { value } = this.signupForm;
     this.authService.SignupUser(value).subscribe((res: any) => {
-      debugger
       if (res?.statusCode == 200) {
         this.messageService.add({ severity: 'success', summary: res?.message || 'Account registred successfully.' });
         this.showRegistrationForm = false;

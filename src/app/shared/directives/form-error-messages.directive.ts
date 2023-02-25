@@ -105,15 +105,16 @@ export class FormErrorMessagesDirective {
     if (!this.errorElement) {
        const divelev= this.renderer.createElement("small");
        this.renderer.addClass(divelev, 'ng-tns-c138-3');
-
        const divelev2= this.renderer.createElement("div");
+       this.renderer.addClass(divelev2, 'w-70');
+       this.renderer.addClass(divelev2, 'mx-auto');
        this.renderer.appendChild(divelev,divelev2)
 
         const element = this.renderer.createElement('small');
         this.errorElement = element;
         this.renderer.addClass(element, 'p-error');
         this.renderer.addClass(element, 'text-danger');
-
+    
         this.renderer.appendChild(divelev2,this.errorElement)
         const parentNode = this.renderer.parentNode(this.el.nativeElement.parentNode);
         const nextSibling = this.renderer.nextSibling(this.el.nativeElement);
