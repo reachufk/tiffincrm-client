@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PublicRoutingModule } from './public-routing.module';
 import { HomeComponent } from './home/home.component';
-import { PublicNavComponent } from './public-nav/public-nav.component';
 import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
@@ -18,7 +17,6 @@ import { NgImageSliderModule } from 'ng-image-slider';
 
   declarations: [
     HomeComponent,
-    PublicNavComponent,
     CarouselComponent,
     CategoryComponent,
     ItemComponent
