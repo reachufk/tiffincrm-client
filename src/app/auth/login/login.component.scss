@@ -1,29 +1,22 @@
-.register_outer {
-    position: relative;
-    display: flex;
-    color: green;
+
+img {
+      max-height: 100vh;
 }
 
-.register_inner {
-    justify-content: end;
-    align-items: end;
+@media (max-width: 992px) {
+.logo{
+      margin-block-start: 10% !important;
+}
 }
 
-
-._2tnu {
-    background: #2b1e16;
-    color: green;
-
+.w-70 {
+      width: 80%;
 }
 
-._12i5X {
-    color: white;
+a{
+      text-decoration: none;
 }
-
-.ufk-solutions {
-    color: green;
-}
-
-.link-style {
-    text-decoration: none;
+a:hover{
+      text-decoration: underline;
+      color: rgb(9, 116, 9);
 }

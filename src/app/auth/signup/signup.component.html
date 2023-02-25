@@ -1,106 +1,75 @@
-<div class="container">
-    <div class="container text-center ">
-        <div class="row justify-content-md-center ">
-            <div class="col-md-6">
-                <div class="row mt-2">
-                    <div class="col text-start">
-                        <a class="link-style" [routerLink]="['/']">
-                            <img src="./../../../assets/logo.png" style="height: 64px" alt="Tiffin Aww">
-                        </a>
-                    </div>
-                </div>
-                <div *ngIf="showRegistrationForm; else elseBlock">
-                    <h3>Welcome to Tiffin Aww</h3>
-                    <form [formGroup]="signupForm">
-                        <div class="p-fluid grid">
-                            <div class="col-12 md:col-4 my-2">
-                                <div class="p-inputgroup">
-                                    <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
-                                    <input type="text" pInputText placeholder="Username" id="username"
-                                        formControlName="username" appFormErrorMessages>
-                                </div>
-                            </div>
-
-                            <div class="col-12 md:col-4 my-2">
-                                <div class="p-inputgroup">
-                                    <span class="p-inputgroup-addon"><i class="pi pi-mobile"></i></span>
-                                    <input type="text" pInputText placeholder="Mobile" id="mobile"
-                                        formControlName="mobile" appFormErrorMessages>
-                                </div>
-                            </div>
-
-                            <div class="col-12 md:col-4 my-2">
-                                <div class="p-inputgroup">
-                                    <span class="p-inputgroup-addon"><i class="pi pi-envelope"></i></span>
-                                    <input type="text" pInputText placeholder="Email" id="email" formControlName="email"
-                                        appFormErrorMessages>
-                                </div>
-                            </div>
-                            <div class="col-12 md:col-4 my-2">
-                                <div class="p-inputgroup">
-                                    <span class="p-inputgroup-addon"><i class="pi pi-lock"></i></span>
-                                    <input type="text" pInputText placeholder="Password" id="password"
-                                        formControlName="password" appFormErrorMessages>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-end">
-                            <button pButton pRipple type="button" (click)="signupUser()" label="Sign up"
-                                class="p-button-raised p-button-success"></button>
-                        </div>
-                    </form>
-                    <p class="text-start">
-                        <a class="link-style" [routerLink]="['/auth/login']">Already have an account?</a>
-                    </p>
-                </div>
-                <ng-template #elseBlock>
-                    <div>
-                        <h3>Verify OPT</h3>
-                        <form [formGroup]="OTPverificationForm">
-                            <div class="p-fluid grid">
-                                <div class="field my-4">
-                                    <span class="p-float-label">
-                                        <input type="text" id="otp" pInputText formControlName="otp"
-                                            appFormErrorMessages>
-                                        <label for="otp">OTP</label>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="text-end">
-                                <button pButton pRipple type="button" (click)="verifyOTP()" label="re-send"
-                                    class="p-button-raised p-button-primary mx-1"></button>
-                                <button pButton pRipple type="button" (click)="verifyOTP()" label="Verify"
-                                    class="p-button-raised p-button-success mx-1"></button>
-                            </div>
-                        </form>
-                    </div>
-                </ng-template>
-            </div>
-        </div>
+<div class="row g-0 d-flex align-items-center">
+    <div class="col-lg-6 d-none d-lg-flex">
+        <img src="../../../assets/img/registration-background.webp" alt="tiffin aaw" class="w-100 h-100" />
     </div>
-</div>
+    <div class="col-lg-6 px-3">
 
-<div class="container-fluid text-center bg-dark">
-    <div class="container" style="color:green;">
-        <div class="row row-cols-2 row-cols-sm-2 row-cols-md-2 py-4">
-            <div class="col">
-                <img width="50" height="100"
-                    src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_210,h_398/4x_-_No_min_order_x0bxuf">
-                <div>No Minimum Order</div>
-                <div class="_12i5X">Order in for yourself or for the group, with no restrictions on order value</div>
-            </div>
-            <div class="col">
-                <img width="50" height="100"
-                    src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_248,h_376/4x_-_Super_fast_delivery_awv7sn">
-                <div>Fast Delivery</div>
-                <div class="_12i5X">Experience Tiffin Aww superfast delivery for food delivered fresh &amp; on time
+        <div class="row g-0 d-flex align-items-center" *ngIf="showOtp">
+            <div class="row">
+                <div class="col-lg-12 mb-3 text-center logo">
+                    <img width="100" height="100" src="../../../assets/img/logo.png">
+                </div>
+                <div class="col-12 mb-2">
+                    <h4 class="w-70 mx-auto">Verify OTP send to {{'98898989898'}}</h4>
+                </div>
+                <div class="col-lg-12">
+                    <div class="w-70 mx-auto">
+                        <ng-otp-input  (onInputChange)="onOtpChange($event)"  [config]="{length:6,allowNumbersOnly:true}"></ng-otp-input>
+                    </div>
                 </div>
             </div>
+
         </div>
-        <h3 class="p-2">
-            <a class="ufk-solutions link-style" href="https://ufksolutions.com/" target="_blank"
-                rel="ufk solutions">Desgined by
-                UFKSolutions</a>
-        </h3>
+
+        <div class="row g-0 d-flex align-items-center" *ngIf="!showOtp">
+            <form [formGroup]="signupForm">
+                <div class="row">
+                    <div class="col-lg-12 text-center logo">
+                        <img width="100" height="100" src="../../../assets/img/logo.png">
+                    </div>
+                    <div class="col-12 mb-0">
+                        <h4 class="w-70 mx-auto">Create an account</h4>
+                    </div>
+                    <div class="col-12  mb-2">
+                        <div class="p-inputgroup w-70 mx-auto">
+                            <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+                            <input type="text" pInputText placeholder="Username" id="username"
+                                formControlName="username" appFormErrorMessages>
+                        </div>
+                    </div>
+
+                    <div class="col-12  my-2">
+                        <div class="p-inputgroup w-70 mx-auto">
+                            <span class="p-inputgroup-addon"><i class="pi pi-mobile"></i></span>
+                            <input type="text" pInputText placeholder="Mobile" id="mobile" formControlName="phoneNumber"
+                                appFormErrorMessages>
+                        </div>
+                    </div>
+
+                    <div class="col-12 my-2">
+                        <div class="p-inputgroup w-70 mx-auto">
+                            <span class="p-inputgroup-addon"><i class="pi pi-envelope"></i></span>
+                            <input type="text" pInputText placeholder="Email"
+                                pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" id="email"
+                                formControlName="email" appFormErrorMessages>
+                        </div>
+                    </div>
+                    <div class="col-12 my-2">
+                        <div class="p-inputgroup w-70 mx-auto">
+                            <span class="p-inputgroup-addon"><i class="pi pi-lock"></i></span>
+                            <input type="text" pInputText placeholder="Password" id="password"
+                                formControlName="password" appFormErrorMessages>
+                        </div>
+                    </div>
+                    <div class="col-12 my-2 text-center">
+                        <button pButton pRipple type="button" (click)="signupUser()" label="Sign up"
+                            class="p-button-raised p-button-success"></button>
+                    </div>
+                    <div class="col-12 my-2 text-center">
+                        <a routerLink="/auth/login">Already have an account? Log In !</a>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 </div>

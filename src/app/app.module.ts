@@ -1,7 +1,7 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app.routing';
 import { AppComponent } from './app.component';
@@ -15,6 +15,10 @@ import { SharedModule } from './shared/shared.module';
 import { PublicModule } from './public/public.module';
 import { AuthModule } from './auth/auth.module';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
+import { LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
+import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
+import { PublicNavComponent } from './public/public-nav/public-nav.component';
 
 @NgModule({
   imports: [
@@ -32,11 +36,16 @@ import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component
     NavbarComponent,
     FooterComponent,
     SidebarComponent,
+    PublicNavComponent,
     PublicLayoutComponent,
     UserLayoutComponent,
     AuthLayoutComponent
   ],
-  providers: [],
+  providers: [
+    { provide: LocationStrategy, useClass: PathLocationStrategy },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

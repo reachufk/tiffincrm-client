@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./public-nav.component.scss']
 })
 export class PublicNavComponent implements OnInit {
+  collapsed:boolean=false
   selectedCountry: string;
   countries: any[];
 
@@ -26,5 +27,6 @@ export class PublicNavComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
 
 }

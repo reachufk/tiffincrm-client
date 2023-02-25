@@ -18,6 +18,7 @@ import {InputNumberModule} from 'primeng/inputnumber';
 import {TabViewModule} from 'primeng/tabview';
 import {MultiSelectModule} from 'primeng/multiselect';
 import {InputTextareaModule} from 'primeng/inputtextarea';
+import {DividerModule} from 'primeng/divider'
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
     InputNumberModule,
     TabViewModule,
     MultiSelectModule,
-    InputTextareaModule
+    InputTextareaModule,
+    DividerModule
   ]
 })
 export class SharedModule { }

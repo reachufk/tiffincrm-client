@@ -34,7 +34,7 @@ export class OrderItemsSelectionComponent implements OnInit, OnDestroy {
         return
       }
       this.selectedItems = items
-      console.log(this.selectedItems)
+      this.TotalAmountCalculated = this.selectedItems?.reduce((acc, curr) => acc + (curr.itemPrice * curr?.count), 0);
     })).subscribe()
 
   }
@@ -51,22 +51,13 @@ export class OrderItemsSelectionComponent implements OnInit, OnDestroy {
       this.Items = res?.items.map((item: any) => ({ ...item, count: 1 }))
       if (this.selectedItems?.length) {
         this.selectedItems.forEach(selectedItem => {
-          const itemToUpdate = this.Items.find(item => item._id === selectedItem._id);
-          if (itemToUpdate) {
-            itemToUpdate.count = selectedItem.count;
+          const selected = this.Items.find(item => item._id === selectedItem._id);
+          if (selected) {
+            selected.count = selectedItem.count;
           }
         });
       }
-
-
     })
-  }
-
-  Selection({ data }) {
-
-  }
-  DeSelection({ data }) {
-
   }
 
   Change(event) {
