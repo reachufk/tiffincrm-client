@@ -1,26 +1,24 @@
 <div class="container">
-    <div class="card mb-2" style="height: 20vh;">
+    <div class="card mb-2 instant-order">
         <div class="row g-0">
-            <div class="col-3">
+            <div class="col-3 col-md-6 text-end content-center">
                 <img src="./../../../assets/img/logo.png" class="img-fluid rounded-start" alt="...">
             </div>
-            <div class="col-9">
-                <div class="card-body m-0 p-0">
-                    <p class="card-title blk">Ready to <span class="grn">Go!</span> </p>
+            <div class="col-9 col-md-6">
+                <div class="card-body m-0 p-0 ">
+                    <p class="card-title blk-clr">Ready to <span class="grn-clr">Go!</span> </p>
                     <ul>
                         <li>Home made chicken biryani.</li>
                         <li>Zero preservaties.</li>
                         <li>No added color</li>
-                        <li style="list-style-type: none">
-                            <p-button label="View" styleClass="p-button-md p-button-success py-2"></p-button>
-                        </li>
+
                     </ul>
                 </div>
             </div>
         </div>
     </div>
-
-    <div class="row row-cols-2 row-cols-md-4 g-4 item-category">
+    <h3>What would you like to <span class="grn-clr">order</span>?</h3>
+    <div class="row row-cols-2 row-cols-md-6 g-2 item-category">
         <div class="col" *ngFor="let catagory of catagories">
             <div class="card">
                 <img [src]="catagory.catagoryImage" class="" [alt]="catagory.catagoryName">
@@ -28,52 +26,44 @@
             </div>
         </div>
     </div>
-    <div class="card text-center my-2">
+    <div class="card text-center my-2 quote-text">
         <div class="card-body">
-            <h5 class="card-title">Special title treatment</h5>
-        </div>
-    </div>
-    <div class="card text-center my-2">
-        <div class="card-body">
-            <h5 class="card-title">Privacy</h5>
+            <h5 class="card-title">An average active adult requires 2000 kcal per day.
+                However, calorie needs may vary.</h5>
         </div>
     </div>
     <div class="card my-2">
         <div class="card-body address">
-            <h2 class="card-title">Tiffin <span style="color: red;">Aww</span></h2>
-            <h3 style="color: black;">Serving Home made Fresh and Health food!</h3>
-            <div class="card-body address">
-                <h2 class="card-title">Tiffin <span style="color: red;">Aww</span></h2>
-                <h3 style="color: black;">Serving Home made Fresh and Health food!</h3>
-                <div class="row">
-                    <div class="col-2 text-end">
-                        <button pButton pRipple type="button" icon="pi pi-map-marker"
-                            class="p-button-rounded p-button-success"></button>
-                    </div>
-                    <div class="col-10">
-                        Rajbagh near IGNOU Centre,Srinagar,
-                        190008 J&K
-                    </div>
+            <h2 class="card-title">Tiffin <span class="red-clr">Aww</span></h2>
+            <h3 class="blk-clr">Serving Home made Fresh and Healthy food!</h3>
+            <div class="row">
+                <div class="col-3 col-md-1 text-center">
+                    <button pButton pRipple type="button" icon="pi pi-map-marker"
+                        class="p-button-rounded p-button-success"></button>
                 </div>
-                <div class="row">
-                    <div class="col-2 text-end">
-                        <button pButton pRipple type="button" icon="pi pi-phone"
-                            class="p-button-rounded p-button-danger"></button>
-                    </div>
-                    <div class="col-10">
-                        +1800 010 2444 1210
-                    </div>
+                <div class="col-9 col-md-11 address-text address-text_addr">
+                    Rajbagh near IGNOU Centre,Srinagar,
+                    190008 J&K
                 </div>
-                <div class="row">
-                    <div class="col-2 text-end">
-                        <button pButton pRipple type="button" icon="pi pi-envelope" class="p-button-rounded"
-                            style="background: black; border: black"></button>
-                    </div>
-                    <div class="col-10">
-                        Feedback@tiffenaaw.com
-                    </div>
+            </div>
+            <div class="row">
+                <div class="col-3 col-md-1 text-center">
+                    <button pButton pRipple type="button" icon="pi pi-phone"
+                        class="p-button-rounded p-button-danger"></button>
+                </div>
+                <div class="col-9 col-md-11 address-text">
+                    +1800 010 2444 1210
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3 col-md-1 text-center">
+                    <button pButton pRipple type="button" icon="pi pi-envelope" class="p-button-rounded"
+                        style="background: black; border: black"></button>
+                </div>
+                <div class="col-9 col-md-11 address-text">
+                    Feedback@tiffenaaw.com
+                </div>
 
-                </div>
             </div>
         </div>
     </div>
