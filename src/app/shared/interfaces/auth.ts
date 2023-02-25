@@ -1,12 +1,19 @@
 
 export interface IUser {
     username: String
-    mobile: String
+    phoneNumber: String
     email: String
     password: String
 }
 
 export interface IOTP {
     otp: String
-    mobile: String
+    phoneNumber: String
+}
+
+export interface IloggedUser{
+    username:String,
+    phoneNumber:Number,
+    email?:String,
+    token:String
 }

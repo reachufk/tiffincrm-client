@@ -4,10 +4,16 @@
           class="w-100 h-100 rounded-t-5 rounded-tr-lg-0 rounded-bl-lg-5" />
       </div>
       <div class="col-lg-6">
-            <form [formGroup]="signupForm">
+            <form [formGroup]="loginForm">
                   <div class="row g-0 d-flex align-items-center">
                         <div class="col-lg-12 text-center logo">
                               <img width="100" height="100" src="../../../assets/img/logo.png">
+                        </div>
+
+                        <div *ngIf="error" class="col-lg-12 mt-3 text-center">
+                             <div class="alert alert-danger w-70 mx-auto p-2">
+                              <i class="pi pi-times"></i>{{error}}
+                             </div>
                         </div>
 
                         <div class="col-lg-12 mb-1 mx-auto">
@@ -18,7 +24,7 @@
                                     <span class="p-inputgroup-addon"><i
                                                 class="pi pi-mobile"></i></span>
                                     <input type="text" pInputText placeholder="Mobile" id="mobile"
-                                          formControlName="mobile" appFormErrorMessages>
+                                          formControlName="phoneNumber" appFormErrorMessages>
                               </div>
                         </div>
                         <div class="col-lg-12 mb-3 ">
@@ -29,7 +35,7 @@
                               </div>
                         </div>
                         <div class="col-lg-12 mb-3 text-center">
-                              <button pButton pRipple type="button" (click)="signupUser()" label="Log in"
+                              <button pButton pRipple type="button" (click)="Login()" label="Log in"
                               class="p-button-raised p-button-success "></button>
                         </div>
                         <div class="col-lg-12 mb-3 text-center">
