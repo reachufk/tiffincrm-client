@@ -1,61 +1,31 @@
-* {
-    font-family: Poppins-Regular;
-}
 
-
-.item-category .card:hover {
-    border: 1px solid green;
-    box-shadow: 0.5px 0.5px green, -0.5px 0 green;
-}
-
-.card {
-    padding: 2%;
-    color: green;
-    border-radius: 16px;
-
-    img {
-        height: 16vh;
-        border-radius: 16px;
+.card-hover :hover{
+    cursor: pointer;
+    .img-rounded{
+          opacity: 0.4 !important;
+          transition: 1s  cubic-bezier(0.075, 0.82, 0.165, 1);
     }
 }
 
-.catagory-image {
-    position: relative;
-}
 
-.bottom-left {
+
+.hover-text {
     position: absolute;
-    bottom: 0px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.5);
     color: white;
-    margin: 2%;
-}
+    padding: 10px;
+    visibility: hidden;
+    z-index: 1;
+  }
 
-.p-button-plain:hover {
-    color: green !important;
-    background-color: white !important;
-}
+  .card-hover:hover .hover-text {
+    visibility: visible;
+  }
 
-.p-button-plain:focus {
-    box-shadow: none !important
-}
-
-.link-style {
-    text-decoration: none;
-}
-
-
-h2 {
-    font-family: Poppins-Italic;
-}
-
-.blk {
-    color: black;
-}
-
-.grn {
-    color: green;
-}
-
-.address .row {
-    margin-top: 2px;
-}
+  img{
+    border-top-right-radius: 5px !important;
+    border-top-left-radius: 5px !important;
+  }

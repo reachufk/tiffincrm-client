@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 
 @Component({
   selector: 'public-nav',
@@ -26,6 +26,13 @@ export class PublicNavComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+
+  stickHeader:boolean=false
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll() {
+    this.stickHeader = window.scrollY < 110.00 ? false : true;
   }
 
 

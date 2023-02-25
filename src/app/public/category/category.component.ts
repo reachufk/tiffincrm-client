@@ -1,4 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
+import { map, Observable } from 'rxjs';
 import { CatagoryService } from '../services/catagory.service';
 
 @Component({
@@ -9,14 +10,15 @@ import { CatagoryService } from '../services/catagory.service';
 export class CategoryComponent implements OnInit {
   private catagoryService = inject(CatagoryService);
 
-  catagories: any[] = [];
-  poweredByDate: number = Date.now();
-
+  catagories: Observable<any>
   constructor() { }
 
   ngOnInit(): void {
-    this.catagoryService.GetCatagories().subscribe((category: any[]) => {
-      this.catagories = category;
-    })
+  this.getCategories()
   }
+
+  getCategories(){
+    this.catagories = this.catagoryService.GetCatagories().pipe(map((res:any)=> res?.data))
+  }
+
 }

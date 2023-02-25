@@ -11,6 +11,8 @@ import { CategoryComponent } from './category/category.component';
 import { ItemComponent } from './item/item.component';
 import { CatagoryService } from './services/catagory.service';
 import { NgImageSliderModule } from 'ng-image-slider';
+import { CategoryItemsComponent } from './category-items/category-items.component';
+import { FooterComponent } from '../layouts/footer/footer.component';
 
 @NgModule({
   providers: [CatagoryService],
@@ -19,7 +21,9 @@ import { NgImageSliderModule } from 'ng-image-slider';
     HomeComponent,
     CarouselComponent,
     CategoryComponent,
-    ItemComponent
+    ItemComponent,
+    FooterComponent,
+    CategoryItemsComponent
   ],
   imports: [
     CommonModule,
