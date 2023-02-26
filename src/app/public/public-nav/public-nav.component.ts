@@ -22,7 +22,6 @@ export class PublicNavComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.LoggedInUser.pipe(takeUntil(this.Destroy),map((user:IloggedUser)=>{
-      console.log(user)
       if(user?.token){
         this.loggedIn = true
       }
