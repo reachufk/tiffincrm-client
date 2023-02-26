@@ -26,7 +26,8 @@ import { PublicNavComponent } from './public/public-nav/public-nav.component';
     HttpClientModule,
     RouterModule,
     AppRoutingModule,
-    SharedModule
+    SharedModule,
+    
   ],
   declarations: [
     AppComponent,

@@ -4,7 +4,7 @@ import { validateAllFormFields } from 'src/app/shared/utils/formUtils';
 import { AuthService } from '../services/auth.service';
 import { MessageService } from 'primeng/api';
 import { IloggedUser } from 'src/app/shared/interfaces/auth';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -24,9 +24,11 @@ export class LoginComponent implements OnInit {
   showText: string;
   date: number = Date.now();
   error=''
-  hide:boolean=true
+  hide:boolean=true;
+  state:any
   constructor(private authService: AuthService, @Optional() private messageService: MessageService,
-  private router:Router) {
+  private router:Router,private activatedRoute:ActivatedRoute) {
+
   }
 
   ngOnInit(): void {
@@ -62,12 +64,22 @@ export class LoginComponent implements OnInit {
         const loggedInUser:IloggedUser = res?.user;
         this.authService.LoggedInUser.next(loggedInUser);
         localStorage.setItem('loggedInUser',JSON.stringify(loggedInUser));
-        this.router.navigate(['/public/home'])
-        return
+        this.navigateIn()
+      }else{
+        this.error = res?.message
       }
-      this.error = res?.message
+     
     })
     
+  }
+  navigateIn() {
+    this.state = this.activatedRoute?.snapshot?.queryParamMap?.get('state')
+    let path = decodeURIComponent(this.state);
+    if(this.state){
+      this.router.navigateByUrl(path)
+    }else{
+      this.router.navigate(['/public/home'])
+    }
   }
 
 

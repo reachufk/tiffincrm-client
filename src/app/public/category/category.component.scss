@@ -26,6 +26,20 @@
   }
 
   img{
-    border-top-right-radius: 5px !important;
-    border-top-left-radius: 5px !important;
+    border-radius: 15px;
+  }
+
+
+  .category-name{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    margin-left: 10px;
+    margin-bottom: 6px;
+  }
+
+  .card-catagory{
+    border-radius: 15px;
+    background: rgba(23, 19, 19, 0.55);
+    border: none;
   }

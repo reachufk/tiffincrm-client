@@ -1,0 +1,78 @@
+:ng-deep .ng-image-slider .ng-image-slider-container .main .main-inner .img-div .caption {
+      border-radius: 15px;
+}
+
+::ng-deep .ng-image-slider .ng-image-slider-container .main .main-inner .img-div img,
+.ng-image-slider .ng-image-slider-container .main .main-inner .img-div video {
+      border-radius: 15px !important;
+}
+
+::ng-deep .ng-image-slider .ng-image-slider-container .main .main-inner .img-div {
+      border-radius: 15px !important;
+}
+
+::ng-deep a {
+      color: black;
+      text-decoration: none;
+}
+
+::ng-deep .ng-image-slider .ng-image-slider-container .main .main-inner .img-div .caption {
+      padding: 5px;
+      border-radius: 15px !important;
+}
+
+.card {
+      border: none;
+}
+
+.pull-right {
+      float: right;
+}
+.mr-3 {
+      margin-right: 10px;
+}
+
+.fw {
+      font-weight: 600;
+}
+
+::ng-deep .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider {
+      background: #16a34a !important;
+}
+
+.active-category {
+      display: inline-block;
+      position: relative;
+      padding-bottom: 7px;
+}
+
+.active-category::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 17%;
+      width: 70%;
+      height: 4px;
+      border-radius: 10px;
+      background-color: #16a34a;
+}
+
+.itemTitle {
+      font-size: larger;
+      font-weight: 600;
+}
+
+.bottom{
+      display: inline-block;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      margin-bottom: 5px;
+      margin-right: 8px;
+}
+
+::ng-deep .p-inputnumber-buttons-horizontal .p-inputnumber-input {
+      order: 2;
+      border-radius: 0;
+      width: 57px !important;
+  }

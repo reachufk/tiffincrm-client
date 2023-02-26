@@ -1,0 +1,103 @@
+<div class="container-xxl py-3 h-100" style="background-color: rgb(243, 240, 240);">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12">
+                  <div class="card card-registration card-registration-2" style="border-radius: 15px;">
+                        <p-toast></p-toast>
+                        <form [formGroup]="OrderForm">
+                              <div class="card-body p-0">
+                                    <div class="row g-0">
+                                          <div class="col-lg-8">
+                                                <div class="p-5">
+                                                      <div
+                                                            class="d-flex justify-content-between align-items-center mb-5">
+                                                            <h1 class="fw-bold mb-0 text-black">Cart</h1>
+                                                            <h6 class="mb-0 text-muted">{{totalItems}} items</h6>
+                                                      </div>
+                                                      <hr class="my-4">
+                                                      
+                                                      <div *ngFor="let item of Items | async" class="row mb-4 d-flex justify-content-between align-items-center">
+                                                           
+                                                            <div class="col-md-5 col-lg-5 col-xl-5">
+                                                                  <span class="fw-bold text-secondary">{{item?.itemName}}</span>
+                                                                  <p class="text-secondary">{{item?.itemDescription}}</p>
+                                                            </div>
+                                                            <div class="col-md-2 col-lg-2 col-xl-2 d-flex">
+                                                                  Quantity : <span class="fw-bold ms-2">{{item?.count}}</span>
+                                                            </div>
+                                                            <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                                                                  <h6 class="mb-0">{{(item?.itemPrice * item?.count) | currency:'INR'}}</h6>
+                                                            </div>
+                                                            <div class="col-md-2 col-lg-2 col-xl-2 text-end">
+                                                                  <a (click)="DeleteCartItem(item)" class="text-danger show-cursor"> <i class="pi pi-trash"></i></a>
+                                                            </div>
+
+
+                                                            <hr class="my-3">
+                                                      </div>
+                                                </div>
+                                          </div>
+                                          <div class="col-lg-4 bg-grey">
+                                                <div class="p-5">
+                                                      <h3 class="fw-bold mb-5 mt-2 pt-1">Summary</h3>
+                                                      <hr class="my-4">
+
+                                                      <div class="d-flex justify-content-between mb-4">
+                                                            <h5 class="text-uppercase">items {{totalItems}}</h5>
+                                                            <h5>{{totalAmount | currency:'INR'}}</h5>
+                                                      </div>
+                                                      <div class="mb-3 pb-2">
+                                                            <label class="text-secondary">Delivery Time</label>
+                                                            <br>
+                                                            <span>
+                                                                  <p-dropdown [options]="DeliveryTimes"
+                                                                  formControlName="orderDeliveryTime"
+                                                                  id="Delivery Date"
+                                                                  placeholder="Select Delivery Day" optionLabel="label"
+                                                                  optionValue="value" appFormerror required></p-dropdown>
+                                                            </span>
+                                                            
+                                                            
+                                                      </div>
+
+                                                      <div class="mb-3 pb-2 p-fluid">
+                                                            <label class="text-secondary">Delivery Address</label>
+                                                            <br>
+                                                            <span>
+                                                                  <textarea pInputTextarea placeholder="Delivery Address" formControlName="orderAddress" id="Address" appFormerror></textarea>
+                                                            </span>
+                                                      </div>
+
+                                                      <div class="mb-3 pb-2 p-fluid">
+                                                            <label class="text-secondary">Order Instructions? (if any)</label>
+                                                            <br>
+                                                            <span>
+                                                                  <textarea pInputTextarea placeholder="Give instruction for making of your order..." formControlName="orderInstructions" id="Order Instructions" appFormerror></textarea>
+                                                            </span>
+                                                      </div>
+
+
+
+                                                      <hr class="my-4">
+
+                                                      <div class="d-flex justify-content-between mb-5">
+                                                            <h5 class="text-secondary">Total Order Amount</h5>
+                                                            <h5>{{totalAmount | currency:'INR'}}</h5>
+                                                      </div>
+
+                                                      <button pButton routerLink="/public/home"
+                                                            class="p-button-text text-dark"  label="Back to home">
+                                                      </button>
+
+                                                      <button pButton (click)="CheckOut()"
+                                                            class="p-button-success float-right" label="Checkout">
+                                                      </button>
+
+                                                </div>
+                                          </div>
+                                    </div>
+                              </div>
+                        </form>
+                  </div>
+            </div>
+      </div>
+</div>

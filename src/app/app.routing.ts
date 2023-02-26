@@ -18,36 +18,24 @@ const routes: Routes = [
   {
     path: 'public',
     component: PublicLayoutComponent,
-    children: [{
-      path: '',
       loadChildren: () => import('./public/public.module').then(m => m.PublicModule)
-    }]
   },
   {
     path: 'user',
     component: UserLayoutComponent,
     canActivate: [AuthGuard],
-    children: [{
-      path: '',
       loadChildren: () => import('./user/user.module').then(m => m.UserModule)
-    }]
   },
   {
     path: 'admin',
     component: AdminLayoutComponent,
     canActivate: [AuthGuard],
-    children: [{
-      path: '',
       loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
-    }]
   },
   {
     path: 'auth',
     component: AuthLayoutComponent,
-    children: [{
-      path: '',
-      loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
-    }]
+    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
   }
 ];
 

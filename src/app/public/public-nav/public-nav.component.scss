@@ -15,22 +15,6 @@
 }
 
 
-.select-region {
-    color: green !important;
-    background: none !important;
-    border: none !important
-}
-
-.dropdown-sign {
-    display: none;
-}
-
-.select-region:hover {
-    .dropdown-sign {
-        display: inline;
-    }
-}
-
 .select-region:focus {
     box-shadow: none !important
 }

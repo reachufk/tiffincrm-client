@@ -2,6 +2,7 @@ export interface CatagoryItem {
       _id?:String
       catagory:String
       itemName:String
-      itemPrice:Number
+      itemPrice:Number,
+      isVeg:Boolean,
       itemDiscount:Number
 }

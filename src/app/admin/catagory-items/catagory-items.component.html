@@ -48,7 +48,7 @@
                                                                         <button (click)="OpenForm(item)" pButton
                                                                               pRipple type="button" icon="pi pi-pencil"
                                                                               class="p-button-rounded p-button-warning p-button-sm ms-1"></button>
-                                                                        <button (click)="DeleteCatagory(item._id)"
+                                                                        <button (click)="DeleteCatagoryItem(item._id)"
                                                                               pButton pRipple type="button"
                                                                               icon="pi pi-trash"
                                                                               class="p-button-rounded p-button-danger p-button-sm ms-1"></button>
@@ -71,7 +71,7 @@
                                                       </ng-template>
                                                       <form [formGroup]="CatagoryItemForm">
                                                             <div class="row">
-                                                                  <div class="col-lg-12 p-fluid mt-4">
+                                                                  <div class="col-lg-9 p-fluid mt-4">
                                                                         <span class="p-float-label">
                                                                               <input id="Item Name" type="text"
                                                                                     pInputText
@@ -81,11 +81,27 @@
                                                                         </span>
                                                                   </div>
 
+                                                                  <div class="col-lg-3 p-fluid mt-4">
+                                                                        <div class="pull-right d-flex align-items-center">
+                                                                              <span class="mr-3 fw"
+                                                                                    [ngClass]="CatagoryItemForm?.get('isVeg').value? 'text-success':'text-dark'">{{CatagoryItemForm?.get('isVeg')?.value?
+                                                                                    'Veg':'Non-veg'}} </span>
+                                                                              <span class="mt-2"><p-inputSwitch formControlName="isVeg"></p-inputSwitch></span>
+                                                                        </div>
+                                                                  </div>
+
                                                                   <div class="col-lg-12 p-fluid mt-4">
                                                                         <span class="p-float-label">
                                                                               <p-inputNumber formControlName="itemPrice" id="Item Price"  inputId="Item Price" mode="currency" currency="INR" locale="en-In" appFormErrorMessages>
                                                                               </p-inputNumber>
-                                                                              <label for="Item Price">Item Price</label>
+                                                                              <label for="Item Price">Price</label>
+                                                                        </span>
+                                                                  </div>
+                                                                  <div class="col-lg-12 p-fluid mt-4">
+                                                                        <span class="p-float-label">
+                                                                              <textarea pInputTextarea formControlName="itemDescription" id="Item Description"  inputId="Item desc" appFormErrorMessages>
+                                                                              </textarea>
+                                                                              <label for="Item desc">Description</label>
                                                                         </span>
                                                                   </div>
 

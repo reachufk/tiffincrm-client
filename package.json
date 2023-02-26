@@ -38,6 +38,7 @@
     "perfect-scrollbar": "1.5.5",
     "primeicons": "^6.0.1",
     "primeng": "^15.2.0",
+    "primeng-shadowdom-directives": "^0.2.0",
     "rxjs": "^7.8.0",
     "socket.io-client": "^4.6.0",
     "tslib": "^2.3.0",
