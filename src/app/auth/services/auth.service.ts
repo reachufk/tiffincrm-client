@@ -19,6 +19,10 @@ export class AuthService {
     )
   }
 
+  public get currentLoggedInUserValue(): IloggedUser {
+    return this.LoggedInUser.value;
+  }
+
   SignupUser(data: IUser) {
     return this.http.post(`${environment.server}User/RegisterUser`, data)
   }

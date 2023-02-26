@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
     if(this.loginForm.invalid){
       return
     }
-    this.authService.Login(this.loginForm.value).subscribe((res:any)=>{
+    this.authService.Login(this.loginForm.value).subscribe(async (res:any)=>{
       if(res?.statusCode==200){
         const loggedInUser:IloggedUser = res?.user;
         this.authService.LoggedInUser.next(loggedInUser);

@@ -24,8 +24,10 @@ import { OrderCustomerInfoComponent } from './place-manual-order/order-customer-
 import { OrderItemsSelectionComponent } from './place-manual-order/order-items-selection/order-items-selection.component';
 import { OrderPreviewComponent } from './place-manual-order/order-preview/order-preview.component';
 import { AdminCreatedOrdersComponent } from './orders/admin-created-orders/admin-created-orders.component';
+import { MessageService } from 'primeng/api';
+import { BannersComponent } from './banners/banners.component';
 @NgModule({
-  providers: [AdminCatagoryService, AdminUserService, AdmiOrdersService],
+  providers: [AdminCatagoryService, AdminUserService, AdmiOrdersService,MessageService],
   declarations: [DashboardComponent,
     OrdersComponent,
     UsersComponent,
@@ -39,7 +41,8 @@ import { AdminCreatedOrdersComponent } from './orders/admin-created-orders/admin
     OrderCustomerInfoComponent,
     OrderItemsSelectionComponent,
     OrderPreviewComponent,
-    AdminCreatedOrdersComponent],
+    AdminCreatedOrdersComponent,
+    BannersComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,

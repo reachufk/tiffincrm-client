@@ -4,7 +4,7 @@ import { Location } from '@angular/common';
 import { debounceTime, map, Observable, startWith, Subject, takeUntil } from 'rxjs';
 import { FetchCatagoryItems, initializeFetchCatagoryItems } from 'src/app/shared/interfaces/fetch-catagory-items';
 import { CatagoryService } from '../services/catagory.service';
-import { Form, FormControl } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { MessageService } from 'primeng/api';
 import { IloggedUser } from 'src/app/shared/interfaces/auth';
@@ -36,7 +36,7 @@ export class CategoryItemsComponent implements OnInit, OnDestroy {
   displayAddItemDialog:boolean = false
   SelectedItem: any={};
   QuantityControl:FormControl = new FormControl(1);
-
+  LoggedInUser:IloggedUser
   constructor(private catagoryService: CatagoryService, private activatedRoute: ActivatedRoute,
     private location: Location,private authService:AuthService,private cartService:CartService) {
     this.category = this.activatedRoute.snapshot.paramMap.get('category')
@@ -47,6 +47,7 @@ export class CategoryItemsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.LoggedInUser = this.authService.currentLoggedInUserValue
     this.FetchModel.pageSize = Infinity;
     this.FetchModel.catagory = this.category
     this.GetCategories()
@@ -98,14 +99,12 @@ export class CategoryItemsComponent implements OnInit, OnDestroy {
       this.messageService.add({ severity: 'warn', summary: 'Select region to continue',sticky:true });
       return
     }
-    this.authService.LoggedInUser.subscribe((user:IloggedUser)=> {
-      if(!user?.token){
-        this.messageService.add({ severity: 'warn', summary: 'Signin to continue',life:6000 });
-        return
-      }
-      this.SelectedItem = ({itemId:item?._id,itemName:item?.itemName,itemPrice:item?.itemPrice,count:1,itemDiscount:item?.itemDiscount,catagory:item?.catagory,isVeg:item?.isVeg?item?.isVeg:false})
-      this.displayAddItemDialog = true
-    })
+    if(!this.LoggedInUser){
+      this.messageService.add({ severity: 'warn', summary: 'Signin to continue',life:6000 });
+      return
+    }
+    this.SelectedItem = ({itemId:item?._id,itemName:item?.itemName,itemPrice:item?.itemPrice,count:1,itemDiscount:item?.itemDiscount,catagory:item?.catagory,isVeg:item?.isVeg?item?.isVeg:false})
+    this.displayAddItemDialog = true
   }
 
   AddToCart(SelectedItem:any){
@@ -116,6 +115,8 @@ export class CategoryItemsComponent implements OnInit, OnDestroy {
       }else{
         this.messageService.add({ severity: 'warn', summary: res?.message || 'already exists',life:3000 });
       }
+      this.SelectedItem = {}
+      this.displayAddItemDialog = false
     })
   }
 

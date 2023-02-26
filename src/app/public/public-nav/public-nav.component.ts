@@ -1,6 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
+import { map, Subject, takeUntil } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { IloggedUser } from 'src/app/shared/interfaces/auth';
 import { CartService } from '../services/cart.service';
@@ -16,19 +17,19 @@ export class PublicNavComponent implements OnInit {
   selectedRegion: string = ''
   cartItemsLength: number = 0;
   loggedIn: boolean = false
+  Destroy: Subject<void> = new Subject();
   constructor(private authService: AuthService, private router: Router, private cartService: CartService) { }
 
   ngOnInit(): void {
+    this.authService.LoggedInUser.pipe(takeUntil(this.Destroy),map((user:IloggedUser)=>{
+      console.log(user)
+      if(user?.token){
+        this.loggedIn = true
+      }
+    })).subscribe()
     const selected = this.authService?.SelectedRegion?.value
     this.selectedRegion = selected ? selected : ''
     this.GetRegions();
-    this.authService.LoggedInUser.subscribe((user: IloggedUser) => {
-      if (user?.token) {
-        this.loggedIn = true
-        return
-      }
-
-    })
     this.cartItemsLength = this.cartService.CartItems.value
   }
 

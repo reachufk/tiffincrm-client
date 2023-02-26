@@ -19,6 +19,7 @@ export class LatestOrdersComponent implements OnInit {
   constructor(private orderService:AdmiOrdersService,private dialogService:DialogService) {
   }
   ngOnInit(): void {
+    this.orderService.connect()
     this.GetLatestOrders()
     this.orderService.FetchNewCreatedOrder().subscribe((order:any)=>{
       this.LatestOrders.push(order)
