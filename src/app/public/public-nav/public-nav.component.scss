@@ -2,8 +2,9 @@
     background-color: #ffffff;
 }
 
-.shadow{
- box-shadow: 0 8px 6px -6px black;
+.shadow {
+    padding-block: 15px;
+    box-shadow: 0 8px 6px -6px black;
 }
 .p-button-plain:hover {
     color: green !important;
@@ -11,14 +12,27 @@
 }
 
 .p-button-plain:focus {
-    box-shadow: none !important
+    box-shadow: none !important;
 }
 
-
 .select-region:focus {
-    box-shadow: none !important
+    box-shadow: none !important;
 }
 
 .link-style {
     text-decoration: none;
+}
+
+.fixed-top {
+    position: sticky;
+    top: 0;
+    width: 100%;
+}
+
+.mr-2 {
+    margin-right: 5px;
+}
+
+.show-cursor {
+    cursor: pointer;
 }

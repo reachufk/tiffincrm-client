@@ -25,8 +25,8 @@
 .pull-right {
       float: right;
 }
-.mr-3 {
-      margin-right: 10px;
+.ml-3 {
+      margin-left: 10px;
 }
 
 .fw {
@@ -69,7 +69,19 @@
 }
 
 ::ng-deep .p-inputnumber-buttons-horizontal .p-inputnumber-input {
-      order: 2;
       border-radius: 0;
-      width: 57px !important;
+      width: 60px !important;
   }
+
+
+ ::ng-deep .p-dialog .p-dialog-footer button {
+      margin: 0 0 0 0;
+      width: auto;
+  }
+
+  @media (max-width:768px){
+      .half{
+            width: 50% !important;
+      }
+  }
+

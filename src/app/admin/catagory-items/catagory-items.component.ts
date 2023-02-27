@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Observable, map } from 'rxjs';
@@ -69,10 +69,33 @@ export class CatagoryItemsComponent {
       itemName: new FormControl(null, [Validators.required]),
       isVeg:new FormControl(false, [Validators.required]),
       itemPrice: new FormControl(null, [Validators.required]),
+      itemTypes:new FormArray([]),
+      selectedItemType: new FormControl(null),
       itemDescription:new FormControl(null),
       itemDiscount: new FormControl(null)
     })
   }
+
+  createItemTypeForm(){
+    return new FormGroup({
+      typeName:new FormControl(null,[Validators.required]),
+      typeValue:new FormControl(null,[Validators.required])
+    })
+  }
+
+  getItemTypesControls() {
+    return (<FormArray>this.CatagoryItemForm.get('itemTypes')).controls;
+  }
+
+  AddType() {
+    let ItemTypes = this.CatagoryItemForm.get('itemTypes') as FormArray;
+    ItemTypes.push(this.createItemTypeForm())
+  }
+  RemoveType(index:number) {
+    let ItemTypes = this.CatagoryItemForm.get('itemTypes') as FormArray;
+    ItemTypes.removeAt(index)
+  }
+
 
   SaveItem() {
     validateAllFormFields(this.CatagoryItemForm)

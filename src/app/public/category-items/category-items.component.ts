@@ -47,12 +47,14 @@ export class CategoryItemsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.LoggedInUser = this.authService.currentLoggedInUserValue
+    this.activatedRoute.data.pipe(takeUntil(this.Destroy),map((data:any)=>{
+      console.log(data?.user)
+      this.LoggedInUser = data?.user
+    })).subscribe()
     this.FetchModel.pageSize = Infinity;
     this.FetchModel.catagory = this.category
     this.GetCategories()
     this.GetItems()
-    this.searchKeyword.valueChanges.pipe(debounceTime(500), takeUntil(this.Destroy), map((input: string) => this.SearchItem(input))).subscribe()
   }
 
   GetItems() {
@@ -89,26 +91,19 @@ export class CategoryItemsComponent implements OnInit, OnDestroy {
     }
   }
 
-  SearchItem(keyword: string) {
-    this.FilteredItems = this.Items.pipe(map((items: Array<any>) => items?.filter((item: any) => item?.itemName?.toLowerCase()?.includes(keyword?.toLowerCase()))))
-  }
-
   OpenItemDialog(item){
-    const regionSelected = this.authService?.SelectedRegion?.value;
-    if(!regionSelected){
-      this.messageService.add({ severity: 'warn', summary: 'Select region to continue',sticky:true });
-      return
-    }
     if(!this.LoggedInUser){
       this.messageService.add({ severity: 'warn', summary: 'Signin to continue',life:6000 });
       return
     }
-    this.SelectedItem = ({itemId:item?._id,itemName:item?.itemName,itemPrice:item?.itemPrice,count:1,itemDiscount:item?.itemDiscount,catagory:item?.catagory,isVeg:item?.isVeg?item?.isVeg:false})
+    this.SelectedItem = ({itemId:item?._id,itemName:item?.itemName,itemPrice:item?.itemPrice,
+      count:1,itemDiscount:item?.itemDiscount,catagory:item?.catagory,
+      isVeg:item?.isVeg?item?.isVeg:false,itemTypes:item?.itemTypes,selectedItemType:{}})
     this.displayAddItemDialog = true
   }
 
   AddToCart(SelectedItem:any){
-    const user = this.authService?.LoggedInUser?.value?.user 
+    const user = this.LoggedInUser?.user
     this.cartService.AddCartItem(user,SelectedItem).subscribe((res:any)=>{
       if(res.statusCode ==200){
         this.messageService.add({ severity: 'success', summary: 'Item added to cart',life:3000 });

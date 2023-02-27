@@ -10,7 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  providers: [MessageService]
+  providers: []
 })
 export class LoginComponent implements OnInit {
 
@@ -25,13 +25,17 @@ export class LoginComponent implements OnInit {
   date: number = Date.now();
   error=''
   hide:boolean=true;
-  state:any
+  state:any;
   constructor(private authService: AuthService, @Optional() private messageService: MessageService,
   private router:Router,private activatedRoute:ActivatedRoute) {
-
+    
   }
 
   ngOnInit(): void {
+    const createdUserPhone = this.activatedRoute.snapshot.queryParamMap.get('registered')
+    if(createdUserPhone){
+    this.loginForm.get('phoneNumber').setValue(createdUserPhone)
+    }
     this.textList = [
       'Unexpected guests?',
       'Game night?',
@@ -61,10 +65,11 @@ export class LoginComponent implements OnInit {
     }
     this.authService.Login(this.loginForm.value).subscribe(async (res:any)=>{
       if(res?.statusCode==200){
+        this.messageService.add({severity:'success',summary:'logged in sucessfully'})
+        this.authService.SetUser(res?.user)
         const loggedInUser:IloggedUser = res?.user;
-        this.authService.LoggedInUser.next(loggedInUser);
         localStorage.setItem('loggedInUser',JSON.stringify(loggedInUser));
-        this.navigateIn()
+        this.router.navigate(['/public/home'])
       }else{
         this.error = res?.message
       }
@@ -74,7 +79,9 @@ export class LoginComponent implements OnInit {
   }
   navigateIn() {
     this.state = this.activatedRoute?.snapshot?.queryParamMap?.get('state')
+    
     let path = decodeURIComponent(this.state);
+    console.log(path)
     if(this.state){
       this.router.navigateByUrl(path)
     }else{

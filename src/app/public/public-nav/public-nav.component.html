@@ -1,4 +1,40 @@
+<div class="container-xxl px-0 mb-3" [ngClass]="stickHeader?'fixed-top':''">
+<nav class="navbar navbar-expand-lg custom-nav py-0" #nav>
+    <div class="container-fluid pt-2" [ngClass]="stickHeader?'shadow':''"> 
+        <a class="navbar-brand" routerLink="/public/home">
+            <img src="./../../../assets/img/logo.png" style="height: 40px;width: 100px;" alt="Tiffin Aww">
+        </a>
+      <button (click)="menu.toggle($event)"  #dd class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="pi pi-user"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav" [ngClass]="{'collapse': collapsed, 'navbar-collapse': true}">
+        <ul class="navbar-nav">
+          <li *ngFor="let item of Items" class="nav-item">
+            <a class="nav-link show-cursor" (click)="NavigateTo(item)" aria-current="page"><i [class]="item?.icon + ' '+ 'mr-2' "></i>{{item?.label}}</a>
+          </li>
+        </ul>
+        <p-menu [appendTo]="'body'"  [baseZIndex]="1111" [autoZIndex]="true" #menu [popup]="true" [model]="Items"></p-menu>
+      </div>
+       
+    </div>
+  </nav>
+</div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
 <div class="container-xxl px-0 sticky-top mb-3" [ngClass]="stickHeader?'sticky-top':''">
    
     <nav class="navbar navbar-expand-lg custom-nav py-0">
@@ -11,18 +47,9 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div  class="" [ngClass]="{'collapse': collapsed, 'navbar-collapse': true}">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <button type="button" pButton icon="pi pi-map-marker" label="{{selectedRegion ? selectedRegion:'Select Region'}}"
-                            (click)="menu.toggle($event)" class="p-button-text text-secondary"></button>
-                        <p-menu [appendTo]="'body'"  [baseZIndex]="1111" [autoZIndex]="true" #menu [popup]="true" [model]="regions"></p-menu>
-                 
-                </ul>
+                
                 <ul class="nav justify-content-end">
-                    <!-- <a class="link-style" [routerLink]="['/auth/login']">
-                        <button pButton pRipple type="button" label="Search" icon="pi pi-search"
-                            class=" p-button-plain p-button-text nav-hover">
-                        </button>
-                    </a> -->
+                  
                     <a *ngIf="!loggedIn" class="link-style" (click)="NavigateToSignIn()">
                         <button pButton pRipple type="button" label="Sign In" icon="pi pi-user"
                             class="p-button-plain p-button-text nav-hover"></button>
@@ -41,4 +68,4 @@
             </div>
         </div>
     </nav>
-</div>
+</div> -->

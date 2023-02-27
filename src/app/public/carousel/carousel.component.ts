@@ -11,11 +11,7 @@ export class CarouselComponent implements OnInit {
   constructor(private bannerService: BannerService) {
   }
 
-  Banners: Array<object> = [{
-    image: './../../../assets/img/logo.png',
-    thumbImage: './../../../assets/img/logo.png',
-    alt: ''
-  }
+  Banners: Array<object> = [
   ];
 
   ngOnInit() {

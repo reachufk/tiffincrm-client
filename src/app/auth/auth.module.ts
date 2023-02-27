@@ -9,10 +9,11 @@ import { LogoutComponent } from './logout/logout.component';
 import { SignupComponent } from './signup/signup.component';
 import { RouterModule } from '@angular/router';
 import { NgOtpInputModule } from  'ng-otp-input';
+import { MessageService } from 'primeng/api';
 
 
 @NgModule({
-  providers: [AuthService],
+  providers: [AuthService,MessageService],
   declarations: [
     LoginComponent,
     LogoutComponent,

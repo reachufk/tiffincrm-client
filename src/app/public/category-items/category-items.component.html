@@ -5,50 +5,43 @@
                         <ng-image-slider [imageSize]="{width: '20%', height: '20%', space: 10}"
                               [manageImageRatio]="false" [images]="Categories" [infinite]="true" [imagePopup]="false"
                               [animationSpeed]="3" [showArrow]="true" (imageClick)="catagoryClick($event)"
-                              [autoSlide]="1" #nav>
+                              [autoSlide]="0" #nav>
                         </ng-image-slider>
                   </div>
             </div>
             <div class="col-lg-12 mt-4 py-2 mb-0 bg-light">
                   <p-toast></p-toast>
                   <div class="row d-flex align-items-center">
-                        <div class="col-lg-4 px-2">
-                              <div class="p-inputgroup">
-                                    <input type="text" [formControl]="searchKeyword" pInputText
-                                          placeholder="Search Item">
-                                    <button type="button" pButton pRipple icon="pi pi-refresh"
-                                          class="p-button-success"></button>
-                              </div>
-                        </div>
                         <div class="col-lg-8 px-2">
-                              <div class="pull-right d-flex align-items-center">
-                                    <span class="mr-3 fw"
+                              <div class="d-flex align-items-center">
+                                    <span class="mt-2"><p-inputSwitch (onChange)="handleChange($event)"
+                                          [formControl]="itemTypeControl"></p-inputSwitch></span>
+                                    <span class="ml-3 fw"
                                           [ngClass]="itemTypeControl.value? 'text-success':'text-dark'">{{itemTypeControl.value?
                                           'Veg Only':'Veg and Non-veg'}} </span>
-                                    <span class="mt-2"><p-inputSwitch (onChange)="handleChange($event)"
-                                                [formControl]="itemTypeControl"></p-inputSwitch></span>
+                                    
                               </div>
 
                         </div>
                   </div>
             </div>
 
-            <div class="col-lg-12 pt-5 pb-3 bg-light text-center">
+            <div class="col-lg-12 pt-2 pb-3 bg-light text-center">
                   <h4><span class="active-category">{{categoryName}}</span></h4>
             </div>
 
             <div class="col-lg-12 bg-light">
                   <div class="row">
-                        <div *ngFor="let item of FilteredItems | async" class="col-lg-4 col-sm-6 col-xs-12 mb-3">
-                              <div class="card p-3">
+                        <div *ngFor="let item of FilteredItems | async" class="col-lg-4 col-sm-6 col-xs-6 half px-2 mb-3">
+                              <div class="card p-3 h-100">
                                     <div class="row">
-                                          <div class="col-lg-8 col-md-8 w-50">
+                                          <div class="col-lg-6 col-md-6">
                                                 <span class="pi pi-stop-circle fw-bold"
                                                       [ngClass]="item?.isVeg? 'text-success':'text-danger'"></span>
                                                 <span class="itemTitle ms-2">{{item?.itemName}}</span>
                                                 <p class="text-secondary my-3">{{item?.itemDescription}}</p>
                                           </div>
-                                          <div class="col-lg-4 col-md-4 w-50 text-end">
+                                          <div class="col-lg-6 col-md-6 text-end">
                                                 <span class="text-secondary pull-right">Starts From</span>
                                                 <br>
                                                 <span class="my-2"><strong>{{item?.itemPrice |
@@ -70,35 +63,35 @@
                                  
                                     <ng-template pTemplate="header">
                                           <h3> <i class="pi pi-stop-circle fs-5 fw-bold" [ngClass]="SelectedItem?.isVeg? 'text-success':'text-danger'"></i> {{SelectedItem?.itemName}}</h3>
+                                          <h3> 
+                                                <p-dropdown [options]="SelectedItem?.itemTypes" [(ngModel)]="SelectedItem.selectedItemType" optionLabel="typeName" placeholder="Select Item Type" appFormerror required></p-dropdown>
+                                          </h3>
                                     </ng-template>
 
                                     <ng-template pTemplate="content">
                                           <div class="row d-flex align-items-center">
-                                                <div class="col-lg-6">
-                                                      Quantity :  
-                                                      <p-inputNumber [allowEmpty]="true" value="0"  [showButtons]="true" [value]="SelectedItem.count ? SelectedItem.count:1" [min]="1" [(ngModel)]="SelectedItem.count" buttonLayout="horizontal" inputId="horizontal" spinnerMode="horizontal" [step]="1" 
-                                                      decrementButtonClass="p-button-danger p-buttonn-sm" incrementButtonClass="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus">
-                                                      </p-inputNumber>
-                                                      <div class="my-4">
-                                                           <span class="fw-bold">Item : {{SelectedItem?.itemName}} </span>
-                                                      <br>
-                                                      <br>
-                                                      <span class="fw-bold">{{SelectedItem?.itemPrice | currency:'INR'}}</span> x {{SelectedItem?.count}}
-                                                      <br>
-                                                      <h5>Total Item Cost: {{(SelectedItem?.itemPrice * SelectedItem?.count) | currency:'INR'}}</h5>
-                                                      </div>
-                                                      
+                                                <div class="col-lg-12 text-secondary">
+                                                      {{SelectedItem?.itemDescription ? SelectedItem?.itemDescription :'Description not available'}}
                                                 </div>
-                                                <div class="col-lg-6 text-secondary">
-                                                      {{SelectedItem?.itemDescription}}
-                                                </div>
-                                                
+                                          </div>
+                                          <div class="col-lg-4 my-auto">
+                                                <span class="fw-bold text-secondary">Total Item Cost: {{(SelectedItem?.itemPrice * SelectedItem?.count) | currency:'INR'}}</span>
                                           </div>
                                     </ng-template>
 
                                     <ng-template pTemplate="footer">
-                                          <p-button icon="pi pi-check" (click)="AddToCart(SelectedItem)" icon="pi pi-shopping-cart" label="Add Item"
-                                                styleClass="p-button-text"></p-button>
+                                          <div class="row">
+                                                <div class="col-lg-6 text-start half">
+                                                      <p-inputNumber [allowEmpty]="true" value="0"  [showButtons]="true" [value]="SelectedItem.count ? SelectedItem.count:1" [min]="1" [(ngModel)]="SelectedItem.count" buttonLayout="horizontal" inputId="horizontal" spinnerMode="horizontal" [step]="1" 
+                                                      decrementButtonClass="p-button-danger p-buttonn-sm" incrementButtonClass="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus">
+                                                      </p-inputNumber>
+                                                </div>
+                                                <div class="col-lg-6 half">
+                                                      <p-button  (click)="AddToCart(SelectedItem)" icon="pi pi-shopping-cart" label="Add Item"
+                                                      styleClass="p-button-text" class="pull-right"></p-button>
+                                                </div>
+                                          </div>
+                                         
                                     </ng-template>
                               </p-dialog>
                         </div>

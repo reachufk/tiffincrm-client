@@ -1,4 +1,11 @@
-.pull-right{
+.pull-right {
       float: right;
       margin-right: 10px;
+}
+
+@media (max-width: 768px) {
+      .half {
+            width: 50% !important;
+            padding-block: 20px;
+      }
 }

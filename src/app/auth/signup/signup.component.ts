@@ -4,12 +4,13 @@ import { validateAllFormFields } from 'src/app/shared/utils/formUtils';
 import { AuthService } from '../services/auth.service';
 import { MessageService } from 'primeng/api';
 import { NgOtpInputComponent } from 'ng-otp-input';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss'],
-  providers: [MessageService]
+  providers: []
 })
 export class SignupComponent implements OnInit {
   @ViewChild(NgOtpInputComponent, { static: false }) ngOtpInput: NgOtpInputComponent;
@@ -20,7 +21,8 @@ export class SignupComponent implements OnInit {
   showText: string;
   date: number = Date.now();
   showOtp: boolean = false;
-  constructor(private authService: AuthService, @Optional() private messageService: MessageService) {
+  constructor(private authService: AuthService,private messageService: MessageService,
+    private router:Router) {
   }
 
   ngOnInit(): void {
@@ -64,7 +66,8 @@ export class SignupComponent implements OnInit {
     this.authService.SignupUser(value).subscribe((res: any) => {
       if (res?.statusCode == 200) {
         this.messageService.add({ severity: 'success', summary: res?.message || 'Account registred successfully.' });
-        this.showOtp = true;
+        const {phoneNumber } = this.signupForm.value
+        this.router.navigate(['/auth/login'],{queryParams:{registered:phoneNumber}})
       }
     })
   }

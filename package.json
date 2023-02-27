@@ -1,7 +1,6 @@
 {
   "name": "tiffi-client",
-  "version": "2.8.0",
-  "license": "MIT",
+  "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -10,10 +9,6 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && ng serve -o"
-  },
-  "engines": {
-    "node": "18.14.1",
-    "npm": "8.19.1"
   },
   "private": true,
   "dependencies": {
@@ -29,6 +24,7 @@
     "@angular/platform-browser-dynamic": "^15.1.5",
     "@angular/router": "^15.1.5",
     "@fontsource/metropolis": "^4.5.3",
+    "@popperjs/core": "^2.11.6",
     "@types/socket.io-client": "^3.0.0",
     "bootstrap": "^5.2.3",
     "bootstrap-material-design": "4.1.3",

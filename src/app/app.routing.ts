@@ -6,8 +6,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { PublicLayoutComponent } from './layouts/public-layout/public-layout.component';
 import { UserLayoutComponent } from './layouts/user-layout/user-layout.component';
-import { AuthGuard } from './shared/guards/auth.guard';
+import { AuthGuard } from './auth/core/guards/auth.guard';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
+import { PublicResolver } from './public/public.resolver';
 
 const routes: Routes = [
   {
@@ -18,19 +19,22 @@ const routes: Routes = [
   {
     path: 'public',
     component: PublicLayoutComponent,
-      loadChildren: () => import('./public/public.module').then(m => m.PublicModule)
+    resolve:{
+      user:PublicResolver
+    },
+    loadChildren: () => import('./public/public.module').then(m => m.PublicModule)
   },
   {
     path: 'user',
     component: UserLayoutComponent,
     canActivate: [AuthGuard],
-      loadChildren: () => import('./user/user.module').then(m => m.UserModule)
+    loadChildren: () => import('./user/user.module').then(m => m.UserModule)
   },
   {
     path: 'admin',
     component: AdminLayoutComponent,
     canActivate: [AuthGuard],
-      loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
+    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
   },
   {
     path: 'auth',

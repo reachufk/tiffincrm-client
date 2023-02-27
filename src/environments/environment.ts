@@ -1,5 +1,5 @@
 
 export const environment = {
   production: false,
-  server:'https://tiffin.ufksolutions.com/'
+  server:'http://localhost:3000/'
 };

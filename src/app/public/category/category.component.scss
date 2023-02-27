@@ -43,3 +43,9 @@
     background: rgba(23, 19, 19, 0.55);
     border: none;
   }
+
+  @media (max-width:986px){
+    .half{
+      width: 50% !important;
+    }
+  }

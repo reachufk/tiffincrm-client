@@ -3,24 +3,28 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { IloggedUser, IOTP, IUser } from 'src/app/shared/interfaces/auth';
 import { BehaviorSubject } from 'rxjs';
-
 @Injectable({
   providedIn: "root"
 })
 export class AuthService {
   LoggedInUser: BehaviorSubject<IloggedUser>;
-  SelectedRegion: BehaviorSubject<string>;
   constructor(private http: HttpClient) {
     this.LoggedInUser = new BehaviorSubject<IloggedUser>(
       JSON.parse(localStorage.getItem('loggedInUser'))
     )
-    this.SelectedRegion = new BehaviorSubject<string>(
-      localStorage.getItem('selectedRegion')
-    )
   }
 
-  public get currentLoggedInUserValue(): IloggedUser {
+  public get getLoggedInUserValue():IloggedUser {
     return this.LoggedInUser.value;
+  }
+
+  SetUser(user:IloggedUser){
+    this.LoggedInUser.next(user);
+  }
+
+  Logout(){
+    this.LoggedInUser.next(null);
+    localStorage.removeItem('loggedInUser')
   }
 
   SignupUser(data: IUser) {
