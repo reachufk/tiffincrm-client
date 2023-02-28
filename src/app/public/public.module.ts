@@ -22,6 +22,7 @@ import {DialogModule} from 'primeng/dialog';
 import {InputNumberModule} from 'primeng/inputnumber';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import { FormerrorDirective } from './services/formerror.directive';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
 @NgModule({
   providers: [CatagoryService],
 
@@ -51,7 +52,7 @@ import { FormerrorDirective } from './services/formerror.directive';
     DialogModule,
     InputNumberModule,
     InputTextareaModule,
-    
+    ConfirmDialogModule
   ]
 })
 export class PublicModule { }

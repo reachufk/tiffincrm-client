@@ -28,8 +28,8 @@ export class PublicNavComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.activatedRoute.data.pipe(map((user:any)=>{
-      if(user){
+    this.activatedRoute.data.pipe(map((data:any)=>{
+      if(data?.user){
         const pullOut=['Login'];
         this.Items =  this.NavItems.filter((item:MenuItem)=> !pullOut.includes(item?.label) )
       }else{

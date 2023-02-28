@@ -19,11 +19,12 @@ import {TabViewModule} from 'primeng/tabview';
 import {MultiSelectModule} from 'primeng/multiselect';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {DividerModule} from 'primeng/divider'
+import { AuthGuard } from '../auth/core/guards/auth.guard';
 
 @NgModule({
   declarations: [
     FormErrorMessagesDirective,
-    PaginatorComponent
+    PaginatorComponent,
   ],
   imports: [
     CommonModule,

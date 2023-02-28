@@ -27,7 +27,6 @@ import { AuthInterceptor } from './auth/core/interceptors/auth.interceptor';
     RouterModule,
     AppRoutingModule,
     SharedModule,
-    
   ],
   declarations: [
     AppComponent,

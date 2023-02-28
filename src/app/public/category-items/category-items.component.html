@@ -10,7 +10,6 @@
                   </div>
             </div>
             <div class="col-lg-12 mt-4 py-2 mb-0 bg-light">
-                  <p-toast></p-toast>
                   <div class="row d-flex align-items-center">
                         <div class="col-lg-8 px-2">
                               <div class="d-flex align-items-center">
@@ -34,8 +33,10 @@
                   <div class="row">
                         <div *ngFor="let item of FilteredItems | async" class="col-lg-4 col-sm-6 col-xs-6 half px-2 mb-3">
                               <div class="card p-3 h-100">
+                                    <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
                                     <div class="row">
                                           <div class="col-lg-6 col-md-6">
+                                                <p-toast position="top-center" key="addcartlogin" [preventOpenDuplicates]="true"></p-toast>
                                                 <span class="pi pi-stop-circle fw-bold"
                                                       [ngClass]="item?.isVeg? 'text-success':'text-danger'"></span>
                                                 <span class="itemTitle ms-2">{{item?.itemName}}</span>
@@ -47,6 +48,7 @@
                                                 <span class="my-2"><strong>{{item?.itemPrice |
                                                             currency:'INR'}}</strong></span>
                                                 <br>
+                                                
                                                 <button (click)="OpenItemDialog(item)" pButton pRipple
                                                       class="p-button-warning p-button-sm my-3" label="Add"
                                                       icon="pi pi-plus">

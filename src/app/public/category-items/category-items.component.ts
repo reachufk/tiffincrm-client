@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy,inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { debounceTime, map, Observable, startWith, Subject, takeUntil } from 'rxjs';
 import { FetchCatagoryItems, initializeFetchCatagoryItems } from 'src/app/shared/interfaces/fetch-catagory-items';
 import { CatagoryService } from '../services/catagory.service';
 import { FormControl } from '@angular/forms';
 import { AuthService } from 'src/app/auth/services/auth.service';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, ConfirmEventType, MessageService } from 'primeng/api';
 import { IloggedUser } from 'src/app/shared/interfaces/auth';
 import { CartService } from '../services/cart.service';
 
@@ -14,7 +14,7 @@ import { CartService } from '../services/cart.service';
   selector: 'app-category-items',
   templateUrl: './category-items.component.html',
   styleUrls: ['./category-items.component.scss'],
-  providers:[MessageService]
+  providers:[MessageService,ConfirmationService]
 })
 export class CategoryItemsComponent implements OnInit, OnDestroy {
 
@@ -38,7 +38,8 @@ export class CategoryItemsComponent implements OnInit, OnDestroy {
   QuantityControl:FormControl = new FormControl(1);
   LoggedInUser:IloggedUser
   constructor(private catagoryService: CatagoryService, private activatedRoute: ActivatedRoute,
-    private location: Location,private authService:AuthService,private cartService:CartService) {
+    private location: Location,private cartService:CartService,
+    private confirmationService: ConfirmationService,private router:Router) {
     this.category = this.activatedRoute.snapshot.paramMap.get('category')
   }
   ngOnDestroy(): void {
@@ -48,7 +49,6 @@ export class CategoryItemsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.activatedRoute.data.pipe(takeUntil(this.Destroy),map((data:any)=>{
-      console.log(data?.user)
       this.LoggedInUser = data?.user
     })).subscribe()
     this.FetchModel.pageSize = Infinity;
@@ -93,7 +93,7 @@ export class CategoryItemsComponent implements OnInit, OnDestroy {
 
   OpenItemDialog(item){
     if(!this.LoggedInUser){
-      this.messageService.add({ severity: 'warn', summary: 'Signin to continue',life:6000 });
+      this.NotSignedInConfirm()
       return
     }
     this.SelectedItem = ({itemId:item?._id,itemName:item?.itemName,itemPrice:item?.itemPrice,
@@ -113,6 +113,34 @@ export class CategoryItemsComponent implements OnInit, OnDestroy {
       this.SelectedItem = {}
       this.displayAddItemDialog = false
     })
+  }
+
+
+   NotSignedInConfirm(){
+     this.confirmationService.confirm({
+      message: 'Sign in to continue?',
+      header: 'You are not logged in?',
+      icon: 'pi pi-exclamation-triangle',
+      acceptLabel:'Sign in',
+      rejectLabel:'Sign up',
+      accept: () => {
+        this.confirmationService.close()
+         this.router.navigate(['/auth/login'])
+      },
+      reject: (type) => {
+        switch(type) {
+          case ConfirmEventType.REJECT:
+            this.confirmationService.close();
+            this.router.navigate(['/auth/signup'])
+          break;
+          case ConfirmEventType.CANCEL:
+            this.confirmationService.close()
+
+          break;
+      }
+        
+      }
+  });
   }
 
 
