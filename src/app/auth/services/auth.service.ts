@@ -8,10 +8,12 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class AuthService {
   LoggedInUser: BehaviorSubject<IloggedUser>;
+  userCart:BehaviorSubject<boolean>;
   constructor(private http: HttpClient) {
     this.LoggedInUser = new BehaviorSubject<IloggedUser>(
       JSON.parse(localStorage.getItem('loggedInUser'))
     )
+    this.userCart = new BehaviorSubject<boolean>(true)
   }
 
   public get getLoggedInUserValue():IloggedUser {
@@ -24,6 +26,7 @@ export class AuthService {
 
   Logout(){
     this.LoggedInUser.next(null);
+    this.userCart.next(false)
     localStorage.removeItem('loggedInUser')
   }
 

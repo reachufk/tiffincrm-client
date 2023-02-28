@@ -3,9 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { map, Subject, take, takeUntil } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
-import { IloggedUser } from 'src/app/shared/interfaces/auth';
 import { CartService } from '../services/cart.service';
-import * as regionData from './regions.json'
 @Component({
   selector: 'public-nav',
   templateUrl: './public-nav.component.html',
@@ -16,8 +14,8 @@ export class PublicNavComponent implements OnInit {
   regions: MenuItem[] = []
   Items: MenuItem[] = [{label:'My Profile',icon:'pi pi-user'},
   {label:'Logout',icon:'pi pi-sign-out'},
-  {label:'Login',icon:'pi pi-sign-in',routerLink:'/auth/login'},
-  {label:"Cart", icon:'pi pi-shopping-cart',routerLink:'/public/cart'}]
+  {label:'Login',icon:'pi pi-sign-in',routerLink:'/auth/login'}
+]
   selectedRegion: string = ''
   cartItemsLength: number = 0;
   loggedIn: boolean = false
@@ -33,7 +31,7 @@ export class PublicNavComponent implements OnInit {
         const pullOut=['Login'];
         this.Items =  this.NavItems.filter((item:MenuItem)=> !pullOut.includes(item?.label) )
       }else{
-        const pullOut=['My Profile','Logout','Cart']
+        const pullOut=['My Profile','Logout']
         this.Items =  this.NavItems.filter((item:MenuItem)=> !pullOut.includes(item?.label) )
       }
     })).subscribe()
@@ -58,26 +56,13 @@ export class PublicNavComponent implements OnInit {
       return
     }
     if(item?.label == 'Logout'){
-      const pullOut=['My Profile','Logout','Cart']
+      const pullOut=['My Profile','Logout']
       this.Items =  this.NavItems.filter((item:MenuItem)=> !pullOut.includes(item?.label) );
       this.authService.Logout()
       this.router.navigate(['/public/home'])
     }
 
   }
-
-  // GetLogoutStatus(){
-  //   debugger
-  //   this.authService.getLoggedInUserValue.pipe(map((user:IloggedUser)=>{
-  //     if(user){
-  //       const pullOut=['Login'];
-  //       this.Items =  this.NavItems.filter((item:MenuItem)=> !pullOut.includes(item?.label) )
-  //     }else{
-  //       const pullOut=['My Profile','Logout','Cart']
-  //       this.Items =  this.NavItems.filter((item:MenuItem)=> !pullOut.includes(item?.label) )
-  //     }
-  //   })).subscribe()
-  // }
 
 
 

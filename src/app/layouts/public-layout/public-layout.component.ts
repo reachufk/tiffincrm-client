@@ -1,4 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { map } from 'rxjs';
+import { AuthService } from 'src/app/auth/services/auth.service';
 @Component({
   selector: 'app-public-layout',
   templateUrl: './public-layout.component.html',
@@ -11,9 +14,25 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 })
 export class PublicLayoutComponent implements OnInit {
 
-  constructor() { }
+  loggedIn:boolean=false
+  constructor(private activatedRoute:ActivatedRoute,private authService:AuthService) { }
 
   ngOnInit(): void {
+    this.authService.userCart.pipe(map((show)=>{
+      if(!show){
+        this.loggedIn=false
+      }
+    })).subscribe()
+    this.activatedRoute.data.pipe(map((data:any)=>{
+      if(data?.user){
+        this.loggedIn=true
+        return
+      }
+      this.loggedIn=false
+    })).subscribe()
+
+   
+
   }
 
 }

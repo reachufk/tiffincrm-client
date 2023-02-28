@@ -16,8 +16,7 @@
                                     <span class="mt-2"><p-inputSwitch (onChange)="handleChange($event)"
                                           [formControl]="itemTypeControl"></p-inputSwitch></span>
                                     <span class="ml-3 fw"
-                                          [ngClass]="itemTypeControl.value? 'text-success':'text-dark'">{{itemTypeControl.value?
-                                          'Veg Only':'Veg and Non-veg'}} </span>
+                                          [ngClass]="itemTypeControl.value? 'text-success':'text-dark'">Veg</span>
                                     
                               </div>
 
@@ -31,18 +30,18 @@
 
             <div class="col-lg-12 bg-light">
                   <div class="row">
-                        <div *ngFor="let item of FilteredItems | async" class="col-lg-4 col-sm-6 col-xs-6 half px-2 mb-3">
+                        <div *ngFor="let item of FilteredItems | async" class="col-lg-4 col-sm-6 col-xs-6 px-2 mb-3">
                               <div class="card p-3 h-100">
-                                    <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+                                    <p-confirmDialog [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
                                     <div class="row">
-                                          <div class="col-lg-6 col-md-6">
+                                          <div class="col-lg-6 col-md-6 half">
                                                 <p-toast position="top-center" key="addcartlogin" [preventOpenDuplicates]="true"></p-toast>
                                                 <span class="pi pi-stop-circle fw-bold"
                                                       [ngClass]="item?.isVeg? 'text-success':'text-danger'"></span>
                                                 <span class="itemTitle ms-2">{{item?.itemName}}</span>
                                                 <p class="text-secondary my-3">{{item?.itemDescription}}</p>
                                           </div>
-                                          <div class="col-lg-6 col-md-6 text-end">
+                                          <div class="col-lg-6 col-md-6 half text-end">
                                                 <span class="text-secondary pull-right">Starts From</span>
                                                 <br>
                                                 <span class="my-2"><strong>{{item?.itemPrice |

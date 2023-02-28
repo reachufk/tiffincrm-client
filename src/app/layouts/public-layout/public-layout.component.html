@@ -1,2 +1,5 @@
 <public-nav></public-nav>
 <router-outlet></router-outlet>
+<span class="cart-button" *ngIf="loggedIn">
+      <button pButton pRipple type="button" routerLink="/public/cart" icon="pi pi-shopping-cart" class="p-button-rounded"></button>
+</span>
