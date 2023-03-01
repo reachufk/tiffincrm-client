@@ -12,7 +12,8 @@ import * as regionData from './availRegions.json'
 export class TiffinLandingComponent implements OnInit {
   
   availablePlaces:Array<any>=[];
-  results:Array<any>=[]
+  results:Array<any>=[];
+  selected :any
   constructor(private authService:AuthService,private router:Router){
 
   }
@@ -25,9 +26,14 @@ export class TiffinLandingComponent implements OnInit {
     this.results = this.availablePlaces.filter((region:any)=> region?.label?.toLowerCase()?.includes(event?.query?.toLowerCase()))
   }
 
-  SetGo(region:any){
-    this.authService.Region.next(region);
-    localStorage.setItem('selectedRegion',JSON.stringify(region));
+
+  selectChange(region){
+    this.selected = region
+  }
+
+  SetGo(){
+    this.authService.Region.next(this.selected);
+    localStorage.setItem('selectedRegion',JSON.stringify(this.selected));
     this.router.navigate(['/public/home'])
   }
 

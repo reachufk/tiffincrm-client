@@ -8,6 +8,7 @@ import { FormControl } from '@angular/forms';
 import { ConfirmationService, ConfirmEventType, MessageService } from 'primeng/api';
 import { IloggedUser } from 'src/app/shared/interfaces/auth';
 import { CartService } from '../services/cart.service';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
   selector: 'app-category-items',
@@ -40,7 +41,7 @@ export class CategoryItemsComponent implements OnInit, OnDestroy {
   empty:boolean = false
   regionSelected = JSON.parse(localStorage.getItem('selectedRegion'))
   constructor(private catagoryService: CatagoryService, private activatedRoute: ActivatedRoute,
-    private location: Location, private cartService: CartService,
+    private location: Location, private cartService: CartService,private authService:AuthService,
     private confirmationService: ConfirmationService, private router: Router) {
     this.category = this.activatedRoute.snapshot.paramMap.get('category')
   }
@@ -57,6 +58,14 @@ export class CategoryItemsComponent implements OnInit, OnDestroy {
     this.FetchModel.catagory = this.category
     this.GetCategories()
     this.GetItems()
+
+    this.authService.Region.pipe(takeUntil(this.Destroy), map((region: any) => {
+      if (region) {
+        this.regionSelected = region
+        return
+      }
+    })).subscribe()
+
   }
 
   GetItems() {

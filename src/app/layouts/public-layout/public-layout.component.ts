@@ -10,38 +10,36 @@ import { AuthService } from 'src/app/auth/services/auth.service';
     "../../../../node_modules/primeng/resources/themes/lara-light-blue/theme.css",
     "../../../../node_modules/primeng/resources/primeng.min.css",
     "../../../../node_modules/bootstrap/dist/css/bootstrap.min.css"],
-    encapsulation:ViewEncapsulation.ShadowDom
+  encapsulation: ViewEncapsulation.ShadowDom
 })
 export class PublicLayoutComponent implements OnInit {
 
-  loggedIn:boolean=false;
+  loggedIn: boolean = false;
   isCart: boolean = false;
-  constructor(private activatedRoute:ActivatedRoute,private authService:AuthService,private router:Router) { }
+  constructor(private activatedRoute: ActivatedRoute, private authService: AuthService, private router: Router) {
+    this.isCart = this.router.url.includes('cart') ? true : false
+  }
 
   ngOnInit(): void {
-    this.router.events.subscribe((event:NavigationEnd)=>{
-      if(event instanceof NavigationEnd){
-        if(event?.url?.includes('cart')){
-          this.isCart = true
-          return
-        }
-        this.isCart = false
+    this.router.events.subscribe((event: NavigationEnd) => {
+      if (event instanceof NavigationEnd) {
+        this.isCart = event.url.includes('cart') ? true : false
       }
     })
-    this.authService.userCart.pipe(map((show)=>{
-      if(!show){
-        this.loggedIn=false
+    this.authService.userCart.pipe(map((show) => {
+      if (!show) {
+        this.loggedIn = false
       }
     })).subscribe()
-    this.activatedRoute.data.pipe(map((data:any)=>{
-      if(data?.user){
-        this.loggedIn=true
+    this.activatedRoute.data.pipe(map((data: any) => {
+      if (data?.user) {
+        this.loggedIn = true
         return
       }
-      this.loggedIn=false
+      this.loggedIn = false
     })).subscribe()
 
-   
+
 
   }
 
