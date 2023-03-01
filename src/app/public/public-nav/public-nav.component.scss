@@ -36,3 +36,20 @@
 .show-cursor {
     cursor: pointer;
 }
+
+.pull-right{
+    float: right;
+}
+.w-50{
+    padding-top: 10px;
+    width: 50%;
+}
+@media (max-width:310px){
+    .w-50{
+        width: 100% !important;
+    }
+}
+
+::ng-deep .p-dialog .p-dialog-content {
+    padding: 0 1.5rem 0.5rem 1.5rem !important;
+}

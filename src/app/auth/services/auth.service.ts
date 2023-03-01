@@ -9,9 +9,13 @@ import { BehaviorSubject } from 'rxjs';
 export class AuthService {
   LoggedInUser: BehaviorSubject<IloggedUser>;
   userCart:BehaviorSubject<boolean>;
+  Region:BehaviorSubject<any>;
   constructor(private http: HttpClient) {
     this.LoggedInUser = new BehaviorSubject<IloggedUser>(
       JSON.parse(localStorage.getItem('loggedInUser'))
+    )
+    this.Region = new BehaviorSubject<any>(
+      JSON.parse(localStorage.getItem('selectedRegion'))
     )
     this.userCart = new BehaviorSubject<boolean>(true)
   }

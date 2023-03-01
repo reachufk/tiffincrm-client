@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { map } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
 @Component({
@@ -14,10 +14,20 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 })
 export class PublicLayoutComponent implements OnInit {
 
-  loggedIn:boolean=false
-  constructor(private activatedRoute:ActivatedRoute,private authService:AuthService) { }
+  loggedIn:boolean=false;
+  isCart: boolean = false;
+  constructor(private activatedRoute:ActivatedRoute,private authService:AuthService,private router:Router) { }
 
   ngOnInit(): void {
+    this.router.events.subscribe((event:NavigationEnd)=>{
+      if(event instanceof NavigationEnd){
+        if(event?.url?.includes('cart')){
+          this.isCart = true
+          return
+        }
+        this.isCart = false
+      }
+    })
     this.authService.userCart.pipe(map((show)=>{
       if(!show){
         this.loggedIn=false

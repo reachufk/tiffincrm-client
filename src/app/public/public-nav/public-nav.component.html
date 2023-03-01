@@ -1,21 +1,102 @@
 <div class="container-xxl px-0 mb-3" [ngClass]="stickHeader?'fixed-top':''">
-<nav class="navbar navbar-expand-lg custom-nav py-0" #nav>
-    <div class="container-fluid pt-2" [ngClass]="stickHeader?'shadow':''"> 
-        <a class="navbar-brand" routerLink="/public/home">
-            <img src="./../../../assets/img/logo.png" style="height: 40px;width: 100px;" alt="Tiffin Aww">
-        </a>
-      <button (click)="menu.toggle($event)"  #dd class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+  <nav class="navbar navbar-expand-lg custom-nav py-0" #nav>
+    <div class="container-fluid pt-2" [ngClass]="stickHeader?'shadow':''">
+      <a class="navbar-brand" routerLink="/public/home">
+        <img src="./../../../assets/img/logo.png" style="height: 40px;width: 100px;" alt="Tiffin Aww">
+      </a>
+      <a class="navbar-brand">
+        <p-dropdown [options]="regions" optionLabel="label" [formControl]="selectedRegion"  [filter]="false"
+          placeholder="Select region">
+          <ng-template let-region pTemplate="item">
+            <div class="country-item">
+              <div>{{region?.label}} - {{region?.distance}}</div>
+            </div>
+          </ng-template>
+        </p-dropdown>
+        <!-- <p-splitButton label="Select Region" [model]="regions" icon="pi pi-globe" styleClass="p-button-text p-button-sm "></p-splitButton> -->
+      </a>
+      <button (click)="menu.toggle($event)" #dd class="navbar-toggler" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="pi pi-user"></span>
       </button>
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNav" [ngClass]="{'collapse': collapsed, 'navbar-collapse': true}">
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav"
+        [ngClass]="{'collapse': collapsed, 'navbar-collapse': true}">
         <ul class="navbar-nav">
           <li *ngFor="let item of Items" class="nav-item">
-            <a class="nav-link show-cursor" (click)="NavigateTo(item)" aria-current="page"><i [class]="item?.icon + ' '+ 'mr-2' "></i>{{item?.label}}</a>
+            <a class="nav-link show-cursor" (click)="NavigateTo(item)" aria-current="page"><i
+                [class]="item?.icon + ' '+ 'mr-2' "></i>{{item?.label}}</a>
           </li>
         </ul>
-        <p-menu [appendTo]="'body'"  [baseZIndex]="1111" [autoZIndex]="true" #menu [popup]="true" [model]="Items"></p-menu>
+        <p-menu [appendTo]="'body'" [baseZIndex]="1111" [autoZIndex]="true" #menu [popup]="true"
+          [model]="Items"></p-menu>
+
+
+        <p-dialog  appendTo="body" [(visible)]="showConfirmation" [modal]="true"
+          [style]="{width: '90vw',minHeight:'60vh'}" [draggable]="false" [resizable]="false">
+          <ng-template pTemplate="header">
+            <h4 class="fw-bold">Confirm Region {{selectedRegion.value?.label}}</h4>
+          </ng-template>
+
+          <ng-template pTemplate="content" class="mb-0">
+            <div class="row">
+              <div class="col-lg-12">
+                <h5 class="mt-2 fw-bold text-secondary">{{selectedRegion.value?.label}} order timming</h5>
+              </div>
+              <div class="col-lg-12 my-2">
+                <span class="type mr-2 fw-bold">Lunch : </span> 
+                <span>{{selectedRegion.value?.lunch}} </span>
+              </div>
+              <div class="col-lg-12">
+                <span class="type mr-2 fw-bold">Dinner : </span>
+                <span> {{selectedRegion.value?.dinner}} </span>
+              </div>
+            </div>
+           
+          </ng-template>
+
+          <ng-template pTemplate="footer">
+            <div class="row">
+              <div class="col-lg-6 text-start w-50">
+                <button type="button" pButton class="p-button-warning" label="Skip for now"
+                  (click)="ResetRegion()"></button>
+              </div>
+              <div class="col-lg-6 text-start w-50">
+                <button type="button" pButton class="p-button-success pull-right" icon="pi pi-check"
+                  label="Proceed with Region" (click)="AcceptRegion()"></button>
+              </div>
+            </div>
+
+
+          </ng-template>
+        </p-dialog>
+
+
+        <!-- <p-confirmDialog appendTo="body" [visible]="showConfirmation" #cd [style]="{width: '90vw',minHeight:'60vh'}" key="regionConfirm">
+          kjkjkj
+          <ng-template pTemplate="header">
+              <h4>Confirm Region {{RegionSelected?.label}}</h4>
+          </ng-template>
+
+          <ng-template pTemplate="message">
+            <h4>Confirm Region {{RegionSelected?.label}}</h4>
+        </ng-template>
+
+          <ng-template pTemplate="footer">
+            <div class="row">
+              <div class="col-lg-6 text-start w-50">
+                <button type="button" pButton class="p-button-warning" label="Skip for now" (click)="showConfirmation = false"></button>
+              </div>
+              <div class="col-lg-6 text-start w-50">
+                <button type="button" pButton class="p-button-success pull-right" icon="pi pi-check" label="Proceed with Region" (click)="cd.accept()"></button>
+              </div>
+            </div>
+             
+              
+          </ng-template>
+      </p-confirmDialog> -->
+
       </div>
-       
+
     </div>
   </nav>
 </div>

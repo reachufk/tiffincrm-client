@@ -18,9 +18,9 @@ import {InputNumberModule} from 'primeng/inputnumber';
 import {TabViewModule} from 'primeng/tabview';
 import {MultiSelectModule} from 'primeng/multiselect';
 import {InputTextareaModule} from 'primeng/inputtextarea';
-import {DividerModule} from 'primeng/divider'
-import { AuthGuard } from '../auth/core/guards/auth.guard';
-
+import {DividerModule} from 'primeng/divider';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import {AutoCompleteModule} from 'primeng/autocomplete';
 @NgModule({
   declarations: [
     FormErrorMessagesDirective,
@@ -52,7 +52,9 @@ import { AuthGuard } from '../auth/core/guards/auth.guard';
     TabViewModule,
     MultiSelectModule,
     InputTextareaModule,
-    DividerModule
+    DividerModule,
+    ConfirmDialogModule,
+    AutoCompleteModule
   ]
 })
 export class SharedModule { }

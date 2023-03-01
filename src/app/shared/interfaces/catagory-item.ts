@@ -6,5 +6,6 @@ export interface CatagoryItem {
       isVeg:Boolean,
       itemTypes:Array<any>;
       selectedItemType:String;
+      itemInstructions?:String,
       itemDiscount:Number
 }

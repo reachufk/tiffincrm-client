@@ -9,13 +9,12 @@ import { UserLayoutComponent } from './layouts/user-layout/user-layout.component
 import { AuthGuard } from './auth/core/guards/auth.guard';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { PublicResolver } from './public/public.resolver';
+import { TiffinLandingComponent } from './tiffin-landing/tiffin-landing.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'public',
-    pathMatch: 'full',
-  },
+ 
+  {path:'',redirectTo:'tiffin-aaw',pathMatch:'full'},
+  {path:'tiffin-aaw',component:TiffinLandingComponent},
   {
     path: 'public',
     component: PublicLayoutComponent,

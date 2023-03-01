@@ -4,7 +4,8 @@ import { AbstractControl, NgControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 @Directive({
-  selector: '[appFormerror]'
+  selector: '[appFormerror]',
+  providers:[]
 })
 export class FormerrorDirective {
 
@@ -17,7 +18,7 @@ export class FormerrorDirective {
   private errorKey: string;
   private errorValue: any;
   private control: AbstractControl;
-  constructor(@Attribute("name") private feildName:string,private el: ElementRef, @Optional() private ncontrol: NgControl, private renderer: Renderer2, @Inject(DOCUMENT) private document) {
+  constructor(@Attribute("name") private feildName:string,private el: ElementRef, @Optional() private ncontrol: NgControl, private renderer: Renderer2) {
   }
 
   ngAfterViewInit(){

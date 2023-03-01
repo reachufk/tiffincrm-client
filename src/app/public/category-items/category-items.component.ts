@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy,inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { debounceTime, map, Observable, startWith, Subject, takeUntil } from 'rxjs';
@@ -14,7 +14,7 @@ import { CartService } from '../services/cart.service';
   selector: 'app-category-items',
   templateUrl: './category-items.component.html',
   styleUrls: ['./category-items.component.scss'],
-  providers:[MessageService,ConfirmationService]
+  providers: [MessageService, ConfirmationService]
 })
 export class CategoryItemsComponent implements OnInit, OnDestroy {
 
@@ -32,14 +32,14 @@ export class CategoryItemsComponent implements OnInit, OnDestroy {
   searchKeyword: FormControl = new FormControl("")
   FilteredItems: Observable<any>;
   Destroy: Subject<void> = new Subject();
-  private messageService= inject(MessageService);
-  displayAddItemDialog:boolean = false
-  SelectedItem: any={};
-  QuantityControl:FormControl = new FormControl(1);
-  LoggedInUser:IloggedUser
+  private messageService = inject(MessageService);
+  displayAddItemDialog: boolean = false
+  SelectedItem: any = {};
+  QuantityControl: FormControl = new FormControl(1);
+  LoggedInUser: IloggedUser
   constructor(private catagoryService: CatagoryService, private activatedRoute: ActivatedRoute,
-    private location: Location,private cartService:CartService,
-    private confirmationService: ConfirmationService,private router:Router) {
+    private location: Location, private cartService: CartService,
+    private confirmationService: ConfirmationService, private router: Router) {
     this.category = this.activatedRoute.snapshot.paramMap.get('category')
   }
   ngOnDestroy(): void {
@@ -48,7 +48,7 @@ export class CategoryItemsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.activatedRoute.data.pipe(takeUntil(this.Destroy),map((data:any)=>{
+    this.activatedRoute.data.pipe(takeUntil(this.Destroy), map((data: any) => {
       this.LoggedInUser = data?.user
     })).subscribe()
     this.FetchModel.pageSize = Infinity;
@@ -91,24 +91,26 @@ export class CategoryItemsComponent implements OnInit, OnDestroy {
     }
   }
 
-  OpenItemDialog(item){
-    if(!this.LoggedInUser){
+  OpenItemDialog(item) {
+    if (!this.LoggedInUser) {
       this.NotSignedInConfirm()
       return
     }
-    this.SelectedItem = ({itemId:item?._id,itemName:item?.itemName,itemPrice:item?.itemPrice,
-      count:1,itemDiscount:item?.itemDiscount,catagory:item?.catagory,
-      isVeg:item?.isVeg?item?.isVeg:false,itemTypes:item?.itemTypes,selectedItemType:{}})
+    this.SelectedItem = ({
+      itemId: item?._id, itemName: item?.itemName, itemPrice: item?.itemPrice,
+      count: 1, itemDiscount: item?.itemDiscount, catagory: item?.catagory,itemInstructions:'',
+      isVeg: item?.isVeg ? item?.isVeg : false, itemTypes: item?.itemTypes, selectedItemType: item?.itemTypes?.length ? item?.itemTypes[0] : {}
+    })
     this.displayAddItemDialog = true
   }
 
-  AddToCart(SelectedItem:any){
+  AddToCart(SelectedItem: any) {
     const user = this.LoggedInUser?.user
-    this.cartService.AddCartItem(user,SelectedItem).subscribe((res:any)=>{
-      if(res.statusCode ==200){
-        this.messageService.add({ severity: 'success', summary: 'Item added to cart',life:3000 });
-      }else{
-        this.messageService.add({ severity: 'warn', summary: res?.message || 'already exists',life:3000 });
+    this.cartService.AddCartItem(user, SelectedItem).subscribe((res: any) => {
+      if (res.statusCode == 200) {
+        this.messageService.add({ severity: 'success', summary: 'Item added to cart', life: 3000 });
+      } else {
+        this.messageService.add({ severity: 'warn', summary: res?.message || 'already exists', life: 3000 });
       }
       this.SelectedItem = {}
       this.displayAddItemDialog = false
@@ -116,32 +118,32 @@ export class CategoryItemsComponent implements OnInit, OnDestroy {
   }
 
 
-   NotSignedInConfirm(){
-     this.confirmationService.confirm({
+  NotSignedInConfirm() {
+    this.confirmationService.confirm({
       message: 'Sign in to continue?',
       header: 'You are not logged in?',
       icon: 'pi pi-exclamation-triangle',
-      acceptLabel:'Sign in',
-      rejectLabel:'Sign up',
+      acceptLabel: 'Sign in',
+      rejectLabel: 'Sign up',
       accept: () => {
         this.confirmationService.close()
-         this.router.navigate(['/auth/login'])
+        this.router.navigate(['/auth/login'])
       },
       reject: (type) => {
-        switch(type) {
+        switch (type) {
           case ConfirmEventType.REJECT:
             this.confirmationService.close();
             this.router.navigate(['/auth/signup'])
-          break;
+            break;
           case ConfirmEventType.CANCEL:
             this.confirmationService.close()
+            break;
+        }
 
-          break;
       }
-        
-      }
-  });
+    });
   }
+
 
 
 }

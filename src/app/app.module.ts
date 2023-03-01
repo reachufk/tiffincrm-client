@@ -17,7 +17,8 @@ import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { ErrorInterceptor } from './auth/core/interceptors/error.interceptor';
 import { PublicNavComponent } from './public/public-nav/public-nav.component';
 import { AuthInterceptor } from './auth/core/interceptors/auth.interceptor';
-
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { TiffinLandingComponent } from './tiffin-landing/tiffin-landing.component';
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -27,6 +28,7 @@ import { AuthInterceptor } from './auth/core/interceptors/auth.interceptor';
     RouterModule,
     AppRoutingModule,
     SharedModule,
+    ConfirmDialogModule,
   ],
   declarations: [
     AppComponent,
@@ -36,7 +38,9 @@ import { AuthInterceptor } from './auth/core/interceptors/auth.interceptor';
     PublicNavComponent,
     PublicLayoutComponent,
     UserLayoutComponent,
-    AuthLayoutComponent
+    AuthLayoutComponent,
+    FooterComponent,
+    TiffinLandingComponent
   ],
   providers: [
     { provide: LocationStrategy, useClass: PathLocationStrategy },

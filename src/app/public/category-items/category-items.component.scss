@@ -85,3 +85,36 @@
       }
   }
 
+
+  ::ng-deep .p-dialog .p-dialog-header {
+            padding-bottom: 0px !important;
+            border-top-right-radius: 25px !important;
+            border-top-left-radius: 25px !important;
+        }
+  
+
+::ng-deep .p-radiobutton .p-radiobutton-box .p-radiobutton-icon {
+    width: 12px;
+    height: 12px;
+    transition-duration: 0.2s;
+    background-color: #147e2f !important;
+}
+
+::ng-deep .p-radiobutton .p-radiobutton-box.p-highlight {
+      border-color: #7c8086 !important;
+      background: #eeeff0 !important;
+  }
+
+  .mr-3{
+      margin-right: 10px;
+  }
+  .ml-2{
+      margin-left: 20px;
+  }
+  .bg-grey{
+      background: #c4c5c68c;
+  }
+
+  ::ng-deep .p-inputswitch .p-inputswitch-slider {
+      background: #bbbcbf !important;
+  }

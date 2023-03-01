@@ -9,33 +9,29 @@
                         </ng-image-slider>
                   </div>
             </div>
-            <div class="col-lg-12 mt-4 py-2 mb-0 bg-light">
-                  <div class="row d-flex align-items-center">
-                        <div class="col-lg-8 px-2">
-                              <div class="d-flex align-items-center">
-                                    <span class="mt-2"><p-inputSwitch (onChange)="handleChange($event)"
-                                          [formControl]="itemTypeControl"></p-inputSwitch></span>
-                                    <span class="ml-3 fw"
-                                          [ngClass]="itemTypeControl.value? 'text-success':'text-dark'">Veg</span>
-                                    
-                              </div>
+            <div class="col-lg-12 mt-4 py-1 mb-0 bg-grey">
+                  <div class="d-flex align-items-center">
+                        <span class="mt-2"><p-inputSwitch (onChange)="handleChange($event)"
+                                    [formControl]="itemTypeControl"></p-inputSwitch></span>
+                        <span class="ml-3 fw" [ngClass]="itemTypeControl.value? 'text-success':'text-dark'">Veg</span>
 
-                        </div>
                   </div>
             </div>
 
-            <div class="col-lg-12 pt-2 pb-3 bg-light text-center">
+            <div class="col-lg-12 py-3 bg-light text-center">
                   <h4><span class="active-category">{{categoryName}}</span></h4>
             </div>
 
             <div class="col-lg-12 bg-light">
-                  <div class="row">
+                  <div class="row mx-auto">
                         <div *ngFor="let item of FilteredItems | async" class="col-lg-4 col-sm-6 col-xs-6 px-2 mb-3">
                               <div class="card p-3 h-100">
-                                    <p-confirmDialog [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+                                    <p-confirmDialog [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
+                                          rejectButtonStyleClass="p-button-text"></p-confirmDialog>
                                     <div class="row">
                                           <div class="col-lg-6 col-md-6 half">
-                                                <p-toast position="top-center" key="addcartlogin" [preventOpenDuplicates]="true"></p-toast>
+                                                <p-toast position="top-center" key="addcartlogin"
+                                                      [preventOpenDuplicates]="true"></p-toast>
                                                 <span class="pi pi-stop-circle fw-bold"
                                                       [ngClass]="item?.isVeg? 'text-success':'text-danger'"></span>
                                                 <span class="itemTitle ms-2">{{item?.itemName}}</span>
@@ -44,10 +40,8 @@
                                           <div class="col-lg-6 col-md-6 half text-end">
                                                 <span class="text-secondary pull-right">Starts From</span>
                                                 <br>
-                                                <span class="my-2"><strong>{{item?.itemPrice |
-                                                            currency:'INR'}}</strong></span>
+                                                <span class="my-3">{{item?.itemPrice | currency:'INR'}}</span>
                                                 <br>
-                                                
                                                 <button (click)="OpenItemDialog(item)" pButton pRipple
                                                       class="p-button-warning p-button-sm my-3" label="Add"
                                                       icon="pi pi-plus">
@@ -59,40 +53,69 @@
                               </div>
                         </div>
                         <div class="col-lg-12">
-                              <p-dialog [(visible)]="displayAddItemDialog" [position]="'bottom'"
-                                    [modal]="true" [style]="{width: '100vw'}" [draggable]="false" [resizable]="false">
-                                 
+                              <p-dialog [(visible)]="displayAddItemDialog" [position]="'bottom'" [modal]="true"
+                                    [style]="{width: '100vw'}" [draggable]="false" [resizable]="false">
+
                                     <ng-template pTemplate="header">
-                                          <h3> <i class="pi pi-stop-circle fs-5 fw-bold" [ngClass]="SelectedItem?.isVeg? 'text-success':'text-danger'"></i> {{SelectedItem?.itemName}}</h3>
-                                          <h3> 
+                                          <div class="row">
+                                                <div class="col-lg-12">
+                                                      <h3> <i class="pi pi-stop-circle fs-5 fw-bold"
+                                                                  [ngClass]="SelectedItem?.isVeg? 'text-success':'text-danger'"></i>
+                                                            {{SelectedItem?.itemName}}</h3>
+                                                </div>
+                                                <div class="col-lg-12 ml-2 mb-2">
+                                                      {{SelectedItem?.itemPrice | currency:'INR'}}
+                                                </div>
+                                          </div>
+                                          <!-- <h3> 
                                                 <p-dropdown [options]="SelectedItem?.itemTypes" [(ngModel)]="SelectedItem.selectedItemType" optionLabel="typeName" placeholder="Select Item Type" appFormerror required></p-dropdown>
-                                          </h3>
+                                          </h3> -->
                                     </ng-template>
 
                                     <ng-template pTemplate="content">
-                                          <div class="row d-flex align-items-center">
-                                                <div class="col-lg-12 text-secondary">
-                                                      {{SelectedItem?.itemDescription ? SelectedItem?.itemDescription :'Description not available'}}
+
+                                          <div class="row">
+                                                <div *ngFor="let type of SelectedItem?.itemTypes" class="col-lg-12 my-2"
+                                                      [ngClass]="type == SelectedItem?.selectedItemType?'fw-bold':''">
+                                                      <span>{{type?.typeName}}</span>
+                                                      <span class="pull-right ms-2">
+                                                            <span class="mr-3">{{type?.typeValue |
+                                                                  currency:'INR'}}</span>
+                                                            <p-radioButton [(ngModel)]="SelectedItem.selectedItemType"
+                                                                  [value]="type"></p-radioButton>
+                                                      </span>
+                                                </div>
+                                                <div class="col-lg-12 my-3 p-fluid">
+                                                      <textarea rows="3" cols="30"
+                                                            [(ngModel)]="SelectedItem.itemInstructions" pInputTextarea
+                                                            placeholder="add instructions"
+                                                            [autoResize]="true"></textarea>
                                                 </div>
                                           </div>
-                                          <div class="col-lg-4 my-auto">
-                                                <span class="fw-bold text-secondary">Total Item Cost: {{(SelectedItem?.itemPrice * SelectedItem?.count) | currency:'INR'}}</span>
-                                          </div>
+
                                     </ng-template>
 
                                     <ng-template pTemplate="footer">
-                                          <div class="row">
+                                          <div class="row mt-2">
                                                 <div class="col-lg-6 text-start half">
-                                                      <p-inputNumber [allowEmpty]="true" value="0"  [showButtons]="true" [value]="SelectedItem.count ? SelectedItem.count:1" [min]="1" [(ngModel)]="SelectedItem.count" buttonLayout="horizontal" inputId="horizontal" spinnerMode="horizontal" [step]="1" 
-                                                      decrementButtonClass="p-button-danger p-buttonn-sm" incrementButtonClass="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus">
+                                                      <p-inputNumber [allowEmpty]="true" value="0" [showButtons]="true"
+                                                            [value]="SelectedItem.count ? SelectedItem.count:1"
+                                                            [min]="1" [(ngModel)]="SelectedItem.count"
+                                                            buttonLayout="horizontal" inputId="horizontal"
+                                                            spinnerMode="horizontal" [step]="1"
+                                                            decrementButtonClass="p-button-danger p-buttonn-sm"
+                                                            incrementButtonClass="p-button-success"
+                                                            incrementButtonIcon="pi pi-plus"
+                                                            decrementButtonIcon="pi pi-minus">
                                                       </p-inputNumber>
                                                 </div>
                                                 <div class="col-lg-6 half">
-                                                      <p-button  (click)="AddToCart(SelectedItem)" icon="pi pi-shopping-cart" label="Add Item"
-                                                      styleClass="p-button-text" class="pull-right"></p-button>
+                                                      <p-button (click)="AddToCart(SelectedItem)"
+                                                            [label]="'Add'+' ' + ( (SelectedItem?.selectedItemType?.typeValue? SelectedItem?.selectedItemType?.typeValue : SelectedItem?.itemPrice) | currency:'INR') "
+                                                            styleClass="p-button-success" class="pull-right"></p-button>
                                                 </div>
                                           </div>
-                                         
+
                                     </ng-template>
                               </p-dialog>
                         </div>

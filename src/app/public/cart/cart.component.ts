@@ -30,11 +30,14 @@ export class CartComponent implements OnInit {
   totalItems: number = 0;
   totalAmount: number = 0
   DeliveryTimes: Array<{ label: string, value: string }> = [];
+  OrderTypes: Array<{ label: string, value: string }> = [{label:'Lunch',value:'lunch'},{label:'Dinner',value:'dinner'}];
   DeliveryTimeControl: FormControl = new FormControl(null, [Validators.required]);
   OrderForm: FormGroup;
   RazorPayOptions: IRazorPayOtpions = InitializeRPayOptions();
   OrderOptions = {} as OrderOptions
   rzpay: any
+  emptyCart:boolean= false;
+
   constructor(private cartService: CartService, private authService: AuthService,
     private messageService: MessageService, private orderService: AdmiOrdersService) {
 
@@ -47,9 +50,12 @@ export class CartComponent implements OnInit {
   GetCartItems() {
     const user = this.authService.LoggedInUser?.value?.user
     this.Items = this.cartService.GetUserCart(user).pipe(map((res: any) => {
+      if(!res?.data?.cartItems?.length){
+        this.emptyCart = true
+      }
       this.totalItems = res?.data?.cartItems?.length
       this.totalAmount = res?.data?.cartItems?.reduce((total: number, item: any) => {
-        const amount = item.itemPrice * item.count;
+        const amount = (item?.selectedItemType?.typeValue?item?.selectedItemType?.typeValue:item?.itemPrice) * item.count;
         return total + amount;
       }, 0);
       this.OrderForm.get('orderItems').setValue(res?.data?.cartItems);
@@ -71,7 +77,7 @@ export class CartComponent implements OnInit {
       orderPaymentMode: new FormControl(null),
       orderInstructions: new FormControl(null),
       orderDeliveryTime: new FormControl(null, [Validators.required]),
-      orderType: new FormControl(""),
+      orderType: new FormControl(null,[Validators.required]),
       orderPaymentStatus: new FormControl(""),
       userInfo: new FormControl({}),
       orderStatus: new FormControl("pending"),

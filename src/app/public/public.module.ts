@@ -23,6 +23,8 @@ import {InputNumberModule} from 'primeng/inputnumber';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import { FormerrorDirective } from './services/formerror.directive';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {RadioButtonModule} from 'primeng/radiobutton';
+
 @NgModule({
   providers: [CatagoryService],
 
@@ -31,7 +33,6 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
     CarouselComponent,
     CategoryComponent,
     ItemComponent,
-    FooterComponent,
     CategoryItemsComponent,
     CartComponent,
     FormerrorDirective,
@@ -52,7 +53,8 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
     DialogModule,
     InputNumberModule,
     InputTextareaModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    RadioButtonModule
   ]
 })
 export class PublicModule { }
