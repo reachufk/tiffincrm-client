@@ -10,12 +10,17 @@ export class CarouselComponent implements OnInit {
 
   constructor(private bannerService: BannerService) {
   }
-
+  width: string = '100%';
   Banners: Array<object> = [
   ];
 
   ngOnInit() {
-    this.GetBanners()
+    this.GetBanners();
+    if (window.innerWidth < 768) {
+      this.width = '100%';
+    } else {
+      this.width = '25%';
+    }
   }
 
   GetBanners() {

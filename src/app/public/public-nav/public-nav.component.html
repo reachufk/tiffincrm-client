@@ -2,25 +2,21 @@
   <nav class="navbar navbar-expand-lg custom-nav py-0" #nav>
     <div class="container-fluid pt-2" [ngClass]="stickHeader?'shadow':''">
       <a class="navbar-brand" routerLink="/public/home">
-        <img src="./../../../assets/img/logo.png" style="height: 40px;width: 100px;" alt="Tiffin Aww">
+        <img src="./../../../assets/img/logo.png" style="height: 40px; width: 60px;" alt="Tiffin Aww">
       </a>
       <a class="navbar-brand">
-        <p-dropdown [options]="regions" optionLabel="label" dropdownIcon="pi pi-globe" [formControl]="selectedRegion"  [filter]="false"
-          placeholder="Select region">
+        <p-dropdown [options]="regions" optionLabel="label" dropdownIcon="pi pi-globe" [formControl]="selectedRegion"
+          [filter]="false" placeholder="Select region">
           <ng-template let-region pTemplate="item">
             <div class="country-item">
               <div>{{region?.label}} - {{region?.distance}}</div>
             </div>
           </ng-template>
         </p-dropdown>
-        <!-- <p-splitButton label="Select Region" [model]="regions" icon="pi pi-globe" styleClass="p-button-text p-button-sm "></p-splitButton> -->
       </a>
-
-      
-
-      
-      <p-dropdown appendTo="body" placeholder="''" class="navbar-toggler" (onChange)="NavigateTo($event?.value)" [options]="Items" optionLabel="label" dropdownIcon="pi pi-user" [filter]="false">
-        </p-dropdown>
+      <p-dropdown appendTo="body" placeholder="''" class="navbar-toggler" (onChange)="NavigateTo($event?.value)"
+        [options]="Items" optionLabel="label" dropdownIcon="pi pi-user" [filter]="false">
+      </p-dropdown>
 
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav"
         [ngClass]="{'collapse': collapsed, 'navbar-collapse': true}">
@@ -30,7 +26,6 @@
                 [class]="item?.icon + ' '+ 'mr-2' "></i>{{item?.label}}</a>
           </li>
         </ul>
-
 
         <p-dialog [closable]="false" appendTo="body" [(visible)]="showConfirmation" [modal]="true"
           [style]="{width: '90vw'}" [draggable]="false" [resizable]="false">
@@ -44,14 +39,14 @@
                 <h5 class="mt-2 fw-bold text-secondary">{{selectedRegion.value?.label}} order timming</h5>
               </div>
               <div class="col-lg-12 my-2">
-                <span class="type mr-2 fw-bold">Lunch : </span> 
+                <span class="type mr-2 fw-bold">Lunch : </span>
                 <span>{{selectedRegion.value?.lunch}} </span>
               </div>
               <div class="col-lg-12">
                 <span class="type mr-2 fw-bold">Dinner : </span>
                 <span> {{selectedRegion.value?.dinner}} </span>
               </div>
-            </div>  
+            </div>
           </ng-template>
 
           <ng-template pTemplate="footer">
@@ -67,9 +62,7 @@
             </div>
           </ng-template>
         </p-dialog>
-
       </div>
-
     </div>
   </nav>
 </div>
