@@ -19,6 +19,7 @@ import { PublicNavComponent } from './public/public-nav/public-nav.component';
 import { AuthInterceptor } from './auth/core/interceptors/auth.interceptor';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { TiffinLandingComponent } from './tiffin-landing/tiffin-landing.component';
+import {SpeedDialModule} from 'primeng/speeddial';
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -29,6 +30,7 @@ import { TiffinLandingComponent } from './tiffin-landing/tiffin-landing.componen
     AppRoutingModule,
     SharedModule,
     ConfirmDialogModule,
+    SpeedDialModule
   ],
   declarations: [
     AppComponent,

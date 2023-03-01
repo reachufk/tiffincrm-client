@@ -1,6 +1,6 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ConfirmationService, MenuItem } from 'primeng/api';
 import { map, Subject, take, takeUntil } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
@@ -12,7 +12,7 @@ import * as regionData from './regions.json'
   styleUrls: ['./public-nav.component.scss'],
   providers: [ConfirmationService]
 })
-export class PublicNavComponent implements OnInit {
+export class PublicNavComponent implements OnInit, OnDestroy {
   collapsed: boolean = true
   regions: MenuItem[] = []
   Items: MenuItem[] = [{ label: 'My Profile', icon: 'pi pi-user' },
@@ -25,18 +25,29 @@ export class PublicNavComponent implements OnInit {
   Destroy: Subject<void> = new Subject();
   NavItems: MenuItem[] = this.Items;
   showConfirmation: boolean = false;
-
+  items = [];
+  url: string = '';
   constructor(private authService: AuthService, private router: Router,
     private cartService: CartService, private activatedRoute: ActivatedRoute,
     private confirmService: ConfirmationService) {
+    this.url = router.url
+  }
+
+  ngOnDestroy(): void {
+    this.Destroy.next()
+    this.Destroy.complete()
   }
 
   ngOnInit(): void {
-
+    this.router.events.pipe(takeUntil(this.Destroy), map((event: NavigationEnd) => {
+      if (event instanceof NavigationEnd) {
+        this.url = event.url
+      }
+    })).subscribe()
     const { regions } = regionData
     this.regions = regions
     this.selectedRegion.setValue(this.authService?.Region?.value)
-    this.activatedRoute.data.pipe(map((data: any) => {
+    this.activatedRoute.data.pipe(takeUntil(this.Destroy), map((data: any) => {
       if (data?.user) {
         const pullOut = ['Login'];
         this.Items = this.NavItems.filter((item: MenuItem) => !pullOut.includes(item?.label))
@@ -48,7 +59,7 @@ export class PublicNavComponent implements OnInit {
 
     this.cartItemsLength = this.cartService.CartItems.value;
     this.selectedRegion.valueChanges.pipe(takeUntil(this.Destroy), map((region: any) => {
-      if(region){
+      if (region) {
         this.showConfirmation = true;
         return
       }
@@ -82,12 +93,12 @@ export class PublicNavComponent implements OnInit {
 
   AcceptRegion() {
     this.authService.Region.next(this.selectedRegion.value)
-    localStorage.setItem('selectedRegion',JSON.stringify(this.selectedRegion.value));
-    this.showConfirmation=false
+    localStorage.setItem('selectedRegion', JSON.stringify(this.selectedRegion.value));
+    this.showConfirmation = false
   }
 
-  ResetRegion(){
-    this.showConfirmation=false
+  ResetRegion() {
+    this.showConfirmation = false
     this.selectedRegion.setValue(null)
   }
 

@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { map, Observable } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { IloggedUser } from 'src/app/shared/interfaces/auth';
 import { validateAllFormFields } from 'src/app/shared/utils/formUtils';
 import { CartService } from '../services/cart.service';
 import { AdmiOrdersService } from '../services/orders.service';
@@ -37,7 +38,7 @@ export class CartComponent implements OnInit {
   OrderOptions = {} as OrderOptions
   rzpay: any
   emptyCart:boolean= false;
-
+  user:IloggedUser = JSON.parse(localStorage.getItem('loggedInUser'))
   constructor(private cartService: CartService, private authService: AuthService,
     private messageService: MessageService, private orderService: AdmiOrdersService) {
 
@@ -48,8 +49,7 @@ export class CartComponent implements OnInit {
   }
 
   GetCartItems() {
-    const user = this.authService.LoggedInUser?.value?.user
-    this.Items = this.cartService.GetUserCart(user).pipe(map((res: any) => {
+    this.Items = this.cartService.GetUserCart(this.user?.user).pipe(map((res: any) => {
       if(!res?.data?.cartItems?.length){
         this.emptyCart = true
       }
@@ -85,8 +85,7 @@ export class CartComponent implements OnInit {
   }
 
   DeleteCartItem(item: any) {
-    const user = this.authService.LoggedInUser?.value?.user;
-    this.cartService.RemoveCartItem(user, item).subscribe((res: any) => {
+    this.cartService.RemoveCartItem(this.user?.user, item).subscribe((res: any) => {
       if (res?.statusCode == 200) {
         this.messageService.add({ severity: 'success', summary: 'item removed from cart', life: 3000 });
         this.GetCartItems()

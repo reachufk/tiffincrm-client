@@ -5,7 +5,6 @@ import { debounceTime, map, Observable, startWith, Subject, takeUntil } from 'rx
 import { FetchCatagoryItems, initializeFetchCatagoryItems } from 'src/app/shared/interfaces/fetch-catagory-items';
 import { CatagoryService } from '../services/catagory.service';
 import { FormControl } from '@angular/forms';
-import { AuthService } from 'src/app/auth/services/auth.service';
 import { ConfirmationService, ConfirmEventType, MessageService } from 'primeng/api';
 import { IloggedUser } from 'src/app/shared/interfaces/auth';
 import { CartService } from '../services/cart.service';
@@ -36,7 +35,10 @@ export class CategoryItemsComponent implements OnInit, OnDestroy {
   displayAddItemDialog: boolean = false
   SelectedItem: any = {};
   QuantityControl: FormControl = new FormControl(1);
-  LoggedInUser: IloggedUser
+  LoggedInUser: IloggedUser;
+  AllCatagories:Array<any>=[];
+  empty:boolean = false
+  regionSelected = JSON.parse(localStorage.getItem('selectedRegion'))
   constructor(private catagoryService: CatagoryService, private activatedRoute: ActivatedRoute,
     private location: Location, private cartService: CartService,
     private confirmationService: ConfirmationService, private router: Router) {
@@ -58,7 +60,14 @@ export class CategoryItemsComponent implements OnInit, OnDestroy {
   }
 
   GetItems() {
-    this.FilteredItems = this.catagoryService.GetCatagoryItems(this.FetchModel).pipe(map((res: any) => res?.data))
+    this.FilteredItems = this.catagoryService.GetCatagoryItems(this.FetchModel).pipe(map((res: any) =>{
+      if(!res?.data?.length){
+        this.empty = true
+        return
+      }
+      this.empty = false
+      return res?.data
+    }))
     this.Items = this.FilteredItems
   }
   GetCategories() {
@@ -67,8 +76,9 @@ export class CategoryItemsComponent implements OnInit, OnDestroy {
         ({ thumbImage: catagory?.catagoryImage, title: catagory?.catagoryName, id: catagory?._id })
       )
       this.Categories = [this.Categories, ...catagories];
+      this.AllCatagories = this.Categories
       this.categoryName = this.Categories.filter((category: any) => category?.id == this.category)[0]?.title;
-
+      this.Categories = this.Categories.filter((catagory:any)=> catagory?.id !== this.category)
     })
   }
 
@@ -80,6 +90,7 @@ export class CategoryItemsComponent implements OnInit, OnDestroy {
     this.FetchModel.pageNo = 1
     this.FetchModel.catagory = this.category
     this.categoryName = this.Categories.filter((category: any) => category?.id == this.category)[0]?.title;
+    this.Categories = this.AllCatagories.filter((catagory:any)=> catagory?.id !== this.category)
     this.GetItems()
   }
 
@@ -92,7 +103,7 @@ export class CategoryItemsComponent implements OnInit, OnDestroy {
   }
 
   OpenItemDialog(item) {
-    if (!this.LoggedInUser) {
+    if (!this.LoggedInUser || !this.regionSelected) {
       this.NotSignedInConfirm()
       return
     }
@@ -119,29 +130,53 @@ export class CategoryItemsComponent implements OnInit, OnDestroy {
 
 
   NotSignedInConfirm() {
-    this.confirmationService.confirm({
-      message: 'Sign in to continue?',
-      header: 'You are not logged in?',
-      icon: 'pi pi-exclamation-triangle',
-      acceptLabel: 'Sign in',
-      rejectLabel: 'Sign up',
-      accept: () => {
-        this.confirmationService.close()
-        this.router.navigate(['/auth/login'])
-      },
-      reject: (type) => {
-        switch (type) {
-          case ConfirmEventType.REJECT:
-            this.confirmationService.close();
-            this.router.navigate(['/auth/signup'])
-            break;
-          case ConfirmEventType.CANCEL:
-            this.confirmationService.close()
-            break;
-        }
 
-      }
-    });
+    if(!this.LoggedInUser){
+      this.confirmationService.confirm({
+        message: 'Sign in to continue?',
+        header: 'You are not logged in?',
+        icon: 'pi pi-exclamation-triangle',
+        acceptLabel: 'Sign in',
+        rejectLabel: 'Sign up',
+        accept: () => {
+          this.confirmationService.close()
+          this.router.navigate(['/auth/login'])
+        },
+        reject: (type) => {
+          switch (type) {
+            case ConfirmEventType.REJECT:
+              this.confirmationService.close();
+              this.router.navigate(['/auth/signup'])
+              break;
+            case ConfirmEventType.CANCEL:
+              this.confirmationService.close()
+              break;
+          }
+  
+        }
+      });
+      return
+    }
+
+    if(!this.regionSelected){
+      this.confirmationService.confirm({
+        message: 'Select Region from above to continue?',
+        header: "You haven't selected your region yet ?",
+        icon: 'pi pi-exclamation-triangle',
+        acceptLabel: 'Select region',
+        rejectVisible:false,
+        accept: () => {
+          this.confirmationService.close()
+          window.scroll({ 
+            top: 0, 
+            left: 0, 
+            behavior: 'smooth' 
+          });
+        }
+      });
+      return
+    }
+
   }
 
 

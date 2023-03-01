@@ -1,34 +1,11 @@
 
-.card-hover :hover{
-    cursor: pointer;
-    .img-rounded{
-          opacity: 0.4 !important;
-          transition: 1s  cubic-bezier(0.075, 0.82, 0.165, 1);
-    }
-}
-
-
-
-.hover-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    padding: 10px;
-    visibility: hidden;
-    z-index: 1;
-  }
-
-  .card-hover:hover .hover-text {
-    visibility: visible;
-  }
-
   img{
     border-radius: 15px;
   }
 
+  .show-cursor{
+    cursor: pointer;
+  }
 
   .category-name{
     position: absolute;

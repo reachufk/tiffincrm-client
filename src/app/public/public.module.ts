@@ -8,11 +8,9 @@ import { ButtonModule } from 'primeng/button';
 import { CarouselComponent } from './carousel/carousel.component';
 import { CarouselModule } from 'primeng/carousel';
 import { CategoryComponent } from './category/category.component';
-import { ItemComponent } from './item/item.component';
 import { CatagoryService } from './services/catagory.service';
 import { NgImageSliderModule } from 'ng-image-slider';
 import { CategoryItemsComponent } from './category-items/category-items.component';
-import { FooterComponent } from '../layouts/footer/footer.component';
 import { PrimeNGShadowDOMDirective } from 'primeng-shadowdom-directives';
 import { InputTextModule } from 'primeng/inputtext';
 import {InputSwitchModule} from 'primeng/inputswitch';
@@ -24,6 +22,7 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
 import { FormerrorDirective } from './services/formerror.directive';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {RadioButtonModule} from 'primeng/radiobutton';
+import { SpeedDialModule } from 'primeng/speeddial';
 
 @NgModule({
   providers: [CatagoryService],
@@ -32,7 +31,6 @@ import {RadioButtonModule} from 'primeng/radiobutton';
     HomeComponent,
     CarouselComponent,
     CategoryComponent,
-    ItemComponent,
     CategoryItemsComponent,
     CartComponent,
     FormerrorDirective,
@@ -54,7 +52,8 @@ import {RadioButtonModule} from 'primeng/radiobutton';
     InputNumberModule,
     InputTextareaModule,
     ConfirmDialogModule,
-    RadioButtonModule
+    RadioButtonModule,
+    SpeedDialModule
   ]
 })
 export class PublicModule { }

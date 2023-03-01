@@ -5,7 +5,7 @@
         <img src="./../../../assets/img/logo.png" style="height: 40px;width: 100px;" alt="Tiffin Aww">
       </a>
       <a class="navbar-brand">
-        <p-dropdown [options]="regions" optionLabel="label" [formControl]="selectedRegion"  [filter]="false"
+        <p-dropdown [options]="regions" optionLabel="label" dropdownIcon="pi pi-globe" [formControl]="selectedRegion"  [filter]="false"
           placeholder="Select region">
           <ng-template let-region pTemplate="item">
             <div class="country-item">
@@ -15,10 +15,13 @@
         </p-dropdown>
         <!-- <p-splitButton label="Select Region" [model]="regions" icon="pi pi-globe" styleClass="p-button-text p-button-sm "></p-splitButton> -->
       </a>
-      <button (click)="menu.toggle($event)" #dd class="navbar-toggler" type="button" data-bs-toggle="collapse"
-        data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="pi pi-user"></span>
-      </button>
+
+      
+
+      
+      <p-dropdown appendTo="body" placeholder="''" class="navbar-toggler" (onChange)="NavigateTo($event?.value)" [options]="Items" optionLabel="label" dropdownIcon="pi pi-user" [filter]="false">
+        </p-dropdown>
+
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav"
         [ngClass]="{'collapse': collapsed, 'navbar-collapse': true}">
         <ul class="navbar-nav">
@@ -27,12 +30,10 @@
                 [class]="item?.icon + ' '+ 'mr-2' "></i>{{item?.label}}</a>
           </li>
         </ul>
-        <p-menu [appendTo]="'body'" [baseZIndex]="1111" [autoZIndex]="true" #menu [popup]="true"
-          [model]="Items"></p-menu>
 
 
-        <p-dialog  appendTo="body" [(visible)]="showConfirmation" [modal]="true"
-          [style]="{width: '90vw',minHeight:'60vh'}" [draggable]="false" [resizable]="false">
+        <p-dialog [closable]="false" appendTo="body" [(visible)]="showConfirmation" [modal]="true"
+          [style]="{width: '90vw'}" [draggable]="false" [resizable]="false">
           <ng-template pTemplate="header">
             <h4 class="fw-bold">Confirm Region {{selectedRegion.value?.label}}</h4>
           </ng-template>
@@ -50,50 +51,22 @@
                 <span class="type mr-2 fw-bold">Dinner : </span>
                 <span> {{selectedRegion.value?.dinner}} </span>
               </div>
-            </div>
-           
+            </div>  
           </ng-template>
 
           <ng-template pTemplate="footer">
-            <div class="row">
-              <div class="col-lg-6 text-start w-50">
+            <div class="row d-flex align-items-center">
+              <div *ngIf="!url?.includes('category-items')" class="col-lg-6 text-start w-50">
                 <button type="button" pButton class="p-button-warning" label="Skip for now"
                   (click)="ResetRegion()"></button>
               </div>
-              <div class="col-lg-6 text-start w-50">
+              <div class="col-lg-6 text-start w-50" [ngClass]="url?.includes('category-items')?'col-lg-12 w-100':''">
                 <button type="button" pButton class="p-button-success pull-right" icon="pi pi-check"
                   label="Proceed with Region" (click)="AcceptRegion()"></button>
               </div>
             </div>
-
-
           </ng-template>
         </p-dialog>
-
-
-        <!-- <p-confirmDialog appendTo="body" [visible]="showConfirmation" #cd [style]="{width: '90vw',minHeight:'60vh'}" key="regionConfirm">
-          kjkjkj
-          <ng-template pTemplate="header">
-              <h4>Confirm Region {{RegionSelected?.label}}</h4>
-          </ng-template>
-
-          <ng-template pTemplate="message">
-            <h4>Confirm Region {{RegionSelected?.label}}</h4>
-        </ng-template>
-
-          <ng-template pTemplate="footer">
-            <div class="row">
-              <div class="col-lg-6 text-start w-50">
-                <button type="button" pButton class="p-button-warning" label="Skip for now" (click)="showConfirmation = false"></button>
-              </div>
-              <div class="col-lg-6 text-start w-50">
-                <button type="button" pButton class="p-button-success pull-right" icon="pi pi-check" label="Proceed with Region" (click)="cd.accept()"></button>
-              </div>
-            </div>
-             
-              
-          </ng-template>
-      </p-confirmDialog> -->
 
       </div>
 
