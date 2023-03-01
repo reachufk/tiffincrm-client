@@ -1,90 +1,21 @@
-<div class="container-xxl my-3">
-
-    <div class="row">
-        <div class="col-lg-12 mt-3 mb-2">
-            <h4><strong>What would you like to  <span class="text-success">Order!</span> </strong></h4>
-        </div>
+<div class="container-xxl my-2">
+    <div class="row p-2">
         <div class="col-lg-12 my-2">
-           <div class="row">
-            <div *ngFor="let category of catagories | async" class="col-lg-3 col-sm-6 col-xs-6 mb-4 half">
-                <div class="card h-100 card-catagory show-cursor" routerLink="/public/category-items/{{category?._id}}">
-                    <div class="text-center mb-0 pb-0">
-                          <img [src]="category?.catagoryImage" class="category-image" width="100%" height="170px" class="img-rounded">
-                          <div class="category-name text-white fw-bold fs-4 py-1">{{category?.catagoryName}}</div>
+            <h4><strong>What would you like to <span class="text-success">Order?</span> </strong></h4>
+        </div>
+        <div class="col-lg-12">
+            <div class="row">
+                <div *ngFor="let category of catagories | async" class="col-md-3 col-sm-6 col-xs-6 half">
+                    <div class="card h-100 card-catagory show-cursor"
+                        routerLink="/public/category-items/{{category?._id}}">
+                        <div class="text-center">
+                            <img [src]="category?.catagoryImage" class="category-image" width="100%" height="170px"
+                                class="img-rounded">
+                            <div class="category-name text-white fw-bold fs-4 py-1">{{category?.catagoryName}}</div>
+                        </div>
                     </div>
-              </div>
+                </div>
             </div>
-           </div>
         </div>
     </div>
-
 </div>
-
-
-<!-- <div class="container">
-    <div class="row row-cols-2 row-cols-md-4 g-4 item-category">
-        <div class="col" *ngFor="let catagory of catagories">
-            <div class="card">
-                <img [src]="catagory.catagoryImage" class="" [alt]="catagory.catagoryName">
-                <h3 class="card-title bottom-left">{{catagory.catagoryName}}</h3>
-            </div>
-        </div>
-    </div>
-    <div class="card text-center my-2">
-        <div class="card-body">
-            <h5 class="card-title">Special title treatment</h5>
-        </div>
-    </div>
-    <div class="card text-center my-2">
-        <div class="card-body">
-            <h5 class="card-title">Privacy</h5>
-        </div>
-    </div>
-    <div class="card my-2">
-        <div class="card-body address">
-            <h2 class="card-title">Tiffin <span style="color: red;">Aww</span></h2>
-            <h3 style="color: black;">Serving Home made Fresh and Health food!</h3>
-            <div class="card-body address">
-                <h2 class="card-title">Tiffin <span style="color: red;">Aww</span></h2>
-                <h3 style="color: black;">Serving Home made Fresh and Health food!</h3>
-                <div class="row">
-                    <div class="col-2 text-end">
-                        <button pButton pRipple type="button" icon="pi pi-map-marker"
-                            class="p-button-rounded p-button-success"></button>
-                    </div>
-                    <div class="col-10">
-                        Rajbagh near IGNOU Centre,Srinagar,
-                        190008 J&K
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-2 text-end">
-                        <button pButton pRipple type="button" icon="pi pi-phone"
-                            class="p-button-rounded p-button-danger"></button>
-                    </div>
-                    <div class="col-10">
-                        +1800 010 2444 1210
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-2 text-end">
-                        <button pButton pRipple type="button" icon="pi pi-envelope" class="p-button-rounded"
-                            style="background: black; border: black"></button>
-                    </div>
-                    <div class="col-10">
-                        Feedback@tiffenaaw.com
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="card text-center my-2">
-        <div class="card-body">
-            <h2 class="card-title">
-                <a href="http://" target="_blank" class="link-style">Powered By ufksolutions &copy;
-                    {{poweredByDate | date:['y']}}</a>
-            </h2>
-        </div>
-    </div>
-</div> -->
