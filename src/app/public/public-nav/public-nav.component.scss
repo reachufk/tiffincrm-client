@@ -2,36 +2,78 @@
     background-color: #ffffff;
 }
 
-.p-button-plain:hover {
-    color: green !important;
-    background-color: white !important;
-}
-
-.p-button-plain:focus {
-    box-shadow: none !important
-}
-
-
-.select-region {
-    color: green !important;
-    background: none !important;
-    border: none !important
-}
-
-.dropdown-sign {
-    display: none;
-}
-
-.select-region:hover {
-    .dropdown-sign {
-        display: inline;
-    }
-}
-
-.select-region:focus {
-    box-shadow: none !important
+.shadow {
+    padding-block: 15px;
+    box-shadow: 0 8px 6px -6px black;
 }
 
 .link-style {
     text-decoration: none;
+}
+
+.fixed-top {
+    position: sticky;
+    top: 0;
+    width: 100%;
+}
+
+.mr-2 {
+    margin-right: 5px;
+}
+
+.show-cursor {
+    cursor: pointer;
+}
+
+.pull-right{
+    float: right;
+}
+.w-50{
+    padding-top: 10px;
+    width: 50%;
+}
+@media (max-width:310px){
+    .w-50{
+        width: 100% !important;
+    }
+}
+
+::ng-deep .p-dialog .p-dialog-content {
+    padding: 0 1.5rem 0.5rem 1.5rem !important;
+}
+
+::ng-deep .navbar-brand .p-dropdown{
+    background: #ffffff;
+    border: none;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    border-radius: 6px;
+    .p-dropdown-trigger {
+        width: 2rem;
+    }
+    .p-dropdown-label{
+        padding: 0px;
+    }
+}
+
+::ng-deep .navbar-brand .p-dropdown:not(.p-disabled).p-focus{
+    border-radius: 50%;
+    border-color: transparent !important;
+    box-shadow: none !important;
+}
+.navbar-toggler{
+    border:none
+}
+::ng-deep .navbar-toggler .p-dropdown{
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    .p-dropdown-label {
+        display: none;
+    }
+    .p-dropdown-trigger{
+        width: 100%;
+    }
+}
+.w-100{
+    width: 100%;
 }

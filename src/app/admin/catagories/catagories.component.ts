@@ -30,7 +30,7 @@ export class CatagoriesComponent {
     this.GetCatagories()
   }
   GetCatagories() {
-    this.Catagories = this.adminCatagoryService.GetCatagories().pipe(map((res) => res))
+    this.Catagories = this.adminCatagoryService.GetCatagories().pipe(map((res:any) => res?.data))
   }
 
 

@@ -1,24 +1,30 @@
-<div class="container">
-    <div class="card mb-2 instant-order">
-        <div class="row g-0">
-            <div class="col-3 col-md-6 text-end content-center">
-                <img src="./../../../assets/img/logo.png" class="img-fluid rounded-start" alt="...">
-            </div>
-            <div class="col-9 col-md-6">
-                <div class="card-body m-0 p-0 ">
-                    <p class="card-title blk-clr">Ready to <span class="grn-clr">Go!</span> </p>
-                    <ul>
-                        <li>Home made chicken biryani.</li>
-                        <li>Zero preservaties.</li>
-                        <li>No added color</li>
+<div class="container-xxl my-3">
 
-                    </ul>
+    <div class="row">
+        <div class="col-lg-12 mt-3 mb-2">
+            <h4><strong>What would you like to <span class="text-success">Order!</span> </strong></h4>
+        </div>
+        <div class="col-lg-12 my-2">
+            <div class="row">
+                <div *ngFor="let category of catagories | async" class="col-lg-3 col-sm-6 col-xs-6 mb-4 half">
+                    <div class="card h-100 card-catagory show-cursor"
+                        routerLink="/public/category-items/{{category?._id}}">
+                        <div class="text-center mb-0 pb-0">
+                            <img [src]="category?.catagoryImage" class="category-image" width="100%" height="170px"
+                                class="img-rounded">
+                            <div class="category-name text-white fw-bold fs-4 py-1">{{category?.catagoryName}}</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <h3>What would you like to <span class="grn-clr">order</span>?</h3>
-    <div class="row row-cols-2 row-cols-md-6 g-2 item-category">
+
+</div>
+
+
+<!-- <div class="container">
+    <div class="row row-cols-2 row-cols-md-4 g-4 item-category">
         <div class="col" *ngFor="let catagory of catagories">
             <div class="card">
                 <img [src]="catagory.catagoryImage" class="" [alt]="catagory.catagoryName">
@@ -75,4 +81,4 @@
             </h2>
         </div>
     </div>
-</div>
+</div> -->

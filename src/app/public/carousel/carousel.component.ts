@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BannerService } from 'src/app/shared/services/banner.service';
 
 @Component({
   selector: 'app-carousel',
@@ -7,61 +8,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CarouselComponent implements OnInit {
 
-  constructor() {
-
+  constructor(private bannerService: BannerService) {
   }
 
-  imageObject: Array<object> = [
-    {
-      image: './../../../assets/img/logo.png',
-      thumbImage: './../../../assets/img/logo.png',
-      alt: 'Image alt'
-    }, {
-      image: './../../../assets/img/logo.png',
-      thumbImage: './../../../assets/img/logo.png',
-      alt: 'Image alt'
-    },
-    {
-      image: './../../../assets/img/logo.png',
-      thumbImage: './../../../assets/img/logo.png',
-      alt: 'Image alt'
-    }, {
-      image: './../../../assets/img/logo.png',
-      thumbImage: './../../../assets/img/logo.png',
-      alt: 'Image alt'
-    }, {
-      image: './../../../assets/img/logo.png',
-      thumbImage: './../../../assets/img/logo.png',
-      alt: 'Image alt'
-    },
-    {
-      image: './../../../assets/img/logo.png',
-      thumbImage: './../../../assets/img/logo.png',
-      alt: 'Image alt'
-    }, {
-      image: './../../../assets/img/logo.png',
-      thumbImage: './../../../assets/img/logo.png',
-      alt: 'Image alt'
-    }, {
-      image: './../../../assets/img/logo.png',
-      thumbImage: './../../../assets/img/logo.png',
-      alt: 'Image alt'
-    },
-    {
-      image: './../../../assets/img/logo.png',
-      thumbImage: './../../../assets/img/logo.png',
-      alt: 'Image alt'
-    }, {
-      image: './../../../assets/img/logo.png',
-      thumbImage: './../../../assets/img/logo.png',
-      alt: 'Image alt'
-    }
+  Banners: Array<object> = [
   ];
 
   ngOnInit() {
-
-
-
+    this.GetBanners()
   }
+
+  GetBanners() {
+    this.bannerService.GetBanners().subscribe(async (res: any) => {
+      const banners = await res?.data?.map((banner: any) =>
+        ({ thumbImage: banner?.bannerImage, title: banner?.bannerName, id: banner?._id })
+      )
+      this.Banners = [this.Banners, ...banners];
+    })
+  }
+
 
 }

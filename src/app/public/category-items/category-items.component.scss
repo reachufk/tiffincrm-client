@@ -1,0 +1,111 @@
+
+::ng-deep a {
+      color: black;
+      text-decoration: none;
+}
+
+
+.card {
+      border: none;
+}
+
+.pull-right {
+      float: right;
+}
+.ml-3 {
+      margin-left: 10px;
+}
+
+.fw {
+      font-weight: 600;
+}
+
+::ng-deep .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider {
+      background: #16a34a !important;
+}
+
+.active-category {
+      display: inline-block;
+      position: relative;
+      padding-bottom: 7px;
+}
+
+.active-category::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 17%;
+      width: 70%;
+      height: 4px;
+      border-radius: 10px;
+      background-color: #16a34a;
+}
+
+.itemTitle {
+      font-size: larger;
+      font-weight: 600;
+}
+
+.bottom{
+      display: inline-block;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      margin-bottom: 5px;
+      margin-right: 8px;
+}
+
+::ng-deep .p-inputnumber-buttons-horizontal .p-inputnumber-input {
+      border-radius: 0;
+      width: 60px !important;
+  }
+
+
+ ::ng-deep .p-dialog .p-dialog-footer button {
+      margin: 0 0 0 0 !important; 
+      width: auto;
+  }
+
+  @media (max-width:768px){
+      .half{
+            width: 50% !important;
+      }
+  }
+
+ ::ng-deep .p-dialog.p-confirm-dialog .p-confirm-dialog-message {
+      margin-block: 19px;
+  }
+
+
+  ::ng-deep .p-dialog .p-dialog-header {
+            padding-bottom: 0px !important;
+            border-top-right-radius: 25px !important;
+            border-top-left-radius: 25px !important;
+        }
+  
+
+::ng-deep .p-radiobutton .p-radiobutton-box .p-radiobutton-icon {
+    width: 12px;
+    height: 12px;
+    transition-duration: 0.2s;
+    background-color: #147e2f !important;
+}
+
+::ng-deep .p-radiobutton .p-radiobutton-box.p-highlight {
+      border-color: #7c8086 !important;
+      background: #eeeff0 !important;
+  }
+
+  .mr-3{
+      margin-right: 10px;
+  }
+  .ml-2{
+      margin-left: 20px;
+  }
+  .bg-grey{
+      background: #c4c5c68c;
+  }
+
+  ::ng-deep .p-inputswitch .p-inputswitch-slider {
+      background: #bbbcbf !important;
+  }

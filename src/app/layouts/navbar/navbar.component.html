@@ -1,5 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-transparent  navbar-absolute fixed-top">
     <div class="container-fluid">
+        <p-toast></p-toast>
         <div class="navbar-wrapper">
             <a class="navbar-brand">
              <span class="fs-4 fw-bold text-secondary">Admin</span> 
@@ -25,7 +26,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link show-cursor" (click)="menuNotifications.toggle($event)">
+                    <a class="nav-link show-cursor" (click)="menuNotifications.toggle($event);notificationItems=[]">
                         <i class="pi pi-bell fs-4"></i>
                         <span class="notification bg-primary">{{notificationItems?.length}}</span>
                         <p-menu #menuNotifications appendTo="body" [popup]="true" [model]="notificationItems"></p-menu>

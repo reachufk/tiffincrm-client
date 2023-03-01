@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Observable, map } from 'rxjs';
@@ -37,10 +37,10 @@ export class CatagoryItemsComponent {
     this.GetCatagoryItems()
   }
   GetCatagoryItems() {
-    this.CatagoryItems = this.adminCatagoryService.GetCatagoryItems(this.FetchModel).pipe(map((res: { items: Array<any>, statusCode: number, totalPages: number, totalCount: number }) => {
+    this.CatagoryItems = this.adminCatagoryService.GetCatagoryItems(this.FetchModel).pipe(map((res: { data: Array<any>, statusCode: number, totalPages: number, totalCount: number }) => {
       this.TotalPages = res?.totalPages
       this.TotalRecords= res?.totalCount
-      return res?.items
+      return res?.data
     }))
   }
 
@@ -53,7 +53,8 @@ export class CatagoryItemsComponent {
 
   OpenForm(catagory: any) {
     if (catagory) {
-      this.CatagoryItemForm.patchValue(catagory);
+      console.log(catagory);
+      this.CatagoryItemForm.patchValue(catagory)
       this.displayCatagoryItemForm = true
     } else {
       this.displayCatagoryItemForm = true
@@ -66,30 +67,55 @@ export class CatagoryItemsComponent {
       _id: new FormControl(null),
       catagory: new FormControl(this.catagoryID, [Validators.required]),
       itemName: new FormControl(null, [Validators.required]),
+      isVeg:new FormControl(false, [Validators.required]),
       itemPrice: new FormControl(null, [Validators.required]),
+      itemTypes:new FormArray([]),
+      selectedItemType: new FormControl(null),
+      itemDescription:new FormControl(null),
       itemDiscount: new FormControl(null)
     })
   }
 
+  createItemTypeForm(){
+    return new FormGroup({
+      typeName:new FormControl(null,[Validators.required]),
+      typeValue:new FormControl(null,[Validators.required])
+    })
+  }
+
+  getItemTypesControls() {
+    return (<FormArray>this.CatagoryItemForm.get('itemTypes')).controls;
+  }
+
+  AddType() {
+    let ItemTypes = this.CatagoryItemForm.get('itemTypes') as FormArray;
+    ItemTypes.push(this.createItemTypeForm())
+  }
+  RemoveType(index:number) {
+    let ItemTypes = this.CatagoryItemForm.get('itemTypes') as FormArray;
+    ItemTypes.removeAt(index)
+  }
+
+
   SaveItem() {
     validateAllFormFields(this.CatagoryItemForm)
+    this.CatagoryItemForm.get('catagory').setValue(this.catagoryID)
     if (this.CatagoryItemForm.valid) {
       if (this.CatagoryItemForm.get('_id').value) {
         this.adminCatagoryService.UpdateCatagoryItem(this.CatagoryItemForm.value).subscribe((res: any) => {
           if (res?.statusCode == 200) {
-            this.messageService.add({ severity: 'success', summary: 'Catagory updated!' });
-            this.displayCatagoryItemForm = false
+            this.messageService.add({ severity: 'success', summary: 'item updated!' });
             this.CatagoryItemForm.reset()
+            this.displayCatagoryItemForm = false
             this.GetCatagoryItems()
           }
-
         })
       } else {
         const formValue = this.CatagoryItemForm.value;
         delete formValue._id
         this.adminCatagoryService.SaveCatagoryItem(formValue).subscribe((res: any) => {
           if (res?.statusCode == 200) {
-            this.messageService.add({ severity: 'success', summary: 'Catagory added!' });
+            this.messageService.add({ severity: 'success', summary: 'item added!' });
             this.CatagoryItemForm.reset()
             this.displayCatagoryItemForm = false
             this.GetCatagoryItems()
@@ -100,8 +126,8 @@ export class CatagoryItemsComponent {
     return
   }
 
-  DeleteCatagory(ID: string) {
-    this.adminCatagoryService.DeleteCatagory(ID).subscribe((res: any) => {
+  DeleteCatagoryItem(ID: string) {
+    this.adminCatagoryService.DeleteCatagoryItem(ID).subscribe((res: any) => {
       if (res?.statusCode == 200) {
         this.messageService.add({ severity: 'success', summary: 'Catagory deleted!' });
         this.GetCatagoryItems()

@@ -4,4 +4,12 @@ export interface FetchCatagoryItems {
       keyword: string,
       catagory: string
 }
+export function initializeFetchCatagoryItems():FetchCatagoryItems{
+      return{
+            pageNo: 1,
+            pageSize: Infinity,
+            keyword: "",
+            catagory: ""
+      }
+}
 

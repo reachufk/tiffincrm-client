@@ -4,13 +4,13 @@ import { validateAllFormFields } from 'src/app/shared/utils/formUtils';
 import { AuthService } from '../services/auth.service';
 import { MessageService } from 'primeng/api';
 import { IloggedUser } from 'src/app/shared/interfaces/auth';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  providers: [MessageService]
+  providers: []
 })
 export class LoginComponent implements OnInit {
 
@@ -24,12 +24,18 @@ export class LoginComponent implements OnInit {
   showText: string;
   date: number = Date.now();
   error=''
-  hide:boolean=true
+  hide:boolean=true;
+  state:any;
   constructor(private authService: AuthService, @Optional() private messageService: MessageService,
-  private router:Router) {
+  private router:Router,private activatedRoute:ActivatedRoute) {
+    
   }
 
   ngOnInit(): void {
+    const createdUserPhone = this.activatedRoute.snapshot.queryParamMap.get('registered')
+    if(createdUserPhone){
+    this.loginForm.get('phoneNumber').setValue(createdUserPhone)
+    }
     this.textList = [
       'Unexpected guests?',
       'Game night?',
@@ -57,17 +63,30 @@ export class LoginComponent implements OnInit {
     if(this.loginForm.invalid){
       return
     }
-    this.authService.Login(this.loginForm.value).subscribe((res:any)=>{
+    this.authService.Login(this.loginForm.value).subscribe(async (res:any)=>{
       if(res?.statusCode==200){
+        this.messageService.add({severity:'success',summary:'logged in sucessfully'})
+        this.authService.SetUser(res?.user)
         const loggedInUser:IloggedUser = res?.user;
-        this.authService.LoggedInUser.next(loggedInUser);
         localStorage.setItem('loggedInUser',JSON.stringify(loggedInUser));
         this.router.navigate(['/public/home'])
-        return
+      }else{
+        this.error = res?.message
       }
-      this.error = res?.message
+     
     })
     
+  }
+  navigateIn() {
+    this.state = this.activatedRoute?.snapshot?.queryParamMap?.get('state')
+    
+    let path = decodeURIComponent(this.state);
+    console.log(path)
+    if(this.state){
+      this.router.navigateByUrl(path)
+    }else{
+      this.router.navigate(['/public/home'])
+    }
   }
 
 

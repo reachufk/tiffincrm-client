@@ -15,10 +15,10 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-lg-12">
-
+                                <p-toast></p-toast>
                                 <p-tabView>
                                     <p-tabPanel header="Latest Orders">
-                                        <app-latest-orders></app-latest-orders>
+                                        <app-latest-orders [inputLatestOrder]="LatestOrder"></app-latest-orders>
                                     </p-tabPanel>
                                     <p-tabPanel header="Future Orders">
                                         <ng-template pTemplate="content">

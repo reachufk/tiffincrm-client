@@ -1,0 +1,12 @@
+{
+      "regions":[
+            {"label":"Hazratbal","distance":"1 km","lunch":"9am-12pm","dinner":"4pm-8pm"},
+            {"label":"Zadibal","distance":"1 km","lunch":"9am-12pm","dinner":"4pm-8pm"},
+            {"label":"Eidgah","distance":"1 km","lunch":"9am-12pm","dinner":"4pm-8pm"},
+            {"label":"Khanyar","distance":"1 km","lunch":"9am-12pm","dinner":"4pm-8pm"},
+            {"label":"Batmaloo","distance":"1 km","lunch":"9am-12pm","dinner":"4pm-8pm"},
+            {"label":"Sonwar","distance":"1 km","lunch":"9am-12pm","dinner":"4pm-8pm"},
+            {"label":"Amira Kadal","distance":"1 km","lunch":"9am-12pm","dinner":"4pm-8pm"},
+            {"label":"Habba Kadal","distance":"1 km","lunch":"9am-12pm","dinner":"4pm-8pm"}
+      ]
+}

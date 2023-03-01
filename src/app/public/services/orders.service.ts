@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import  {io} from 'socket.io-client';
-import { FetchCompletedOrders } from 'src/app/shared/interfaces/fetch-completed-orders';
+import { FetchOrderModel } from 'src/app/shared/interfaces/fetch-completed-orders';
 @Injectable()
 export class AdmiOrdersService {
 
@@ -17,11 +17,23 @@ export class AdmiOrdersService {
     });
   }
 
-  GetCompletedOrders(FetchCompOrderModel:FetchCompletedOrders){
+  GetCompletedOrders(FetchCompOrderModel:FetchOrderModel){
     return this.http.post(`${environment.server}Orders/GetCompletedOrders`,FetchCompOrderModel)
   }
   GetLatestOrders(){
     return this.http.get(`${environment.server}Orders/GetLatestOrders`)
+  }
+
+  CreateRpayOrder(OrderOption:any){
+    return this.http.post(`${environment.server}Orders/CreateRpayOrder`,OrderOption)
+  }
+
+  VerifyPayment(verifyModel:any){
+    return this.http.post(`${environment.server}Orders/VerifyPayment`,verifyModel)
+  }
+
+  PlaceOrder(OrderModel:any){
+    return this.http.post(`${environment.server}Orders/PlaceOrder`,OrderModel)
   }
 
   FetchNewCreatedOrder(): Observable<any> {

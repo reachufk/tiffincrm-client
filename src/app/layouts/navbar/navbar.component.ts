@@ -3,11 +3,14 @@ import { ROUTES } from '../sidebar/sidebar.component';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
+import { MessageService } from 'primeng/api';
+import { AdmiOrdersService } from 'src/app/admin/services/admin-orders.service';
 
 @Component({
     selector: 'app-navbar',
     templateUrl: './navbar.component.html',
-    styleUrls: ['./navbar.component.css']
+    styleUrls: ['./navbar.component.css'],
+    providers:[MessageService,AdmiOrdersService]
 })
 export class NavbarComponent implements OnInit {
     private listTitles: any[];
@@ -17,9 +20,10 @@ export class NavbarComponent implements OnInit {
     private sidebarVisible: boolean;
 
     searchControl: FormControl = new FormControl(null)
-    notificationItems: { label: string; icon: string }[] = []
+    notificationItems: Array<any>= []
     userItems: { label: string; icon: string }[] = []
-    constructor(location: Location, private element: ElementRef, private router: Router) {
+    constructor(location: Location, private element: ElementRef, private router: Router,
+        private messageService:MessageService,private adminOrderService:AdmiOrdersService) {
         this.location = location;
         this.sidebarVisible = false;
     }
@@ -39,6 +43,13 @@ export class NavbarComponent implements OnInit {
                 this.mobile_menu_visible = 0;
             }
         });
+        this.adminOrderService.connect()
+        this.adminOrderService.FetchNewCreatedOrder().subscribe((order:any)=>{
+            if(order){
+                this.notificationItems.push(order)
+                this.messageService.add({severity:'success',summary:'New Order has been placed check Orders',sticky:true})
+            }
+        })
     }
 
     sidebarOpen() {
@@ -119,10 +130,7 @@ export class NavbarComponent implements OnInit {
 
 
     getNavbarItems() {
-        this.notificationItems = [
-            { label: 'New', icon: 'pi pi-fw pi-plus' },
-            { label: 'Download', icon: 'pi pi-fw pi-download' }
-        ]
+        this.notificationItems = []
         this.userItems = [
             { label: 'Profile', icon: 'pi pi-fw pi-user' },
             { label: 'Change Password', icon: 'pi pi-fw pi-key' }

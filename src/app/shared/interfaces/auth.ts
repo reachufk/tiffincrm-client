@@ -1,5 +1,6 @@
 
 export interface IUser {
+    user:String
     username: String
     phoneNumber: String
     email: String
@@ -12,8 +13,9 @@ export interface IOTP {
 }
 
 export interface IloggedUser{
+    user:String
     username:String,
     phoneNumber:Number,
-    email?:String,
+    email:String,
     token:String
 }

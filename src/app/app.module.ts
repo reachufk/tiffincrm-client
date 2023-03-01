@@ -12,14 +12,14 @@ import { SidebarComponent } from './layouts/sidebar/sidebar.component';
 import { PublicLayoutComponent } from './layouts/public-layout/public-layout.component';
 import { UserLayoutComponent } from './layouts/user-layout/user-layout.component';
 import { SharedModule } from './shared/shared.module';
-import { PublicModule } from './public/public.module';
-import { AuthModule } from './auth/auth.module';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
-import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
-import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
+import { ErrorInterceptor } from './auth/core/interceptors/error.interceptor';
 import { PublicNavComponent } from './public/public-nav/public-nav.component';
-
+import { AuthInterceptor } from './auth/core/interceptors/auth.interceptor';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { TiffinLandingComponent } from './tiffin-landing/tiffin-landing.component';
+import {SpeedDialModule} from 'primeng/speeddial';
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -28,18 +28,21 @@ import { PublicNavComponent } from './public/public-nav/public-nav.component';
     HttpClientModule,
     RouterModule,
     AppRoutingModule,
-    SharedModule
+    SharedModule,
+    ConfirmDialogModule,
+    SpeedDialModule
   ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
     NavbarComponent,
-    FooterComponent,
     SidebarComponent,
     PublicNavComponent,
     PublicLayoutComponent,
     UserLayoutComponent,
-    AuthLayoutComponent
+    AuthLayoutComponent,
+    FooterComponent,
+    TiffinLandingComponent
   ],
   providers: [
     { provide: LocationStrategy, useClass: PathLocationStrategy },
