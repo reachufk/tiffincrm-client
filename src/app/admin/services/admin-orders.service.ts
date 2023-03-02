@@ -11,8 +11,10 @@ export class AdminOrdersService {
   constructor(private http: HttpClient) {
   }
   connect() {
-    this.socket = io(`${environment.socketURL}`, { transports: ['websocket']});
+    this.socket = io(`${environment.socketURL}`, { transports: ['websocket'],secure:true});
     this.socket.on('connect', () => { console.log('connected to server'); });
+    this.socket.on('connect_error', (err) => { console.log('socket error ::', err);
+    });
   }
 
   GetCompletedOrders(FetchCompOrderModel: FetchOrderModel) {
@@ -21,8 +23,8 @@ export class AdminOrdersService {
   GetLatestOrders() {
     return this.http.get(`${environment.server}Orders/GetLatestOrders`);
   }
-  SetCompletedOrder(orderID: string) {
-    return this.http.get(`${environment.server}Orders/SetCompletedOrder/${orderID}`);
+  SetCompletedOrder(order: any) {
+    return this.http.post(`${environment.server}Orders/SetCompletedOrder/${order?._id}`,order);
   }
 
   FetchNewCreatedOrder(): Observable<any> {

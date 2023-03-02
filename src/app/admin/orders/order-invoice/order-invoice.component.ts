@@ -24,7 +24,6 @@ export class OrderInvoiceComponent implements OnInit {
   ProcessToComplete() {
     this.adminOrderService.SetCompletedOrder(this.OrderDetails._id).subscribe((res:any)=>{
       if(res.statusCode == 200){
-        this.messageService.add({severity:'success',summary:'Order processed'})
         this.ref.close(true)
       }else{
         this.messageService.add({severity:'success',summary:res?.message})
