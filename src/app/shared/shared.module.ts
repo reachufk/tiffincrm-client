@@ -22,11 +22,13 @@ import { DividerModule } from 'primeng/divider';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { UfklogoComponent } from '../layouts/ufklogo/ufklogo.component';
+import { LoaderComponent } from './components/loader/loader.component';
 @NgModule({
   declarations: [
     FormErrorMessagesDirective,
     PaginatorComponent,
-    UfklogoComponent
+    UfklogoComponent,
+    LoaderComponent
 
   ],
   imports: [
@@ -58,7 +60,8 @@ import { UfklogoComponent } from '../layouts/ufklogo/ufklogo.component';
     DividerModule,
     ConfirmDialogModule,
     AutoCompleteModule,
-    UfklogoComponent
+    UfklogoComponent,
+    LoaderComponent
   ]
 })
 export class SharedModule { }

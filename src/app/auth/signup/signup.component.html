@@ -49,9 +49,11 @@
                             <div class="my-2 ">
                                 <div class="p-inputgroup">
                                     <span class="p-inputgroup-addon"><i class="pi pi-lock"></i></span>
-                                    <input type="password" pInputText placeholder="Password" id="password"
-                                        formControlName="password" appFormErrorMessages>
+                                    <input  type="{{showPassword?'text':'password'}}" pPassword placeholder="Password" id="password"
+                                        formControlName="password">
+                                        <span (click)="showPassword = !showPassword" class="p-inputgroup-addon"><i class="pi pi-eye"></i></span>
                                 </div>
+                                <small class="text-secondary mt-2">Use 8 or more characters with a mix of lower-case, upper-case letters & numbers</small>
                             </div>
                             <button pButton pRipple type="button" (click)="signupUser()" label="Sign up"
                                 class="p-button-raised p-button-success my-2"></button>

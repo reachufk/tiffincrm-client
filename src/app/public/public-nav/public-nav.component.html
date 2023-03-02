@@ -17,7 +17,7 @@
 
 
 
-      <p-dropdown appendTo="body" placeholder="''" class="navbar-toggler" (onChange)="NavigateTo($event?.value)"
+      <p-dropdown appendTo="body" placeholder="''" [formControl]="selected" class="navbar-toggler" (onChange)="NavigateTo($event?.value)"
         [options]="Items" optionLabel="label" dropdownIcon="pi pi-user" [filter]="false">
         <ng-template let-item pTemplate="item">
           <div class="item">

@@ -191,7 +191,7 @@ export class FormErrorMessagesDirective {
                   message = `aaaa password doesn't match bbbbb`;
                   break;
 
-              case 'Password':
+              case 'password':
                   message = 'Password is not strong enough';
                   break;
 

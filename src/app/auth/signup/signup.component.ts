@@ -5,12 +5,14 @@ import { AuthService } from '../services/auth.service';
 import { MessageService } from 'primeng/api';
 import { NgOtpInputComponent } from 'ng-otp-input';
 import { Router } from '@angular/router';
+import { PasswordDirective } from 'primeng/password';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss'],
-  providers: []
+  providers: [],
+  
 })
 export class SignupComponent implements OnInit {
   @ViewChild(NgOtpInputComponent, { static: false }) ngOtpInput: NgOtpInputComponent;
@@ -21,6 +23,7 @@ export class SignupComponent implements OnInit {
   showText: string;
   date: number = Date.now();
   showOtp: boolean = false;
+  showPassword:boolean=false
   constructor(private authService: AuthService,private messageService: MessageService,
     private router:Router) {
   }
@@ -53,7 +56,7 @@ export class SignupComponent implements OnInit {
       username: new FormControl(null, [Validators.required]),
       phoneNumber: new FormControl(null, [Validators.required]),
       email: new FormControl(null, [Validators.required]),
-      password: new FormControl(null, [Validators.required, Validators.minLength(8)])
+      password: new FormControl(null, [Validators.required,Validators.pattern(/^(?=.*\d)(?=.*[a-zA-Z])[a-zA-Z0-9]{8,}$/)])
     })
   }
 

@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit {
   error=''
   hide:boolean=true;
   state:any;
+  showPassword:boolean=false
   constructor(private authService: AuthService, @Optional() private messageService: MessageService,
   private router:Router,private activatedRoute:ActivatedRoute) {
     

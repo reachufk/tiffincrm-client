@@ -10,7 +10,8 @@ import { SignupComponent } from './signup/signup.component';
 import { RouterModule } from '@angular/router';
 import { NgOtpInputModule } from  'ng-otp-input';
 import { MessageService } from 'primeng/api';
-
+import {PasswordModule} from 'primeng/password';
+import { PrimeNGShadowDOMDirective } from 'primeng-shadowdom-directives';
 
 @NgModule({
   providers: [AuthService,MessageService],
@@ -26,10 +27,10 @@ import { MessageService } from 'primeng/api';
     ReactiveFormsModule,
     SharedModule,
     RouterModule,
-    NgOtpInputModule
+    NgOtpInputModule,
+    PasswordModule,
+    PrimeNGShadowDOMDirective
   ],
-  exports: [
-
-  ]
+  exports: []
 })
 export class AuthModule { }

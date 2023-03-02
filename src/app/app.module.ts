@@ -20,14 +20,20 @@ import { AuthInterceptor } from './auth/core/interceptors/auth.interceptor';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { TiffinLandingComponent } from './tiffin-landing/tiffin-landing.component';
 import { SpeedDialModule } from 'primeng/speeddial';
+import { BlockUIModule } from 'ng-block-ui';
+import { BlockUIHttpModule } from 'ng-block-ui/http';
+import { LoaderComponent } from './shared/components/loader/loader.component';
 @NgModule({
   imports: [
+
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule,
     AppRoutingModule,
+    BlockUIModule.forRoot({template:LoaderComponent}),
+    BlockUIHttpModule.forRoot(),
     SharedModule,
     ConfirmDialogModule,
     SpeedDialModule

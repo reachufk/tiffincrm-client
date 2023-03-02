@@ -14,7 +14,8 @@ import * as regionData from './regions.json'
 })
 export class PublicNavComponent implements OnInit, OnDestroy {
   collapsed: boolean = true
-  regions: MenuItem[] = []
+  regions: MenuItem[] = [];
+  selected:FormControl = new FormControl(null)
   Items: MenuItem[] = [{ label: 'My Orders', icon: 'pi pi-shopping-cart',routerLink:'/public/my-orders' },
   { label: 'Logout', icon: 'pi pi-sign-out' },
   { label: 'Login', icon: 'pi pi-sign-in', routerLink: '/auth/login' }
@@ -79,6 +80,7 @@ export class PublicNavComponent implements OnInit, OnDestroy {
 
   NavigateTo(item: MenuItem) {
     if (item?.routerLink) {
+      this.selected.reset();
       this.router.navigate([item.routerLink])
       return
     }

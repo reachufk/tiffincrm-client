@@ -12,7 +12,7 @@
             <div class="col-md-5">
                   <div class="card  welcome-back">
                         <div class="card-body">
-                              <p>Welcome <span style="color: green;">Back</span></p>
+                              <p>Welcome <span class="text-success">Back</span></p>
                         </div>
                   </div>
             </div>
@@ -29,18 +29,18 @@
                                           </div>
                                           <div class="my-2">
                                                 <div class="p-inputgroup">
-                                                      <span class="p-inputgroup-addon"><i
-                                                                  class="pi pi-mobile"></i></span>
+                                                      <span class="p-inputgroup-addon">
+                                                            <i class="pi pi-mobile"></i></span>
                                                       <input type="text" pInputText placeholder="Mobile" id="mobile"
-                                                            formControlName="phoneNumber" appFormErrorMessages>
+                                                            formControlName="phoneNumber">
                                                 </div>
                                           </div>
                                           <div class="my-2 ">
                                                 <div class="p-inputgroup">
                                                       <span class="p-inputgroup-addon"><i class="pi pi-lock"></i></span>
-                                                      <input type="password" pInputText placeholder="Password"
-                                                            id="password" formControlName="password"
-                                                            appFormErrorMessages>
+                                                      <input type="{{showPassword?'text':'password'}}" pInputText placeholder="Password"
+                                                            id="password" formControlName="password">
+                                                            <span (click)="showPassword = !showPassword" class="p-inputgroup-addon"><i class="pi pi-eye"></i></span>
                                                 </div>
                                           </div>
                                           <button pButton pRipple type="button" (click)="Login()" label="Log in"
@@ -51,8 +51,8 @@
                                           <hr>
                                           <div class="my-2 text-center">
                                                 <button pButton pRipple type="button" (click)="Login()"
-                                                      class="p-button-raised p-button-primary">
-                                                      <a routerLink="/auth/signup">Create new account</a>
+                                                      class=" p-button-plain p-button-text p-button-raised">
+                                                      <a routerLink="/auth/signup" class="text-primary">Create new account</a>
                                                 </button>
                                           </div>
                                     </div>
