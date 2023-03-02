@@ -1,8 +1,78 @@
-<div class="row g-0 d-flex align-items-center">
+<div class="container">
+      <div class="row justify-content-md-center my-2">
+            <div class="col-md-5">
+                  <div class="card  welcome-back tiffinaww-logo">
+                        <div class="card-body">
+                              <img style="height: 64px;" src="./../../../assets/img/logo.png" alt="" srcset="">
+                        </div>
+                  </div>
+            </div>
+      </div>
+      <div class="row justify-content-md-center text-center my-2">
+            <div class="col-md-5">
+                  <div class="card  welcome-back">
+                        <div class="card-body">
+                              <p>Welcome <span style="color: green;">Back</span></p>
+                        </div>
+                  </div>
+            </div>
+      </div>
+      <div class="row justify-content-md-center my-2">
+            <div class="col-md-5">
+                  <div class="card login-pannel">
+                        <div class="card-body">
+                              <p>Please login to continue</p>
+                              <form [formGroup]="loginForm">
+                                    <div class="row g-0">
+                                          <div *ngIf="error" class="alert alert-danger p-2">
+                                                <i class="pi pi-times"></i>{{error}}
+                                          </div>
+                                          <div class="my-2">
+                                                <div class="p-inputgroup">
+                                                      <span class="p-inputgroup-addon"><i
+                                                                  class="pi pi-mobile"></i></span>
+                                                      <input type="text" pInputText placeholder="Mobile" id="mobile"
+                                                            formControlName="phoneNumber" appFormErrorMessages>
+                                                </div>
+                                          </div>
+                                          <div class="my-2 ">
+                                                <div class="p-inputgroup">
+                                                      <span class="p-inputgroup-addon"><i class="pi pi-lock"></i></span>
+                                                      <input type="password" pInputText placeholder="Password"
+                                                            id="password" formControlName="password"
+                                                            appFormErrorMessages>
+                                                </div>
+                                          </div>
+                                          <button pButton pRipple type="button" (click)="Login()" label="Log in"
+                                                class="p-button-raised p-button-success my-2"></button>
+                                          <div class="my-2 text-center">
+                                                <a href="">Forgotten password?</a>
+                                          </div>
+                                          <hr>
+                                          <div class="my-2 text-center">
+                                                <button pButton pRipple type="button" (click)="Login()"
+                                                      class="p-button-raised p-button-primary">
+                                                      <a routerLink="/auth/signup">Create new account</a>
+                                                </button>
+                                          </div>
+                                    </div>
+                              </form>
+                        </div>
+                  </div>
+            </div>
+      </div>
+      <div class="row justify-content-md-center my-2">
+            <div class="col-md-5 text-center">
+                  <app-ufklogo />
+            </div>
+      </div>
+</div>
+
+<!-- <div class="row g-0 d-flex align-items-center">
       <p-toast></p-toast>
       <div class="col-lg-6 d-none d-lg-flex">
-        <img src="../../../assets/img/registration-background.webp" alt="Trendy Pants and Shoes"
-          class="w-100 h-100 rounded-t-5 rounded-tr-lg-0 rounded-bl-lg-5" />
+            <img src="../../../assets/img/registration-background.webp" alt="Trendy Pants and Shoes"
+                  class="w-100 h-100 rounded-t-5 rounded-tr-lg-0 rounded-bl-lg-5" />
       </div>
       <div class="col-lg-6">
             <form [formGroup]="loginForm">
@@ -12,9 +82,9 @@
                         </div>
 
                         <div *ngIf="error" class="col-lg-12 mt-3 text-center">
-                             <div class="alert alert-danger w-70 mx-auto p-2">
-                              <i class="pi pi-times"></i>{{error}}
-                             </div>
+                              <div class="alert alert-danger w-70 mx-auto p-2">
+                                    <i class="pi pi-times"></i>{{error}}
+                              </div>
                         </div>
 
                         <div class="col-lg-12 mb-1 mx-auto">
@@ -22,8 +92,7 @@
                         </div>
                         <div class="col-lg-12 mb-3">
                               <div class="p-inputgroup w-70 mx-auto">
-                                    <span class="p-inputgroup-addon"><i
-                                                class="pi pi-mobile"></i></span>
+                                    <span class="p-inputgroup-addon"><i class="pi pi-mobile"></i></span>
                                     <input type="text" pInputText placeholder="Mobile" id="mobile"
                                           formControlName="phoneNumber" appFormErrorMessages>
                               </div>
@@ -37,7 +106,7 @@
                         </div>
                         <div class="col-lg-12 mb-3 text-center">
                               <button pButton pRipple type="button" (click)="Login()" label="Log in"
-                              class="p-button-raised p-button-success "></button>
+                                    class="p-button-raised p-button-success "></button>
                         </div>
                         <div class="col-lg-12 mb-3 text-center">
                               <a routerLink="/auth/signup">Don't have an account? Create one !</a>
@@ -45,4 +114,4 @@
                   </div>
             </form>
       </div>
-    </div>
+</div> -->

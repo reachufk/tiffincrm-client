@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { BannerService } from 'src/app/shared/services/banner.service';
 
 @Component({
@@ -10,17 +10,13 @@ export class CarouselComponent implements OnInit {
 
   constructor(private bannerService: BannerService) {
   }
-  width: string = '100%';
+  width: string;
   Banners: Array<object> = [
   ];
 
   ngOnInit() {
     this.GetBanners();
-    if (window.innerWidth < 768) {
-      this.width = '100%';
-    } else {
-      this.width = '25%';
-    }
+    this.onWindowResize();
   }
 
   GetBanners() {
@@ -31,6 +27,16 @@ export class CarouselComponent implements OnInit {
       this.Banners = [this.Banners, ...banners];
     })
   }
+
+  @HostListener('window:resize', ['$event'])
+  onWindowResize() {
+    if (window.innerWidth < 768) {
+      this.width = '100%';
+    } else {
+      this.width = '25%';
+    }
+  }
+
 
 
 }
