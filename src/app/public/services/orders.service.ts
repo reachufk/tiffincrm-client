@@ -10,12 +10,6 @@ export class OrdersService {
   private socket: any;
   constructor(private http: HttpClient) {
   }
-  connect() {
-    this.socket = io(`http://localhost:3000`, { transports: ['websocket'] });
-    this.socket.on('connect', () => {
-      console.log('connected to server');
-    });
-  }
 
   GetCompletedOrders(FetchCompOrderModel:FetchOrderModel){
     return this.http.post(`${environment.server}Orders/GetCompletedOrders`,FetchCompOrderModel)
