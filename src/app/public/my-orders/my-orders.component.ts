@@ -25,13 +25,11 @@ export class MyOrdersComponent implements OnInit {
   GetUserOrders() {
    this.Orders =  this.orderService.GetUserOrders(this.User?.user).pipe(map((orders: any) => {
       if (orders?.statusCode == 200) {
-        if (!orders.data?.length) {
-          this.emptyOrders = true;
-          return
-        }
         this.emptyOrders = false
         this.totalItems = orders?.data?.length
         return orders?.data
+      }else{
+        this.emptyOrders = true;
       }
     }))
   }
