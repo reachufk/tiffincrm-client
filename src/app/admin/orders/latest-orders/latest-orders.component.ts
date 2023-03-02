@@ -52,6 +52,8 @@ export class LatestOrdersComponent implements OnInit {
       width: '50%',
       data:order
   });
+  
+  ref.onClose.subscribe((result:any)=> console.log(result));
   }
 
 }

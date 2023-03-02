@@ -18,15 +18,18 @@ export class AdminOrdersService {
   }
 
   GetCompletedOrders(FetchCompOrderModel:FetchOrderModel){
-    return this.http.post(`${environment.server}Orders/GetCompletedOrders`,FetchCompOrderModel)
+    return this.http.post(`${environment.server}Orders/GetCompletedOrders`,FetchCompOrderModel);
   }
   GetLatestOrders(){
-    return this.http.get(`${environment.server}Orders/GetLatestOrders`)
+    return this.http.get(`${environment.server}Orders/GetLatestOrders`);
+  }
+  SetCompletedOrder(orderID:string){
+    return this.http.get(`${environment.server}Orders/SetCompletedOrder/${orderID}`);
   }
 
   FetchNewCreatedOrder(): Observable<any> {
     return new Observable((observer) => {
-      this.socket.on('newOrder', (order) => {
+      this.socket.on('newOrder', (order:any) => {
         observer.next(order);
       });
     });
