@@ -1,6 +1,6 @@
 import { Component ,Input,OnInit} from '@angular/core';
 import { DialogService } from 'primeng/dynamicdialog';
-import { AdmiOrdersService } from '../../services/admin-orders.service';
+import { AdminOrdersService } from '../../services/admin-orders.service';
 import { OrderInvoiceComponent } from '../order-invoice/order-invoice.component';
 
 @Component({
@@ -16,7 +16,7 @@ export class LatestOrdersComponent implements OnInit {
   FilterdLatestOrders: any[];
   OrderTypes: Array<any> = [{ name: "Lunch", value: "lunch" }, { name: "Dinner", value: "dinner" }]
 
-  constructor(private orderService:AdmiOrdersService,private dialogService:DialogService) {
+  constructor(private orderService:AdminOrdersService,private dialogService:DialogService) {
   }
   ngOnInit(): void {
     this.orderService.connect()

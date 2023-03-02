@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { FetchOrderModel, initializeFetchOrderModel } from 'src/app/shared/interfaces/fetch-completed-orders';
-import { AdmiOrdersService } from '../../services/admin-orders.service';
+import { AdminOrdersService } from '../../services/admin-orders.service';
 
 @Component({
   selector: 'app-admin-created-orders',
@@ -16,7 +16,7 @@ export class AdminCreatedOrdersComponent implements OnInit {
   searchKeywordControl: FormControl = new FormControl("");
   OrderTypes: Array<any> = [{ name: "Lunch", value: "lunch" }, { name: "Dinner", value: "dinner" }]
   FilteredAdminOrders: Array<any> = [];
-  constructor(private orderService: AdmiOrdersService) {
+  constructor(private orderService: AdminOrdersService) {
 
   }
 

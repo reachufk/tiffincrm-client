@@ -14,14 +14,25 @@
           </ng-template>
         </p-dropdown>
       </a>
+
+
+
       <p-dropdown appendTo="body" placeholder="''" class="navbar-toggler" (onChange)="NavigateTo($event?.value)"
         [options]="Items" optionLabel="label" dropdownIcon="pi pi-user" [filter]="false">
+        <ng-template let-item pTemplate="item">
+          <div class="item">
+            <span> <i [class]="item?.icon + ' ' + 'mr-2'"></i></span>
+            <span>{{item.label}}</span>
+          </div>
+        </ng-template>
       </p-dropdown>
+      <!--  <p-dropdown appendTo="body" placeholder="''" class="navbar-toggler" (onChange)="NavigateTo($event?.value)" [options]="Items" optionLabel="label" dropdownIcon="pi pi-user" [filter]="false">
+       </p-dropdown> -->
 
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav"
         [ngClass]="{'collapse': collapsed, 'navbar-collapse': true}">
         <ul class="navbar-nav">
-          <li *ngFor="let item of Items" class="nav-item">
+          <li *ngFor="let item of Items" class="nav-item ms-4">
             <a class="nav-link show-cursor" (click)="NavigateTo(item)" aria-current="page"><i
                 [class]="item?.icon + ' '+ 'mr-2' "></i>{{item?.label}}</a>
           </li>
@@ -66,53 +77,3 @@
     </div>
   </nav>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- 
-<div class="container-xxl px-0 sticky-top mb-3" [ngClass]="stickHeader?'sticky-top':''">
-   
-    <nav class="navbar navbar-expand-lg custom-nav py-0">
-        <div class="container-xxl" [ngClass]="stickHeader?'shadow':''">
-            <a class="navbar-brand" href="#">
-                <img src="./../../../assets/img/logo.png" style="height: 65px;width: 100px;" alt="Tiffin Aww">
-            </a>
-            <button (click)="collapsed = !collapsed" class="navbar-toggler" type="button"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div  class="" [ngClass]="{'collapse': collapsed, 'navbar-collapse': true}">
-                
-                <ul class="nav justify-content-end">
-                  
-                    <a *ngIf="!loggedIn" class="link-style" (click)="NavigateToSignIn()">
-                        <button pButton pRipple type="button" label="Sign In" icon="pi pi-user"
-                            class="p-button-plain p-button-text nav-hover"></button>
-                    </a>
-                    <a *ngIf="loggedIn" class="link-style" (click)="SignOut()">
-                        <button pButton pRipple type="button"  label="Sign Out" icon="pi pi-sign-in"
-                            class="p-button-plain p-button-text nav-hover"></button>
-                    </a>
-
-                    <a *ngIf="loggedIn" class="link-style" routerLink="/public/cart">
-                        <button pButton pRipple type="button" label="Cart" icon="pi pi-shopping-cart"
-                            class="p-button-plain p-button-text nav-hover"></button>
-                    </a>
-                </ul>
-
-            </div>
-        </div>
-    </nav>
-</div> -->

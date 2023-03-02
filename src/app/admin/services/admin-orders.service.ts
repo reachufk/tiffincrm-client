@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import  {io} from 'socket.io-client';
 import { FetchOrderModel } from 'src/app/shared/interfaces/fetch-completed-orders';
 @Injectable()
-export class AdmiOrdersService {
+export class AdminOrdersService {
 
   private socket: any;
   constructor(private http: HttpClient) {

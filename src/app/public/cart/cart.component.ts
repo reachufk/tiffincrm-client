@@ -6,7 +6,7 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 import { IloggedUser } from 'src/app/shared/interfaces/auth';
 import { validateAllFormFields } from 'src/app/shared/utils/formUtils';
 import { CartService } from '../services/cart.service';
-import { AdmiOrdersService } from '../services/orders.service';
+import { OrdersService } from '../services/orders.service';
 import { InitializeRPayOptions, IRazorPayOtpions } from './IRazorPayOptions';
 export interface OrderOptions {
   amount: number;
@@ -23,7 +23,7 @@ declare var Razorpay: any
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss'],
-  providers: [MessageService, AdmiOrdersService]
+  providers: [MessageService, OrdersService]
 })
 export class CartComponent implements OnInit {
 
@@ -38,14 +38,28 @@ export class CartComponent implements OnInit {
   OrderOptions = {} as OrderOptions
   rzpay: any
   emptyCart:boolean= false;
-  user:IloggedUser = JSON.parse(localStorage.getItem('loggedInUser'))
+  user:IloggedUser = JSON.parse(localStorage.getItem('loggedInUser'));
+  
+  minDate: Date;
+  maxDate: Date;
+
+
+    // Set min date to today
+   
+
   constructor(private cartService: CartService, private authService: AuthService,
-    private messageService: MessageService, private orderService: AdmiOrdersService) {
+    private messageService: MessageService, private orderService: OrdersService) {
+      this.minDate = new Date();
+      const maxDate = new Date();
+      maxDate.setDate(this.minDate.getDate() + 4);
+      this.maxDate = maxDate;
 
   }
   ngOnInit(): void {
     this.CreateForm()
     this.GetCartItems()
+    console.log(this.minDate);
+    
   }
 
   GetCartItems() {
@@ -154,4 +168,15 @@ export class CartComponent implements OnInit {
 
   }
 
+  getMinDate(){
+    const dt = new Date();
+    console.log(dt.toLocaleDateString())
+
+  }
+
+  getMaxDate(){
+    const dt = new Date();
+    dt.setDate(dt.getDate()+5);
+    return dt
+  }
 }

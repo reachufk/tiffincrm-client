@@ -29,7 +29,7 @@
               </ng-template>
               <ng-template pTemplate="body" let-order>
                   <tr>
-                      <td>{{order['userInfo']?.firstName +' '+ order['userInfo']?.lastName}}</td>
+                      <td>{{order['userInfo']?.username}}</td>
                       <td>{{order?.orderAddress}}</td>
                       <td>{{order?.orderType}}</td>
                       <td>{{order?.orderAmount | currency:"INR"}}</td>

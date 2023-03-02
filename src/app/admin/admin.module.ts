@@ -14,7 +14,7 @@ import { CatagoriesComponent } from './catagories/catagories.component';
 import { CatagoryItemsComponent } from './catagory-items/catagory-items.component';
 import { AdminCatagoryService } from './services/admin-catagory.service';
 import { AdminUserService } from './services/admin-user.service';
-import { AdmiOrdersService } from './services/admin-orders.service';
+import { AdminOrdersService } from './services/admin-orders.service';
 import { FutureOrdersComponent } from './orders/future-orders/future-orders.component';
 import { LatestOrdersComponent } from './orders/latest-orders/latest-orders.component';
 import { CompletedOrdersComponent } from './orders/completed-orders/completed-orders.component';
@@ -27,7 +27,7 @@ import { AdminCreatedOrdersComponent } from './orders/admin-created-orders/admin
 import { MessageService } from 'primeng/api';
 import { BannersComponent } from './banners/banners.component';
 @NgModule({
-  providers: [AdminCatagoryService, AdminUserService, AdmiOrdersService,MessageService],
+  providers: [AdminCatagoryService, AdminUserService, AdminOrdersService,MessageService],
   declarations: [DashboardComponent,
     OrdersComponent,
     UsersComponent,

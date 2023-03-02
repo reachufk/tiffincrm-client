@@ -1,18 +1,21 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { ROUTES } from '../sidebar/sidebar.component';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import { MessageService } from 'primeng/api';
-import { AdmiOrdersService } from 'src/app/admin/services/admin-orders.service';
+import { AdminOrdersService } from 'src/app/admin/services/admin-orders.service';
+import { Menu } from 'primeng/menu';
 
 @Component({
     selector: 'app-navbar',
     templateUrl: './navbar.component.html',
     styleUrls: ['./navbar.component.css'],
-    providers:[MessageService,AdmiOrdersService]
+    providers:[MessageService,AdminOrdersService]
 })
 export class NavbarComponent implements OnInit {
+    @ViewChild('menuNotifications',{static:false}) 
+    menuNotifications:Menu
     private listTitles: any[];
     location: Location;
     mobile_menu_visible: any = 0;
@@ -23,7 +26,7 @@ export class NavbarComponent implements OnInit {
     notificationItems: Array<any>= []
     userItems: { label: string; icon: string }[] = []
     constructor(location: Location, private element: ElementRef, private router: Router,
-        private messageService:MessageService,private adminOrderService:AdmiOrdersService) {
+        private messageService:MessageService,private adminOrderService:AdminOrdersService) {
         this.location = location;
         this.sidebarVisible = false;
     }
@@ -43,11 +46,12 @@ export class NavbarComponent implements OnInit {
                 this.mobile_menu_visible = 0;
             }
         });
-        this.adminOrderService.connect()
+        this.adminOrderService.connect();
         this.adminOrderService.FetchNewCreatedOrder().subscribe((order:any)=>{
             if(order){
-                this.notificationItems.push(order)
-                this.messageService.add({severity:'success',summary:'New Order has been placed check Orders',sticky:true})
+                console.log(order);
+                this.notificationItems.push({label:`${order?.userInfo?.username} orderd for ${order?.orderType}`})
+                this.messageService.add({severity:'success',summary:`${order?.userInfo?.username?order?.userInfo?.username:'user'} has placed new nrder. check Orders to process`,sticky:true,key:'notify'})
             }
         })
     }
@@ -60,7 +64,6 @@ export class NavbarComponent implements OnInit {
         }, 500);
 
         body.classList.add('nav-open');
-
         this.sidebarVisible = true;
     };
     sidebarClose() {

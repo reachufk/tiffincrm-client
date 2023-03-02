@@ -46,14 +46,10 @@
                                                             <h5>{{totalAmount | currency:'INR'}}</h5>
                                                       </div>
                                                       <div class="mb-3 pb-2 p-fluid">
-                                                            <label class="text-secondary">Delivery Time</label>
+                                                            <label #dp class="text-secondary">Delivery Time</label>
                                                             <br>
                                                             <span>
-                                                                  <p-dropdown [options]="DeliveryTimes"
-                                                                  formControlName="orderDeliveryTime"
-                                                                  id="Delivery Date"
-                                                                  placeholder="Select Delivery Day" optionLabel="label"
-                                                                  optionValue="value" appFormerror required></p-dropdown>
+                                                            <p-calendar [appendTo]="'body'" placeholder="Select Delivery Date" formControlName="orderDeliveryTime" [minDate]="minDate" [maxDate]="maxDate" id="Delivery Date"  [showIcon]="true" appFormerror required></p-calendar>
                                                             </span>
                                                       </div>
 

@@ -22,8 +22,8 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
 import { FormerrorDirective } from './services/formerror.directive';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {RadioButtonModule} from 'primeng/radiobutton';
-import { SpeedDialModule } from 'primeng/speeddial';
-
+import { MyOrdersComponent } from './my-orders/my-orders.component';
+import {CalendarModule} from 'primeng/calendar';
 @NgModule({
   providers: [CatagoryService],
 
@@ -34,6 +34,7 @@ import { SpeedDialModule } from 'primeng/speeddial';
     CategoryItemsComponent,
     CartComponent,
     FormerrorDirective,
+    MyOrdersComponent,
   ],
   imports: [
     CommonModule,
@@ -53,7 +54,7 @@ import { SpeedDialModule } from 'primeng/speeddial';
     InputTextareaModule,
     ConfirmDialogModule,
     RadioButtonModule,
-    SpeedDialModule
+    CalendarModule
   ]
 })
 export class PublicModule { }

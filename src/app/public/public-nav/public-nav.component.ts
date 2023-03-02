@@ -15,7 +15,7 @@ import * as regionData from './regions.json'
 export class PublicNavComponent implements OnInit, OnDestroy {
   collapsed: boolean = true
   regions: MenuItem[] = []
-  Items: MenuItem[] = [{ label: 'My Profile', icon: 'pi pi-user' },
+  Items: MenuItem[] = [{ label: 'My Orders', icon: 'pi pi-shopping-cart',routerLink:'/public/my-orders' },
   { label: 'Logout', icon: 'pi pi-sign-out' },
   { label: 'Login', icon: 'pi pi-sign-in', routerLink: '/auth/login' }
   ]
@@ -52,7 +52,7 @@ export class PublicNavComponent implements OnInit, OnDestroy {
         const pullOut = ['Login'];
         this.Items = this.NavItems.filter((item: MenuItem) => !pullOut.includes(item?.label))
       } else {
-        const pullOut = ['My Profile', 'Logout']
+        const pullOut = ['My Orders', 'Logout']
         this.Items = this.NavItems.filter((item: MenuItem) => !pullOut.includes(item?.label))
       }
     })).subscribe()
@@ -83,7 +83,7 @@ export class PublicNavComponent implements OnInit, OnDestroy {
       return
     }
     if (item?.label == 'Logout') {
-      const pullOut = ['My Profile', 'Logout']
+      const pullOut = ['My Orders', 'Logout']
       this.Items = this.NavItems.filter((item: MenuItem) => !pullOut.includes(item?.label));
       this.authService.Logout()
       this.router.navigate(['/public/home'])
