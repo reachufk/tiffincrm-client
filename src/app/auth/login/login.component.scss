@@ -1,22 +1,33 @@
+.tiffinaww-logo {
+      border-bottom: 2px solid rgb(245, 245, 245) !important;
+      border-radius: 0px !important;
 
-img {
-      max-height: 100vh;
 }
 
-@media (max-width: 992px) {
-.logo{
-      margin-block-start: 10% !important;
-}
-}
-
-.w-70 {
-      width: 80%;
-}
-
-a{
+a {
       text-decoration: none;
 }
-a:hover{
+
+button a {
+      text-decoration: none;
+      color: white;
+}
+
+a:hover {
       text-decoration: underline;
       color: rgb(9, 116, 9);
+}
+
+.login-pannel {
+      border: none;
+      border-radius: 16px;
+      box-shadow: rgb(245, 245, 245) 1px 1px 2px 2px;
+}
+
+.welcome-back {
+      border: none;
+}
+
+.welcome-back p {
+      font-size: 2em;
 }
