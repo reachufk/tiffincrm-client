@@ -12,7 +12,7 @@ import { PasswordDirective } from 'primeng/password';
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss'],
   providers: [],
-  
+
 })
 export class SignupComponent implements OnInit {
   @ViewChild(NgOtpInputComponent, { static: false }) ngOtpInput: NgOtpInputComponent;
@@ -23,9 +23,9 @@ export class SignupComponent implements OnInit {
   showText: string;
   date: number = Date.now();
   showOtp: boolean = false;
-  showPassword:boolean=false
-  constructor(private authService: AuthService,private messageService: MessageService,
-    private router:Router) {
+  showPassword: boolean = false
+  constructor(private authService: AuthService, private messageService: MessageService,
+    private router: Router) {
   }
 
   ngOnInit(): void {
@@ -54,9 +54,9 @@ export class SignupComponent implements OnInit {
   createSignupFormForm() {
     this.signupForm = new FormGroup({
       username: new FormControl(null, [Validators.required]),
-      phoneNumber: new FormControl(null, [Validators.required]),
+      phoneNumber: new FormControl(null, [Validators.required, Validators.minLength(10), Validators.maxLength(13), Validators.pattern(/^\+?\d+$/)]),
       email: new FormControl(null, [Validators.required]),
-      password: new FormControl(null, [Validators.required,Validators.pattern(/^(?=.*\d)(?=.*[a-zA-Z])[a-zA-Z0-9]{8,}$/)])
+      password: new FormControl(null, [Validators.required, Validators.pattern(/^(?=.*\d)(?=.*[a-zA-Z])[a-zA-Z0-9!@#$%^&*()_+|{}\[\]\\:";'<>?,./]{8,}$/)])
     })
   }
 
@@ -69,8 +69,8 @@ export class SignupComponent implements OnInit {
     this.authService.SignupUser(value).subscribe((res: any) => {
       if (res?.statusCode == 200) {
         this.messageService.add({ severity: 'success', summary: res?.message || 'Account registred successfully.' });
-        const {phoneNumber } = this.signupForm.value
-        this.router.navigate(['/auth/login'],{queryParams:{registered:phoneNumber}})
+        const { phoneNumber } = this.signupForm.value
+        this.router.navigate(['/auth/login'], { queryParams: { registered: phoneNumber } })
       }
     })
   }

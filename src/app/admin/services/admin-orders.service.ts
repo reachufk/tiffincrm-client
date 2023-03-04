@@ -23,6 +23,9 @@ export class AdminOrdersService {
   GetLatestOrders() {
     return this.http.get(`${environment.server}Orders/GetLatestOrders`);
   }
+  GetFutureOrders() {
+    return this.http.get(`${environment.server}Orders/GetFutureOrders`);
+  }
   SetCompletedOrder(order: any) {
     return this.http.post(`${environment.server}Orders/SetCompletedOrder/${order?._id}`,order);
   }

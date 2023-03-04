@@ -49,9 +49,15 @@ export class NavbarComponent implements OnInit {
         this.adminOrderService.connect();
         this.adminOrderService.FetchNewCreatedOrder().subscribe((order:any)=>{
             if(order){
-                console.log(order);
                 this.notificationItems.push({label:`${order?.userInfo?.username} orderd for ${order?.orderType}`})
-                this.messageService.add({severity:'success',summary:`${order?.userInfo?.username?order?.userInfo?.username:'user'} has placed new nrder. check Orders to process`,sticky:true,key:'notify'})
+                const currentDate  = new Date().toISOString().slice(0, 10);
+                const deliveryDate = order?.orderDeliveryTime?.slice(0,10);
+                if(currentDate == deliveryDate){
+                    this.messageService.add({severity:'success',summary:`${order?.userInfo?.username?order?.userInfo?.username:'user'} has placed new nrder. check Latest Orders to process`,sticky:true,key:'notify'})
+                }else{
+                    this.messageService.add({severity:'success',summary:`${order?.userInfo?.username?order?.userInfo?.username:'user'} has placed new nrder. check Future Orders to process`,sticky:true,key:'notify'})
+                }
+               
             }
         })
     }

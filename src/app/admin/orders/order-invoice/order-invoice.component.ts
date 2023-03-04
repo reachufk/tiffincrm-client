@@ -22,7 +22,7 @@ export class OrderInvoiceComponent implements OnInit {
   }
 
   ProcessToComplete() {
-    this.adminOrderService.SetCompletedOrder(this.OrderDetails._id).subscribe((res:any)=>{
+    this.adminOrderService.SetCompletedOrder(this.OrderDetails).subscribe((res:any)=>{
       if(res.statusCode == 200){
         this.ref.close(true)
       }else{

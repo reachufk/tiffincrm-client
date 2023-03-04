@@ -70,7 +70,7 @@ export class LoginComponent implements OnInit {
         this.authService.SetUser(res?.user)
         const loggedInUser:IloggedUser = res?.user;
         localStorage.setItem('loggedInUser',JSON.stringify(loggedInUser));
-        this.router.navigate(['/public/home'])
+        this.navigateHandler(loggedInUser.role)
       }else{
         this.error = res?.message
       }
@@ -78,16 +78,22 @@ export class LoginComponent implements OnInit {
     })
     
   }
-  navigateIn() {
-    this.state = this.activatedRoute?.snapshot?.queryParamMap?.get('state')
-    
-    let path = decodeURIComponent(this.state);
-    console.log(path)
-    if(this.state){
-      this.router.navigateByUrl(path)
+  navigateHandler(role:String) {
+    if (role == 'admin'){
+      this.router.navigate(['/admin/dashboard'])
     }else{
       this.router.navigate(['/public/home'])
     }
+    
+
+    // this.state = this.activatedRoute?.snapshot?.queryParamMap?.get('state')
+    // let path = decodeURIComponent(this.state);
+    // console.log(path)
+    // if(this.state){
+    //   this.router.navigateByUrl(path)
+    // }else{
+    //   this.router.navigate(['/public/home'])
+    // }
   }
 
 

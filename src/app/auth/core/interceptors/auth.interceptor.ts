@@ -7,17 +7,21 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { IloggedUser } from 'src/app/shared/interfaces/auth';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-
-  constructor(private authService:AuthService) {}
+  loggedUser: IloggedUser
+  constructor(private authService: AuthService) {
+  }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    let currentUser = this.authService.LoggedInUser?.value;
+    if (!this.loggedUser) {
+      this.loggedUser = this.authService.LoggedInUser?.value ? this.authService.LoggedInUser?.value : JSON.parse(localStorage.getItem('loggedInUser'))
+    }
     request = request.clone({
       setHeaders: {
-        Authorization: `Bearer ${currentUser ? currentUser?.token : ''}`,
+        Authorization: `Bearer ${this.loggedUser ? this.loggedUser?.token : ''}`,
       },
     });
     return next.handle(request);

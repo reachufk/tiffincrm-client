@@ -1,7 +1,7 @@
 <div class="row">
       <div class="col-lg-12 px-0">
-          <p-table #dt1 [value]="FutureOrders"
-              [globalFilterFields]="['orderAddress','orderMode','userInfo.firstName','userInfo.lastName']"
+          <p-table #dt1 [value]="FilteredFutureOrders"
+              [globalFilterFields]="['orderAddress','orderMode','userInfo.username']"
               class="w-100">
 
               <ng-template pTemplate="caption">
@@ -19,32 +19,32 @@
               </ng-template>
 
               <ng-template pTemplate="header">
-                  <tr>
-                      <th>Customer</th>
-                      <th>Address</th>
-                      <th>Type</th>
-                      <th>Items</th>
-                      <th>Amount</th>
-                      <th>Action</th>
-                  </tr>
-              </ng-template>
-              <ng-template pTemplate="body" let-order>
-                  <tr>
-                      <td>{{order['userInfo']?.username}}</td>
-                      <td>{{order?.orderAddress}}</td>
-                      <td>{{order?.orderType}}</td>
-                      <td>
-                          <div class="row">
-                              <div  class="col-lg-12">
+                <tr>
+                    <th>Customer</th>
+                    <th>Address</th>
+                    <th>Type</th>
+                    <th>Amount</th>
+                    <th [pSortableColumn]="'orderDeliveryTime'">
+                        Delivery Date
+                        <p-sortIcon field="'orderDeliveryTime'"></p-sortIcon>
+                    </th>
+                    <th>Action</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-order>
+                <tr>
+                    <td>{{order['userInfo']?.username}} <span class="text-success fw-bold fs-small ml-3">{{order?.tag == 'new'? 'New':''}}</span></td>
+                    <td>{{order?.orderAddress}}</td>
+                    <td>{{order?.orderType}}</td>
+                    <td>{{order?.orderAmount | currency:"INR"}}</td>
+                    <td>{{order?.orderDeliveryTime | date}}</td>
+                    <td>
+                      <i (click)="ViewOrder(order)" class="pi pi-eye fs-4 show-cursor text-success">
+                      </i>
+                    </td>
 
-                              </div>
-                          </div>
-                      </td>
-                      <td></td>
-                      <td></td>
-
-                  </tr>
-              </ng-template>
+                </tr>
+            </ng-template>
               <ng-template pTemplate="emptymessage">
                   <tr class="text-center">
                       <th colspan="6" class="py-4 text-danger">No future order</th>
