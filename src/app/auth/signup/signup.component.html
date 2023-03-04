@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" style="height: 100vh;">
     <div class="row justify-content-md-center my-2">
         <div class="col-md-5">
             <div class="card  welcome-back tiffinaww-logo">
@@ -17,7 +17,7 @@
             </div>
         </div>
     </div>
-    <div class="row justify-content-md-center my-2">
+    <div class="row justify-content-md-center my-2  align-items-center" style="height: 64vh;">
         <div class="col-md-5">
             <div class="card login-pannel">
                 <div class="card-body">
@@ -49,18 +49,22 @@
                             <div class="my-2 ">
                                 <div class="p-inputgroup">
                                     <span class="p-inputgroup-addon"><i class="pi pi-lock"></i></span>
-                                    <input  type="{{showPassword?'text':'password'}}" pPassword placeholder="Password" id="password"
-                                        formControlName="password">
-                                        <span (click)="showPassword = !showPassword" class="p-inputgroup-addon"><i class="pi pi-eye"></i></span>
+                                    <input type="{{showPassword?'text':'password'}}" pPassword placeholder="Password"
+                                        id="password" formControlName="password">
+                                    <span (click)="showPassword = !showPassword" class="p-inputgroup-addon"><i
+                                            class="pi pi-eye"></i></span>
                                 </div>
-                                <small class="text-secondary mt-2">Use 8 or more characters with a mix of lower-case, upper-case letters & numbers</small>
+                                <small class="text-secondary mt-2">Use 8 or more characters with a mix of lower-case,
+                                    upper-case letters & numbers</small>
                             </div>
                             <button pButton pRipple type="button" (click)="signupUser()" label="Sign up"
                                 class="p-button-raised p-button-success my-2"></button>
+                            <p-divider align="center" type="dashed">
+                                <b>or</b>
+                            </p-divider>
                             <div class="my-2 text-center">
                                 <a routerLink="/auth/login">Already have an account?</a>
                             </div>
-                            <hr>
                         </div>
                     </form>
                 </div>

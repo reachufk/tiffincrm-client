@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" style="height: 100vh;">
       <div class="row justify-content-md-center my-2">
             <div class="col-md-5">
                   <div class="card  welcome-back tiffinaww-logo">
@@ -17,7 +17,7 @@
                   </div>
             </div>
       </div>
-      <div class="row justify-content-md-center my-2">
+      <div class="row justify-content-md-center my-2 align-items-center" style="height: 64vh;">
             <div class="col-md-5">
                   <div class="card login-pannel">
                         <div class="card-body">
@@ -38,22 +38,24 @@
                                           <div class="my-2 ">
                                                 <div class="p-inputgroup">
                                                       <span class="p-inputgroup-addon"><i class="pi pi-lock"></i></span>
-                                                      <input type="{{showPassword?'text':'password'}}" pInputText placeholder="Password"
-                                                            id="password" formControlName="password">
-                                                            <span (click)="showPassword = !showPassword" class="p-inputgroup-addon"><i class="pi pi-eye"></i></span>
+                                                      <input type="{{showPassword?'text':'password'}}" pInputText
+                                                            placeholder="Password" id="password"
+                                                            formControlName="password">
+                                                      <span (click)="showPassword = !showPassword"
+                                                            class="p-inputgroup-addon"><i class="pi pi-eye"></i></span>
                                                 </div>
+                                          </div>
+                                          <div class="my-2 text-end">
+                                                <a href="">Forgotten password?</a>
                                           </div>
                                           <button pButton pRipple type="button" (click)="Login()" label="Log in"
                                                 class="p-button-raised p-button-success my-2"></button>
+                                          <p-divider align="center" type="dashed">
+                                                <b>or</b>
+                                          </p-divider>
                                           <div class="my-2 text-center">
-                                                <a href="">Forgotten password?</a>
-                                          </div>
-                                          <hr>
-                                          <div class="my-2 text-center">
-                                                <button pButton pRipple type="button" (click)="Login()"
-                                                      class=" p-button-plain p-button-text p-button-raised">
-                                                      <a routerLink="/auth/signup" class="text-primary">Create new account</a>
-                                                </button>
+                                                <a routerLink="/auth/signup" class="text-primary">Create new
+                                                      account?</a>
                                           </div>
                                     </div>
                               </form>

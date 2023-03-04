@@ -55,10 +55,11 @@ a:hover {
     color: rgb(9, 116, 9);
 }
 
-::ng-deep .p-password-meter{
+::ng-deep .p-password-meter {
     display: none !important;
 }
 
-// :host ::ng-deep .p-password input {
-//     width: 15rem
-// }
+.p-divider {
+    margin: 0px !important;
+    padding: 0px !important;
+}
