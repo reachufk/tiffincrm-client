@@ -1,13 +1,13 @@
 <div class="container-fluid">
       <div class="row justify-content-md-center">
-            <div class="col-sm-12 col-md-4 offset-md-2 px-4">
+            <div class="col-sm-12 col-md-5 offset-md-2 px-4">
                   <div class="card text-start ta-box ">
                         <div class="card-body">
                               <div class="row">
                                     <div class="col-2">
                                           <img src="../../assets/img/logo_tiffin_aaw.webp" height="50px" alt="logo">
                                     </div>
-                                    <div class="col d-flex-end">
+                                    <div class="col d-flex-end ta-auth-button">
                                           <button routerLink="/auth/signup" pButton
                                                 class="bg-dark fw-bold pull-right">Sign
                                                 up</button>
@@ -44,18 +44,18 @@
                                           *ngFor="let place of availablePlaces;let i=index"
                                           [ngClass]="i%2 ==0? 'text-dark':''">{{place?.label}}</span>
                                     <span class="ms-2 fw-bold text-secondary"> & more</span>
-
                               </p>
                         </div>
                   </div>
 
                   <div class="card text-end ta-box mb-0">
                         <div class="card-body ">
-                              <p><button pButton class="p-button-plain p-button-text fw-bold text-dark"
-                                          routerLink="/public/home">Skip</button></p>
+                              <p>
+                                    <button pButton class="p-button-plain p-button-text fw-bold text-dark"
+                                          routerLink="/public/home">Skip</button>
+                              </p>
                         </div>
                   </div>
-
                   <div *ngIf="selected" class="card text-start ta-box">
                         <p-dialog [(visible)]="showSelected" [breakpoints]="{'960px': '75vw'}"
                               [style]="{minWidth: '32vw'}" [draggable]="false" [resizable]="false">
@@ -72,7 +72,7 @@
                         </p-dialog>
                   </div>
             </div>
-            <div class="col-sm-12 col-md-6 tiffin-aww-image">
+            <div class="col-sm-12 col-md-5 tiffin-aww-image">
                   <img src="../../../assets/img/registration-background.webp" alt="tiffin background" width="100%"
                         height="100%" class="rounded-t-5 rounded-tr-lg-0 rounded-bl-lg-5" />
             </div>
@@ -84,10 +84,8 @@
                               <img class="ta-footer-img"
                                     src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_210,h_398/4x_-_No_min_order_x0bxuf">
                               <div class="text-success">No Minimum Order</div>
-                              <div class="text-light">Order in for yourself or for the group, with no restrictions
-                                    on
-                                    order
-                                    value
+                              <div class="text-light">Order in for yourself or for the group, with no restrictions on
+                                    order value
                               </div>
                         </div>
                         <div class="col">
@@ -103,10 +101,7 @@
                                     src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_248,h_376/4x_-_Super_fast_delivery_awv7sn">
                               <div class="text-success">Lightning-Fast Delivery</div>
                               <div class="text-light">Experience Tiffin Aww's superfast delivery for food delivered
-                                    fresh
-                                    &amp;
-                                    on
-                                    time
+                                    fresh &amp; on time
                               </div>
                         </div>
                   </div>

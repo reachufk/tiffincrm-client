@@ -1,11 +1,17 @@
-.container-fluid {
-      padding: 0px;
+* {
+      margin: 0;
+      padding: 0;
+}
+
+.ta-auth-button button {
+      padding: 1% 2%;
+      border-radius: 0;
 }
 
 .ta-box {
-      padding: 2px;
-      margin-top: 2vh;
-      margin-bottom: 2vh;
+      padding: 1px;
+      margin-top: 1vh;
+      margin-bottom: 1vh;
       border: none !important;
       box-shadow: none;
 }
@@ -34,6 +40,14 @@
 @media only screen and (min-width: 768px) {
       .tiffin-aww-image {
             height: 55vh;
+      }
+
+      .ta-box {
+            padding: 2px;
+            margin-top: 2vh;
+            margin-bottom: 2vh;
+            border: none !important;
+            box-shadow: none;
       }
 }
 
