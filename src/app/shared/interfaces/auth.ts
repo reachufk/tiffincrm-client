@@ -17,5 +17,6 @@ export interface IloggedUser{
     username:String,
     phoneNumber:Number,
     email:String,
+    role:String
     token:String
 }

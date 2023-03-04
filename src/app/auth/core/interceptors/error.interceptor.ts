@@ -18,10 +18,10 @@ export class ErrorInterceptor implements HttpInterceptor {
       catchError((err) => {
         console.log(err)
         if (err.status === 403) {
+          localStorage.removeItem('loggedInUser')
           this.router.navigate(['/auth/login'])
         }
-
-        const error = err.error.message || err.statusText;
+        const error = err?.error?.message || err?.statusText;
         return throwError(error);
       })
     );

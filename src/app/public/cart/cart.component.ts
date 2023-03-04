@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { map, Observable } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
@@ -48,18 +49,16 @@ export class CartComponent implements OnInit {
    
 
   constructor(private cartService: CartService, private authService: AuthService,
-    private messageService: MessageService, private orderService: OrdersService) {
+    private messageService: MessageService, private orderService: OrdersService,
+    private router:Router) {
       this.minDate = new Date();
       const maxDate = new Date();
       maxDate.setDate(this.minDate.getDate() + 4);
       this.maxDate = maxDate;
-
   }
   ngOnInit(): void {
     this.CreateForm()
     this.GetCartItems()
-    console.log(this.minDate);
-    
   }
 
   GetCartItems() {
@@ -111,7 +110,6 @@ export class CartComponent implements OnInit {
 
   CheckOut() {
     validateAllFormFields(this.OrderForm)
-    console.log(this.OrderForm.valid);
     if (this.OrderForm.invalid) {
       return
     }
@@ -156,6 +154,7 @@ export class CartComponent implements OnInit {
     this.orderService.PlaceOrder(this.OrderForm.value).subscribe((res:any)=>{
       if(res?.statusCode == 200){
         this.messageService.add({ severity: 'success', summary: 'payment completed successfully !',detail:'Your order is in process', life: 3000 });
+        this.router.navigate(['/public/my-orders'])
       }else{
         this.messageService.add({ severity: 'success', summary:res?.message, life: 3000 });
       }
@@ -168,15 +167,4 @@ export class CartComponent implements OnInit {
 
   }
 
-  getMinDate(){
-    const dt = new Date();
-    console.log(dt.toLocaleDateString())
-
-  }
-
-  getMaxDate(){
-    const dt = new Date();
-    dt.setDate(dt.getDate()+5);
-    return dt
-  }
 }

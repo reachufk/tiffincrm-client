@@ -25,18 +25,22 @@ export class LatestOrdersComponent implements OnInit {
     this.GetLatestOrders()
     this.orderService.FetchNewCreatedOrder().subscribe((order: any) => {
       order.tag='new';
-      this.LatestOrders.push(order)
-      this.FilterdLatestOrders.push(order)
-      this.LatestOrders?.reverse()
-      this.FilterdLatestOrders?.reverse()
+      const currentDate  = new Date().toISOString().slice(0, 10);
+      const deliveryDate = order?.orderDeliveryTime?.slice(0,10)
+      if(deliveryDate == currentDate){
+        this.LatestOrders.push(order)
+        this.FilterdLatestOrders.push(order)
+        this.LatestOrders?.reverse()
+        this.FilterdLatestOrders?.reverse()
+      }
     })
   }
 
   GetLatestOrders() {
     this.orderService.GetLatestOrders().subscribe((res: any) => {
       if (res?.statusCode == 200) {
-        this.LatestOrders = res?.orders;
-        this.FilterdLatestOrders = res?.orders
+        this.LatestOrders = res?.data;
+        this.FilterdLatestOrders = res?.data
       }
     })
   }
@@ -48,7 +52,6 @@ export class LatestOrdersComponent implements OnInit {
     }
     const selectedValues: Array<String> = event?.value;
     this.FilterdLatestOrders = this.LatestOrders.filter((order: any) => selectedValues?.includes(order?.orderType));
-    console.log(this.FilterdLatestOrders)
   }
 
   ViewOrder(order: any) {
@@ -60,7 +63,8 @@ export class LatestOrdersComponent implements OnInit {
     ref.onClose.subscribe((result: any) => {
       if(result){
         this.messageService.add({severity:'success',summary:'Order processed'});
-        this.LatestOrders.filter((orders:any)=> orders?._id !== order?._id)
+        this.LatestOrders = this.LatestOrders.filter((orders:any)=> orders?._id !== order?._id);
+        this.FilterdLatestOrders = this.LatestOrders
       }
     })
 

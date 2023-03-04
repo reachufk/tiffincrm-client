@@ -24,6 +24,10 @@
                       <th>Address</th>
                       <th>Type</th>
                       <th>Amount</th>
+                      <th [pSortableColumn]="'orderDeliveryTime'">
+                        Delivery Date
+                        <p-sortIcon field="'orderDeliveryTime'"></p-sortIcon>
+                    </th>
                       <th>Action</th>
                   </tr>
               </ng-template>
@@ -33,6 +37,9 @@
                       <td>{{order?.orderAddress}}</td>
                       <td>{{order?.orderType}}</td>
                       <td>{{order?.orderAmount | currency:"INR"}}</td>
+                      <td>
+                        {{order?.orderDeliveryTime | date}}
+                    </td>
                       <td>
                         <i (click)="ViewOrder(order)" class="pi pi-eye fs-4 show-cursor text-success">
 

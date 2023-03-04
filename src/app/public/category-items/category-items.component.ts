@@ -139,7 +139,6 @@ export class CategoryItemsComponent implements OnInit, OnDestroy {
 
 
   NotSignedInConfirm() {
-
     if(!this.LoggedInUser){
       this.confirmationService.confirm({
         message: 'Sign in to continue?',
