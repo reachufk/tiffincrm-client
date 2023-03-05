@@ -1,10 +1,11 @@
 
 export interface IUser {
-    user:String
+    user: String
     username: String
     phoneNumber: String
     email: String
     password: String
+    otp: String
 }
 
 export interface IOTP {
@@ -12,11 +13,11 @@ export interface IOTP {
     phoneNumber: String
 }
 
-export interface IloggedUser{
-    user:String
-    username:String,
-    phoneNumber:Number,
-    email:String,
-    role:String
-    token:String
+export interface IloggedUser {
+    user: String
+    username: String,
+    phoneNumber: Number,
+    email: String,
+    role: String
+    token: String
 }

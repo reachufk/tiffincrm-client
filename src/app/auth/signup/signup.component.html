@@ -3,27 +3,18 @@
         <div class="col-md-5">
             <div class="card  welcome-back tiffinaww-logo">
                 <div class="card-body">
-                    <img style="height: 64px;" src="./../../../assets/img/logo_tiffin_aaw.webp" alt="" srcset="">
+                    <a routerLink="/">
+                        <img style="height: 64px;" src="./../../../assets/img/logo_tiffin_aaw.webp" alt="" srcset="">
+                    </a>
                 </div>
             </div>
         </div>
     </div>
-    <!-- <div class="row justify-content-md-center  my-2">
-        <div class="col-md-5">
-            <div class="card  welcome-back">
-                <div class="card-body">
-                    <p><span style="color: green;">Get </span>Registered</p>
-                </div>
-            </div>
-        </div>
-    </div> -->
     <h2 class="welcome-back text-center"><span style="color: green;">Get </span>Registered</h2>
-
     <div class="row justify-content-md-center my-2  align-items-center" style="height: 64vh;">
         <div class="col-md-5">
             <div class="card login-pannel">
-                <div class="card-body">
-
+                <div *ngIf="!showOtp" class="card-body">
                     <p>Enter details to get started now!</p>
                     <form [formGroup]="signupForm">
                         <div class="row g-0">
@@ -67,6 +58,28 @@
                             </p-divider>
                             <div class="my-2 text-center">
                                 <a routerLink="/auth/login">Already have an account?</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div *ngIf="showOtp" class="card-body">
+                    <p>Enter your OTP!</p>
+                    <form [formGroup]="otpForm">
+                        <div class="row g-0">
+                            <div class="my-2">
+                                <div class="p-inputgroup">
+                                    <span class="p-inputgroup-addon"><i class="pi pi-lock"></i></span>
+                                    <input type="text" pInputText placeholder="OTP" id="otp" formControlName="otp"
+                                        appFormErrorMessages>
+                                </div>
+                            </div>
+                            <button pButton pRipple type="button" (click)="verifyOTP()" label="Verify"
+                                class="p-button-raised p-button-success my-2"></button>
+                            <p-divider align="center" type="dashed">
+                                <b>or</b>
+                            </p-divider>
+                            <div class="my-2 text-center">
+                                <a routerLink="/auth/login">resend otp?</a>
                             </div>
                         </div>
                     </form>

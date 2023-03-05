@@ -18,6 +18,7 @@ export class TiffinLandingComponent implements OnInit {
   counter: number = 0;
   changeClass: boolean = true;
   showSelected: boolean = false;
+
   constructor(private authService: AuthService, private router: Router) {
 
   }
