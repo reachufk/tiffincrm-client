@@ -17,7 +17,7 @@ import { PasswordDirective } from 'primeng/password';
 export class SignupComponent implements OnInit {
   @ViewChild(NgOtpInputComponent, { static: false }) ngOtpInput: NgOtpInputComponent;
   signupForm: FormGroup;
-  otp: FormControl = new FormControl(null, [Validators.required, Validators.minLength(6), Validators.maxLength(6)])
+  otpForm: FormGroup;
   showRegistrationForm: boolean = true;
   textList: string[] = [];
   showText: string;
@@ -30,25 +30,7 @@ export class SignupComponent implements OnInit {
 
   ngOnInit(): void {
     this.createSignupFormForm();
-    this.textList = [
-      'Unexpected guests?',
-      'Game night?',
-      'Cooking gone wrong?',
-      'Movie marathon?',
-      'Late night at office?',
-      'Hungry'
-    ];
-    this.showText = this.textList[this.textList.length - 1]
-  }
-
-  ngAfterViewInit() {
-    let i = 0;
-    setInterval(() => {
-      if (i === this.textList.length) {
-        i = 0;
-      }
-      this.showText = this.textList[i++];
-    }, 2048)
+    this.createOTPFormForm();
   }
 
   createSignupFormForm() {
@@ -56,44 +38,55 @@ export class SignupComponent implements OnInit {
       username: new FormControl(null, [Validators.required]),
       phoneNumber: new FormControl(null, [Validators.required, Validators.minLength(10), Validators.maxLength(13), Validators.pattern(/^\+?\d+$/)]),
       email: new FormControl(null, [Validators.required]),
-      password: new FormControl(null, [Validators.required, Validators.pattern(/^(?=.*\d)(?=.*[a-zA-Z])[a-zA-Z0-9!@#$%^&*()_+|{}\[\]\\:";'<>?,./]{8,}$/)])
+      password: new FormControl(null, [Validators.required, Validators.pattern(/^(?=.*\d)(?=.*[a-zA-Z])[a-zA-Z0-9!@#$%^&*()_+|{}\[\]\\:";'<>?,./]{8,}$/)]),
+    })
+  }
+
+  createOTPFormForm() {
+    this.otpForm = new FormGroup({
+      otp: new FormControl(null, [Validators.required, Validators.minLength(6), Validators.maxLength(6)]),
     })
   }
 
   signupUser() {
-    validateAllFormFields(this.signupForm)
+    validateAllFormFields(this.signupForm);
     if (!this.signupForm.valid) {
       return this.messageService.add({ severity: 'danger', summary: 'All fields are required.' });
     }
-    const { value } = this.signupForm;
-    this.authService.SignupUser(value).subscribe((res: any) => {
+    const { phoneNumber } = this.signupForm.value;
+    debugger
+    this.authService.SignupUser(phoneNumber).subscribe((res: any) => {
       if (res?.statusCode == 200) {
         this.messageService.add({ severity: 'success', summary: res?.message || 'Account registred successfully.' });
-        const { phoneNumber } = this.signupForm.value
-        this.router.navigate(['/auth/login'], { queryParams: { registered: phoneNumber } })
+        this.messageService.add({ severity: 'success', summary: res?.message || 'OTP has been sent successfully.' });
+        this.showOtp = true;
       }
     })
   }
 
   verifyOTP() {
-    validateAllFormFields(this.otp)
-    if (!this.otp.valid) {
+    validateAllFormFields(this.otpForm);
+    validateAllFormFields(this.signupForm);
+    if (!this.otpForm.valid) {
       return this.messageService.add({ severity: 'danger', summary: 'OTP is required.' });
     }
-    const { otp } = this.otp.value;
-    const { phoneNumber } = this.signupForm.value;
+    const { value } = this.otpForm;
+    const { value: signupData } = this.signupForm;
+
     this.authService.VerifyOTP({
-      otp,
-      phoneNumber
+      ...value,
+      signupData
     }).subscribe((res: any) => {
-      if (res?.statusCode == 200) {
+      if (res?.statusCode === 201) {
         this.messageService.add({ severity: 'success', summary: res?.message || 'Account registred successfully.' });
+        this.router.navigate(['/public/home']);
       }
+      return this.messageService.add({ severity: 'warning', summary: res?.message || 'Invalid OTP' });
     })
   }
 
   onOtpChange(event) {
-    event.length == 6 ? this.otp.setValue(+event) : null
+    // event.length == 6 ? this.otp.setValue(+event) : null
   }
 
 

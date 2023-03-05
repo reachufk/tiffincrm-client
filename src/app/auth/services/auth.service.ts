@@ -8,8 +8,8 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class AuthService {
   LoggedInUser: BehaviorSubject<IloggedUser>;
-  userCart:BehaviorSubject<boolean>;
-  Region:BehaviorSubject<any>;
+  userCart: BehaviorSubject<boolean>;
+  Region: BehaviorSubject<any>;
   constructor(private http: HttpClient) {
     this.LoggedInUser = new BehaviorSubject<IloggedUser>(
       JSON.parse(localStorage.getItem('loggedInUser'))
@@ -20,29 +20,30 @@ export class AuthService {
     this.userCart = new BehaviorSubject<boolean>(true)
   }
 
-  public get getLoggedInUserValue():IloggedUser {
+  public get getLoggedInUserValue(): IloggedUser {
     return this.LoggedInUser.value;
   }
 
-  SetUser(user:IloggedUser){
+  SetUser(user: IloggedUser) {
     this.LoggedInUser.next(user);
   }
 
-  Logout(){
+  Logout() {
     this.LoggedInUser.next(null);
     this.userCart.next(false)
     localStorage.removeItem('loggedInUser')
   }
 
-  SignupUser(data: IUser) {
-    return this.http.post(`${environment.server}User/RegisterUser`, data)
+  SignupUser(phoneNumber: string) {
+    debugger
+    return this.http.post(`${environment.server}User/RegisterUser`, phoneNumber);
   }
 
-  VerifyOTP(data: IOTP) {
-    return this.http.post(`${environment.server}api/auth/verify-otp`, data)
+  VerifyOTP(data: IUser) {
+    return this.http.post(`${environment.server}User/verify-otp`, data);
   }
   Login(data: any) {
-    return this.http.post(`${environment.server}User/Login`, data)
+    return this.http.post(`${environment.server}User/Login`, data);
   }
 
 }

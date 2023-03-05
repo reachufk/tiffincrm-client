@@ -1,13 +1,43 @@
-.container-fluid {
-      padding: 0px;
+.ta-auth-button button,
+.skip {
+      padding: 1% 2%;
+      border-radius: 0;
+      box-shadow: none;
+      margin: 0 0 0 1%;
+}
+
+.ta-auth-button>button:focus {
+      border: none;
+      outline: none;
 }
 
 .ta-box {
       padding: 2px;
-      margin-top: 2vh;
-      margin-bottom: 2vh;
+      margin: 2px !important;
       border: none !important;
       box-shadow: none;
+}
+
+.ta-box p {
+      padding: 2px;
+      margin: 0px !important;
+}
+
+:host ::ng-deep .p-autocomplete input:focus {
+      border-color: none;
+      box-shadow: none;
+}
+
+:host ::ng-deep .p-dialog * {
+      padding: 2% !important;
+      margin: 0% !important;
+}
+
+:host ::ng-deep .p-button-success {
+      padding: 1% 2% !important;
+      border-radius: 0;
+      box-shadow: none;
+      margin: 0;
 }
 
 .ta-popular-regions>span {
@@ -24,10 +54,8 @@
 }
 
 .tiffin-aww-image {
-      max-height: 100%;
-      min-height: 80vh;
+      height: 32vh;
 }
-
 
 .card-body {
       padding: 2px 0px !important;
@@ -35,20 +63,25 @@
 
 @media only screen and (min-width: 768px) {
       .tiffin-aww-image {
-            height: 55vh !important;
+            height: 55vh;
+      }
+
+      .ta-box {
+            padding: 2px;
+            margin: 2% 0 !important;
+            border: none !important;
+            box-shadow: none;
       }
 }
 
 .highLight-content-0 {
       font-size: 2em;
-      font-weight: 600;
       animation: fadeIn 2s;
       margin: 2px;
 }
 
 .highLight-content-1 {
       font-size: 2em;
-      font-weight: 600;
       animation: fadeOut 2s;
       margin: 2px;
 }
@@ -76,7 +109,7 @@
 .ta-footer-img {
       height: 200px;
       width: 150px;
-      margin: 4px 0px;
+      margin: 4px 0px !important;
 }
 
 @media only screen and (max-width: 768px) {

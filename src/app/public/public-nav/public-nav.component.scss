@@ -25,58 +25,92 @@
     cursor: pointer;
 }
 
-.pull-right{
+.pull-right {
     float: right;
 }
-.w-50{
+
+.w-50 {
     padding-top: 10px;
     width: 50%;
 }
-@media (max-width:310px){
-    .w-50{
+
+@media (max-width:310px) {
+    .w-50 {
         width: 100% !important;
     }
 }
 
-::ng-deep .p-dialog .p-dialog-content {
-    padding: 0 1.5rem 0.5rem 1.5rem !important;
+::ng-deep .p-dialog * {
+    padding: 2% !important;
+    margin: 0% !important;
 }
 
-::ng-deep .navbar-brand .p-dropdown{
+::ng-deep .p-button-success {
+    padding: 1% 2% !important;
+    border-radius: 0;
+    box-shadow: none;
+    margin: 0;
+}
+
+::ng-deep .navbar-brand .p-dropdown {
     background: #ffffff;
     border: none;
     transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
     border-radius: 6px;
+
     .p-dropdown-trigger {
         width: 2rem;
     }
-    .p-dropdown-label{
+
+    .p-dropdown-label {
         padding: 0px;
     }
 }
 
-::ng-deep .navbar-brand .p-dropdown:not(.p-disabled).p-focus{
+::ng-deep .navbar-brand .p-dropdown:not(.p-disabled).p-focus {
     border-radius: 50%;
     border-color: transparent !important;
     box-shadow: none !important;
 }
-.navbar-toggler{
-    border:none
+
+.navbar-toggler {
+    border: none
 }
-::ng-deep .navbar-toggler .p-dropdown{
+
+::ng-deep .navbar-toggler .p-dropdown {
     border-radius: 50%;
-    width: 40px;
+    // width: 40px;
     height: 40px;
+
     .p-dropdown-label {
         display: none;
     }
-    .p-dropdown-trigger{
+
+    .p-dropdown-trigger {
         width: 100%;
     }
 }
-.w-100{
+
+.w-100 {
     width: 100%;
 }
-.mr-2{
+
+.mr-2 {
     margin-right: 8px;
+}
+
+.ta-box {
+    padding: 2px;
+    margin: 2px !important;
+    border: none !important;
+    box-shadow: none;
+}
+
+::ng-deep .accept-button {
+    color: white;
+    background-color: green;
+}
+
+::ng-deep .select-region * {
+    padding: 1% !important;
 }
