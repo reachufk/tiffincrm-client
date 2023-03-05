@@ -1,27 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MessageService } from 'primeng/api';
 import { AuthService } from '../auth/services/auth.service';
 import * as regionData from './availRegions.json'
+import { IRegion } from "../shared/interfaces/regions";
+
 @Component({
   selector: 'app-tiffin-landing',
   templateUrl: './tiffin-landing.component.html',
   styleUrls: ['./tiffin-landing.component.scss'],
-  providers: [MessageService]
 })
-export class TiffinLandingComponent implements OnInit {
+export class TiffinLandingComponent implements OnInit, OnDestroy {
   highLights: string[] = [];
-  availablePlaces: Array<any> = [];
+  availablePlaces: IRegion[] = [];
   results: Array<any> = [];
-  selected: any;
+  selected: IRegion;
   highLight: string = 'Hungry?';
   counter: number = 0;
   changeClass: boolean = true;
   showSelected: boolean = false;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService, private router: Router) { }
 
-  }
   ngOnInit(): void {
     const { regions } = regionData;
     this.availablePlaces = regions;
@@ -35,11 +34,10 @@ export class TiffinLandingComponent implements OnInit {
   }
 
   search(event) {
-    this.results = this.availablePlaces.filter((region: any) => region?.label?.toLowerCase()?.includes(event?.query?.toLowerCase()))
+    this.results = this.availablePlaces.filter((region: IRegion) => region.label.toLowerCase().includes(event?.query?.toLowerCase()))
   }
 
-
-  selectChange(region) {
+  selectChange(region: IRegion) {
     this.showSelected = true;
     this.selected = region
   }
@@ -66,5 +64,9 @@ export class TiffinLandingComponent implements OnInit {
       this.changeClass = !this.changeClass;
       this.counter++;
     }, 3000)
+  }
+
+  ngOnDestroy() {
+    this.showSelected = false;
   }
 }

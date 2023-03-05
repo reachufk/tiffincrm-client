@@ -29,7 +29,8 @@
 }
 
 :host ::ng-deep .p-dialog * {
-      padding: 2%;
+      padding: 2% !important;
+      margin: 0% !important;
 }
 
 :host ::ng-deep .p-button-success {
