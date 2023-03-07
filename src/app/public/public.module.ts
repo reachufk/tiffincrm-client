@@ -13,17 +13,20 @@ import { NgImageSliderModule } from 'ng-image-slider';
 import { CategoryItemsComponent } from './category-items/category-items.component';
 import { PrimeNGShadowDOMDirective } from 'primeng-shadowdom-directives';
 import { InputTextModule } from 'primeng/inputtext';
-import {InputSwitchModule} from 'primeng/inputswitch';
-import {ToastModule} from 'primeng/toast';
+import { InputSwitchModule } from 'primeng/inputswitch';
+import { ToastModule } from 'primeng/toast';
 import { CartComponent } from './cart/cart.component';
-import {DialogModule} from 'primeng/dialog';
-import {InputNumberModule} from 'primeng/inputnumber';
-import {InputTextareaModule} from 'primeng/inputtextarea';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { DialogModule } from 'primeng/dialog';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 import { FormerrorDirective } from './services/formerror.directive';
-import {ConfirmDialogModule} from 'primeng/confirmdialog';
-import {RadioButtonModule} from 'primeng/radiobutton';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { RadioButtonModule } from 'primeng/radiobutton';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
-import {CalendarModule} from 'primeng/calendar';
+import { CalendarModule } from 'primeng/calendar';
+import { CheckboxModule } from 'primeng/checkbox';
+import { CheckoutComponent } from './checkout/checkout.component';
 @NgModule({
   providers: [CatagoryService],
 
@@ -35,6 +38,7 @@ import {CalendarModule} from 'primeng/calendar';
     CartComponent,
     FormerrorDirective,
     MyOrdersComponent,
+    CheckoutComponent,
   ],
   imports: [
     CommonModule,
@@ -54,7 +58,9 @@ import {CalendarModule} from 'primeng/calendar';
     InputTextareaModule,
     ConfirmDialogModule,
     RadioButtonModule,
-    CalendarModule
+    CalendarModule,
+    SelectButtonModule,
+    CheckboxModule
   ]
 })
 export class PublicModule { }

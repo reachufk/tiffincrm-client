@@ -11,6 +11,8 @@ import { RouterModule } from '@angular/router';
 import { NgOtpInputModule } from  'ng-otp-input';
 import { MessageService } from 'primeng/api';
 import {PasswordModule} from 'primeng/password';
+import {InputNumberModule} from 'primeng/inputnumber';
+import {InputMaskModule} from 'primeng/inputmask';
 import { PrimeNGShadowDOMDirective } from 'primeng-shadowdom-directives';
 
 @NgModule({
@@ -29,6 +31,8 @@ import { PrimeNGShadowDOMDirective } from 'primeng-shadowdom-directives';
     RouterModule,
     NgOtpInputModule,
     PasswordModule,
+    InputNumberModule,
+    InputMaskModule,
     PrimeNGShadowDOMDirective
   ],
   exports: []

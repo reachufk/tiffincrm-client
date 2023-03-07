@@ -35,7 +35,6 @@ export class AuthService {
   }
 
   SignupUser(phoneNumber: string) {
-    debugger
     return this.http.post(`${environment.server}User/RegisterUser`, phoneNumber);
   }
 

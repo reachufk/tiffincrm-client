@@ -10,6 +10,7 @@ import { AuthGuard } from './auth/core/guards/auth.guard';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { PublicResolver } from './public/public.resolver';
 import { TiffinLandingComponent } from './tiffin-landing/tiffin-landing.component';
+import { OrderPlacedComponent } from './public/order-placed/order-placed.component';
 
 const routes: Routes = [
  
@@ -28,6 +29,11 @@ const routes: Routes = [
     component: UserLayoutComponent,
     canActivate: [AuthGuard],
     loadChildren: () => import('./user/user.module').then(m => m.UserModule)
+  },
+  {
+    path: 'order-placed',
+    component: OrderPlacedComponent,
+    canActivate:[AuthGuard]
   },
   {
     path: 'admin',

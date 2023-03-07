@@ -56,9 +56,9 @@
                               </p>
                         </div>
                   </div>
-                  <div *ngIf="selected" class="card text-start ta-box">
-                        <p-dialog position="top" [(visible)]="showSelected" [breakpoints]="{'960px': '75vw'}"
-                              [style]="{minWidth: '32vw'}" [draggable]="true" [resizable]="false">
+                  <div *ngIf="selected" class="card text-start ta-box landing-region-dialog">
+                        <p-dialog position="top" [(visible)]="showSelected" [breakpoints]="{'960px': '78vw'}"
+                              [style]="{minWidth: '32vw'}" [draggable]="false" [resizable]="false">
                               <p class="text-success text-center fw-bold">We are time based for our order timing!</p>
                               <p class="text-secondary text-center fw-bold fs-2">{{selected?.label}}</p>
                               <p class="fw-bold text-secondary">Lunch : {{selected?.lunch}}</p>
