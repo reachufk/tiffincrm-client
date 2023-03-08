@@ -3,9 +3,10 @@ import { ROUTES } from '../sidebar/sidebar.component';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
-import { MessageService } from 'primeng/api';
+import { MenuItem, MessageService } from 'primeng/api';
 import { AdminOrdersService } from 'src/app/admin/services/admin-orders.service';
 import { Menu } from 'primeng/menu';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
     selector: 'app-navbar',
@@ -24,9 +25,10 @@ export class NavbarComponent implements OnInit {
 
     searchControl: FormControl = new FormControl(null)
     notificationItems: Array<any>= []
-    userItems: { label: string; icon: string }[] = []
+    userItems: MenuItem[] = []
     constructor(location: Location, private element: ElementRef, private router: Router,
-        private messageService:MessageService,private adminOrderService:AdminOrdersService) {
+        private messageService:MessageService,private adminOrderService:AdminOrdersService,
+        private authService:AuthService) {
         this.location = location;
         this.sidebarVisible = false;
     }
@@ -142,8 +144,15 @@ export class NavbarComponent implements OnInit {
         this.notificationItems = []
         this.userItems = [
             { label: 'Profile', icon: 'pi pi-fw pi-user' },
-            { label: 'Change Password', icon: 'pi pi-fw pi-key' }
+            { label: 'Change Password', icon: 'pi pi-fw pi-key' },
+            { label: 'Sign out', icon: 'pi pi-sign-out' ,command:()=>{this.signOut()}}
         ]
+    }
+
+    signOut(){
+        localStorage.clear();
+        this.authService.LoggedInUser.next(null);
+        this.router.navigate(['/auth/login'])
     }
 
 }

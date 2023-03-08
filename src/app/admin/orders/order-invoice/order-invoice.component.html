@@ -5,7 +5,7 @@
             [useExistingCss]="true" label="Print Order"
             class="p-button-primary p-button-sm mr-3" ></button>
             <button (click)="ProcessToComplete()" pButton 
-            class="p-button-success p-button-sm" label="Process"></button>
+            class="p-button-success p-button-sm" label="Process to complete"></button>
       </div>
       <!-- BEGIN INVOICE -->
       <div #invoice id="invoice" class="col-12">
@@ -65,7 +65,7 @@
                                     <br>
                                     <span><strong>Payment Status :</strong></span>
                                     <br>
-                                    <span class="text-success">Paid</span>
+                                    <span class="text-success">{{OrderDetails?.orderPaymentStatus}}</span>
                               </div>
                         </div>
                         <hr>

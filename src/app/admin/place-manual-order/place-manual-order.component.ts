@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { map, Subject, takeUntil } from 'rxjs';
 import { AdminPlaceOrderService } from '../services/admin-place-order.service';
@@ -7,7 +7,7 @@ import { AdminPlaceOrderService } from '../services/admin-place-order.service';
   selector: 'app-place-manual-order',
   templateUrl: './place-manual-order.component.html',
   styleUrls: ['./place-manual-order.component.scss'],
-  providers:[AdminPlaceOrderService]
+  providers: [AdminPlaceOrderService]
 })
 export class PlaceManualOrderComponent implements OnInit, OnDestroy {
   OrderSteps: MenuItem[] = [];
@@ -33,7 +33,7 @@ export class PlaceManualOrderComponent implements OnInit, OnDestroy {
     ]
   }
   GetStep() {
-    this.placeOrderServvice.Step.pipe(takeUntil(this.Destroy),map((step: number) => {
+    this.placeOrderServvice.Step.pipe(takeUntil(this.Destroy), map((step: number) => {
       switch (step) {
         case 1:
           this.OrderSteps[1].disabled = false
@@ -45,7 +45,5 @@ export class PlaceManualOrderComponent implements OnInit, OnDestroy {
       }
     })).subscribe()
   }
-
-
 
 }

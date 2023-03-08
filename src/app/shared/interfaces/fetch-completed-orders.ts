@@ -7,7 +7,7 @@ export interface FetchOrderModel {
 export function initializeFetchOrderModel(): FetchOrderModel {
       return {
             pageNo: 1,
-            pageSize: 10,
+            pageSize: 20,
             keyword: ""
       }
 }

@@ -1,6 +1,6 @@
 
 export const environment = {
   production: false,
-  server:'https://tiffin.ufksolutions.com/',
-  socketURL:'https://tiffin.ufksolutions.com/'
+  server:'http://localhost:3000/',
+  socketURL:'http://localhost:3000/'
 };

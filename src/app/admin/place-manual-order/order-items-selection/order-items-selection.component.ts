@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { map, Observable, Subject, takeUntil } from 'rxjs';
 import { AdminPlaceOrderService } from '../../services/admin-place-order.service';
 
@@ -19,7 +20,8 @@ export class OrderItemsSelectionComponent implements OnInit, OnDestroy {
   selectedItems: Array<any> = []
   Destroy: Subject<void> = new Subject();
   TotalAmountCalculated: number = 0
-  constructor(private router: Router, private placeOrderService: AdminPlaceOrderService) {
+  constructor(private router: Router, private placeOrderService: AdminPlaceOrderService,
+    private messageService:MessageService) {
 
   }
 
@@ -69,6 +71,10 @@ export class OrderItemsSelectionComponent implements OnInit, OnDestroy {
     this.router.navigate(['/admin/place-order/customer-info'])
   }
   NextStep() {
+    if(!this.selectedItems.length){
+      this.messageService.add({severity:'error',summary:'Place select your items'});
+      return
+    }
     this.placeOrderService.ItemsSubject.next(this.selectedItems);
     this.placeOrderService.Step.next(2);
     this.router.navigate(['/admin/place-order/order-preview'])

@@ -19,26 +19,41 @@
               </ng-template>
 
               <ng-template pTemplate="header">
-                  <tr>
-                      <th>Customer</th>
-                      <th>Address</th>
-                      <th>Type</th>
-                      <th>Amount</th>
-                  </tr>
-              </ng-template>
+                <tr>
+                    <th>Customer</th>
+                    <th>Address</th>
+                    <th>Type</th>
+                    <th>Amount</th>
+                    <th [pSortableColumn]="'orderDeliveryTime'">
+                        Delivery Date
+                        <p-sortIcon field="'orderDeliveryTime'"></p-sortIcon>
+                    </th>
+                    <th>Action</th>
+                </tr>
+            </ng-template>
               <ng-template pTemplate="body" let-order>
-                  <tr>
-                      <td>{{order?.username}}</td>
-                      <td>{{order?.orderAddress}}</td>
-                      <td>{{order?.orderType}}</td>
-                      <td>{{order?.orderAmount | currency:'INR'}}</td>
-                  </tr>
-              </ng-template>
+                <tr>
+                    <td>{{order?.username}} <span class="text-success fw-bold fs-small ml-3">{{order?.tag == 'new'? 'New':''}}</span></td>
+                    <td>{{order?.orderAddress}}</td>
+                    <td>{{order?.orderType}}</td>
+                    <td>{{order?.orderAmount | currency:"INR"}}</td>
+                    <td>{{order?.orderDeliveryTime | date}}</td>
+                    <td>
+                      <i (click)="ViewOrder(order)" class="pi pi-eye fs-4 show-cursor text-success">
+                      </i>
+                    </td>
+
+                </tr>
+            </ng-template>
               <ng-template pTemplate="emptymessage">
                   <tr class="text-center">
                       <th colspan="6" class="py-4 text-danger">No admin order</th>
                   </tr>
               </ng-template>
           </p-table>
+      </div>
+      <div class="col-lg-12">
+        <app-paginator [CurrentPage]="FetchModel.pageNo" [TotalPages]="TotalPages" [TotalRecords]="TotalRecords"
+        (PageChange)="pageChange($event)"></app-paginator>
       </div>
   </div>

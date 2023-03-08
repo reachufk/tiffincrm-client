@@ -22,6 +22,10 @@ export class OrderInvoiceComponent implements OnInit {
   }
 
   ProcessToComplete() {
+    if(this.config.data.ref){
+      this.ProcessToCompleteAdminOrder()
+      return
+    }
     this.adminOrderService.SetCompletedOrder(this.OrderDetails).subscribe((res:any)=>{
       if(res.statusCode == 200){
         this.ref.close(true)
@@ -29,7 +33,20 @@ export class OrderInvoiceComponent implements OnInit {
         this.messageService.add({severity:'success',summary:res?.message})
       }
     })
-
   }
+
+  ProcessToCompleteAdminOrder() {
+    this.OrderDetails.orderPaymentStatus = 'completed'
+    delete this.OrderDetails.ref
+    this.adminOrderService.UpdateAdminCreatedOrder(this.OrderDetails).subscribe((res:any)=>{
+      if(res.statusCode == 200){
+        this.ref.close(true)
+      }else{
+        this.messageService.add({severity:'success',summary:res?.message})
+      }
+    })
+  }
+
+
 
 }
