@@ -81,7 +81,7 @@ export class CheckoutComponent {
 
   CreateForm() {
     this.OrderForm = new FormGroup({
-      user: new FormControl(this.user?.user, [Validators.required]),
+      user: new FormControl(this.user?.user ?  this.user?.user: JSON.parse(localStorage.getItem('loggedInUser')).user , [Validators.required]),
       orderAddress: new FormControl(null, [Validators.required]),
       orderAmount: new FormControl(null, [Validators.required]),
       orderMode: new FormControl("offline"),
