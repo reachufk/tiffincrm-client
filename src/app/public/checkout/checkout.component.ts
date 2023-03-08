@@ -112,14 +112,17 @@ export class CheckoutComponent {
     if (!this.isFutureOrder.value) {
       this.OrderForm.get('orderDeliveryTime').setValue(this.currentDate.toISOString())
     }
+    console.log(this.OrderForm.value);
+    if (this.OrderForm.get('orderMode').value == 'offline') {
+      if (this.OrderForm.invalid) {
+        return
+      }
+      this.PlaceOrder()
+    }
+
     if (this.OrderForm.invalid) {
       return
     }
-    if (this.OrderForm.get('orderMode').value == 'offline') {
-      this.PlaceOrder()
-      return
-    }
-
     this.RazorPayOptions.handler = (response: any) => { this.CheckPayment(response) };
     this.RazorPayOptions.modal.ondismiss = (response: any) => { this.CancelCheckout(response) };
     this.OrderOptions.amount = this.totalAmount * 100; // as rpaz takes unit of currency like paisa;
