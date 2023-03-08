@@ -28,12 +28,12 @@
       box-shadow: none;
 }
 
-:host ::ng-deep .p-dialog * {
-      padding: 2% !important;
-      margin: 0% !important;
+ ::ng-deep .landing-region-dialog .p-dialog *  {
+      padding: 2% ;
+      margin: 0% ;
 }
 
-:host ::ng-deep .p-button-success {
+::ng-deep .p-button-success {
       padding: 1% 2% !important;
       border-radius: 0;
       box-shadow: none;

@@ -6,6 +6,7 @@ import { MessageService } from 'primeng/api';
 import { NgOtpInputComponent } from 'ng-otp-input';
 import { Router } from '@angular/router';
 import { PasswordDirective } from 'primeng/password';
+import { IloggedUser } from 'src/app/shared/interfaces/auth';
 
 @Component({
   selector: 'app-signup',
@@ -53,10 +54,14 @@ export class SignupComponent implements OnInit {
     if (!this.signupForm.valid) {
       return this.messageService.add({ severity: 'danger', summary: 'All fields are required.' });
     }
-    const { phoneNumber } = this.signupForm.value;
-    this.authService.SignupUser(phoneNumber).subscribe((res: any) => {
+    let { phoneNumber } = this.signupForm.value;
+    if (!phoneNumber?.includes('+91')) {
+      phoneNumber = `+91${phoneNumber}`
+    }
+    this.signupForm.get('phoneNumber').setValue(phoneNumber)
+    this.authService.SignupUser(this.signupForm.value).subscribe((res: any) => {
       if (res?.statusCode == 200) {
-        this.messageService.add({ severity: 'success', summary: res?.message || 'Account registred successfully.' });
+        //this.messageService.add({ severity: 'success', summary: res?.message || 'Account registred successfully.' });
         this.messageService.add({ severity: 'success', summary: res?.message || 'OTP has been sent successfully.' });
         this.showOtp = true;
       }
@@ -78,7 +83,11 @@ export class SignupComponent implements OnInit {
     }).subscribe((res: any) => {
       if (res?.statusCode === 201) {
         this.messageService.add({ severity: 'success', summary: res?.message || 'Account registred successfully.' });
+        this.authService.SetUser(res?.user)
+        const loggedInUser: IloggedUser = res?.data;
+        localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
         this.router.navigate(['/public/home']);
+        return
       }
       return this.messageService.add({ severity: 'warning', summary: res?.message || 'Invalid OTP' });
     })

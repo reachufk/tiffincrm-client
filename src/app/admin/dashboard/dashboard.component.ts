@@ -30,8 +30,9 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.daysLabels = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     this.monthLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    this.UsersChart();
-    this.OrdersChart();
+
+    this.chartOptions();
+
     this.GetTodaysUser();
     this.GetTodaysOrder();
     this.GetTodaysSales();
@@ -43,85 +44,33 @@ export class DashboardComponent implements OnInit {
     this.GetUsersAnalyticsMonthly();
   }
 
-  UsersChart() {
-    this.dailyUsersOptions = {
-      plugins: {
-        legend: {
-          labels: {
-            color: '#000'
+  chartOptions() {
+    [
+      this.dailyUsersOptions,
+      this.monthlyUsersOptions,
+      this.dailyOrdersOptions,
+      this.monthlyOrdersOptions
+    ].forEach((options) => {
+      options = {
+        plugins: {
+          legend: {
+            labels: {
+              color: '#000'
+            }
+          }
+        },
+        scales: {
+          x: {
+            ticks: {
+              color: '#000'
+            },
+            grid: {
+              color: '#f5f5f5'
+            }
           }
         }
-      },
-      scales: {
-        x: {
-          ticks: {
-            color: '#000'
-          },
-          grid: {
-            color: '#f5f5f5'
-          }
-        }
-      }
-    };
-    this.monthlyUsersOptions = {
-      plugins: {
-        legend: {
-          labels: {
-            color: '#000'
-          }
-        }
-      },
-      scales: {
-        x: {
-          ticks: {
-            color: '#000'
-          },
-          grid: {
-            color: '#f5f5f5'
-          }
-        }
-      }
-    };
-  };
-  OrdersChart() {
-    this.dailyOrdersOptions = {
-      plugins: {
-        legend: {
-          labels: {
-            color: '#000'
-          }
-        }
-      },
-      scales: {
-        x: {
-          ticks: {
-            color: '#000'
-          },
-          grid: {
-            color: '#f5f5f5'
-          }
-        }
-      }
-    };
-    this.monthlyOrdersOptions = {
-      plugins: {
-        legend: {
-          labels: {
-            color: '#000'
-          }
-        }
-      },
-      scales: {
-        x: {
-          ticks: {
-            color: '#000'
-          },
-          grid: {
-            color: '#f5f5f5'
-          }
-        }
-      }
-    };
+      };
+    });
   };
 
   GetTodaysUser() {

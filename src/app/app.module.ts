@@ -23,6 +23,8 @@ import { SpeedDialModule } from 'primeng/speeddial';
 import { BlockUIModule } from 'ng-block-ui';
 import { BlockUIHttpModule } from 'ng-block-ui/http';
 import { LoaderComponent } from './shared/components/loader/loader.component';
+import { OrderPlacedComponent } from './public/order-placed/order-placed.component';
+
 @NgModule({
   imports: [
 
@@ -44,6 +46,7 @@ import { LoaderComponent } from './shared/components/loader/loader.component';
     NavbarComponent,
     SidebarComponent,
     PublicNavComponent,
+    OrderPlacedComponent,
     PublicLayoutComponent,
     UserLayoutComponent,
     AuthLayoutComponent,

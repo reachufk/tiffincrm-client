@@ -8,74 +8,73 @@ import { IloggedUser } from 'src/app/shared/interfaces/auth';
 import { validateAllFormFields } from 'src/app/shared/utils/formUtils';
 import { CartService } from '../services/cart.service';
 import { OrdersService } from '../services/orders.service';
-import { InitializeRPayOptions, IRazorPayOtpions } from '../checkout/IRazorPayOptions';
+import { InitializeRPayOptions, IRazorPayOtpions } from './IRazorPayOptions';
 export interface OrderOptions {
   amount: number;
   currency: string
 }
 export interface VerifyPaymentModel {
-  razorpay_payment_id:String,
-  razorpay_order_id:String,
-  razorpay_signature:String
+  razorpay_payment_id: String,
+  razorpay_order_id: String,
+  razorpay_signature: String
 
 }
 declare var Razorpay: any
 @Component({
-  selector: 'app-cart',
-  templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.scss'],
+  selector: 'app-checkout',
+  templateUrl: './checkout.component.html',
+  styleUrls: ['./checkout.component.scss'],
   providers: [MessageService, OrdersService]
 })
-export class CartComponent implements OnInit {
+export class CheckoutComponent {
+
 
   Items: Observable<any>
   totalItems: number = 0;
   totalAmount: number = 0
   DeliveryTimes: Array<{ label: string, value: string }> = [];
-  OrderTypes: Array<{ label: string, value: string }> = [{label:'Lunch',value:'lunch'},{label:'Dinner',value:'dinner'}];
+  OrderTypes: Array<{ label: string, value: string }> = [{ label: 'Lunch', value: 'lunch' }, { label: 'Dinner', value: 'dinner' }];
   DeliveryTimeControl: FormControl = new FormControl(null, [Validators.required]);
   OrderForm: FormGroup;
   RazorPayOptions: IRazorPayOtpions = InitializeRPayOptions();
   OrderOptions = {} as OrderOptions
   rzpay: any
-  emptyCart:boolean= false;
-  user:IloggedUser = JSON.parse(localStorage.getItem('loggedInUser'));
-  
+  emptyCart: boolean = false;
+  user: IloggedUser = JSON.parse(localStorage.getItem('loggedInUser'));
+  isFutureOrder: FormControl = new FormControl(false)
   minDate: Date;
   maxDate: Date;
-
-
-    // Set min date to today
-   
-
+  currentDate: Date
+  OrderForTypes: Array<any> = [{ label: "Lunch", value: "lunch" }, { label: "Dinner", value: "dinner" }];
+  paymentModes: Array<any> = [{ label: "Online", value: "online" }, { label: "Offline", value: "offline" }];
+  displayOrderPlaced: boolean = true;
   constructor(private cartService: CartService, private authService: AuthService,
     private messageService: MessageService, private orderService: OrdersService,
-    private router:Router) {
-     
+    private router: Router) {
+
   }
   ngOnInit(): void {
-
     this.CreateForm()
     this.GetCartItems()
+    this.currentDate = new Date();
+    this.currentDate.setDate(this.currentDate.getDate() + 1);
+    this.minDate = this.currentDate;
+    const maxDate = new Date();
+    maxDate.setDate(this.minDate.getDate() + 4);
+    this.maxDate = maxDate;
   }
 
   GetCartItems() {
-    this.Items = this.cartService.GetUserCart(this.user?.user).pipe(map((res: any) => {
-      if(!res?.data?.cartItems?.length){
-        this.emptyCart = true
-      }
+    this.cartService.GetUserCart(this.user?.user).subscribe((res: any) => {
       this.totalItems = res?.data?.cartItems?.length
       this.totalAmount = res?.data?.cartItems?.reduce((total: number, item: any) => {
-        const amount = (item?.selectedItemType?.typeValue?item?.selectedItemType?.typeValue:item?.itemPrice) * item.count;
+        const amount = (item?.selectedItemType?.typeValue ? item?.selectedItemType?.typeValue : item?.itemPrice) * item.count;
         return total + amount;
       }, 0);
       this.OrderForm.get('orderItems').setValue(res?.data?.cartItems);
       this.OrderForm.get('orderAmount').setValue(this.totalAmount);
       return res?.data?.cartItems
-    }))
-
-    this.DeliveryTimes = [{ label: 'Today', value: '0' }, { label: 'Tomorrow', value: '1' }, { label: '2 Days', value: '2' }, { label: '3 Days', value: '3' }, { label: '4 days', value: '4' }, { label: '5 days', value: '5' }]
-
+    })
   }
 
   CreateForm() {
@@ -83,12 +82,12 @@ export class CartComponent implements OnInit {
       user: new FormControl(this.authService?.LoggedInUser?.value?.user, [Validators.required]),
       orderAddress: new FormControl(null, [Validators.required]),
       orderAmount: new FormControl(null, [Validators.required]),
-      orderMode: new FormControl(null),
+      orderMode: new FormControl("offline"),
       orderItems: new FormControl([], [Validators.required]),
-      orderPaymentMode: new FormControl(null),
+      orderPaymentMode: new FormControl("offline-mode"),
       orderInstructions: new FormControl(null),
-      orderDeliveryTime: new FormControl(null, [Validators.required]),
-      orderType: new FormControl(null,[Validators.required]),
+      orderDeliveryTime: new FormControl(null, []),
+      orderType: new FormControl(null, [Validators.required]),
       orderPaymentStatus: new FormControl(""),
       userInfo: new FormControl({}),
       orderStatus: new FormControl("pending"),
@@ -108,9 +107,19 @@ export class CartComponent implements OnInit {
 
   CheckOut() {
     validateAllFormFields(this.OrderForm)
+    this.OrderForm.get('orderPaymentMode').setValue('cod')
+    this.OrderForm.get('orderPaymentStatus').setValue('offline-mode');
+    if (!this.isFutureOrder.value) {
+      this.OrderForm.get('orderDeliveryTime').setValue(this.currentDate.toISOString())
+    }
     if (this.OrderForm.invalid) {
       return
     }
+    if (this.OrderForm.get('orderMode').value == 'offline') {
+      this.PlaceOrder()
+      return
+    }
+
     this.RazorPayOptions.handler = (response: any) => { this.CheckPayment(response) };
     this.RazorPayOptions.modal.ondismiss = (response: any) => { this.CancelCheckout(response) };
     this.OrderOptions.amount = this.totalAmount * 100; // as rpaz takes unit of currency like paisa;
@@ -133,28 +142,27 @@ export class CartComponent implements OnInit {
 
 
 
-  CheckPayment(response:any) {
+  CheckPayment(response: any) {
     let VerifyModel: VerifyPaymentModel = response
-    this.orderService.VerifyPayment(VerifyModel).subscribe((res:any)=>{
+    this.orderService.VerifyPayment(VerifyModel).subscribe((res: any) => {
       if (res.statusCode == 200 && res?.verified) {
         const paymentData = res?.data;
         this.OrderForm.get('orderPaymentMode').setValue(paymentData?.method)
         this.OrderForm.get('orderPaymentStatus').setValue('paid');
         this.OrderForm.get('orderMode').setValue('online')
         this.PlaceOrder()
-      }else{
-        this.messageService.add({ severity: 'error', summary: 'payment not verified?',detail:'please contact us at given below contacts', life: 3000 });
+      } else {
+        this.messageService.add({ severity: 'error', summary: 'payment not verified?', detail: 'please contact us at given below contacts', life: 3000 });
       }
     })
   }
 
-  PlaceOrder(){
-    this.orderService.PlaceOrder(this.OrderForm.value).subscribe((res:any)=>{
-      if(res?.statusCode == 200){
-        this.messageService.add({ severity: 'success', summary: 'payment completed successfully !',detail:'Your order is in process', life: 3000 });
-        this.router.navigate(['/public/my-orders'])
-      }else{
-        this.messageService.add({ severity: 'success', summary:res?.message, life: 3000 });
+  PlaceOrder() {
+    this.orderService.PlaceOrder(this.OrderForm.value).subscribe((res: any) => {
+      if (res?.statusCode == 201) {
+        this.OrderPlacedNotify()
+      } else {
+        this.messageService.add({ severity: 'success', summary: res?.message, life: 3000 });
       }
     })
   }
@@ -162,7 +170,11 @@ export class CartComponent implements OnInit {
 
   CancelCheckout(res: any) {
     console.log(res, 'cancel');
+  }
 
+  OrderPlacedNotify() {
+    this.OrderForm.reset();
+    this.router.navigate(['/order-placed'])
   }
 
 }

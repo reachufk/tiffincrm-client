@@ -40,10 +40,10 @@
     }
 }
 
-::ng-deep .p-dialog * {
-    padding: 2% !important;
-    margin: 0% !important;
-}
+::ng-deep .dialog-nav .p-dialog * {
+     padding: 2% !important;
+  margin: 0% !important;
+ }
 
 ::ng-deep .p-button-success {
     padding: 1% 2% !important;
