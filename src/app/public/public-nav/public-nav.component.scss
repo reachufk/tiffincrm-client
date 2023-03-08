@@ -40,10 +40,11 @@
     }
 }
 
-::ng-deep .dialog-nav .p-dialog * {
-     padding: 2% !important;
-  margin: 0% !important;
- }
+::ng-deep .p-dialog * {
+    padding: 1% !important;
+    margin: 0% !important;
+    font-size: 1rem !important;
+}
 
 ::ng-deep .p-button-success {
     padding: 1% 2% !important;
@@ -52,15 +53,13 @@
     margin: 0;
 }
 
-::ng-deep .navbar-brand .p-dropdown {
+:host::ng-deep .navbar-brand .p-dropdown {
     background: #ffffff;
     border: none;
     transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
     border-radius: 6px;
 
-    .p-dropdown-trigger {
-        width: 2rem;
-    }
+
 
     .p-dropdown-label {
         padding: 0px;
@@ -74,21 +73,24 @@
 }
 
 .navbar-toggler {
-    border: none
+    border: none;
+    padding: 0 !important;
 }
 
 ::ng-deep .navbar-toggler .p-dropdown {
     border-radius: 50%;
-    // width: 40px;
     height: 40px;
 
     .p-dropdown-label {
         display: none;
     }
+}
 
-    .p-dropdown-trigger {
-        // width: 100%;
-    }
+
+::ng-deep .p-dropdown .p-dropdown-trigger {
+    margin: 4px;
+    width: 2rem !important;
+
 }
 
 .w-100 {
@@ -109,8 +111,4 @@
 ::ng-deep .accept-button {
     color: white;
     background-color: green;
-}
-
-::ng-deep .select-region * {
-    padding: 1% !important;
 }
