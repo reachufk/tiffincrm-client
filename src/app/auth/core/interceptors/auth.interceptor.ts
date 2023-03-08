@@ -16,9 +16,7 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    if (!this.loggedUser) {
-      this.loggedUser = JSON.parse(localStorage.getItem('loggedInUser'))
-    }
+    this.loggedUser = this.authService.getLoggedInUserValue
     request = request.clone({
       setHeaders: {
         Authorization: `Bearer ${this.loggedUser ? this.loggedUser?.token : ''}`,
