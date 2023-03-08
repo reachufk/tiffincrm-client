@@ -22,10 +22,10 @@ const routes: Routes = [
   {
     path: 'place-order', component: PlaceManualOrderComponent,
     children: [
-      {path:'',redirectTo:'customer-info',pathMatch:'full'},
-      {path:'customer-info',component:OrderCustomerInfoComponent},
-      {path:'items-selection',component:OrderItemsSelectionComponent},
-      {path:'order-preview',component:OrderPreviewComponent}
+      { path: '', redirectTo: 'customer-info', pathMatch: 'full' },
+      { path: 'customer-info', component: OrderCustomerInfoComponent },
+      { path: 'items-selection', component: OrderItemsSelectionComponent },
+      { path: 'order-preview', component: OrderPreviewComponent }
     ]
   }
 ];

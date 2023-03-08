@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AdminUserService } from '../services/admin-user.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,132 +8,180 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
-  // startAnimationForLineChart(chart){
-  //     let seq: any, delays: any, durations: any;
-  //     seq = 0;
-  //     delays = 80;
-  //     durations = 500;
+  todaysUser: number = 0;
+  todaysOrders: number = 0;
+  todaysSales: number = 0;
 
-  //     chart.on('draw', function(data) {
-  //       if(data.type === 'line' || data.type === 'area') {
-  //         data.element.animate({
-  //           d: {
-  //             begin: 600,
-  //             dur: 700,
-  //             from: data.path.clone().scale(1, 0).translate(0, data.chartRect.height()).stringify(),
-  //             to: data.path.clone().stringify(),
-  //             easing: Chartist.Svg.Easing.easeOutQuint
-  //           }
-  //         });
-  //       } else if(data.type === 'point') {
-  //             seq++;
-  //             data.element.animate({
-  //               opacity: {
-  //                 begin: seq * delays,
-  //                 dur: durations,
-  //                 from: 0,
-  //                 to: 1,
-  //                 easing: 'ease'
-  //               }
-  //             });
-  //         }
-  //     });
+  dailyUsers: { day: string, count: number }[] = [];
+  dailyUsersData: any = {};
+  dailyUsersOptions: any = {};
+  monthlyUsersData: any = {};
+  monthlyUsersOptions: any = {};
+  dailyOrdersData: any = {};
+  dailyOrdersOptions: any = {};
+  monthlyOrdersData: any = {};
+  monthlyOrdersOptions: any = {};
 
-  //     seq = 0;
-  // };
-  // startAnimationForBarChart(chart){
-  //     let seq2: any, delays2: any, durations2: any;
+  daysLabels: string[];
+  monthLabels: string[];
 
-  //     seq2 = 0;
-  //     delays2 = 80;
-  //     durations2 = 500;
-  //     chart.on('draw', function(data) {
-  //       if(data.type === 'bar'){
-  //           seq2++;
-  //           data.element.animate({
-  //             opacity: {
-  //               begin: seq2 * delays2,
-  //               dur: durations2,
-  //               from: 0,
-  //               to: 1,
-  //               easing: 'ease'
-  //             }
-  //           });
-  //       }
-  //     });
+  constructor(private adminUserService: AdminUserService) { }
 
-  //     seq2 = 0;
-  // };
   ngOnInit() {
-    //   const dataDailySalesChart: any = {
-    //       labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
-    //       series: [
-    //           [12, 17, 7, 17, 23, 18, 38]
-    //       ]
-    //   };
+    this.daysLabels = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    this.monthLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-    //  const optionsDailySalesChart: any = {
-    //       lineSmooth: Chartist.Interpolation.cardinal({
-    //           tension: 0
-    //       }),
-    //       low: 0,
-    //       high: 50, 
-    //       chartPadding: { top: 0, right: 0, bottom: 0, left: 0},
-    //   }
+    this.chartOptions();
 
-    //   var dailySalesChart = new Chartist.Line('#dailySalesChart', dataDailySalesChart, optionsDailySalesChart);
+    this.GetTodaysUser();
+    this.GetTodaysOrder();
+    this.GetTodaysSales();
 
-    //   this.startAnimationForLineChart(dailySalesChart);
+    this.GetOrdersAnalyticsDaily();
+    this.GetOrdersAnalyticsMonthly();
 
-    //   const dataCompletedTasksChart: any = {
-    //       labels: ['12p', '3p', '6p', '9p', '12p', '3a', '6a', '9a'],
-    //       series: [
-    //           [230, 750, 450, 300, 280, 240, 200, 190]
-    //       ]
-    //   };
+    this.GetUsersAnalyticsDaily();
+    this.GetUsersAnalyticsMonthly();
+  }
 
-    //  const optionsCompletedTasksChart: any = {
-    //       lineSmooth: Chartist.Interpolation.cardinal({
-    //           tension: 0
-    //       }),
-    //       low: 0,
-    //       high: 1000,
-    //       chartPadding: { top: 0, right: 0, bottom: 0, left: 0}
-    //   }
+  chartOptions() {
+    [
+      this.dailyUsersOptions,
+      this.monthlyUsersOptions,
+      this.dailyOrdersOptions,
+      this.monthlyOrdersOptions
+    ].forEach((options) => {
+      options = {
+        plugins: {
+          legend: {
+            labels: {
+              color: '#000'
+            }
+          }
+        },
+        scales: {
+          x: {
+            ticks: {
+              color: '#000'
+            },
+            grid: {
+              color: '#f5f5f5'
+            }
+          }
+        }
+      };
+    });
+  };
 
-    //   var completedTasksChart = new Chartist.Line('#completedTasksChart', dataCompletedTasksChart, optionsCompletedTasksChart);
+  GetTodaysUser() {
+    this.adminUserService.GetTodaysUser().subscribe((res: any) => {
+      this.todaysUser = res.data;
+    })
+  }
 
-    //   this.startAnimationForLineChart(completedTasksChart);
+  GetTodaysOrder() {
+    this.adminUserService.GetTodaysOrder().subscribe((res: any) => {
+      this.todaysOrders = res.data;
+    })
+  }
 
-    //   var datawebsiteViewsChart = {
-    //     labels: ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
-    //     series: [
-    //       [542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895]
+  GetTodaysSales() {
+    this.adminUserService.GetTodaysSales().subscribe((res: any) => {
+      this.todaysSales = res.data;
+    })
+  }
 
-    //     ]
-    //   };
-    //   var optionswebsiteViewsChart = {
-    //       axisX: {
-    //           showGrid: false
-    //       },
-    //       low: 0,
-    //       high: 1000,
-    //       chartPadding: { top: 0, right: 5, bottom: 0, left: 0}
-    //   };
-    //   var responsiveOptions: any[] = [
-    //     ['screen and (max-width: 640px)', {
-    //       seriesBarDistance: 5,
-    //       axisX: {
-    //         labelInterpolationFnc: function (value) {
-    //           return value[0];
-    //         }
-    //       }
-    //     }]
-    //   ];
-    //   var websiteViewsChart = new Chartist.Bar('#websiteViewsChart', datawebsiteViewsChart, optionswebsiteViewsChart, responsiveOptions);
+  GetUsersAnalyticsDaily() {
+    this.adminUserService.GetUsersAnalyticsDaily().subscribe((res: any) => {
+      if (res?.data?.length) {
+        let labels = [];
+        let data = [];
+        res?.data?.forEach(element => {
+          labels.push(element.day);
+          data.push(element.count)
+        });
+        this.dailyUsersData = {
+          labels,
+          datasets: [
+            {
+              label: 'Total users',
+              backgroundColor: '#EF4444',
+              data
+            }
+          ]
+        };
+      }
+    })
+  }
 
-    //   this.startAnimationForBarChart(websiteViewsChart);
+  GetOrdersAnalyticsDaily() {
+    this.adminUserService.GetOrdersAnalyticsDaily().subscribe((res: any) => {
+      if (res?.data?.length) {
+        let labels = [];
+        let data = [];
+        res?.data?.forEach(element => {
+          labels.push(element.day);
+          data.push(element.count)
+        });
+        this.dailyOrdersData = {
+          labels,
+          datasets: [
+            {
+              label: 'Total orders',
+              backgroundColor: '#F59E0B',
+              data
+            }
+          ]
+        };
+      }
+    })
+  }
+
+
+  GetUsersAnalyticsMonthly() {
+    this.adminUserService.GetUsersAnalyticsMonthly().subscribe((res: any) => {
+      if (res?.data?.length) {
+        let labels = [];
+        let data = [];
+        res?.data?.forEach(element => {
+          labels.push(element.month);
+          data.push(element.count)
+        });
+        this.monthlyUsersData = {
+          labels,
+          datasets: [
+            {
+              label: 'Total users',
+              backgroundColor: '#EF4444',
+              data
+            }
+          ]
+        };
+      }
+    })
+  }
+
+  GetOrdersAnalyticsMonthly() {
+    this.adminUserService.GetOrdersAnalyticsMonthly().subscribe((res: any) => {
+      if (res?.data?.length) {
+        let labels = [];
+        let data = [];
+        res?.data?.forEach(element => {
+          labels.push(element.month);
+          data.push(element.count)
+        });
+        this.monthlyOrdersData = {
+          labels,
+          datasets: [
+            {
+              label: 'Total orders',
+              backgroundColor: '#F59E0B',
+              data
+            }
+          ]
+        };
+      }
+    })
   }
 
 }

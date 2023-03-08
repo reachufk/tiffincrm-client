@@ -55,12 +55,12 @@ export class SignupComponent implements OnInit {
       return this.messageService.add({ severity: 'danger', summary: 'All fields are required.' });
     }
     let { phoneNumber } = this.signupForm.value;
-    if(!phoneNumber?.includes('+91')){
+    if (!phoneNumber?.includes('+91')) {
       phoneNumber = `+91${phoneNumber}`
     }
     this.signupForm.get('phoneNumber').setValue(phoneNumber)
     this.authService.SignupUser(this.signupForm.value).subscribe((res: any) => {
-      if (res?.statusCode == 200) { 
+      if (res?.statusCode == 200) {
         //this.messageService.add({ severity: 'success', summary: res?.message || 'Account registred successfully.' });
         this.messageService.add({ severity: 'success', summary: res?.message || 'OTP has been sent successfully.' });
         this.showOtp = true;
@@ -84,8 +84,8 @@ export class SignupComponent implements OnInit {
       if (res?.statusCode === 201) {
         this.messageService.add({ severity: 'success', summary: res?.message || 'Account registred successfully.' });
         this.authService.SetUser(res?.user)
-        const loggedInUser:IloggedUser = res?.data;
-        localStorage.setItem('loggedInUser',JSON.stringify(loggedInUser));
+        const loggedInUser: IloggedUser = res?.data;
+        localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
         this.router.navigate(['/public/home']);
         return
       }

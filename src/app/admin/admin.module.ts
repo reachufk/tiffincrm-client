@@ -26,8 +26,10 @@ import { OrderPreviewComponent } from './place-manual-order/order-preview/order-
 import { AdminCreatedOrdersComponent } from './orders/admin-created-orders/admin-created-orders.component';
 import { MessageService } from 'primeng/api';
 import { BannersComponent } from './banners/banners.component';
+import { ChartModule } from "primeng/chart"
+
 @NgModule({
-  providers: [AdminCatagoryService, AdminUserService, AdminOrdersService,MessageService],
+  providers: [AdminCatagoryService, AdminUserService, AdminOrdersService, MessageService],
   declarations: [DashboardComponent,
     OrdersComponent,
     UsersComponent,
@@ -51,7 +53,8 @@ import { BannersComponent } from './banners/banners.component';
     SharedModule,
     NgxPrintModule,
     StepsModule,
-    PickListModule
+    PickListModule,
+    ChartModule
   ]
 })
 export class AdminModule { }
