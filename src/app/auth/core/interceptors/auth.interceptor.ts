@@ -11,13 +11,13 @@ import { IloggedUser } from 'src/app/shared/interfaces/auth';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  loggedUser: IloggedUser
+  loggedUser: IloggedUser = JSON.parse(localStorage.getItem('loggedInUser'))
   constructor(private authService: AuthService) {
   }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     if (!this.loggedUser) {
-      this.loggedUser = this.authService.LoggedInUser?.value ? this.authService.LoggedInUser?.value : JSON.parse(localStorage.getItem('loggedInUser'))
+      this.loggedUser = JSON.parse(localStorage.getItem('loggedInUser'))
     }
     request = request.clone({
       setHeaders: {
