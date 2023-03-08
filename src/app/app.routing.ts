@@ -12,14 +12,14 @@ import { PublicResolver } from './public/public.resolver';
 import { TiffinLandingComponent } from './tiffin-landing/tiffin-landing.component';
 
 const routes: Routes = [
- 
-  {path:'',redirectTo:'tiffin-aaw',pathMatch:'full'},
-  {path:'tiffin-aaw',component:TiffinLandingComponent},
+
+  { path: '', redirectTo: 'tiffin-aaw', pathMatch: 'full' },
+  { path: 'tiffin-aaw', component: TiffinLandingComponent },
   {
     path: 'public',
     component: PublicLayoutComponent,
-    resolve:{
-      user:PublicResolver
+    resolve: {
+      user: PublicResolver
     },
     loadChildren: () => import('./public/public.module').then(m => m.PublicModule)
   },
@@ -32,7 +32,7 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminLayoutComponent,
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
   },
   {
@@ -48,7 +48,7 @@ const routes: Routes = [
     BrowserModule,
     RouterModule.forRoot(routes, {
       useHash: true,
-      scrollPositionRestoration:"top"
+      scrollPositionRestoration: "top"
     })
   ],
   exports: [

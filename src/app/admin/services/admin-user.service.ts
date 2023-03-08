@@ -10,5 +10,32 @@ export class AdminUserService {
     return this.http.post(`${environment.server}User/GetUsers`, fetchPayload)
   }
 
+  GetTodaysUser() {
+    return this.http.get(`${environment.server}User/TodaysUser`);
+  }
+
+  GetTodaysOrder() {
+    return this.http.get(`${environment.server}User/TodaysOrder`);
+  }
+
+  GetTodaysSales() {
+    return this.http.get(`${environment.server}User/GetTodaysSales`);
+  }
+
+  GetUsersAnalyticsDaily() {
+    return this.http.get(`${environment.server}User/GetUsersAnalyticsDaily`);
+  }
+
+  GetOrdersAnalyticsDaily() {
+    return this.http.get(`${environment.server}User/GetOrdersAnalyticsDaily`);
+  }
+
+  GetUsersAnalyticsMonthly() {
+    return this.http.get(`${environment.server}User/GetUsersAnalyticsMonthly`);
+  }
+
+  GetOrdersAnalyticsMonthly() {
+    return this.http.get(`${environment.server}User/GetOrdersAnalyticsMonthly`);
+  }
 
 }

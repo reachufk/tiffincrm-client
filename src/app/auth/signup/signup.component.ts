@@ -54,7 +54,6 @@ export class SignupComponent implements OnInit {
       return this.messageService.add({ severity: 'danger', summary: 'All fields are required.' });
     }
     const { phoneNumber } = this.signupForm.value;
-    debugger
     this.authService.SignupUser(phoneNumber).subscribe((res: any) => {
       if (res?.statusCode == 200) {
         this.messageService.add({ severity: 'success', summary: res?.message || 'Account registred successfully.' });
