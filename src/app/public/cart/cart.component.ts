@@ -14,9 +14,9 @@ export interface OrderOptions {
   currency: string
 }
 export interface VerifyPaymentModel {
-  razorpay_payment_id:String,
-  razorpay_order_id:String,
-  razorpay_signature:String
+  razorpay_payment_id: String,
+  razorpay_order_id: String,
+  razorpay_signature: String
 
 }
 declare var Razorpay: any
@@ -32,26 +32,26 @@ export class CartComponent implements OnInit {
   totalItems: number = 0;
   totalAmount: number = 0
   DeliveryTimes: Array<{ label: string, value: string }> = [];
-  OrderTypes: Array<{ label: string, value: string }> = [{label:'Lunch',value:'lunch'},{label:'Dinner',value:'dinner'}];
+  OrderTypes: Array<{ label: string, value: string }> = [{ label: 'Lunch', value: 'lunch' }, { label: 'Dinner', value: 'dinner' }];
   DeliveryTimeControl: FormControl = new FormControl(null, [Validators.required]);
   OrderForm: FormGroup;
   RazorPayOptions: IRazorPayOtpions = InitializeRPayOptions();
   OrderOptions = {} as OrderOptions
   rzpay: any
-  emptyCart:boolean= false;
-  user:IloggedUser = JSON.parse(localStorage.getItem('loggedInUser'));
-  
+  emptyCart: boolean = false;
+  user: IloggedUser = JSON.parse(localStorage.getItem('loggedInUser'));
+
   minDate: Date;
   maxDate: Date;
 
 
-    // Set min date to today
-   
+  // Set min date to today
+
 
   constructor(private cartService: CartService, private authService: AuthService,
     private messageService: MessageService, private orderService: OrdersService,
-    private router:Router) {
-     
+    private router: Router) {
+
   }
   ngOnInit(): void {
 
@@ -61,12 +61,12 @@ export class CartComponent implements OnInit {
 
   GetCartItems() {
     this.Items = this.cartService.GetUserCart(this.user?.user).pipe(map((res: any) => {
-      if(!res?.data?.cartItems?.length){
+      if (!res?.data?.cartItems?.length) {
         this.emptyCart = true
       }
       this.totalItems = res?.data?.cartItems?.length
       this.totalAmount = res?.data?.cartItems?.reduce((total: number, item: any) => {
-        const amount = (item?.selectedItemType?.typeValue?item?.selectedItemType?.typeValue:item?.itemPrice) * item.count;
+        const amount = (item?.selectedItemType?.typeValue ? item?.selectedItemType?.typeValue : item?.itemPrice) * item.count;
         return total + amount;
       }, 0);
       this.OrderForm.get('orderItems').setValue(res?.data?.cartItems);
@@ -88,7 +88,7 @@ export class CartComponent implements OnInit {
       orderPaymentMode: new FormControl(null),
       orderInstructions: new FormControl(null),
       orderDeliveryTime: new FormControl(null, [Validators.required]),
-      orderType: new FormControl(null,[Validators.required]),
+      orderType: new FormControl(null, [Validators.required]),
       orderPaymentStatus: new FormControl(""),
       userInfo: new FormControl({}),
       orderStatus: new FormControl("pending"),
@@ -123,7 +123,6 @@ export class CartComponent implements OnInit {
       this.RazorPayOptions.prefill.contact = this.authService?.LoggedInUser?.value?.phoneNumber;
       this.OpenPayDilog();
     })
-
   }
 
   OpenPayDilog() {
@@ -131,34 +130,31 @@ export class CartComponent implements OnInit {
     this.rzpay.open()
   }
 
-
-
-  CheckPayment(response:any) {
+  CheckPayment(response: any) {
     let VerifyModel: VerifyPaymentModel = response
-    this.orderService.VerifyPayment(VerifyModel).subscribe((res:any)=>{
+    this.orderService.VerifyPayment(VerifyModel).subscribe((res: any) => {
       if (res.statusCode == 200 && res?.verified) {
         const paymentData = res?.data;
         this.OrderForm.get('orderPaymentMode').setValue(paymentData?.method)
         this.OrderForm.get('orderPaymentStatus').setValue('paid');
         this.OrderForm.get('orderMode').setValue('online')
         this.PlaceOrder()
-      }else{
-        this.messageService.add({ severity: 'error', summary: 'payment not verified?',detail:'please contact us at given below contacts', life: 3000 });
+      } else {
+        this.messageService.add({ severity: 'error', summary: 'payment not verified?', detail: 'please contact us at given below contacts', life: 3000 });
       }
     })
   }
 
-  PlaceOrder(){
-    this.orderService.PlaceOrder(this.OrderForm.value).subscribe((res:any)=>{
-      if(res?.statusCode == 200){
-        this.messageService.add({ severity: 'success', summary: 'payment completed successfully !',detail:'Your order is in process', life: 3000 });
+  PlaceOrder() {
+    this.orderService.PlaceOrder(this.OrderForm.value).subscribe((res: any) => {
+      if (res?.statusCode == 200) {
+        this.messageService.add({ severity: 'success', summary: 'payment completed successfully!', detail: 'Your order is in process', life: 3000 });
         this.router.navigate(['/public/my-orders'])
-      }else{
-        this.messageService.add({ severity: 'success', summary:res?.message, life: 3000 });
+      } else {
+        this.messageService.add({ severity: 'success', summary: res?.message, life: 3000 });
       }
     })
   }
-
 
   CancelCheckout(res: any) {
     console.log(res, 'cancel');

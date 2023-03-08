@@ -1,11 +1,10 @@
 <div class="row">
       <div class="col-lg-12 text-end mt-2">
             <p-toast></p-toast>
-            <button printSectionId="invoice" ngxPrint pButton 
-            [useExistingCss]="true" label="Print Order"
-            class="p-button-primary p-button-sm mr-3" ></button>
-            <button (click)="ProcessToComplete()" pButton 
-            class="p-button-success p-button-sm" label="Process"></button>
+            <button printSectionId="invoice" ngxPrint pButton [useExistingCss]="true" label="Print Order"
+                  class="p-button-primary p-button-sm mr-3"></button>
+            <button (click)="ProcessToComplete()" pButton class="p-button-success p-button-sm"
+                  label="Mark as complete"></button>
       </div>
       <!-- BEGIN INVOICE -->
       <div #invoice id="invoice" class="col-12">
