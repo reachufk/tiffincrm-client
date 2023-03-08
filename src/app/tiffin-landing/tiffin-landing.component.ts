@@ -33,20 +33,20 @@ export class TiffinLandingComponent implements OnInit, OnDestroy {
     ]
   }
 
-  search(event) {
+  search(event: any) {
     this.results = this.availablePlaces.filter((region: IRegion) => region.label.toLowerCase().includes(event?.query?.toLowerCase()))
   }
 
   selectChange(region: IRegion) {
     this.showSelected = true;
-    this.selected = region
+    this.selected = region;
   }
 
   SetGo() {
     this.showSelected = false;
     this.authService.Region.next(this.selected);
     localStorage.setItem('selectedRegion', JSON.stringify(this.selected));
-    this.router.navigate(['/public/home'])
+    this.router.navigate(['/public/home']);
   }
 
   skip() {
@@ -57,14 +57,18 @@ export class TiffinLandingComponent implements OnInit, OnDestroy {
 
   ngAfterViewInit() {
     setInterval(() => {
-      if (this.counter == this.highLights.length) {
-        this.counter = 0;
-      }
+      this.counter === this.highLights.length && (this.counter = 0)
       this.highLight = this.highLights[this.counter];
       this.changeClass = !this.changeClass;
       this.counter++;
-    }, 3000)
+    }, 3000);
   }
+
+  newLocation(region: any) {
+    this.selected = region;
+    this.SetGo();
+  }
+
 
   ngOnDestroy() {
     this.showSelected = false;

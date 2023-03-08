@@ -41,9 +41,10 @@
 }
 
 ::ng-deep .dialog-nav .p-dialog * {
-     padding: 2% !important;
-  margin: 0% !important;
- }
+    padding: 1% !important;
+    margin: 0% !important;
+    font-size: 1rem !important;
+}
 
 ::ng-deep .p-button-success {
     padding: 1% 2% !important;
@@ -109,8 +110,4 @@
 ::ng-deep .accept-button {
     color: white;
     background-color: green;
-}
-
-::ng-deep .select-region * {
-    padding: 1% !important;
 }

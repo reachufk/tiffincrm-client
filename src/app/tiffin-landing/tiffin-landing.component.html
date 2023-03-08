@@ -41,7 +41,7 @@
                               <p class="text-secondary mb-2">POPULAR REGIONS</p>
                               <p class="ta-popular-regions">
                                     <span class="ms-2 ib fw-bold text-secondary"
-                                          *ngFor="let place of availablePlaces;let i=index"
+                                          *ngFor="let place of availablePlaces;let i=index" (click)="newLocation(place)"
                                           [ngClass]="i%2 ==0? 'text-dark':''">{{place?.label}}</span>
                                     <span class="ms-2 fw-bold text-secondary"> & more</span>
                               </p>
