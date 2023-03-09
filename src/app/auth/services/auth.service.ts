@@ -21,6 +21,9 @@ export class AuthService {
   }
 
   public get getLoggedInUserValue(): IloggedUser {
+    if(!this.LoggedInUser.value){
+      return JSON.parse(localStorage.getItem('loggedInUser'))
+    }
     return this.LoggedInUser.value;
   }
 

@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Subject, takeUntil, map } from 'rxjs';
@@ -15,6 +16,14 @@ export class OrderPreviewComponent implements OnInit, OnDestroy {
   OrderDetails: { userInfo: {}, items: [], orderAmount: number } = { userInfo: {}, items: [], orderAmount: 0 }
   Destroy: Subject<void> = new Subject();
   orderAmount: number = 0
+  latestDate: any;
+  minDate: Date;
+  maxDate: Date;
+  currentDate: Date
+  isFutureOrder:FormControl = new FormControl(false)
+  deliveryTime:FormControl = new FormControl(null,[Validators.required]);
+  orderModeControl:FormControl = new FormControl('offline',[Validators.required]);
+  orderModes:Array<any> = [{label:'Online',value:'online'},{label:'Offline',value:'offline'}]
   constructor(private placeOrderService: AdminPlaceOrderService, private router: Router,
     private messageService: MessageService,) {}
 
@@ -23,6 +32,14 @@ export class OrderPreviewComponent implements OnInit, OnDestroy {
     this.Destroy.complete()
   }
   ngOnInit(): void {
+    this.currentDate = new Date();
+    this.latestDate = this.currentDate.toISOString()
+    this.currentDate.setDate(this.currentDate.getDate() + 1);
+    this.minDate = this.currentDate;
+    const maxDate = new Date();
+    maxDate.setDate(this.minDate.getDate() + 4);
+    this.maxDate = maxDate;
+    console.log(this.latestDate);
     this.GetOrderDetails()
   }
 
@@ -35,6 +52,18 @@ export class OrderPreviewComponent implements OnInit, OnDestroy {
     AdminOrderModel = { ...this.OrderDetails.userInfo };
     AdminOrderModel.orderItems = this.OrderDetails?.items;
     AdminOrderModel.orderAmount = this.orderAmount;
+    AdminOrderModel.orderMode = 'offline';
+    AdminOrderModel.orderPymentMode = this.orderModeControl.value;
+    AdminOrderModel.orderPaymentStatus = 'pending';
+    if(!this.isFutureOrder.value){
+      AdminOrderModel.orderDeliveryTime = this.latestDate
+    }else{
+      if(!this.deliveryTime.valid){
+        return
+      }
+      const selectedDate = new Date(this.deliveryTime.value).toISOString()
+      AdminOrderModel.orderDeliveryTime = selectedDate
+    }
     this.placeOrderService.PlaceAdminOrder(AdminOrderModel).subscribe((res:any)=>{
       if(res?.statusCode==201){
         this.messageService.add({ severity: 'success', summary: 'Order Placed!' });

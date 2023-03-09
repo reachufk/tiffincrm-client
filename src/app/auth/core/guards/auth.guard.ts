@@ -14,7 +14,7 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       const user:IloggedUser = JSON.parse(localStorage.getItem('loggedInUser'))
-      if (this.authService.getLoggedInUserValue || user?.token) {
+      if (this.authService.getLoggedInUserValue || user) {
         return true;
       }
       this.router.navigate(['/auth/login'],{queryParams:{state:JSON.stringify(state.url)}});
