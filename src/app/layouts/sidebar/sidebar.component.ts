@@ -2,14 +2,17 @@ import { Component, OnInit } from '@angular/core';
 
 declare const $: any;
 declare interface RouteInfo {
-    path: string;
-    title: string;
-    icon: string;
-    class: string;
+  path: string;
+  title: string;
+  icon: string;
+  class: string;
 }
 export const ROUTES: RouteInfo[] = [
-    { path: '/dashboard', title: 'Dashboard',  icon: 'pi pi-home', class: '' },
-    { path: '/user-profile', title: 'User Profile',  icon:'pi pi-user', class: '' },
+  { path: '/admin/dashboard', title: 'Dashboard', icon: 'pi pi-home', class: '' },
+  { path: '/admin/orders', title: 'Orders', icon: 'pi pi-shopping-cart', class: '' },
+  { path: '/admin/catagories', title: 'Catagories', icon: 'pi pi-list', class: '' },
+  { path: '/admin/banners', title: 'Banners', icon: 'pi pi-image', class: '' },
+  { path: '/admin/users', title: 'Users', icon: 'pi pi-user', class: '' },
 ];
 
 @Component({
@@ -26,9 +29,9 @@ export class SidebarComponent implements OnInit {
     this.menuItems = ROUTES.filter(menuItem => menuItem);
   }
   isMobileMenu() {
-      // if ($(window).width() > 991) {
-      //     return false;
-      // }
-      // return true;
+    // if ($(window).width() > 991) {
+    //     return false;
+    // }
+    // return true;
   };
 }

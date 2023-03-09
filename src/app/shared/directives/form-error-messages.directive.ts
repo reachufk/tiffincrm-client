@@ -22,17 +22,17 @@ export class FormErrorMessagesDirective {
 
   ngAfterViewInit(){
       this.feildName = this.el.nativeElement.name?  this.el.nativeElement.name : this.el.nativeElement.id
-      if (this.ncontrol && this.ncontrol.control) {
-          this.control = this.ncontrol.control;
+      if (this.ncontrol && this.ncontrol?.control) {
+          this.control = this.ncontrol?.control;
       } else {
           let p: any;
           p = this.ncontrol;
           this.control = (p as AbstractControl);
       }
-      const oldValue = this.control.value;
+      const oldValue = this.control?.value;
       this.doupdate();
       if (this.control) {
-          this.control.valueChanges.subscribe((value) => {
+          this.control?.valueChanges?.subscribe((value) => {
               // console.log(this.parentForm.get('question1').value);
               if (oldValue !== value && oldValue) {
                   this.renderer.setStyle(
@@ -40,7 +40,7 @@ export class FormErrorMessagesDirective {
                       'font-weight',
                       'bold'
                   );
-              } else if (oldValue === value && Object.values(this.el.nativeElement.style).includes('font-weight')) {
+              } else if (oldValue === value && Object?.values(this.el.nativeElement.style).includes('font-weight')) {
                   this.renderer.removeStyle(this.el.nativeElement, 'font-weight');
               }
           });
@@ -49,14 +49,14 @@ export class FormErrorMessagesDirective {
 
   ngOnInit(): void {
     this.feildName = this.el.nativeElement.name?  this.el.nativeElement.name : this.el.nativeElement.id
-      if (this.ncontrol && this.ncontrol.control) {
+      if (this.ncontrol && this.ncontrol?.control) {
           this.control = this.ncontrol.control;
       } else {
           let p: any;
           p = this.ncontrol;
           this.control = (p as AbstractControl);
       }
-      const oldValue = this.control.value;
+      const oldValue = this.control?.value;
       this.doupdate();
       if (this.control) {
           this.control.valueChanges.subscribe((value) => {
@@ -105,15 +105,16 @@ export class FormErrorMessagesDirective {
     if (!this.errorElement) {
        const divelev= this.renderer.createElement("small");
        this.renderer.addClass(divelev, 'ng-tns-c138-3');
-
        const divelev2= this.renderer.createElement("div");
+       this.renderer.addClass(divelev2, 'w-70');
+       this.renderer.addClass(divelev2, 'mx-auto');
        this.renderer.appendChild(divelev,divelev2)
 
         const element = this.renderer.createElement('small');
         this.errorElement = element;
         this.renderer.addClass(element, 'p-error');
         this.renderer.addClass(element, 'text-danger');
-
+    
         this.renderer.appendChild(divelev2,this.errorElement)
         const parentNode = this.renderer.parentNode(this.el.nativeElement.parentNode);
         const nextSibling = this.renderer.nextSibling(this.el.nativeElement);
@@ -190,7 +191,7 @@ export class FormErrorMessagesDirective {
                   message = `aaaa password doesn't match bbbbb`;
                   break;
 
-              case 'Password':
+              case 'password':
                   message = 'Password is not strong enough';
                   break;
 
@@ -209,7 +210,6 @@ export class FormErrorMessagesDirective {
   
   doupdate(): void {
       if (!this.control) {
-          console.error('No control bound. appFormErrorMessages directive');
           return;
       }
 

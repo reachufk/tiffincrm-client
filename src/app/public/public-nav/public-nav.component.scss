@@ -1,0 +1,129 @@
+.custom-nav {
+    background-color: #ffffff;
+}
+
+.shadow {
+    padding-block: 15px;
+    box-shadow: 0 8px 6px -6px black;
+}
+
+.link-style {
+    text-decoration: none;
+}
+
+.fixed-top {
+    position: sticky;
+    top: 0;
+    width: 100%;
+}
+
+.mr-2 {
+    margin-right: 5px;
+}
+
+.show-cursor {
+    cursor: pointer;
+}
+
+.pull-right {
+    float: right;
+}
+
+.w-50 {
+    padding-top: 10px;
+    width: 50%;
+}
+
+@media (max-width:310px) {
+    .w-50 {
+        width: 100% !important;
+    }
+}
+
+::ng-deep .dialog-nav .p-dialog * {
+    padding: 1% !important;
+    margin: 0% !important;
+    font-size: 1rem !important;
+}
+
+::ng-deep .p-button-success {
+    padding: 1% 2% !important;
+    border-radius: 0;
+    box-shadow: none;
+    margin: 0;
+}
+
+:host::ng-deep .navbar-brand .p-dropdown {
+    background: #ffffff;
+    border: none;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    border-radius: 6px;
+
+    .p-dropdown-label {
+        padding: 0px;
+    }
+}
+
+::ng-deep .navbar-brand .p-dropdown:not(.p-disabled).p-focus {
+    border-radius: 50%;
+    border-color: transparent !important;
+    box-shadow: none !important;
+}
+
+.navbar-toggler {
+    border: none;
+    padding: 0 !important;
+}
+
+::ng-deep .navbar-toggler .p-dropdown {
+    border-radius: 50%;
+    height: 40px;
+
+    .p-dropdown-label {
+        display: none;
+    }
+
+    .p-dropdown-item {
+        padding: 2px !important;
+    }
+}
+
+
+::ng-deep .p-dropdown .p-dropdown-trigger {
+    margin: 2px;
+    width: 2rem !important;
+
+}
+
+::ng-deep .p-dropdown-panel .p-dropdown-items .p-dropdown-item {
+    padding: 6px;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.mr-2 {
+    margin-right: 8px;
+}
+
+.ta-box {
+    padding: 2px;
+    margin: 2px !important;
+    border: none !important;
+    box-shadow: none;
+}
+
+::ng-deep .accept-button {
+    color: white;
+    background-color: green;
+}
+
+.user-profile * {
+    padding: 0px !important;
+    margin: 0% !important;
+}
+
+::ng-deep .user-profile .p-dialog .p-dialog-header {
+    padding: 0;
+}

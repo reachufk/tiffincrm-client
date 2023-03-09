@@ -1,0 +1,88 @@
+<div class="container-xxl py-3 h-100" style="background-color: rgb(243, 240, 240);">
+    <p-toast position="top-center"></p-toast>
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 order-placed-dialog">
+            <div class="card card-registration card-registration-2" style="border-radius: 15px;">
+                <form [formGroup]="OrderForm">
+                    <div class="card-body p-0 bg-light">
+                        <div class="row g-0">
+                            <div class="col-lg-12 text-center my-5">
+                                <h2 class="fw-bold float-center text-success">
+                                    Checkout <i class="fs-3 pi pi-shopping-cart  fw-bold"></i>
+                                </h2>
+                            </div>
+                            <div class="col-lg-8">
+                                <form [formGroup]="OrderForm">
+                                    <div class="row">
+                                        <div class="col-lg-12 px-4 p-fluid">
+                                            <h4>Select order for: </h4>
+                                            <p-selectButton [options]="OrderForTypes" formControlName="orderType"
+                                                optionLabel="label" optionValue="value" id="Select choice"
+                                                appFormerror></p-selectButton>
+
+                                        </div>
+                                        <div class="col-lg-12 px-4 my-3">
+                                            <h4>Future Order : <p-checkbox [value]="true" [binary]="true"
+                                                    [formControl]="isFutureOrder"></p-checkbox></h4>
+                                        </div>
+                                        <div *ngIf="isFutureOrder?.value" class="col-lg-12 px-4 ">
+                                            <p-calendar [appendTo]="'body'" placeholder="Select Delivery Date"
+                                                formControlName="orderDeliveryTime" [minDate]="minDate"
+                                                [maxDate]="maxDate" id="Delivery Date" [showIcon]="true" appFormerror
+                                                required></p-calendar>
+                                        </div>
+
+                                        <div class="col-lg-12 px-4 p-fluid">
+                                            <h4>Delivery Address </h4>
+                                            <textarea [rows]="5" [cols]="30" pInputTextarea
+                                                formControlName="orderAddress" [autoResize]="true" id="Delivery address"
+                                                appFormerror></textarea>
+                                        </div>
+
+                                        <div class="col-lg-12 px-4 p-fluid">
+                                            <h4>Select Payment Mode: </h4>
+                                            <p-selectButton [options]="paymentModes" formControlName="orderMode"
+                                                optionLabel="label" optionValue="value" id="Select choice"
+                                                appFormerror></p-selectButton>
+                                        </div>
+
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-lg-4 bg-grey px-3">
+                                <h4 class="fw-bold">Summary</h4>
+                                <span class="fs-5 fw-bold text-dark mr-2">
+                                    {{totalItems}} items
+                                </span>
+
+                                <div class="d-flex justify-content-between">
+                                    <h5 class="text-secondary">Subtotal</h5>
+                                    <h5>{{totalAmount | currency:'INR'}}</h5>
+                                </div>
+
+                                <div class="d-flex justify-content-between">
+                                    <h5 class="text-secondary">Delivery Charges</h5>
+                                    <h5>free</h5>
+                                </div>
+
+                                <div class="d-flex justify-content-between mb-4">
+                                    <h5 class="text-secondary">Gst</h5>
+                                    <h5>Included</h5>
+                                </div>
+
+                                <div class="d-flex justify-content-between mb-3">
+                                    <h5 class="text-secondary">Total :
+                                        <span class="text-dark"> {{totalAmount | currency:'INR'}}</span>
+                                    </h5>
+                                    <button pButton (click)="CheckOut()"
+                                        class="p-button-success p-3 p-button-rounded float-right" label="Checkout">
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+img {
+  border-radius: 8px;
+}
+
+.show-cursor {
+  cursor: pointer;
+}
+
+.category-name {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  margin-left: 4px;
+  line-height: 12px;
+}
+
+.card-catagory {
+  border-radius: 15px;
+  background: rgba(23, 19, 19, 0.55);
+  border: none;
+}
+
+@media (max-width:986px) {
+  .half {
+    width: 50% !important;
+  }
+}
+
+.row>* {
+  padding: 4px !important;
+}

@@ -1,0 +1,50 @@
+<div class="container-xxl px-0 mb-3" [ngClass]="stickHeader?'fixed-top':''">
+  <nav class="navbar navbar-expand-lg custom-nav py-0" #nav>
+    <div class="container-fluid pt-2 dialog-nav" [ngClass]="stickHeader?'shadow':''">
+      <a class="navbar-brand" routerLink="/public/home">
+        <img src="./../../../assets/img/logo_tiffin_aaw.webp" style="height: 50px;" alt="Tiffin Aww">
+      </a>
+      <a class="navbar-brand">
+        <p-dropdown [options]="regions" optionLabel="label" dropdownIcon="pi pi-globe" [formControl]="selectedRegion"
+          [filter]="false" placeholder="Select region">
+          <ng-template let-region pTemplate="item">
+            <div class="country-item">
+              <div>{{region?.label}} - {{region?.distance}}</div>
+            </div>
+          </ng-template>
+        </p-dropdown>
+      </a>
+      <p-dropdown appendTo="body" placeholder="''" [formControl]="selected" class="navbar-toggler"
+        (onChange)="NavigateTo($event?.value)" [options]="Items" optionLabel="label" dropdownIcon="pi pi-user"
+        [filter]="false">
+        <ng-template let-item pTemplate="item">
+          <div class="item">
+            <span> <i [class]="item?.icon + ' ' + 'mr-2'"></i></span>
+            <span>{{item.label}}</span>
+          </div>
+        </ng-template>
+      </p-dropdown>
+      <div class="collapse navbar-collapse justify-content-end m-0" id="navbarNav"
+        [ngClass]="{'collapse': collapsed, 'navbar-collapse': true}">
+        <ul class="navbar-nav">
+          <li *ngFor="let item of Items" class="nav-item ms-4">
+            <a class="nav-link show-cursor" (click)="NavigateTo(item)" aria-current="page"><i
+                [class]="item?.icon + ' '+ 'mr-2' "></i>{{item?.label}}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <p-confirmDialog acceptLabel="Yes" [rejectVisible]="false" position="top" [baseZIndex]="10000"
+      acceptButtonStyleClass="accept-button" [breakpoints]="{'960px': '75vw', '640px': '100vw'}">
+    </p-confirmDialog>
+    <div class="user-profile">
+      <p-dialog [(visible)]="showProfile" position="top-right" [modal]="true" (onHide)="closeProfile()"
+        [draggable]="false" [resizable]="false">
+        <p>Username: {{userProfile?.username}}</p>
+        <p>Phone number: {{userProfile?.phoneNumber}}</p>
+        <p>Email: {{userProfile?.email}}</p>
+      </p-dialog>
+    </div>
+  </nav>
+</div>

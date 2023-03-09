@@ -1,33 +1,29 @@
-<footer class="footer ">
-    <div class="container-fluid">
-        <nav class="pull-left">
-            <ul>
-                <li>
-                    <a href="https://www.creative-tim.com">
-                        Creative Tim
-                    </a>
-                </li>
-                <li>
-                    <a href="https://creative-tim.com/about-us">
-                        About Us
-                    </a>
-                </li>
-                <li>
-                    <a href="http://blog.creative-tim.com">
-                        Blog
-                    </a>
-                </li>
-                <li>
-                    <a href="https://www.creative-tim.com/license">
-                        Licenses
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        <div class="copyright pull-right">
-            &copy;
-            {{test | date: 'yyyy'}}, made with love by
-            <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
-        </div>
+<div class="container-xxl text-dark bg-light">
+  <div class="row pt-2">
+    <div class="col-sm-12 col-md-4 serving-homemade">
+      <img src="../../../assets/img/logo_tiffin_aaw.webp" style="height: 90px;">
     </div>
-</footer>
+    <div class="col-sm-12 col-md-4 my-2 address">
+      <p>
+        <i class="pi pi-map-marker me-2"></i>Rajbagh near IGNOU Centre, Srinagar,
+        190008 J&K
+      </p>
+      <p>
+        <i class="pi pi-phone me-2"></i> <a href="tel:9086811422">+919086811422</a>
+      </p>
+      <p>
+        <i class="pi pi-envelope me-2"></i> <a href="mailto:feedback@tiffinaaw.com">
+          feedback@tiffinaaw.com</a>
+      </p>
+    </div>
+    <div class="col-sm-12 col-md-4 my-1">
+      <button pButton pRipple type="button" icon="pi pi-whatsapp" class="p-button-rounded p-button-success"></button>
+      <button pButton pRipple type="button" icon="pi pi-facebook" class="p-button-rounded ms-2"></button>
+      <button pButton pRipple type="button" icon="pi pi-twitter" class="p-button-rounded ms-2"></button>
+      <button pButton pRipple type="button" icon="pi pi-instagram"
+        class="p-button-rounded p-button-success ms-2"></button>
+    </div>
+    <p-divider type="dashed"></p-divider>
+    <app-ufklogo />
+  </div>
+</div>

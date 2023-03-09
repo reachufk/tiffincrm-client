@@ -1,0 +1,26 @@
+.pull-right {
+      float: right;
+      margin-right: 10px;
+}
+
+@media (max-width: 768px) {
+      .half {
+            width: 50% !important;
+            padding-block: 20px;
+      }
+}
+
+.ready-to-go {
+      background-color: green;
+      color: white;
+      text-decoration: none;
+      padding: 4px 10px;
+      border-radius: 16px;
+      margin-left: 16px;
+}
+
+.card-text p::before {
+      content: '';
+      border: 2px black solid;
+      margin-right: 4px;
+}

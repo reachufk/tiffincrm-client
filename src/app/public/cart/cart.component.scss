@@ -1,0 +1,26 @@
+.float-right{
+      float: right;
+}
+
+.mr-2{
+      margin-right: 9px;
+}
+.show-cursor{
+      cursor: pointer;
+}
+.show-cursor:hover{
+      padding: 10px;
+      border: 1px solid rgba(0, 128, 0, 0.571);
+      border-radius: 50%;
+      transition: 0.3s ease-in-out;
+}
+.empty-fcss{
+      min-height: 90vh;
+}
+.half{
+      width: 50%;
+}
+
+.fs-small{
+      font-size: smaller;
+}

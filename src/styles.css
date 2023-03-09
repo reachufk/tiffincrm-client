@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: Poppins-Regular;
+    src: url(assets/font/Poppins-Regular.ttf) format("opentype");
+}
+
+@font-face {
+    font-family: Poppins-Italic;
+    src: url(assets/font/Poppins-Italic.ttf) format("opentype");
+}
+
