@@ -11,6 +11,7 @@ import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component
 import { PublicResolver } from './public/public.resolver';
 import { TiffinLandingComponent } from './tiffin-landing/tiffin-landing.component';
 import { OrderPlacedComponent } from './public/order-placed/order-placed.component';
+import { NotFoundComponent } from './layouts/NotFound/notfound.component';
 
 const routes: Routes = [
 
@@ -45,6 +46,10 @@ const routes: Routes = [
     path: 'auth',
     component: AuthLayoutComponent,
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
+  },
+  {
+    path: '**',
+    component: NotFoundComponent,
   }
 ];
 

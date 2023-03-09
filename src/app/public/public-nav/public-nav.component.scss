@@ -59,8 +59,6 @@
     transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
     border-radius: 6px;
 
-
-
     .p-dropdown-label {
         padding: 0px;
     }
@@ -84,13 +82,21 @@
     .p-dropdown-label {
         display: none;
     }
+
+    .p-dropdown-item {
+        padding: 2px !important;
+    }
 }
 
 
 ::ng-deep .p-dropdown .p-dropdown-trigger {
-    margin: 4px;
+    margin: 2px;
     width: 2rem !important;
 
+}
+
+::ng-deep .p-dropdown-panel .p-dropdown-items .p-dropdown-item {
+    padding: 6px;
 }
 
 .w-100 {
@@ -111,4 +117,13 @@
 ::ng-deep .accept-button {
     color: white;
     background-color: green;
+}
+
+.user-profile * {
+    padding: 0px !important;
+    margin: 0% !important;
+}
+
+::ng-deep .user-profile .p-dialog .p-dialog-header {
+    padding: 0;
 }

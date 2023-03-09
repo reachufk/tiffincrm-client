@@ -8,11 +8,9 @@
                 <div *ngFor="let category of catagories | async" class="col-md-3 col-sm-6 col-xs-6 half">
                     <div class="card h-100 card-catagory show-cursor"
                         routerLink="/public/category-items/{{category?._id}}">
-                        <div class="text-center">
-                            <img [src]="category?.catagoryImage" class="category-image" width="100%" height="170px"
-                                class="img-rounded">
-                            <div class="category-name text-white fw-bold fs-4 py-1">{{category?.catagoryName}}</div>
-                        </div>
+                        <img [src]="category?.catagoryImage" class="category-image" width="100%" height="170px"
+                            class="img-rounded">
+                        <div class="category-name text-white fw-bold py-1">{{category?.catagoryName}}</div>
                     </div>
                 </div>
             </div>

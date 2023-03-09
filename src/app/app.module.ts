@@ -24,17 +24,17 @@ import { BlockUIModule } from 'ng-block-ui';
 import { BlockUIHttpModule } from 'ng-block-ui/http';
 import { LoaderComponent } from './shared/components/loader/loader.component';
 import { OrderPlacedComponent } from './public/order-placed/order-placed.component';
+import { NotFoundComponent } from './layouts/NotFound/notfound.component';
 
 @NgModule({
   imports: [
-
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule,
     AppRoutingModule,
-    BlockUIModule.forRoot({template:LoaderComponent}),
+    BlockUIModule.forRoot({ template: LoaderComponent }),
     BlockUIHttpModule.forRoot(),
     SharedModule,
     ConfirmDialogModule,
@@ -51,7 +51,8 @@ import { OrderPlacedComponent } from './public/order-placed/order-placed.compone
     UserLayoutComponent,
     AuthLayoutComponent,
     FooterComponent,
-    TiffinLandingComponent
+    TiffinLandingComponent,
+    NotFoundComponent
   ],
   providers: [
     { provide: LocationStrategy, useClass: PathLocationStrategy },

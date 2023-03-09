@@ -38,6 +38,13 @@
     <p-confirmDialog acceptLabel="Yes" [rejectVisible]="false" position="top" [baseZIndex]="10000"
       acceptButtonStyleClass="accept-button" [breakpoints]="{'960px': '75vw', '640px': '100vw'}">
     </p-confirmDialog>
-
+    <div class="user-profile">
+      <p-dialog [(visible)]="showProfile" position="top-right" [modal]="true" (onHide)="closeProfile()"
+        [draggable]="false" [resizable]="false">
+        <p>Username: {{userProfile?.username}}</p>
+        <p>Phone number: {{userProfile?.phoneNumber}}</p>
+        <p>Email: {{userProfile?.email}}</p>
+      </p-dialog>
+    </div>
   </nav>
 </div>

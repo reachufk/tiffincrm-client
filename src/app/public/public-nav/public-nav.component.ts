@@ -2,10 +2,16 @@ import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
-import { map, Subject, take, takeUntil } from 'rxjs';
+import { map, Subject, takeUntil } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { CartService } from '../services/cart.service';
 import * as regionData from './regions.json';
+
+interface IUserProfile {
+  username: string,
+  phoneNumber: string,
+  email: string
+}
 
 @Component({
   selector: 'public-nav',
@@ -17,9 +23,11 @@ export class PublicNavComponent implements OnInit, OnDestroy {
   collapsed: boolean = true
   regions: MenuItem[] = [];
   selected: FormControl = new FormControl(null)
-  Items: MenuItem[] = [{ label: 'My Orders', icon: 'pi pi-shopping-cart', routerLink: '/public/my-orders' },
-  { label: 'Logout', icon: 'pi pi-sign-out' },
-  { label: 'Login', icon: 'pi pi-sign-in', routerLink: '/auth/login' }
+  Items: MenuItem[] = [
+    { label: 'My Orders', icon: 'pi pi-shopping-cart', routerLink: '/public/my-orders' },
+    { label: 'Logout', icon: 'pi pi-sign-out' },
+    { label: 'My profile', icon: 'pi pi-user' },
+    { label: 'Login', icon: 'pi pi-sign-in', routerLink: '/auth/login' }
   ]
   selectedRegion: FormControl = new FormControl();
   cartItemsLength: number = 0;
@@ -29,7 +37,8 @@ export class PublicNavComponent implements OnInit, OnDestroy {
   showConfirmation: boolean = false;
   items = [];
   url: string = '';
-
+  showProfile: boolean = false;
+  userProfile: IUserProfile;
   constructor(private authService: AuthService, private router: Router,
     private cartService: CartService, private activatedRoute: ActivatedRoute,
     private confirmationService: ConfirmationService, messageService: MessageService) {
@@ -55,7 +64,7 @@ export class PublicNavComponent implements OnInit, OnDestroy {
         const pullOut = ['Login'];
         this.Items = this.NavItems.filter((item: MenuItem) => !pullOut.includes(item?.label))
       } else {
-        const pullOut = ['My Orders', 'Logout']
+        const pullOut = ['My Orders', 'Logout', 'My profile']
         this.Items = this.NavItems.filter((item: MenuItem) => !pullOut.includes(item?.label))
       }
     })).subscribe()
@@ -90,17 +99,32 @@ export class PublicNavComponent implements OnInit, OnDestroy {
   }
 
   NavigateTo(item: MenuItem) {
-    if (item?.routerLink) {
-      this.selected.reset();
-      this.router.navigate([item.routerLink])
-      return
+    switch (item.label) {
+      case 'Logout':
+        this.Items = [
+          { label: 'Login', icon: 'pi pi-sign-in', routerLink: '/auth/login' }
+        ]
+        this.authService.Logout()
+        this.router.navigate(['/public/home'])
+        break;
+      case 'My profile':
+        const { email, phoneNumber, username } = JSON.parse(localStorage.getItem('loggedInUser'));
+        this.userProfile = {
+          username,
+          email,
+          phoneNumber
+        }
+        this.selected.reset();
+        this.showProfile = true;
+        break;
+      default:
+        this.selected.reset();
+        this.router.navigate([item.routerLink])
     }
-    if (item?.label == 'Logout') {
-      const pullOut = ['My Orders', 'Logout']
-      this.Items = this.NavItems.filter((item: MenuItem) => !pullOut.includes(item?.label));
-      this.authService.Logout()
-      this.router.navigate(['/public/home'])
-    }
+  }
+
+  closeProfile() {
+    return this.showProfile = false;
   }
 
   AcceptRegion() {
@@ -113,7 +137,6 @@ export class PublicNavComponent implements OnInit, OnDestroy {
     this.selectedRegion.patchValue(JSON.parse(localStorage.getItem('selectedRegion')));
     return this.showConfirmation = false;
   }
-
 
   ResetRegion() {
     this.showConfirmation = false
