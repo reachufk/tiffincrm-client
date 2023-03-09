@@ -1,7 +1,7 @@
-import { Component, OnInit, OnDestroy, inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { debounceTime, map, Observable, startWith, Subject, takeUntil } from 'rxjs';
+import { map, Observable, Subject, takeUntil } from 'rxjs';
 import { FetchCatagoryItems, initializeFetchCatagoryItems } from 'src/app/shared/interfaces/fetch-catagory-items';
 import { CatagoryService } from '../services/catagory.service';
 import { FormControl } from '@angular/forms';
@@ -37,14 +37,16 @@ export class CategoryItemsComponent implements OnInit, OnDestroy {
   SelectedItem: any = {};
   QuantityControl: FormControl = new FormControl(1);
   LoggedInUser: IloggedUser;
-  AllCatagories:Array<any>=[];
-  empty:boolean = false
+  AllCatagories: Array<any> = [];
+  empty: boolean = false
   regionSelected = JSON.parse(localStorage.getItem('selectedRegion'))
   constructor(private catagoryService: CatagoryService, private activatedRoute: ActivatedRoute,
-    private location: Location, private cartService: CartService,private authService:AuthService,
+    private location: Location, private cartService: CartService, private authService: AuthService,
     private confirmationService: ConfirmationService, private router: Router) {
     this.category = this.activatedRoute.snapshot.paramMap.get('category')
   }
+  width: string;
+
   ngOnDestroy(): void {
     this.Destroy.next();
     this.Destroy.complete()
@@ -58,7 +60,7 @@ export class CategoryItemsComponent implements OnInit, OnDestroy {
     this.FetchModel.catagory = this.category
     this.GetCategories()
     this.GetItems()
-
+    this.onWindowResize();
     this.authService.Region.pipe(takeUntil(this.Destroy), map((region: any) => {
       if (region) {
         this.regionSelected = region
@@ -69,8 +71,8 @@ export class CategoryItemsComponent implements OnInit, OnDestroy {
   }
 
   GetItems() {
-    this.FilteredItems = this.catagoryService.GetCatagoryItems(this.FetchModel).pipe(map((res: any) =>{
-      if(!res?.data?.length){
+    this.FilteredItems = this.catagoryService.GetCatagoryItems(this.FetchModel).pipe(map((res: any) => {
+      if (!res?.data?.length) {
         this.empty = true
         return
       }
@@ -87,7 +89,7 @@ export class CategoryItemsComponent implements OnInit, OnDestroy {
       this.Categories = [this.Categories, ...catagories];
       this.AllCatagories = this.Categories
       this.categoryName = this.Categories.filter((category: any) => category?.id == this.category)[0]?.title;
-      this.Categories = this.Categories.filter((catagory:any)=> catagory?.id !== this.category)
+      this.Categories = this.Categories.filter((catagory: any) => catagory?.id !== this.category)
     })
   }
 
@@ -99,7 +101,7 @@ export class CategoryItemsComponent implements OnInit, OnDestroy {
     this.FetchModel.pageNo = 1
     this.FetchModel.catagory = this.category
     this.categoryName = this.Categories.filter((category: any) => category?.id == this.category)[0]?.title;
-    this.Categories = this.AllCatagories.filter((catagory:any)=> catagory?.id !== this.category)
+    this.Categories = this.AllCatagories.filter((catagory: any) => catagory?.id !== this.category)
     this.GetItems()
   }
 
@@ -118,7 +120,7 @@ export class CategoryItemsComponent implements OnInit, OnDestroy {
     }
     this.SelectedItem = ({
       itemId: item?._id, itemName: item?.itemName, itemPrice: item?.itemPrice,
-      count: 1, itemDiscount: item?.itemDiscount, catagory: item?.catagory,itemInstructions:'',
+      count: 1, itemDiscount: item?.itemDiscount, catagory: item?.catagory, itemInstructions: '',
       isVeg: item?.isVeg ? item?.isVeg : false, itemTypes: item?.itemTypes, selectedItemType: item?.itemTypes?.length ? item?.itemTypes[0] : {}
     })
     this.displayAddItemDialog = true
@@ -137,9 +139,17 @@ export class CategoryItemsComponent implements OnInit, OnDestroy {
     })
   }
 
+  @HostListener('window:resize', ['$event'])
+  onWindowResize() {
+    if (window.innerWidth < 768) {
+      this.width = '24.5%';
+    } else {
+      this.width = '12.25%';
+    }
+  }
 
   NotSignedInConfirm() {
-    if(!this.LoggedInUser){
+    if (!this.LoggedInUser) {
       this.confirmationService.confirm({
         message: 'Sign in to continue?',
         header: 'You are not logged in?',
@@ -160,25 +170,25 @@ export class CategoryItemsComponent implements OnInit, OnDestroy {
               this.confirmationService.close()
               break;
           }
-  
+
         }
       });
       return
     }
 
-    if(!this.regionSelected){
+    if (!this.regionSelected) {
       this.confirmationService.confirm({
         message: 'Select Region from above to continue?',
         header: "You haven't selected your region yet ?",
         icon: 'pi pi-exclamation-triangle',
         acceptLabel: 'Select region',
-        rejectVisible:false,
+        rejectVisible: false,
         accept: () => {
           this.confirmationService.close()
-          window.scroll({ 
-            top: 0, 
-            left: 0, 
-            behavior: 'smooth' 
+          window.scroll({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
           });
         }
       });
@@ -186,7 +196,5 @@ export class CategoryItemsComponent implements OnInit, OnDestroy {
     }
 
   }
-
-
 
 }

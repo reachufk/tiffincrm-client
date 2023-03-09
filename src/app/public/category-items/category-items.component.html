@@ -3,11 +3,11 @@
             acceptButtonStyleClass="p-button-success"></p-confirmDialog>
       <div class="row mx-auto">
             <div class="col-lg-12 px-0">
-                  <div class="card py-3 shadow">
-                        <ng-image-slider [imageSize]="{width: '100px', height: '90px', space: 6}"
-                              [defaultActiveImage]="1" [manageImageRatio]="false" [images]="Categories"
-                              [infinite]="true" [imagePopup]="false" [animationSpeed]="1" [showArrow]="false"
-                              (imageClick)="catagoryClick($event)" [autoSlide]="0" #nav>
+                  <div class="card p-1 shadow">
+                        <ng-image-slider [imageSize]="{width: width, height: '10%', space: 1}" [defaultActiveImage]="1"
+                              [manageImageRatio]="false" [images]="Categories" [infinite]="true" [imagePopup]="false"
+                              [animationSpeed]="1" [showArrow]="false" (imageClick)="catagoryClick($event)"
+                              [autoSlide]="0" #nav>
                         </ng-image-slider>
                   </div>
             </div>
@@ -32,35 +32,35 @@
                                     Sorry! no items for {{categoryName}} for now
                               </h5>
                         </div>
-                        <div *ngFor="let item of FilteredItems | async" class="col-lg-4 col-sm-6 col-xs-6 px-2 mb-3">
-                              <div class="card p-3 h-100">
+                        <div *ngFor="let item of FilteredItems | async; index as i"
+                              class="col-lg-4 col-sm-6 col-xs-6 px-2 mb-3">
+                              <div class="card p-2 h-100">
                                     <div class="row">
-                                          <div class="col-lg-6 col-md-6 half">
+                                          <div class="col-8">
                                                 <p-toast position="top-center"></p-toast>
                                                 <span class="pi pi-stop-circle fw-bold"
                                                       [ngClass]="item?.isVeg? 'text-success':'text-danger'"></span>
-                                                <span class="itemTitle ms-2">{{item?.itemName}}</span>
-                                                <p class="text-secondary my-3">{{item?.itemDescription}}</p>
+                                                <span>&nbsp; {{item?.itemName}}</span>
+                                                <p class="text-secondary my-2">
+                                                      {{item?.itemDescription}}</p>
                                           </div>
-                                          <div class="col-lg-6 col-md-6 half text-end">
-
-                                                <span class="text-secondary pull-right">Starts From</span>
-                                                <br>
-                                                <span class="my-3">{{item?.itemPrice | currency:'INR'}}</span>
-                                                <br>
+                                          <div class="col-4 text-end item-price">
+                                                <p class="text-secondary pull-right">Starts From</p><br>
+                                                <p>{{item?.itemPrice | currency:'INR'}}</p>
                                                 <button (click)="OpenItemDialog(item)" pButton pRipple
-                                                      class="p-button-warning p-button-sm my-3" label="Add"
+                                                      class="p-button-warning p-button-sm" label="Add"
                                                       icon="pi pi-plus">
                                                 </button>
-                                                <br>
-                                                <span class="text-secondary bottom">Customizable</span>
+                                                <p *ngIf="i == 0" class="text-secondary  mt-2 customizable">
+                                                      Customizable</p>
                                           </div>
                                     </div>
                               </div>
                         </div>
                         <div class="col-lg-12 mx-0">
                               <p-dialog [(visible)]="displayAddItemDialog" [position]="'bottom'" [modal]="true"
-                                    [style]="{width: '100vw'}" [draggable]="false" [resizable]="false">
+                                    [style]="{width: '100vw'}" [draggable]="false" [resizable]="false"
+                                    acceptButtonStyleClass="accept-button">
 
                                     <ng-template pTemplate="header">
                                           <div class="row">
@@ -73,9 +73,6 @@
                                                       {{SelectedItem?.itemPrice | currency:'INR'}}
                                                 </div>
                                           </div>
-                                          <!-- <h3> 
-                                                <p-dropdown [options]="SelectedItem?.itemTypes" [(ngModel)]="SelectedItem.selectedItemType" optionLabel="typeName" placeholder="Select Item Type" appFormerror required></p-dropdown>
-                                          </h3> -->
                                     </ng-template>
 
                                     <ng-template pTemplate="content">

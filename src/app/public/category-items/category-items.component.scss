@@ -41,11 +41,6 @@
       background-color: #16a34a;
 }
 
-.itemTitle {
-      font-size: larger;
-      font-weight: 600;
-}
-
 .bottom {
       display: inline-block;
       position: absolute;
@@ -62,9 +57,18 @@
 
 
 ::ng-deep .p-dialog .p-dialog-footer button {
-      margin: 0 0 0 0 !important;
-      width: auto;
+      border: none !important;
+      outline: none !important;
+      padding: 2px;
 }
+
+::ng-deep .ng-image-slider .ng-image-slider-container .main .main-inner .img-div .caption {
+      padding: 1px;
+      text-align: start;
+      line-height: 17px;
+      font-size: 1rem;
+}
+
 
 @media (max-width:768px) {
       .half {
@@ -72,8 +76,23 @@
       }
 }
 
-::ng-deep .p-dialog.p-confirm-dialog .p-confirm-dialog-message {
+::ng-deep .p-dialog .p-confirm-dialog .p-confirm-dialog-message {
       margin-block: 19px;
+}
+
+::ng-deep .p-dialog * {
+      padding: 2px !important;
+      margin: 0px !important;
+}
+
+::ng-deep .p-dialog .p-dialog-header {
+      padding: 2px !important;
+      margin: 0px !important;
+}
+
+::ng-deep .p-dialog .p-dialog-header .p-dialog-title {
+      font-weight: bold;
+      font-size: 1rem;
 }
 
 ::ng-deep .p-radiobutton .p-radiobutton-box .p-radiobutton-icon {
@@ -102,4 +121,19 @@
 
 ::ng-deep .p-inputswitch .p-inputswitch-slider {
       background: #bbbcbf !important;
+}
+
+::ng-deep .accept-button {
+      color: white;
+      background-color: red;
+}
+
+.item-price p {
+      margin: 0px;
+}
+
+.customizable {
+      margin-top: 1px;
+      font-size: smaller;
+      line-height: 0.5px;
 }

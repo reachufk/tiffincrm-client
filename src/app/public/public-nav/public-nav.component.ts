@@ -19,6 +19,7 @@ interface IUserProfile {
   styleUrls: ['./public-nav.component.scss'],
   providers: [ConfirmationService, MessageService]
 })
+
 export class PublicNavComponent implements OnInit, OnDestroy {
   collapsed: boolean = true
   regions: MenuItem[] = [];
@@ -41,7 +42,7 @@ export class PublicNavComponent implements OnInit, OnDestroy {
   userProfile: IUserProfile;
   constructor(private authService: AuthService, private router: Router,
     private cartService: CartService, private activatedRoute: ActivatedRoute,
-    private confirmationService: ConfirmationService, messageService: MessageService) {
+    private confirmationService: ConfirmationService, private messageService: MessageService) {
     this.url = router.url
   }
 
@@ -104,8 +105,9 @@ export class PublicNavComponent implements OnInit, OnDestroy {
         this.Items = [
           { label: 'Login', icon: 'pi pi-sign-in', routerLink: '/auth/login' }
         ]
-        this.authService.Logout()
-        this.router.navigate(['/public/home'])
+        this.authService.Logout();
+        this.messageService.add({ severity: 'success', summary: 'Logout successfully', life: 3000 });
+        this.router.navigate(['/public/home']);
         break;
       case 'My profile':
         const { email, phoneNumber, username } = JSON.parse(localStorage.getItem('loggedInUser'));
