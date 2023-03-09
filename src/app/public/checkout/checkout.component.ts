@@ -48,6 +48,7 @@ export class CheckoutComponent {
   OrderForTypes: Array<any> = [{ label: "Lunch", value: "lunch" }, { label: "Dinner", value: "dinner" }];
   paymentModes: Array<any> = [{ label: "Online", value: "online" }, { label: "Offline", value: "offline" }];
   displayOrderPlaced: boolean = true;
+  latestDate:any
   constructor(private cartService: CartService, private authService: AuthService,
     private messageService: MessageService, private orderService: OrdersService,
     private router: Router) {
@@ -57,6 +58,7 @@ export class CheckoutComponent {
     this.CreateForm()
     this.GetCartItems()
     this.currentDate = new Date();
+    this.latestDate = this.currentDate.toISOString()
     this.currentDate.setDate(this.currentDate.getDate() + 1);
     this.minDate = this.currentDate;
     const maxDate = new Date();
@@ -79,7 +81,7 @@ export class CheckoutComponent {
 
   CreateForm() {
     this.OrderForm = new FormGroup({
-      user: new FormControl(this.authService?.LoggedInUser?.value?.user, [Validators.required]),
+      user: new FormControl(this.user?.user ?  this.user?.user: JSON.parse(localStorage.getItem('loggedInUser')).user , [Validators.required]),
       orderAddress: new FormControl(null, [Validators.required]),
       orderAmount: new FormControl(null, [Validators.required]),
       orderMode: new FormControl("offline"),
@@ -110,18 +112,14 @@ export class CheckoutComponent {
     this.OrderForm.get('orderPaymentMode').setValue('cod')
     this.OrderForm.get('orderPaymentStatus').setValue('offline-mode');
     if (!this.isFutureOrder.value) {
-      this.OrderForm.get('orderDeliveryTime').setValue(this.currentDate.toISOString())
+      this.OrderForm.get('orderDeliveryTime').setValue(this.latestDate)
     }
     console.log(this.OrderForm.value);
-    if (this.OrderForm.get('orderMode').value == 'offline') {
-      if (this.OrderForm.invalid) {
-        return
-      }
-      this.PlaceOrder()
+    if (this.OrderForm.invalid) {
       return
     }
-
-    if (this.OrderForm.invalid) {
+    if (this.OrderForm.get('orderMode').value == 'offline') {
+      this.PlaceOrder()
       return
     }
     this.RazorPayOptions.handler = (response: any) => { this.CheckPayment(response) };

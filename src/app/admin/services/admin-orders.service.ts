@@ -42,6 +42,14 @@ export class AdminOrdersService {
     return this.http.post(`${environment.server}Orders/GetAdminOrders`, payload)
   }
 
+  UpdateAdminCreatedOrder(payload:any){
+    return this.http.put(`${environment.server}Orders/UpdateAdminCreatedOrder/${payload?._id}`, payload)
+  }
+
+  GetAdminCompletedOrders(payload: any) {
+    return this.http.post(`${environment.server}Orders/GetAdminCompletedOrders`, payload)
+  }
+
 
   disconnect() {
     this.socket.on('disconnect', () => {

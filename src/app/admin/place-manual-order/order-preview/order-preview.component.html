@@ -2,18 +2,32 @@
       <div class="row">
             <div class="col-lg-12 mb-3">
                   <h5 class="text-success"><strong>Order Details</strong>
-                        <button printSectionId="invoice" ngxPrint pButton 
-                        [useExistingCss]="true"
-                        class="p-button-primary p-button-sm pull-right" label="Process"></button>
+                        <button class="pull-right p-button-primary p-button-sm ms-2" pButton pRipple icon="pi pi-cart" [label]="isFutureOrder?.value? 'Place Future Order' : 'Place order' "
+                              (click)="PlaceOrder()"></button>
+                        <button printSectionId="invoice" ngxPrint pButton [useExistingCss]="true"
+                              class="p-button-primary p-button-sm pull-right ms-2" label="Print Order Slip"></button>
                   </h5>
             </div>
-            <div class="col-lg-12 mt-4">
-                  <span class="p-float-label pull-right">
-                        <input id="om" type="text" pInputText 
-                              appFormErrorMessages [value]="'Offline'" disabled>
-                        <label for="om">Order Mode</label>
+            <div class="col-lg-3 mt-4">
+                  <span class="p-float-label ms-2 fs-5 fw-bold">
+                        Future Order : <p-checkbox [value]="true" [binary]="true"
+                              [formControl]="isFutureOrder"></p-checkbox>
                   </span>
             </div>
+            <div class="col-lg-3 mt-4">
+                  <span *ngIf="isFutureOrder?.value" class="ms-2">
+                        <p-calendar [appendTo]="'body'" placeholder="Select Delivery Date" [formControl]="deliveryTime"
+                              [minDate]="minDate" [maxDate]="maxDate" id="Delivery Date" [showIcon]="true"
+                              appFormErrorMessages required></p-calendar>
+                  </span>
+            </div>
+            <div class="col-lg-6 mt-4">
+                  <span class="p-float-label pull-right">
+                        <p-dropdown [options]="orderModes" [formControl]="orderModeControl" optionLabel="label"
+                              optionValue="value"></p-dropdown>
+                  </span>
+            </div>
+
             <div class="col-lg-12">
                   <div #invoice id="invoice" class="col-12">
                         <div class="grid">
@@ -42,50 +56,56 @@
                                                 </address>
                                           </div>
                                           <div class="col-6 mb-0">
-                                                <span><strong>Order For :</strong> {{OrderDetails?.userInfo?.orderType}}</span>
+                                                <span><strong>Order For :</strong>
+                                                      {{OrderDetails?.userInfo?.orderType}}</span>
                                                 <br>
+                                                <span><strong>Payment Mode :</strong>
+                                                      {{orderModeControl.value}}</span>
                                           </div>
                                     </div>
                                     <hr>
                                     <div class="row mt-2">
-                                                <h5>ORDER SUMMARY</h5>
-                                                <table class="table">
-                                                      <thead>
-                                                            <tr class="line">
-                                                                  <td><strong>#</strong></td>
-                                                                  <td class="text-left"><strong>ITEM</strong></td>
-                                                                  <td class="text-center"><strong>UNIT</strong></td>
-                                                                  <td class="text-center"><strong>RATE</strong></td>
-                                                                  <td class="text-right"><strong>SUBTOTAL</strong></td>
-                                                            </tr>
-                                                      </thead>
-                                                      <tbody>
-            
-                                                            <tr *ngFor="let item of OrderDetails?.items;let i = index">
-                                                                  <td>{{i+1}}</td>
-                                                                  <td>{{item?.itemName}}</td>
-                                                                  <td class="text-center">{{item?.count}}</td>
-                                                                  <td class="text-center">{{item?.itemPrice | currency:"INR"}}</td>
-                                                                  <td class="text-right">{{item?.itemPrice * item?.count |
-                                                                        currency:"INR"}}</td>
-                                                            </tr>
-                                                            <tr>
-                                                                  <td colspan="3">
-                                                                  </td>
-                                                                  <td class="text-right"><strong>Total</strong></td>
-                                                                  <td class="text-right"><strong>{{orderAmount | currency:"INR"}}</strong></td>
-                                                            </tr>
-                                                      </tbody>
-                                                </table>
-                                          
+                                          <h5>ORDER SUMMARY</h5>
+                                          <table class="table">
+                                                <thead>
+                                                      <tr class="line">
+                                                            <td><strong>#</strong></td>
+                                                            <td class="text-left"><strong>ITEM</strong></td>
+                                                            <td class="text-center"><strong>UNIT</strong></td>
+                                                            <td class="text-center"><strong>RATE</strong></td>
+                                                            <td class="text-right"><strong>SUBTOTAL</strong></td>
+                                                      </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                      <tr *ngFor="let item of OrderDetails?.items;let i = index">
+                                                            <td>{{i+1}}</td>
+                                                            <td>{{item?.itemName}}</td>
+                                                            <td class="text-center">{{item?.count}}</td>
+                                                            <td class="text-center">{{item?.itemPrice | currency:"INR"}}
+                                                            </td>
+                                                            <td class="text-right">{{item?.itemPrice * item?.count |
+                                                                  currency:"INR"}}</td>
+                                                      </tr>
+                                                      <tr>
+                                                            <td colspan="3">
+                                                            </td>
+                                                            <td class="text-right"><strong>Total</strong></td>
+                                                            <td class="text-right"><strong>{{orderAmount |
+                                                                        currency:"INR"}}</strong></td>
+                                                      </tr>
+                                                </tbody>
+                                          </table>
+
                                     </div>
                               </div>
                         </div>
                   </div>
             </div>
             <div class="col-lg-12 col-sm-12 col-sm-12 col-xs-12 my-2">
-                  <button pButton pRipple icon="pi pi-arrow-left" label="Back" routerLink="/admin/place-order/items-selection"></button>
-                  <button class="pull-right mt-2" pButton pRipple icon="pi pi-cart" label="Place Order" (click)="PlaceOrder()"></button>
+                  <button pButton pRipple icon="pi pi-arrow-left" label="Back"
+                        routerLink="/admin/place-order/items-selection"></button>
+                
             </div>
       </div>
 </div>

@@ -67,8 +67,6 @@ export class LatestOrdersComponent implements OnInit {
         this.FilterdLatestOrders = this.LatestOrders
       }
     })
-
-
   }
 
 }
