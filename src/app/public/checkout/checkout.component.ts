@@ -118,6 +118,7 @@ export class CheckoutComponent {
         return
       }
       this.PlaceOrder()
+      return
     }
 
     if (this.OrderForm.invalid) {
