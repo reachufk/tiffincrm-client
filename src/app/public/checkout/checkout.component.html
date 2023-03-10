@@ -1,81 +1,78 @@
-<div class="container-xxl py-3 h-100" style="background-color: rgb(243, 240, 240);">
+<div class="container-xxl p-0 h-100" style="background-color: rgb(243, 240, 240);">
     <p-toast position="top-center"></p-toast>
     <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-12 order-placed-dialog">
-            <div class="card card-registration card-registration-2" style="border-radius: 15px;">
+            <div class="card card-registration card-registration-2" style="border-radius: 2px;">
                 <form [formGroup]="OrderForm">
                     <div class="card-body p-0 bg-light">
                         <div class="row g-0">
-                            <div class="col-lg-12 text-center my-5">
+                            <div class="col-lg-12 text-center my-2">
                                 <h2 class="fw-bold float-center text-success">
                                     Checkout <i class="fs-3 pi pi-shopping-cart  fw-bold"></i>
                                 </h2>
                             </div>
-                            <div class="col-lg-8">
+                            <div class="col-12">
                                 <form [formGroup]="OrderForm">
-                                    <div class="row">
-                                        <div class="col-lg-12 px-4 p-fluid">
-                                            <h4>Select order for: </h4>
-                                            <p-selectButton [options]="OrderForTypes" formControlName="orderType"
-                                                optionLabel="label" optionValue="value" id="Select choice"
-                                                appFormerror></p-selectButton>
-
+                                    <div class="row g-0 px-2">
+                                        <div class="col-12 p-fluid d-flex">
+                                            <p class="col-8 fw-bold ">Select order for: </p>
+                                            <div class="col-4 text-end order-type">
+                                                <p-selectButton [options]="OrderForTypes" formControlName="orderType"
+                                                    optionLabel="label" optionValue="value" id="Select choice"
+                                                    appFormerror></p-selectButton>
+                                            </div>
                                         </div>
-                                        <div class="col-lg-12 px-4 my-3">
-                                            <h4>Future Order : <p-checkbox [value]="true" [binary]="true"
-                                                    [formControl]="isFutureOrder"></p-checkbox></h4>
+                                        <div class="col-12">
+                                            <p class="fw-bold"> Future Order : <p-checkbox [value]="true"
+                                                    [binary]="true" [formControl]="isFutureOrder"></p-checkbox></p>
                                         </div>
-                                        <div *ngIf="isFutureOrder?.value" class="col-lg-12 px-4 ">
+                                        <div class="col-12" *ngIf="isFutureOrder?.value">
                                             <p-calendar [appendTo]="'body'" placeholder="Select Delivery Date"
                                                 formControlName="orderDeliveryTime" [minDate]="minDate"
                                                 [maxDate]="maxDate" id="Delivery Date" [showIcon]="true" appFormerror
-                                                required></p-calendar>
+                                                required>
+                                            </p-calendar>
                                         </div>
-
-                                        <div class="col-lg-12 px-4 p-fluid">
-                                            <h4>Delivery Address </h4>
-                                            <textarea [rows]="5" [cols]="30" pInputTextarea
-                                                formControlName="orderAddress" [autoResize]="true" id="Delivery address"
-                                                appFormerror></textarea>
+                                        <div class="col-lg-12 p-fluid">
+                                            <div class="fw-bold">Delivery Address </div>
+                                            <textarea [rows]="2" [cols]="30" pInputTextarea
+                                                placeholder="Enter your delivary address" formControlName="orderAddress"
+                                                [autoResize]="true" id="Delivery address" appFormerror></textarea>
                                         </div>
-
-                                        <div class="col-lg-12 px-4 p-fluid">
-                                            <h4>Select Payment Mode: </h4>
+                                        <div class="col-12 p-fluid">
+                                            <p class="fw-bold">Select Payment Mode: </p>
                                             <p-selectButton [options]="paymentModes" formControlName="orderMode"
                                                 optionLabel="label" optionValue="value" id="Select choice"
                                                 appFormerror></p-selectButton>
                                         </div>
-
                                     </div>
                                 </form>
                             </div>
-                            <div class="col-lg-4 bg-grey px-3">
-                                <h4 class="fw-bold">Summary</h4>
-                                <span class="fs-5 fw-bold text-dark mr-2">
-                                    {{totalItems}} items
-                                </span>
-
+                            <div *ngIf="!emptyCart" class="col-12 bg-grey p-3">
+                                <h2 class="text-success text-center">Summary</h2>
                                 <div class="d-flex justify-content-between">
-                                    <h5 class="text-secondary">Subtotal</h5>
-                                    <h5>{{totalAmount | currency:'INR'}}</h5>
+                                    <div class="text-secondary">Quantity</div>
+                                    <div class="fw-bold">{{totalItems}} items</div>
                                 </div>
-
                                 <div class="d-flex justify-content-between">
-                                    <h5 class="text-secondary">Delivery Charges</h5>
-                                    <h5>free</h5>
+                                    <div class="text-secondary">Subtotal</div>
+                                    <div class="fw-bold">{{totalAmount | currency:'INR'}}</div>
                                 </div>
-
-                                <div class="d-flex justify-content-between mb-4">
-                                    <h5 class="text-secondary">Gst</h5>
-                                    <h5>Included</h5>
+                                <div class="d-flex justify-content-between">
+                                    <div class="text-secondary">Delivery charges</div>
+                                    <div class="fw-bold">free</div>
                                 </div>
-
-                                <div class="d-flex justify-content-between mb-3">
-                                    <h5 class="text-secondary">Total :
-                                        <span class="text-dark"> {{totalAmount | currency:'INR'}}</span>
-                                    </h5>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <div class="text-secondary">Gst</div>
+                                    <div class="fw-bold">Included</div>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <div class="text-secondary fw-bold">Total :
+                                        <span class="text-dark"> {{totalAmount |
+                                            currency:'INR'}}</span>
+                                    </div>
                                     <button pButton (click)="CheckOut()"
-                                        class="p-button-success p-3 p-button-rounded float-right" label="Checkout">
+                                        class="p-button-success p-button-rounded float-right" label="Checkout">
                                     </button>
                                 </div>
                             </div>

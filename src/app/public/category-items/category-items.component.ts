@@ -119,9 +119,16 @@ export class CategoryItemsComponent implements OnInit, OnDestroy {
       return
     }
     this.SelectedItem = ({
-      itemId: item?._id, itemName: item?.itemName, itemPrice: item?.itemPrice,
-      count: 1, itemDiscount: item?.itemDiscount, catagory: item?.catagory, itemInstructions: '',
-      isVeg: item?.isVeg ? item?.isVeg : false, itemTypes: item?.itemTypes, selectedItemType: item?.itemTypes?.length ? item?.itemTypes[0] : {}
+      itemId: item?._id,
+      itemName: item?.itemName,
+      itemPrice: item?.itemPrice,
+      count: 1,
+      itemDiscount: item?.itemDiscount,
+      catagory: item?.catagory,
+      itemInstructions: '',
+      isVeg: item?.isVeg ? item?.isVeg : false,
+      itemTypes: item?.itemTypes,
+      selectedItemType: item?.itemTypes?.length ? item?.itemTypes[0] : {}
     })
     this.displayAddItemDialog = true
   }
@@ -194,7 +201,6 @@ export class CategoryItemsComponent implements OnInit, OnDestroy {
       });
       return
     }
-
   }
 
 }

@@ -23,6 +23,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { UfklogoComponent } from '../layouts/ufklogo/ufklogo.component';
 import { LoaderComponent } from './components/loader/loader.component';
+
 @NgModule({
   declarations: [
     FormErrorMessagesDirective,
