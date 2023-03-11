@@ -16,15 +16,18 @@ export class PublicLayoutComponent implements OnInit {
 
   loggedIn: boolean = false;
   isCart: boolean = false;
+  url: string
 
   constructor(private activatedRoute: ActivatedRoute, private authService: AuthService, private router: Router) {
     this.isCart = this.router.url.includes('cart') ? true : false
+    this.url = this.router.url
   }
 
   ngOnInit(): void {
     this.router.events.subscribe((event: NavigationEnd) => {
       if (event instanceof NavigationEnd) {
-        this.isCart = event.url.includes('cart') ? true : false;
+        this.url = event.url
+        this.isCart = event.url.includes('cart') ? true : false
       }
     })
     this.authService.userCart.pipe(map((show) => {
