@@ -27,6 +27,10 @@ import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { CalendarModule } from 'primeng/calendar';
 import { CheckboxModule } from 'primeng/checkbox';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { ProfileComponent } from './profile/profile.component';
+import { CartItemsComponent } from './cart-items/cart-items.component';
+import { BadgeModule } from 'primeng/badge';
+
 @NgModule({
   providers: [CatagoryService],
 
@@ -39,6 +43,8 @@ import { CheckoutComponent } from './checkout/checkout.component';
     FormerrorDirective,
     MyOrdersComponent,
     CheckoutComponent,
+    ProfileComponent,
+    CartItemsComponent
   ],
   imports: [
     CommonModule,
@@ -60,7 +66,8 @@ import { CheckoutComponent } from './checkout/checkout.component';
     RadioButtonModule,
     CalendarModule,
     SelectButtonModule,
-    CheckboxModule
+    CheckboxModule,
+    BadgeModule
   ]
 })
 export class PublicModule { }

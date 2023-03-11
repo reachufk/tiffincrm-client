@@ -10,12 +10,12 @@ import { AdminPlaceOrderService } from '../../services/admin-place-order.service
   templateUrl: './order-customer-info.component.html',
   styleUrls: ['./order-customer-info.component.scss']
 })
-export class OrderCustomerInfoComponent implements OnInit,OnDestroy {
+export class OrderCustomerInfoComponent implements OnInit, OnDestroy {
 
   CustomerInfoForm: FormGroup
   router = inject(Router);
   Destroy: Subject<void> = new Subject();
-  OrderTypes:Array<any>=[{name:'Lunch',value:'lunch'},{name:'Dinner',value:'dinner'}]
+  OrderTypes: Array<any> = [{ name: 'Lunch', value: 'lunch' }, { name: 'Dinner', value: 'dinner' }]
   constructor(private placeOrderService: AdminPlaceOrderService) {
 
   }
@@ -27,8 +27,8 @@ export class OrderCustomerInfoComponent implements OnInit,OnDestroy {
 
   ngOnInit(): void {
     this.CreateForm();
-    this.placeOrderService.CustomerInfoSubject.pipe(takeUntil(this.Destroy),map((customerInfo:any)=>{
-      if(!customerInfo){
+    this.placeOrderService.CustomerInfoSubject.pipe(takeUntil(this.Destroy), map((customerInfo: any) => {
+      if (!customerInfo) {
         return
       }
       this.CustomerInfoForm.patchValue(customerInfo)
@@ -51,10 +51,10 @@ export class OrderCustomerInfoComponent implements OnInit,OnDestroy {
       phoneNumber: new FormControl(null, [Validators.required, Validators.pattern('^[0-9]*$'), Validators.minLength(10), Validators.maxLength(13)]),
       email: new FormControl(null, [Validators.email]),
       orderAddress: new FormControl(null, [Validators.required]),
-      orderType:new FormControl('lunch',[Validators.required]),
-      orderInstructions:new FormControl(null),
-      orderMode:new FormControl('offline'),
-      orderPaymentMode:new FormControl('COD')
+      orderType: new FormControl('lunch', [Validators.required]),
+      orderInstructions: new FormControl(null),
+      orderMode: new FormControl('offline'),
+      orderPaymentMode: new FormControl('COD')
     })
   }
 }

@@ -6,6 +6,7 @@ import { CategoryItemsComponent } from './category-items/category-items.componen
 import { CheckoutComponent } from './checkout/checkout.component';
 import { HomeComponent } from './home/home.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
+import { ProfileComponent } from './profile/profile.component';
 import { PublicResolver } from './public.resolver';
 
 const routes: Routes = [
@@ -14,7 +15,8 @@ const routes: Routes = [
   { path: 'category-items/:category', component: CategoryItemsComponent, resolve: { user: PublicResolver } },
   { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
   { path: 'my-orders', component: MyOrdersComponent, canActivate: [AuthGuard] },
-  { path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard] }
+  { path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

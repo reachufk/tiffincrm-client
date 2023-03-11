@@ -16,7 +16,8 @@ export class PublicLayoutComponent implements OnInit {
 
   loggedIn: boolean = false;
   isCart: boolean = false;
-  url:string
+  url: string
+
   constructor(private activatedRoute: ActivatedRoute, private authService: AuthService, private router: Router) {
     this.isCart = this.router.url.includes('cart') ? true : false
     this.url = this.router.url
