@@ -5,7 +5,7 @@ import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { map, Subject, takeUntil } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { CartService } from '../services/cart.service';
-import * as regionData from './regions.json';
+import * as regionData from '../../tiffin-landing/availRegions.json';
 
 interface IUserProfile {
   username: string,
@@ -30,7 +30,7 @@ export class PublicNavComponent implements OnInit, OnDestroy {
     { label: 'My profile', icon: 'pi pi-user' },
     { label: 'Login', icon: 'pi pi-sign-in', routerLink: '/auth/login' }
   ]
-  selectedRegion: FormControl = new FormControl();
+  selectedRegion:FormControl = new FormControl(this.authService.Region.value);
   cartItemsLength: number = 0;
   loggedIn: boolean = false
   Destroy: Subject<void> = new Subject();
@@ -43,7 +43,9 @@ export class PublicNavComponent implements OnInit, OnDestroy {
   constructor(private authService: AuthService, private router: Router,
     private cartService: CartService, private activatedRoute: ActivatedRoute,
     private confirmationService: ConfirmationService, private messageService: MessageService) {
-    this.url = router.url
+    this.url = router.url;
+    const { regions } = regionData
+    this.regions = regions
   }
 
   ngOnDestroy(): void {
@@ -57,9 +59,7 @@ export class PublicNavComponent implements OnInit, OnDestroy {
         this.url = event.url
       }
     })).subscribe()
-    const { regions } = regionData
-    this.regions = regions
-    this.selectedRegion.setValue(this.authService?.Region?.value)
+
     this.activatedRoute.data.pipe(takeUntil(this.Destroy), map((data: any) => {
       if (data?.user) {
         const pullOut = ['Login'];
@@ -136,7 +136,7 @@ export class PublicNavComponent implements OnInit, OnDestroy {
   }
 
   onDialogHide() {
-    this.selectedRegion.patchValue(JSON.parse(localStorage.getItem('selectedRegion')));
+   this.selectedRegion.patchValue(JSON.parse(localStorage.getItem('selectedRegion')));
     return this.showConfirmation = false;
   }
 

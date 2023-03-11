@@ -6,12 +6,7 @@
       </a>
       <a class="navbar-brand" *ngIf="!url?.includes('cart') && !url?.includes('checkout')">
         <p-dropdown [options]="regions" optionLabel="label" dropdownIcon="pi pi-globe" [formControl]="selectedRegion"
-          [filter]="false" placeholder="Select region">
-          <ng-template let-region pTemplate="item">
-            <div class="country-item">
-              <div>{{region?.label}} - {{region?.distance}}</div>
-            </div>
-          </ng-template>
+           placeholder="Select region">
         </p-dropdown>
       </a>
       <p-dropdown appendTo="body" placeholder="''" [formControl]="selected" class="navbar-toggler"

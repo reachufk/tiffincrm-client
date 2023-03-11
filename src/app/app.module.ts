@@ -25,6 +25,7 @@ import { BlockUIHttpModule } from 'ng-block-ui/http';
 import { LoaderComponent } from './shared/components/loader/loader.component';
 import { OrderPlacedComponent } from './public/order-placed/order-placed.component';
 import { NotFoundComponent } from './layouts/NotFound/notfound.component';
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
   imports: [
@@ -38,7 +39,8 @@ import { NotFoundComponent } from './layouts/NotFound/notfound.component';
     BlockUIHttpModule.forRoot(),
     SharedModule,
     ConfirmDialogModule,
-    SpeedDialModule
+    SpeedDialModule,
+    DropdownModule
   ],
   declarations: [
     AppComponent,
