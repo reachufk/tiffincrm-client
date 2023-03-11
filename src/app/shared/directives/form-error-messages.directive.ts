@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { Attribute, Directive, ElementRef, Inject, Optional, Renderer2 } from '@angular/core';
+import { AfterViewInit, Attribute, Directive, ElementRef, Inject, OnInit, Optional, Renderer2 } from '@angular/core';
 import { AbstractControl, NgControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs';
   selector: '[appFormErrorMessages]',
   
 })
-export class FormErrorMessagesDirective {
+export class FormErrorMessagesDirective implements OnInit ,AfterViewInit {
   private errorElement: ElementRef;
   private textElement: any;
   private subscription: Subscription;
