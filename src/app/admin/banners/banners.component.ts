@@ -1,16 +1,16 @@
 import { Component, inject, Optional, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { FileUpload } from 'primeng/fileupload';
 import { Observable, map } from 'rxjs';
 import { BannerService } from 'src/app/shared/services/banner.service';
 import { validateAllFormFields } from 'src/app/shared/utils/formUtils';
-import { AdminCatagoryService } from '../services/admin-catagory.service';
 
 @Component({
   selector: 'app-banners',
   templateUrl: './banners.component.html',
-  styleUrls: ['./banners.component.scss']
+  styleUrls: ['./banners.component.scss'],
+  providers: [ConfirmationService, MessageService]
 })
 export class BannersComponent {
 
@@ -21,7 +21,7 @@ export class BannersComponent {
   BannerForm: FormGroup
   searchKeyword: FormControl = new FormControl(null);
 
-  constructor(private messageService: MessageService) {
+  constructor(private confirmationService: ConfirmationService, private messageService: MessageService) {
 
   }
 
@@ -30,7 +30,7 @@ export class BannersComponent {
     this.GetBanners()
   }
   GetBanners() {
-    this.Banners = this.bannerService.GetBanners().pipe(map((res:any) => res?.data))
+    this.Banners = this.bannerService.GetBanners().pipe(map((res: any) => res?.data))
   }
 
 
@@ -102,18 +102,33 @@ export class BannersComponent {
     return
   }
 
+
   DeleteBanner(ID: string) {
-    this.bannerService.DeleteBanner(ID).subscribe((res: any) => {
-      if (res?.statusCode == 200) {
-        this.messageService.add({ severity: 'success', summary: 'banner deleted!' });
-        this.GetBanners()
+    this.confirmationService.confirm({
+      message: 'Do you want to delete this Banner?',
+      header: 'Delete Confirmation',
+      icon: 'pi pi-info-circle',
+      accept: () => {
+        this.bannerService.DeleteBanner(ID).subscribe((res: any) => {
+          if (res?.statusCode == 200) {
+            this.messageService.add({ severity: 'success', summary: 'banner deleted!' });
+            this.GetBanners()
+          }
+        })
+      },
+      reject: () => {
+        return;
       }
-    })
+    });
   }
 
   clear() {
     this.BannerForm.get('bannerImageType').reset(null)
     this.BannerForm.get('bannerImage').reset(null)
+    this.fileUpload.clear()
+  }
+  onHide() {
+    this.BannerForm.reset();
     this.fileUpload.clear()
   }
 

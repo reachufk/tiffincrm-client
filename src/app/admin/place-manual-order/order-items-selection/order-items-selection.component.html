@@ -4,11 +4,8 @@
                   <h5 class="text-success"><strong>Select Items</strong> </h5>
             </div>
             <div class="col-lg-12 mt-2">
-                  <p-table #dt1 [value]="Items" 
-                  [globalFilterFields]="['itemName','itemPrice']"
-                  class="w-100" [(selection)]="selectedItems"
-                  (onRowUnselect)="Change($event)"
-                  (onRowSelect)="Change($event)">
+                  <p-table #dt1 [value]="Items" [globalFilterFields]="['itemName','itemPrice']" class="w-100"
+                        [(selection)]="selectedItems" (onRowUnselect)="Change($event)" (onRowSelect)="Change($event)">
 
                         <ng-template pTemplate="caption">
                               <div class="p-d-flex">
@@ -16,13 +13,13 @@
                                           <i class="pi pi-search"></i>
                                           <input pInputText type="text"
                                                 (input)="dt1.filterGlobal($event.target.value, 'contains')"
-                                                [formControl]="keyword"
-                                                placeholder="Search keyword" />
+                                                [formControl]="keyword" placeholder="Search keyword" />
                                     </span>
                                     <button (click)="GetItems()" pButton pRipple type="button" icon="pi pi-search"
-                                    class="p-button-rounded p-button-success p-button-sm ms-2"></button>
+                                          class="p-button-rounded p-button-success p-button-sm ms-2"></button>
                                     <button pButton type="button"
-                                    class="p-button-text pull-right p-button-sm ms-2 text-dark fw-bold"> Order Amount: {{TotalAmountCalculated | currency:'INR'}}</button>
+                                          class="p-button-text pull-right p-button-sm ms-2 text-dark fw-bold"> Order
+                                          Amount: {{TotalAmountCalculated | currency:'INR'}}</button>
                               </div>
                         </ng-template>
 
@@ -35,15 +32,20 @@
                               </tr>
                         </ng-template>
                         <ng-template pTemplate="body" let-item let-rowIndex="rowIndex">
-                              <tr [pSelectableRow]="item" >
+                              <tr [pSelectableRow]="item">
                                     <td>
-                                          <p-tableCheckbox [value]="item" [index]="rowIndex" ></p-tableCheckbox>
+                                          <p-tableCheckbox [value]="item" [index]="rowIndex"></p-tableCheckbox>
                                     </td>
                                     <td>{{item.itemName}}</td>
                                     <td>{{item.itemPrice | currency:'INR'}}</td>
                                     <td class="itemCount">
-                                          <p-inputNumber (onInput)="Change($event)" [allowEmpty]="false" [value]="item.count ? item.itemCount:1" [min]="1" [(ngModel)]="item.count" [showButtons]="true" buttonLayout="horizontal" inputId="horizontal" spinnerMode="horizontal" [step]="1" 
-                                          decrementButtonClass="p-button-danger p-buttonn-sm" incrementButtonClass="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus">
+                                          <p-inputNumber (onInput)="Change($event)" [allowEmpty]="false"
+                                                [value]="item.count ? item.itemCount:1" [min]="1"
+                                                [(ngModel)]="item.count" [showButtons]="true" buttonLayout="horizontal"
+                                                inputId="horizontal" spinnerMode="horizontal" [step]="1"
+                                                decrementButtonClass="p-button-danger p-buttonn-sm"
+                                                incrementButtonClass="p-button-success" incrementButtonIcon="pi pi-plus"
+                                                decrementButtonIcon="pi pi-minus">
                                           </p-inputNumber>
                                     </td>
                               </tr>

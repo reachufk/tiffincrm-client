@@ -20,8 +20,7 @@
                                           <div class="col-lg-12">
                                                 <p-toast></p-toast>
                                                 <p-table #dt1 [value]="Banners | async"
-                                                      [globalFilterFields]="['bannerName']"
-                                                      class="w-100">
+                                                      [globalFilterFields]="['bannerName']" class="w-100">
 
                                                       <ng-template pTemplate="caption">
                                                             <div class="p-d-flex">
@@ -69,7 +68,7 @@
                                                 </p-table>
 
                                                 <p-dialog [(visible)]="displayBannerForm" [modal]="true"
-                                                      [style]="{width: '50vw',minHeight:'50vh'}" [draggable]="false"
+                                                      (onHide)="onHide()" [style]="{width: '50vw'}" [draggable]="false"
                                                       [resizable]="false">
                                                       <ng-template pTemplate="header">
                                                             <h4>{{this.BannerForm.get('_id').value? 'Edit':'Add'}}
@@ -89,11 +88,6 @@
                                                                   </div>
                                                                   <div
                                                                         class="col-lg-12 my-3 p-fluid p-upload-button text-center">
-                                                                        <span *ngIf="!BannerForm.get('bannerImage')?.value"
-                                                                              class="ib ip ">
-                                                                              <div class="my-auto">Image preview here
-                                                                              </div>
-                                                                        </span>
                                                                         <img *ngIf="BannerForm.get('bannerImage').value"
                                                                               [src]="BannerForm.get('bannerImage').value"
                                                                               alt="image" width="150" height="120">
@@ -108,9 +102,9 @@
                                                                               appFormErrorMessages></p-fileUpload>
                                                                   </div>
                                                                   <div *ngIf="BannerForm.get('bannerImage')?.value"
-                                                                        class="col-lg-12 text-center">
+                                                                        class="col-lg-12 text-center text p-2">
                                                                         <p-button (click)="clear()" icon="pi pi-times"
-                                                                              styleClass="p-button-text p-button-rounded">
+                                                                              styleClass="p-button-danger p-button-rounded">
                                                                         </p-button>
                                                                   </div>
 
@@ -123,7 +117,8 @@
                                                       </ng-template>
                                                 </p-dialog>
 
-
+                                                <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"
+                                                      rejectButtonStyleClass="p-button-outlined"></p-confirmDialog>
                                           </div>
                                     </div>
                               </div>

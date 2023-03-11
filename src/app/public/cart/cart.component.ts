@@ -44,10 +44,6 @@ export class CartComponent implements OnInit {
   minDate: Date;
   maxDate: Date;
 
-
-  // Set min date to today
-
-
   constructor(private cartService: CartService, private authService: AuthService,
     private messageService: MessageService, private orderService: OrdersService,
     private router: Router) {
@@ -158,7 +154,6 @@ export class CartComponent implements OnInit {
 
   CancelCheckout(res: any) {
     console.log(res, 'cancel');
-
   }
 
 }

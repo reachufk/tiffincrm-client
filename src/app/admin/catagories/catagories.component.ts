@@ -1,9 +1,8 @@
 import { Component, inject, Optional, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { FileUpload } from 'primeng/fileupload';
-import { Observable, map, of } from 'rxjs';
-import { Catagory } from 'src/app/shared/interfaces/catagory';
+import { Observable, map } from 'rxjs';
 import { validateAllFormFields } from 'src/app/shared/utils/formUtils';
 import { AdminCatagoryService } from '../services/admin-catagory.service';
 
@@ -11,7 +10,7 @@ import { AdminCatagoryService } from '../services/admin-catagory.service';
   selector: 'app-catagories',
   templateUrl: './catagories.component.html',
   styleUrls: ['./catagories.component.scss'],
-  providers: [MessageService]
+  providers: [ConfirmationService, MessageService]
 })
 export class CatagoriesComponent {
   @ViewChild('fileUpload') fileUpload: FileUpload;
@@ -21,7 +20,7 @@ export class CatagoriesComponent {
   CatagoryForm: FormGroup
   searchKeyword: FormControl = new FormControl(null);
 
-  constructor(@Optional() private messageService: MessageService) {
+  constructor(@Optional() private messageService: MessageService, private confirmationService: ConfirmationService) {
 
   }
 
@@ -30,7 +29,7 @@ export class CatagoriesComponent {
     this.GetCatagories()
   }
   GetCatagories() {
-    this.Catagories = this.adminCatagoryService.GetCatagories().pipe(map((res:any) => res?.data))
+    this.Catagories = this.adminCatagoryService.GetCatagories().pipe(map((res: any) => res?.data))
   }
 
 
@@ -83,7 +82,6 @@ export class CatagoriesComponent {
             this.CatagoryForm.reset()
             this.GetCatagories()
           }
-
         })
       } else {
         const formValue = this.CatagoryForm.value;
@@ -102,12 +100,22 @@ export class CatagoriesComponent {
   }
 
   DeleteCatagory(ID: string) {
-    this.adminCatagoryService.DeleteCatagory(ID).subscribe((res: any) => {
-      if (res?.statusCode == 200) {
-        this.messageService.add({ severity: 'success', summary: 'Catagory deleted!' });
-        this.GetCatagories()
+    this.confirmationService.confirm({
+      message: 'Do you want to delete this Category?',
+      header: 'Delete Confirmation',
+      icon: 'pi pi-info-circle',
+      accept: () => {
+        this.adminCatagoryService.DeleteCatagory(ID).subscribe((res: any) => {
+          if (res?.statusCode == 200) {
+            this.messageService.add({ severity: 'success', summary: 'Catagory deleted!' });
+            this.GetCatagories()
+          }
+        })
+      },
+      reject: () => {
+        return;
       }
-    })
+    });
   }
 
   clear() {
@@ -115,6 +123,9 @@ export class CatagoriesComponent {
     this.CatagoryForm.get('catagoryImage').reset(null)
     this.fileUpload.clear()
   }
-
+  onHide() {
+    this.CatagoryForm.reset();
+    this.fileUpload.clear()
+  }
 
 }

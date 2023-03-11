@@ -21,7 +21,7 @@ export class OrderItemsSelectionComponent implements OnInit, OnDestroy {
   Destroy: Subject<void> = new Subject();
   TotalAmountCalculated: number = 0
   constructor(private router: Router, private placeOrderService: AdminPlaceOrderService,
-    private messageService:MessageService) {
+    private messageService: MessageService) {
 
   }
 
@@ -71,8 +71,8 @@ export class OrderItemsSelectionComponent implements OnInit, OnDestroy {
     this.router.navigate(['/admin/place-order/customer-info'])
   }
   NextStep() {
-    if(!this.selectedItems.length){
-      this.messageService.add({severity:'error',summary:'Place select your items'});
+    if (!this.selectedItems.length) {
+      this.messageService.add({ severity: 'error', summary: 'Place select your items' });
       return
     }
     this.placeOrderService.ItemsSubject.next(this.selectedItems);
