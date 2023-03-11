@@ -14,7 +14,7 @@ export class LatestOrdersComponent implements OnInit {
 
   @Input() inputLatestOrder: any = {}
   LatestOrders: Array<any> = []
-  FilterdLatestOrders: any[];
+  FilterdLatestOrders: Array<any> =[];
   OrderTypes: Array<any> = [{ name: "Lunch", value: "lunch" }, { name: "Dinner", value: "dinner" }]
 
   constructor(private orderService: AdminOrdersService, private dialogService: DialogService,
@@ -30,8 +30,8 @@ export class LatestOrdersComponent implements OnInit {
       if(deliveryDate == currentDate){
         this.LatestOrders.push(order)
         this.FilterdLatestOrders.push(order)
-        this.LatestOrders?.reverse()
-        this.FilterdLatestOrders?.reverse()
+        // this.LatestOrders?.reverse()
+        // this.FilterdLatestOrders?.reverse()
       }
     })
   }

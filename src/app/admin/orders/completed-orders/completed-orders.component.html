@@ -1,6 +1,6 @@
 <div class="row">
       <div class="col-lg-12 px-0">
-          <p-table #dt1 [value]="CompletedOrders"
+          <p-table #dt1 [value]="FilteredCompletedOrders"
               [globalFilterFields]="['orderAddress','orderMode']"
               class="w-100">
 
@@ -12,6 +12,7 @@
                               (input)="dt1.filterGlobal($event.target.value, 'contains')"
                               placeholder="Search keyword" />
                       </span>
+                      
                       <span class="pull-right p-fluid">
                           <p-multiSelect [options]="OrderTypes" appendTo="body" optionLabel="name" (onChange)="orderTypeFilter($event)" placeholder="Select Order Type" optionValue="value"></p-multiSelect>
                       </span>
@@ -37,7 +38,7 @@
                     <td>{{order?.orderAddress}}</td>
                     <td>{{order?.orderType}}</td>
                     <td>{{order?.orderAmount | currency:"INR"}}</td>
-                    <td>{{order?.orderDeliveryTime | date}}</td>
+                    <td>{{order?.orderDeliveryTime?.slice(0,10)}}</td>
                     <td>
                       <i (click)="ViewOrder(order)" class="pi pi-eye fs-4 show-cursor text-success">
                       </i>

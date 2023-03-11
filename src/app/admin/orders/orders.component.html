@@ -17,11 +17,11 @@
                             <div class="col-lg-12">
                                 <p-toast></p-toast>
                                 <p-tabView (onChange)="handleTabChange($event)">
-                                    <p-tabPanel header="Latest Orders"> </p-tabPanel>
-                                    <p-tabPanel header="Future Orders"></p-tabPanel>
-                                    <p-tabPanel header="Completed Orders"></p-tabPanel>
-                                    <p-tabPanel header="Admin Created Orders"></p-tabPanel>
-                                    <p-tabPanel header="Admin Completed Orders"></p-tabPanel>
+                                    <p-tabPanel header="Latest Orders" [selected]="selected == 'latest'"> </p-tabPanel>
+                                    <p-tabPanel header="Future Orders" [selected]="selected == 'future'"></p-tabPanel>
+                                    <p-tabPanel header="Completed Orders" [selected]="selected == 'completed'"></p-tabPanel>
+                                    <p-tabPanel header="Admin Created Orders" [selected]="selected == 'admin-created'"></p-tabPanel>
+                                    <p-tabPanel header="Admin Completed Orders" [selected]="selected == 'admin-completed'"></p-tabPanel>
                                 </p-tabView>
                                 <router-outlet></router-outlet>
                             </div>

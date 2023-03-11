@@ -7,32 +7,35 @@ import { Router } from '@angular/router';
   styleUrls: ['./orders.component.scss']
 })
 export class OrdersComponent implements OnInit {
-  LatestOrder:any={}
-  constructor(private router:Router) {
-
+  LatestOrder: any = {};
+  selected: any = ''
+  constructor(private router: Router) {
+    const {url} = router
+    this.selected = url?.split('/')[3]
+    console.log(this.selected);
+    
   }
 
   ngOnInit(): void {
   }
 
-  handleTabChange(event){
-   const {index} = event;
+  handleTabChange(event) {
+    const { index } = event;
     switch (index) {
       case 0:
         this.router.navigate(['/admin/orders/latest'])
         break;
-        case 1:
-          this.router.navigate(['/admin/orders/future'])
+      case 1:
+        this.router.navigate(['/admin/orders/future'])
         break;
-        case 2:
-          this.router.navigate(['/admin/orders/completed'])
+      case 2:
+        this.router.navigate(['/admin/orders/completed'])
         break;
-
-        case 3:
-          this.router.navigate(['/admin/orders/admin-created'])
+      case 3:
+        this.router.navigate(['/admin/orders/admin-created'])
         break;
-        case 4:
-          this.router.navigate(['/admin/orders/admin-completed'])
+      case 4:
+        this.router.navigate(['/admin/orders/admin-completed'])
         break;
 
 

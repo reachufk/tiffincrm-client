@@ -12,17 +12,28 @@ import { AdminOrdersService } from '../../services/admin-orders.service';
 export class OrderInvoiceComponent implements OnInit {
   @ViewChild('invoice') invoice: ElementRef
   OrderDetails: any = {};
-  adminOrderService = inject(AdminOrdersService)
+  adminOrderService = inject(AdminOrdersService);
+  isAdminCreated:boolean = false;
+  isCompleted:boolean = false
   constructor(public ref: DynamicDialogRef, public config: DynamicDialogConfig,
     private messageService:MessageService) {
     this.OrderDetails = this.config.data
   }
 
   ngOnInit(): void {
+    if(this.config.data?.ref){
+      this.isAdminCreated = true
+    }
+    if(this.config.data?.isCompleted){
+      this.isCompleted = true
+    }
   }
 
   ProcessToComplete() {
-    if(this.config.data.ref){
+    if(this.OrderDetails?.isCompleted){
+      delete this.OrderDetails.isCompleted
+    }
+    if(this.config?.data?.ref){
       this.ProcessToCompleteAdminOrder()
       return
     }

@@ -3,7 +3,7 @@
             <p-toast></p-toast>
             <button printSectionId="invoice" ngxPrint pButton [useExistingCss]="true" label="Print"
                   class="p-button-primary p-button-sm mr-3"></button>
-            <button (click)="ProcessToComplete()" pButton class="p-button-success p-button-sm"
+            <button *ngIf="!isCompleted" (click)="ProcessToComplete()" pButton class="p-button-success p-button-sm"
                   label="Mark as complete"></button>
       </div>
       <!-- BEGIN INVOICE -->
@@ -27,10 +27,13 @@
                                           {{OrderDetails?.orderAddress}}
                                           <br>
                                           <abbr title="Phone">Phone : </abbr>
-                                          {{OrderDetails?.userInfo?.phoneNumber}}
+                                          {{isAdminCreated? OrderDetails?.phoneNumber :
+                                          OrderDetails?.userInfo?.phoneNumber}}
                                           <br>
                                           <abbr title="Email">Email : </abbr>
-                                          {{OrderDetails?.userInfo?.email}}
+                                          {{isAdminCreated?
+                                          (OrderDetails?.email?OrderDetails?.email:'Not available') :
+                                          (OrderDetails?.userInfo?.email?OrderDetails?.userInfo?.email:'not available')}}
                                     </address>
                               </div>
                               <div class="col-6 text-end">
