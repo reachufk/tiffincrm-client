@@ -165,13 +165,13 @@ export class CategoryItemsComponent implements OnInit, OnDestroy {
         rejectLabel: 'Sign up',
         accept: () => {
           this.confirmationService.close()
-          this.router.navigate(['/auth/login'])
+          this.router.navigate(['/auth/login'],{queryParams:{state:JSON.stringify(this.router.url)}})
         },
         reject: (type) => {
           switch (type) {
             case ConfirmEventType.REJECT:
               this.confirmationService.close();
-              this.router.navigate(['/auth/signup'])
+              this.router.navigate(['/auth/signup'],{queryParams:{state:+this.router.url}})
               break;
             case ConfirmEventType.CANCEL:
               this.confirmationService.close()

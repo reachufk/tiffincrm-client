@@ -15,8 +15,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup = new FormGroup({
-    phoneNumber: new FormControl(null, [Validators.required, Validators.minLength(10), Validators.maxLength(13)]),
-    password: new FormControl(null, [Validators.required, Validators.minLength(8)])
+    phoneNumber: new FormControl("6006014287", [Validators.required, Validators.minLength(10), Validators.maxLength(13)]),
+    password: new FormControl('Asif.chap111', [Validators.required, Validators.minLength(8)])
   });
   OTPverificationForm: FormGroup
   showRegistrationForm: boolean = true;
@@ -29,14 +29,10 @@ export class LoginComponent implements OnInit {
   showPassword: boolean = false
   constructor(private authService: AuthService, @Optional() private messageService: MessageService,
     private router: Router, private activatedRoute: ActivatedRoute) {
-
+    this.state = this.activatedRoute.snapshot.queryParamMap.get('state')?.split('"')[1]
   }
 
   ngOnInit(): void {
-    const createdUserPhone = this.activatedRoute.snapshot.queryParamMap.get('registered')
-    if (createdUserPhone) {
-      this.loginForm.get('phoneNumber').setValue(createdUserPhone)
-    }
     this.textList = [
       'Unexpected guests?',
       'Game night?',
@@ -82,7 +78,12 @@ export class LoginComponent implements OnInit {
     if (role == 'admin') {
       this.router.navigate(['/admin/dashboard'])
     } else {
-      this.router.navigate(['/public/home'])
+      if(!this.state){
+        this.router.navigate(['/public/home']);
+        return
+      }
+      const decodedURL = decodeURIComponent(this.state);
+      this.router.navigate([decodedURL])
     }
   }
 }

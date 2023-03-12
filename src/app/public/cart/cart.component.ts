@@ -50,8 +50,6 @@ export class CartComponent implements OnInit {
 
   }
   ngOnInit(): void {
-
-    this.CreateForm()
     this.GetCartItems()
   }
 
@@ -74,22 +72,6 @@ export class CartComponent implements OnInit {
 
   }
 
-  CreateForm() {
-    this.OrderForm = new FormGroup({
-      user: new FormControl(this.authService?.LoggedInUser?.value?.user, [Validators.required]),
-      orderAddress: new FormControl(null, [Validators.required]),
-      orderAmount: new FormControl(null, [Validators.required]),
-      orderMode: new FormControl(null),
-      orderItems: new FormControl([], [Validators.required]),
-      orderPaymentMode: new FormControl(null),
-      orderInstructions: new FormControl(null),
-      orderDeliveryTime: new FormControl(null, [Validators.required]),
-      orderType: new FormControl(null, [Validators.required]),
-      orderPaymentStatus: new FormControl(""),
-      userInfo: new FormControl({}),
-      orderStatus: new FormControl("pending"),
-    })
-  }
 
   DeleteCartItem(item: any) {
     this.cartService.RemoveCartItem(this.user?.user, item).subscribe((res: any) => {
@@ -102,58 +84,6 @@ export class CartComponent implements OnInit {
     })
   }
 
-  CheckOut() {
-    validateAllFormFields(this.OrderForm)
-    if (this.OrderForm.invalid) {
-      return
-    }
-    this.RazorPayOptions.handler = (response: any) => { this.CheckPayment(response) };
-    this.RazorPayOptions.modal.ondismiss = (response: any) => { this.CancelCheckout(response) };
-    this.OrderOptions.amount = this.totalAmount * 100; // as rpaz takes unit of currency like paisa;
-    this.OrderOptions.currency = 'INR';
-    this.orderService.CreateRpayOrder(this.OrderOptions).subscribe((createdRes: any) => {
-      this.RazorPayOptions.amount = createdRes?.data?.amount;
-      this.RazorPayOptions.order_id = createdRes?.data?.id;
-      this.RazorPayOptions.currency = createdRes?.data?.currency;
-      this.RazorPayOptions.prefill.email = this.authService?.LoggedInUser?.value?.email;
-      this.RazorPayOptions.prefill.contact = this.authService?.LoggedInUser?.value?.phoneNumber;
-      this.OpenPayDilog();
-    })
-  }
 
-  OpenPayDilog() {
-    this.rzpay = new Razorpay(this.RazorPayOptions);
-    this.rzpay.open()
-  }
-
-  CheckPayment(response: any) {
-    let VerifyModel: VerifyPaymentModel = response
-    this.orderService.VerifyPayment(VerifyModel).subscribe((res: any) => {
-      if (res.statusCode == 200 && res?.verified) {
-        const paymentData = res?.data;
-        this.OrderForm.get('orderPaymentMode').setValue(paymentData?.method)
-        this.OrderForm.get('orderPaymentStatus').setValue('paid');
-        this.OrderForm.get('orderMode').setValue('online')
-        this.PlaceOrder()
-      } else {
-        this.messageService.add({ severity: 'error', summary: 'payment not verified?', detail: 'please contact us at given below contacts', life: 3000 });
-      }
-    })
-  }
-
-  PlaceOrder() {
-    this.orderService.PlaceOrder(this.OrderForm.value).subscribe((res: any) => {
-      if (res?.statusCode == 200) {
-        this.messageService.add({ severity: 'success', summary: 'payment completed successfully!', detail: 'Your order is in process', life: 3000 });
-        this.router.navigate(['/public/my-orders'])
-      } else {
-        this.messageService.add({ severity: 'success', summary: res?.message, life: 3000 });
-      }
-    })
-  }
-
-  CancelCheckout(res: any) {
-    console.log(res, 'cancel');
-  }
 
 }

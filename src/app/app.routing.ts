@@ -12,6 +12,11 @@ import { PublicResolver } from './public/public.resolver';
 import { TiffinLandingComponent } from './tiffin-landing/tiffin-landing.component';
 import { OrderPlacedComponent } from './public/order-placed/order-placed.component';
 import { NotFoundComponent } from './layouts/NotFound/notfound.component';
+import { TermsConditionsComponent } from './public/legalize-components/terms-conditions/terms-conditions.component';
+import { PrivacyPolicyComponent } from './public/legalize-components/privacy-policy/privacy-policy.component';
+import { CancellationRefundComponent } from './public/legalize-components/cancellation-refund/cancellation-refund.component';
+import { ShippingDeliveryComponent } from './public/legalize-components/shipping-delivery/shipping-delivery.component';
+import { ContactUsComponent } from './public/legalize-components/contact-us/contact-us.component';
 
 const routes: Routes = [
 

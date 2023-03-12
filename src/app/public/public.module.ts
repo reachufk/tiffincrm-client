@@ -30,6 +30,11 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { ProfileComponent } from './profile/profile.component';
 import { CartItemsComponent } from './cart-items/cart-items.component';
 import { BadgeModule } from 'primeng/badge';
+import { PrivacyPolicyComponent } from './legalize-components/privacy-policy/privacy-policy.component';
+import { TermsConditionsComponent } from './legalize-components/terms-conditions/terms-conditions.component';
+import { CancellationRefundComponent } from './legalize-components/cancellation-refund/cancellation-refund.component';
+import { ShippingDeliveryComponent } from './legalize-components/shipping-delivery/shipping-delivery.component';
+import { ContactUsComponent } from './legalize-components/contact-us/contact-us.component';
 
 @NgModule({
   providers: [CatagoryService],
@@ -44,7 +49,12 @@ import { BadgeModule } from 'primeng/badge';
     MyOrdersComponent,
     CheckoutComponent,
     ProfileComponent,
-    CartItemsComponent
+    CartItemsComponent,
+    PrivacyPolicyComponent,
+    TermsConditionsComponent,
+    CancellationRefundComponent,
+    ShippingDeliveryComponent,
+    ContactUsComponent
   ],
   imports: [
     CommonModule,
