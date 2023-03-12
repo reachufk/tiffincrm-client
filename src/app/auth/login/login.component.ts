@@ -15,8 +15,8 @@ import { MessageService } from 'primeng/api';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup = new FormGroup({
-    phoneNumber: new FormControl("6006014287", [Validators.required, Validators.minLength(10), Validators.maxLength(13)]),
-    password: new FormControl('Asif.chap111', [Validators.required, Validators.minLength(8)])
+    phoneNumber: new FormControl(null, [Validators.required, Validators.minLength(10), Validators.maxLength(13)]),
+    password: new FormControl(null, [Validators.required, Validators.minLength(8)])
   });
   OTPverificationForm: FormGroup
   showRegistrationForm: boolean = true;
