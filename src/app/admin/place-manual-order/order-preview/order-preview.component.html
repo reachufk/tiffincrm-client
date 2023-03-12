@@ -2,11 +2,11 @@
       <div class="row">
             <div class="col-lg-12 mb-3">
                   <h5 class="text-success"><strong>Order Details</strong>
-                        <button class="pull-right p-button-primary p-button-sm ms-2" pButton pRipple icon="pi pi-cart"
+                        <button class="pull-right p-button-success p-button-sm ms-2" pButton pRipple icon="pi pi-cart"
                               [label]="isFutureOrder?.value? 'Place Future Order' : 'Place order' "
                               (click)="PlaceOrder()"></button>
                         <button printSectionId="invoice" ngxPrint pButton [useExistingCss]="true"
-                              class="p-button-primary p-button-sm pull-right ms-2" label="Print Order Slip"></button>
+                              class="p-button-success p-button-sm pull-right ms-2" label="Print Order Slip"></button>
                   </h5>
             </div>
             <div class="col-lg-3 mt-4">
@@ -15,7 +15,7 @@
                               [formControl]="isFutureOrder"></p-checkbox>
                   </span>
             </div>
-            <div class="col-lg-3 mt-4">
+            <div class="col-lg-3 mt-4 date-button">
                   <span *ngIf="isFutureOrder?.value" class="ms-2">
                         <p-calendar [appendTo]="'body'" placeholder="Select Delivery Date" [formControl]="deliveryTime"
                               [minDate]="minDate" [maxDate]="maxDate" id="Delivery Date" [showIcon]="true"
@@ -104,10 +104,8 @@
                   </div>
             </div>
             <div class="col-lg-12 col-sm-12 col-sm-12 col-xs-12 my-2">
-                  <button pButton pRipple icon="pi pi-arrow-left" label="Back"
+                  <button pButton pRipple icon="pi pi-arrow-left" label="Back" class="p-button-success"
                         routerLink="/admin/place-order/items-selection"></button>
-                  <button class="pull-right mt-2" pButton pRipple icon="pi pi-cart" label="Place Order"
-                        (click)="PlaceOrder()"></button>
             </div>
       </div>
 </div>
