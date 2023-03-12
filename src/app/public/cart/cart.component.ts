@@ -31,9 +31,6 @@ export class CartComponent implements OnInit {
   Items: Observable<any>
   totalItems: number = 0;
   totalAmount: number = 0
-  DeliveryTimes: Array<{ label: string, value: string }> = [];
-  OrderTypes: Array<{ label: string, value: string }> = [{ label: 'Lunch', value: 'lunch' }, { label: 'Dinner', value: 'dinner' }];
-  DeliveryTimeControl: FormControl = new FormControl(null, [Validators.required]);
   OrderForm: FormGroup;
   RazorPayOptions: IRazorPayOtpions = InitializeRPayOptions();
   OrderOptions = {} as OrderOptions
@@ -44,9 +41,7 @@ export class CartComponent implements OnInit {
   minDate: Date;
   maxDate: Date;
 
-  constructor(private cartService: CartService, private authService: AuthService,
-    private messageService: MessageService, private orderService: OrdersService,
-    private router: Router) {
+  constructor(private cartService: CartService,private messageService: MessageService,) {
 
   }
   ngOnInit(): void {
@@ -63,13 +58,8 @@ export class CartComponent implements OnInit {
         const amount = (item?.selectedItemType?.typeValue ? item?.selectedItemType?.typeValue : item?.itemPrice) * item.count;
         return total + amount;
       }, 0);
-      this.OrderForm.get('orderItems').setValue(res?.data?.cartItems);
-      this.OrderForm.get('orderAmount').setValue(this.totalAmount);
       return res?.data?.cartItems
     }))
-
-    this.DeliveryTimes = [{ label: 'Today', value: '0' }, { label: 'Tomorrow', value: '1' }, { label: '2 Days', value: '2' }, { label: '3 Days', value: '3' }, { label: '4 days', value: '4' }, { label: '5 days', value: '5' }]
-
   }
 
 

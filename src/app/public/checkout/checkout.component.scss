@@ -1,3 +1,15 @@
 ::ng-deep .order-type .p-button {
     padding: 2px !important;
 }
+
+::ng-deep .checkout .p-selectbutton .p-button.p-highlight {
+    background: #1ace5f;
+    border-color: #0fc43c;
+    color: #ffffff;
+}
+
+::ng-deep .checkout .p-selectbutton .p-button.p-highlight:hover {
+    background: #15a34b;
+    border-color: #0fc43c;
+    color: #ffffff;
+}
