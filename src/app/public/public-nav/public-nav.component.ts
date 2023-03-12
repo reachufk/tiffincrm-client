@@ -1,19 +1,16 @@
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
+import { MenuItem } from 'primeng/api';
 import { map, Subject, takeUntil } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { CartService } from '../services/cart.service';
 import * as regionData from '../../tiffin-landing/availRegions.json';
 
-
-
 @Component({
   selector: 'public-nav',
   templateUrl: './public-nav.component.html',
-  styleUrls: ['./public-nav.component.scss'],
-  providers: [ConfirmationService, MessageService]
+  styleUrls: ['./public-nav.component.scss']
 })
 
 export class PublicNavComponent implements OnInit, OnDestroy {
@@ -26,7 +23,7 @@ export class PublicNavComponent implements OnInit, OnDestroy {
     { label: 'My profile', icon: 'pi pi-user' },
     { label: 'Login', icon: 'pi pi-sign-in', routerLink: '/auth/login' }
   ]
-  selectedRegion:FormControl = new FormControl(this.authService.Region.value);
+  selectedRegion: FormControl = new FormControl(this.authService.Region.value);
   cartItemsLength: number = 0;
   loggedIn: boolean = false
   Destroy: Subject<void> = new Subject();
@@ -34,9 +31,10 @@ export class PublicNavComponent implements OnInit, OnDestroy {
   showConfirmation: boolean = false;
   items = [];
   url: string = '';
+  showSelected: boolean = false;
+
   constructor(private authService: AuthService, private router: Router,
-    private cartService: CartService, private activatedRoute: ActivatedRoute,
-    private confirmationService: ConfirmationService, private messageService: MessageService) {
+    private cartService: CartService, private activatedRoute: ActivatedRoute) {
     this.url = router.url;
     const { regions } = regionData
     this.regions = regions
@@ -64,23 +62,11 @@ export class PublicNavComponent implements OnInit, OnDestroy {
       }
     })).subscribe()
     this.cartItemsLength = this.cartService.CartItems.value;
-    this.selectedRegion.valueChanges.pipe(takeUntil(this.Destroy), map((region: any) => {
+    this.selectedRegion.valueChanges.subscribe((region) => {
       if (region) {
-        this.confirmationService.confirm({
-          header: `${region?.label}, Lunch time: ${region?.lunch} and Dinner time: ${region?.dinner}`,
-          message: 'Are you sure that you want to proceed?',
-          accept: () => {
-            this.authService.Region.next(this.selectedRegion.value);
-            localStorage.setItem('selectedRegion', JSON.stringify(this.selectedRegion.value));
-            return this.showConfirmation = false;
-          },
-          reject: () => {
-            this.selectedRegion.patchValue(JSON.parse(localStorage.getItem('selectedRegion')));
-            return this.showConfirmation = false;
-          }
-        });
+        this.showSelected = true;
       }
-    })).subscribe()
+    });
   }
 
   stickHeader: boolean = false
@@ -100,7 +86,6 @@ export class PublicNavComponent implements OnInit, OnDestroy {
           { label: 'Login', icon: 'pi pi-sign-in', routerLink: '/auth/login' }
         ]
         this.authService.Logout();
-        this.messageService.add({ severity: 'success', summary: 'Logout successfully', life: 3000 });
         this.router.navigate(['/public/home']);
         break;
       case 'My profile':
@@ -116,17 +101,17 @@ export class PublicNavComponent implements OnInit, OnDestroy {
   AcceptRegion() {
     this.authService.Region.next(this.selectedRegion.value);
     localStorage.setItem('selectedRegion', JSON.stringify(this.selectedRegion.value));
-    this.showConfirmation = false;
+    return this.showSelected = false;
   }
 
   onDialogHide() {
-   this.selectedRegion.patchValue(JSON.parse(localStorage.getItem('selectedRegion')));
-    return this.showConfirmation = false;
+    this.selectedRegion.patchValue(JSON.parse(localStorage.getItem('selectedRegion') || ''));
+    return this.showSelected = false;
   }
 
   ResetRegion() {
-    this.showConfirmation = false
-    this.selectedRegion.setValue(null)
+    this.showSelected = false;
+    this.selectedRegion.setValue(null);
   }
 
 }

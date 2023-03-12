@@ -20,8 +20,15 @@ import { ContactUsComponent } from './public/legalize-components/contact-us/cont
 
 const routes: Routes = [
 
-  { path: '', redirectTo: 'tiffin-aaw', pathMatch: 'full' },
-  { path: 'tiffin-aaw', component: TiffinLandingComponent },
+  {
+    path: '',
+    redirectTo: 'tiffin-aaw',
+    pathMatch: 'full'
+  },
+  {
+    path: 'tiffin-aaw',
+    component: TiffinLandingComponent
+  },
   {
     path: 'public',
     component: PublicLayoutComponent,

@@ -12,6 +12,7 @@ import { IRegion } from "../shared/interfaces/regions";
 export class TiffinLandingComponent implements OnInit, OnDestroy {
   highLights: string[] = [];
   availablePlaces: IRegion[] = [];
+  allRegions: IRegion[] = [];
   results: Array<any> = [];
   selected: IRegion;
   highLight: string = 'Hungry?';
@@ -23,7 +24,8 @@ export class TiffinLandingComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     const { regions } = regionData;
-    this.availablePlaces = regions;
+    this.allRegions = regions;
+    this.availablePlaces = regions.slice(0, 14);;
     this.highLights = [
       'Cooking gone wrong?',
       'Movie marathon?',
@@ -34,7 +36,7 @@ export class TiffinLandingComponent implements OnInit, OnDestroy {
   }
 
   search(event: any) {
-    this.results = this.availablePlaces.filter((region: IRegion) => region.label.toLowerCase().includes(event?.query?.toLowerCase()))
+    this.results = this.allRegions.filter((region: IRegion) => region.label.toLowerCase().includes(event?.query?.toLowerCase()))
   }
 
   selectChange(region: IRegion) {
@@ -55,6 +57,10 @@ export class TiffinLandingComponent implements OnInit, OnDestroy {
     this.router.navigate(['/public/home'])
   }
 
+  closeDialog() {
+    this.selected = JSON.parse(localStorage.getItem('selectedRegion')) || '';
+    this.SetGo();
+  }
   ngAfterViewInit() {
     setInterval(() => {
       this.counter === this.highLights.length && (this.counter = 0)

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { single } from 'rxjs';
 
 @Component({
   selector: 'app-footer',
@@ -13,5 +12,4 @@ export class FooterComponent implements OnInit {
   ngOnInit() {
     this.copyRightDate = Date.now();
   }
-
 }

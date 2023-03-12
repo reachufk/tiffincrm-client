@@ -1,12 +1,324 @@
 {
-      "regions":[
-            {"label":"Hazratbal","distance":"1 km","lunch":"9am-12pm","dinner":"4pm-8pm"},
-            {"label":"Zadibal","distance":"1 km","lunch":"9am-12pm","dinner":"4pm-8pm"},
-            {"label":"Eidgah","distance":"1 km","lunch":"9am-12pm","dinner":"4pm-8pm"},
-            {"label":"Khanyar","distance":"1 km","lunch":"9am-12pm","dinner":"4pm-8pm"},
-            {"label":"Batmaloo","distance":"1 km","lunch":"9am-12pm","dinner":"4pm-8pm"},
-            {"label":"Sonwar","distance":"1 km","lunch":"9am-12pm","dinner":"4pm-8pm"},
-            {"label":"Amira Kadal","distance":"1 km","lunch":"9am-12pm","dinner":"4pm-8pm"},
-            {"label":"Habba Kadal","distance":"1 km","lunch":"9am-12pm","dinner":"4pm-8pm"}
+      "regions": [
+            {
+                  "label": "Hazratbal",
+                  "lunch": "08:00am-12:00pm",
+                  "dinner": "8:00am-06:00pm"
+            },
+            {
+                  "label": "Zadibal",
+                  "lunch": "09:00am-12:00pm",
+                  "dinner": "04:00pm-08:00pm"
+            },
+            {
+                  "label": "Baghat",
+                  "lunch": "08:00am-12:00pm",
+                  "dinner": "08:00am-6:00pm"
+            },
+            {
+                  "label": "Barzulla",
+                  "lunch": "08:00am-12:00pm",
+                  "dinner": "08:00am-06:00pm"
+            },
+            {
+                  "label": "Chanapora",
+                  "lunch": "08:00am-12:00pm",
+                  "dinner": "08:00am-06:00pm"
+            },
+            {
+                  "label": "Nowgam",
+                  "lunch": "08:00am-12:00pm",
+                  "dinner": "08:00am-06:00pm"
+            },
+            {
+                  "label": "Sanat Nagar",
+                  "lunch": "08:00am-12:00pm",
+                  "dinner": "08:00am-06:00pm"
+            },
+            {
+                  "label": "Hyderpora",
+                  "lunch": "08:00am-12:00pm",
+                  "dinner": "08:00am-06:00pm"
+            },
+            {
+                  "label": "Peerbagh",
+                  "lunch": "08:00am-12:00pm",
+                  "dinner": "08:00am-06:00pm"
+            },
+            {
+                  "label": "Tengpora",
+                  "lunch": "08:00am-12:00pm",
+                  "dinner": "08:00am-06:00pm"
+            },
+            {
+                  "label": "bemoan",
+                  "lunch": "08:00am-12:00pm",
+                  "dinner": "08:00am-06:00pm"
+            },
+            {
+                  "label": "JVC",
+                  "lunch": "08:00am-12:00pm",
+                  "dinner": "08:00am-06:00pm"
+            },
+            {
+                  "label": "Parimpora",
+                  "lunch": "08:00am-12:00pm",
+                  "dinner": "08:00am-06:00pm"
+            },
+            {
+                  "label": "Hmt",
+                  "lunch": "08:00am-12:00pm",
+                  "dinner": "08:00am-06:00pm"
+            },
+            {
+                  "label": "Rajbagh",
+                  "lunch": "08:00am-02:00pm",
+                  "dinner": "08:00am-08:00pm"
+            },
+            {
+                  "label": "Jawahar Nagar",
+                  "lunch": "08:00am-02:00pm",
+                  "dinner": "08:00am-08:00pm"
+            },
+            {
+                  "label": "LD hospital",
+                  "lunch": "08:00am-02:00pm",
+                  "dinner": "08:00am-08:00pm"
+            },
+            {
+                  "label": "Wazir Bagh",
+                  "lunch": "08:00am-02:00pm",
+                  "dinner": "08:00am-08:00pm"
+            },
+            {
+                  "label": "Gogji Bagh",
+                  "lunch": "08:00am-02:00pm",
+                  "dinner": "08:00am-08:00pm"
+            },
+            {
+                  "label": "Padshaibaghl",
+                  "lunch": "08:00am-02:00pm",
+                  "dinner": "08:00am-08:00pm"
+            },
+            {
+                  "label": "Rambagh",
+                  "lunch": "08:00am-02:00pm",
+                  "dinner": "08:00am-08:00pm"
+            },
+            {
+                  "label": "Solina",
+                  "lunch": "08:00am-02:00pm",
+                  "dinner": "08:00am-8:00pm"
+            },
+            {
+                  "label": "Alochi Bagh",
+                  "lunch": "08:00am-02:00pm",
+                  "dinner": "08:00am-08:00pm"
+            },
+            {
+                  "label": "Sonwar",
+                  "lunch": "08:00am-02:00pm",
+                  "dinner": "08:00am-08:00pm"
+            },
+            {
+                  "label": "Dalgate",
+                  "lunch": "08:00am-02:00pm",
+                  "dinner": "08:00am-08: 00pm"
+            },
+            {
+                  "label": "Lal chock",
+                  "lunch": "08:00am-02:00pm",
+                  "dinner": "08:00am-08: 00pm"
+            },
+            {
+                  "label": "Batamaloo",
+                  "lunch": "08:00am-02:00pm",
+                  "dinner": "08:00am-08: 00pm"
+            },
+            {
+                  "label": "Smhs",
+                  "lunch": "08:00am-02:00pm",
+                  "dinner": "08:00am-08: 00pm"
+            },
+            {
+                  "label": "SMHS Hospital",
+                  "lunch": "08:00am-02:00pm",
+                  "dinner": "08:00am-08: 00pm"
+            },
+            {
+                  "label": "Karan Nagar",
+                  "lunch": "08:00am-02:00pm",
+                  "dinner": "08:00am-08: 00pm"
+            },
+            {
+                  "label": "Munawarabad",
+                  "lunch": "08:00am-02:00pm",
+                  "dinner": "08:00am-08:00pm"
+            },
+            {
+                  "label": "goni khan",
+                  "lunch": "08:00am-02:00pm",
+                  "dinner": "08:00am-08:00pm"
+            },
+            {
+                  "label": "Amira Kadal",
+                  "lunch": "08:00am-02:00pm",
+                  "dinner": "08:00am-08:00pm"
+            },
+            {
+                  "label": "Maisumal",
+                  "lunch": "08:00am-02:00pm",
+                  "dinner": "08:00am-08: 00pm"
+            },
+            {
+                  "label": "Shaheed Gunj",
+                  "lunch": "08:00am-02:00pm",
+                  "dinner": "08:00am-08:00pm"
+            },
+            {
+                  "label": "Nawa Kadal",
+                  "lunch": "08:00am-12:00pm",
+                  "dinner": "08:00am-06:00pm"
+            },
+            {
+                  "label": "Safa Kadal",
+                  "lunch": "08:00am-12:00pm",
+                  "dinner": "08:00am-06:00pm"
+            },
+            {
+                  "label": "Fateh  Kadal",
+                  "lunch": "08:00am-12:00pm",
+                  "dinner": "08:00am-06:00pm"
+            },
+            {
+                  "label": "Habba Kadal",
+                  "lunch": "08:00am-12:00pm",
+                  "dinner": "08:00am-06:00pm"
+            },
+            {
+                  "label": "Zaina Kadal",
+                  "lunch": "08:00am-12:00pm",
+                  "dinner": "08:00am-06:00pm"
+            },
+            {
+                  "label": "Budshah Kadal",
+                  "lunch": "08:00am-12:00pm",
+                  "dinner": "08:00am-06:00pm"
+            },
+            {
+                  "label": "Ali Kadal",
+                  "lunch": "08:00am-12:00pm",
+                  "dinner": "08:00am-06:00pm"
+            },
+            {
+                  "label": "Eidgah",
+                  "lunch": "08:00am-12:00pm",
+                  "dinner": "08:00am-06:00pm"
+            },
+            {
+                  "label": "Soura",
+                  "lunch": "08:00am-12:00pm",
+                  "dinner": "08:00am-06:00pm"
+            },
+            {
+                  "label": "90 ft",
+                  "lunch": "08:00am-12:00pm",
+                  "dinner": "08:00am-06:00pm"
+            },
+            {
+                  "label": "Ahmad Nagar",
+                  "lunch": "08:00am-12:00pm",
+                  "dinner": "08:00am-06:00pm"
+            },
+            {
+                  "label": "Boulevard",
+                  "lunch": "08:00am-12:00pm",
+                  "dinner": "08:00am-06:00pm"
+            },
+            {
+                  "label": "Khanyar",
+                  "lunch": "08:00am-12:00pm",
+                  "dinner": "08:00am-06:00pm"
+            },
+            {
+                  "label": "Gojawara",
+                  "lunch": "08:00am-12:00pm",
+                  "dinner": "08:00am-06:00pm"
+            },
+            {
+                  "label": "Hawal",
+                  "lunch": "08:00am-12:00pm",
+                  "dinner": "08:00am-06:00pm"
+            },
+            {
+                  "label": "Raina Wari",
+                  "lunch": "08:00am-12:00pm",
+                  "dinner": "08:00am-06:00pm"
+            },
+            {
+                  "label": "Nigeen",
+                  "lunch": "08:00am-12:00pm",
+                  "dinner": "08:00am-06:00pm"
+            },
+            {
+                  "label": "Saida Kadal",
+                  "lunch": "08:00am-12:00pm",
+                  "dinner": "08:00am-06:00pm"
+            },
+            {
+                  "label": "Dargah",
+                  "lunch": "08:00am-12:00pm",
+                  "dinner": "08:00am-06:00pm"
+            },
+            {
+                  "label": "Lal bazar",
+                  "lunch": "08:00am-12:00pm",
+                  "dinner": "08:00am-06:00pm"
+            },
+            {
+                  "label": "Zakura",
+                  "lunch": "08:00am-12:00pm",
+                  "dinner": "08:00am-06: 00pm"
+            },
+            {
+                  "label": "Fore Shore",
+                  "lunch": "08:00am-12:00pm",
+                  "dinner": "08:00am-06:00pm"
+            },
+            {
+                  "label": "Alamgiri Bazar",
+                  "lunch": "08:00am-12:00pm",
+                  "dinner": "08:00am-06:00pm"
+            },
+            {
+                  "label": "Nowshera",
+                  "lunch": "08:00am-12:00pm",
+                  "dinner": "08:00am-06:00pm"
+            },
+            {
+                  "label": "Ali masjid",
+                  "lunch": "08:00am-12:00pm",
+                  "dinner": "08:00am-06:00pm"
+            },
+            {
+                  "label": "Kawdara",
+                  "lunch": "08:00am-12:00pm",
+                  "dinner": "08:00am-06:00pm"
+            },
+            {
+                  "label": "Alijan Road",
+                  "lunch": "08:00am-12:00pm",
+                  "dinner": "08:00am-06:00pm"
+            },
+            {
+                  "label": "Zoonimar",
+                  "lunch": "08:00am-12:00pm",
+                  "dinner": "08:00am-06:00pm"
+            },
+            {
+                  "label": "Zakura",
+                  "lunch": "08:00am-12:00pm",
+                  "dinner": "08:00am-06:00pm"
+            }
       ]
 }
