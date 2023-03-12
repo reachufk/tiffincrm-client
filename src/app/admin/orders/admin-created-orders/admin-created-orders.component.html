@@ -1,6 +1,13 @@
 <div class="row">
-      <div class="col-lg-12 px-0">
-          <p-table #dt1 [value]="FilteredAdminOrders"
+        <div class="col-lg-12">
+            <p-toast></p-toast>
+            <p-tabView (onChange)="handleTabChange($event)">
+                <p-tabPanel header="Admin Latest Orders" [selected]="selected == 'admin-latest'"></p-tabPanel>
+                <p-tabPanel header="Admin Future Orders" [selected]="selected == 'admin-future'"></p-tabPanel>
+            </p-tabView>
+        </div>
+        <div class="col-lg-12">
+            <p-table #dt1 [value]="FilteredAdminOrders"
               [globalFilterFields]="['orderAddress','orderMode','username','phoneNumber']"
               class="w-100">
 
@@ -51,7 +58,8 @@
                   </tr>
               </ng-template>
           </p-table>
-      </div>
+        </div>
+          
       <div class="col-lg-12">
         <app-paginator [CurrentPage]="FetchModel.pageNo" [TotalPages]="TotalPages" [TotalRecords]="TotalRecords"
         (PageChange)="pageChange($event)"></app-paginator>

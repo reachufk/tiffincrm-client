@@ -41,6 +41,13 @@ export class AdminOrdersService {
   GetAdminCreatedOrders(payload: any) {
     return this.http.post(`${environment.server}Orders/GetAdminOrders`, payload)
   }
+  FetchAdminLatestOrders(payload: any){
+    return this.http.post(`${environment.server}Orders/GetAdminLatestOrders`, payload)
+  }
+
+  FetchAdminFutureOrders(payload: any){
+    return this.http.post(`${environment.server}Orders/GetAdminFutureOrders`, payload)
+  }
 
   UpdateAdminCreatedOrder(payload:any){
     return this.http.put(`${environment.server}Orders/UpdateAdminCreatedOrder/${payload?._id}`, payload)

@@ -11,3 +11,12 @@
       height: 120px;
       border: 1px solid rgb(91, 88, 88) !important;
   }
+
+  ::ng-deep .p-tabview .p-tabview-panels {
+    background: #ffffff;
+    padding: 0.25rem;
+    border: 0 none;
+    color: #495057;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+}

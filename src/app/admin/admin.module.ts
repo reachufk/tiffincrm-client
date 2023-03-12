@@ -29,8 +29,7 @@ import { BannersComponent } from './banners/banners.component';
 import { ChartModule } from "primeng/chart";
 import { CalendarModule } from "primeng/calendar";
 import { CheckboxModule } from "primeng/checkbox";
-import { AdminCompletedOrdersComponent } from './orders/admin-completed-orders/admin-completed-orders.component'
-
+import { AdminCompletedOrdersComponent } from './orders/admin-completed-orders/admin-completed-orders.component';
 @NgModule({
   providers: [AdminCatagoryService, AdminUserService, AdminOrdersService, MessageService],
   declarations: [DashboardComponent,
