@@ -163,6 +163,8 @@ export class CategoryItemsComponent implements OnInit, OnDestroy {
         icon: 'pi pi-exclamation-triangle',
         acceptLabel: 'Sign in',
         rejectLabel: 'Sign up',
+        acceptIcon: '<i></i>',
+        rejectIcon: '<i></i>',
         accept: () => {
           this.confirmationService.close()
           this.router.navigate(['/auth/login'])

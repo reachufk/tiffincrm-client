@@ -1,12 +1,12 @@
-<div class="container-xxl px-0 mb-3" [ngClass]="stickHeader?'fixed-top':''">
-  <nav class="navbar navbar-expand-lg custom-nav py-0" #nav>
-    <div class="container-fluid pt-2 dialog-nav" [ngClass]="stickHeader?'shadow':''">
+<div class="container-xxl mb-2" [ngClass]="stickHeader?'fixed-top':''">
+  <nav class="navbar navbar-expand-lg custom-nav p-0" #nav>
+    <div class="container-fluid p-0 pt-2 dialog-nav" [ngClass]="stickHeader?'shadow':''">
       <a class="navbar-brand" routerLink="/public/home">
         <img src="./../../../assets/img/tiffenaw_p0.png" style="height: 30px;" alt="Tiffin Aww">
       </a>
       <a class="navbar-brand" *ngIf="!url?.includes('cart') && !url?.includes('checkout')">
-        <p-dropdown [options]="regions" optionLabel="label" dropdownIcon="pi pi-globe" [formControl]="selectedRegion"
-           placeholder="Select region">
+        <p-dropdown [options]="regions" optionLabel="label" [filter]="true" filterBy="label" tooltipPosition="bottom"
+          dropdownIcon="pi pi-globe" [formControl]="selectedRegion" placeholder="Select region">
         </p-dropdown>
       </a>
       <p-dropdown appendTo="body" placeholder="''" [formControl]="selected" class="navbar-toggler"
@@ -29,10 +29,18 @@
         </ul>
       </div>
     </div>
-
-    <p-confirmDialog acceptLabel="Yes" [rejectVisible]="false" position="top" [baseZIndex]="10000"
-      acceptButtonStyleClass="accept-button" [breakpoints]="{'960px': '75vw', '640px': '100vw'}">
-    </p-confirmDialog>
+    <p-dialog header="Confirn region" [(visible)]="showSelected" [modal]="true" position="top"
+      [style]="{width: '100vw'}" [draggable]="false" (onHide)="onDialogHide()">
+      <p>We are time based for our order timing!</p>
+      <p class="text-secondary text-center fw-bold fs-2">{{selectedRegion?.value?.label}}</p>
+      <p class="fw-bold text-secondary">Lunch : {{selectedRegion?.value?.lunch}}</p>
+      <p class="fw-bold text-secondary">Dinner : {{selectedRegion?.value?.dinner}}</p>
+      <ng-template pTemplate="footer">
+        <div class="col text-center">
+          <button (click)="AcceptRegion()" pButton pRipple type="button" label="Proceed"
+            class="p-button-success ta-proceed"></button>
+        </div>
+      </ng-template>
+    </p-dialog>
   </nav>
 </div>
-<p-toast position="top-right"></p-toast>

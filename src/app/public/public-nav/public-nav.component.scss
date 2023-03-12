@@ -40,11 +40,7 @@
     }
 }
 
-::ng-deep .dialog-nav .p-dialog * {
-    padding: 1% !important;
-    margin: 0% !important;
-    font-size: 1rem !important;
-}
+
 
 ::ng-deep .p-button-success {
     padding: 1% 2% !important;
@@ -99,6 +95,15 @@
     padding: 6px;
 }
 
+::ng-deep .p-dropdown-panel .p-dropdown-header {
+    padding: 0;
+}
+
+
+::ng-deep .p-dropdown-panel .p-dropdown-filter {
+    padding: 0;
+}
+
 .w-100 {
     width: 100%;
 }
@@ -125,5 +130,13 @@
 }
 
 ::ng-deep .user-profile .p-dialog .p-dialog-header {
-    padding: 0;
+    padding: 0 !important;
+}
+
+::ng-deep .p-dialog *,
+.p-dialog-header,
+.p-dialog-content,
+.p-dialog-footer {
+    padding: 1% !important;
+    margin: 0% !important;
 }

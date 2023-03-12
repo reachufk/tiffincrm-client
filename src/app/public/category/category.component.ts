@@ -14,11 +14,11 @@ export class CategoryComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-  this.getCategories()
+    this.getCategories()
   }
 
-  getCategories(){
-    this.catagories = this.catagoryService.GetCatagories().pipe(map((res:any)=> res?.data))
+  getCategories() {
+    this.catagories = this.catagoryService.GetCatagories().pipe(map((res: any) => res?.data))
   }
 
 }

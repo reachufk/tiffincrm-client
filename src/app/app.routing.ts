@@ -15,8 +15,15 @@ import { NotFoundComponent } from './layouts/NotFound/notfound.component';
 
 const routes: Routes = [
 
-  { path: '', redirectTo: 'tiffin-aaw', pathMatch: 'full' },
-  { path: 'tiffin-aaw', component: TiffinLandingComponent },
+  {
+    path: '',
+    redirectTo: 'tiffin-aaw',
+    pathMatch: 'full'
+  },
+  {
+    path: 'tiffin-aaw',
+    component: TiffinLandingComponent
+  },
   {
     path: 'public',
     component: PublicLayoutComponent,

@@ -1,16 +1,14 @@
-import { Component, inject, OnInit, Optional, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, MinLengthValidator, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { validateAllFormFields } from 'src/app/shared/utils/formUtils';
 import { AuthService } from '../services/auth.service';
-import { MessageService } from 'primeng/api';
 import { IloggedUser } from 'src/app/shared/interfaces/auth';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
-  providers: []
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
 
@@ -27,8 +25,8 @@ export class LoginComponent implements OnInit {
   hide: boolean = true;
   state: any;
   showPassword: boolean = false
-  constructor(private authService: AuthService, @Optional() private messageService: MessageService,
-    private router: Router, private activatedRoute: ActivatedRoute) {
+
+  constructor(private authService: AuthService, private router: Router, private activatedRoute: ActivatedRoute) {
 
   }
 
@@ -58,7 +56,6 @@ export class LoginComponent implements OnInit {
     }, 2048)
   }
 
-
   Login() {
     validateAllFormFields(this.loginForm);
     if (this.loginForm.invalid) {
@@ -66,18 +63,16 @@ export class LoginComponent implements OnInit {
     }
     this.authService.Login(this.loginForm.value).subscribe(async (res: any) => {
       if (res?.statusCode == 200) {
-        this.messageService.add({ severity: 'success', summary: 'logged in sucessfully' })
-        this.authService.SetUser(res?.user)
+        this.authService.SetUser(res?.user);
         const loggedInUser: IloggedUser = res?.user;
         localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
-        this.navigateHandler(loggedInUser.role)
+        this.navigateHandler(loggedInUser.role);
       } else {
-        this.error = res?.message
+        this.error = res?.message;
       }
-
     })
-
   }
+
   navigateHandler(role: String) {
     if (role == 'admin') {
       this.router.navigate(['/admin/dashboard'])
