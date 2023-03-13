@@ -24,7 +24,7 @@ export interface IRazorPayOtpions {
 
 export function InitializeRPayOptions ():IRazorPayOtpions{
      return {
-            "key": "rzp_test_G1Ge4DzK3mWbcm", 
+            "key": "rzp_test_2alsaQKjTooqSr", 
             "amount": 0,
             "currency": "",
             "name": "Tiffin Aaw",
