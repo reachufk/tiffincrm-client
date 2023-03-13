@@ -30,18 +30,20 @@
         </ul>
       </div>
     </div>
-    <p-dialog header="Confirn region" [(visible)]="showSelected" [modal]="true" position="top"
-      [style]="{width: '100vw'}" [draggable]="false" (onHide)="onDialogHide()">
-      <p>We are time based for our order timing!</p>
-      <p class="text-secondary text-center fw-bold fs-2">{{selectedRegion?.value?.label}}</p>
-      <p class="fw-bold text-secondary">Lunch : {{selectedRegion?.value?.lunch}}</p>
-      <p class="fw-bold text-secondary">Dinner : {{selectedRegion?.value?.dinner}}</p>
-      <ng-template pTemplate="footer">
-        <div class="col text-center">
-          <button (click)="AcceptRegion()" pButton pRipple type="button" label="Proceed"
-            class="p-button-success ta-proceed"></button>
-        </div>
-      </ng-template>
-    </p-dialog>
+    <div class="text-center">
+      <p-dialog header="Confirm region" [(visible)]="showSelected" [modal]="true" position="top"
+        [style]="{width: '100vw'}" [draggable]="false" (onHide)="onDialogHide()">
+        <p>We are time based for our order timing!</p>
+        <p class="text-dark text-center fw-bold fs-2">{{selectedRegion?.value?.label}}</p>
+        <p class="fw-bold text-secondary">Lunch : {{selectedRegion?.value?.lunch}}</p>
+        <p class="fw-bold text-secondary">Dinner : {{selectedRegion?.value?.dinner}}</p>
+        <ng-template pTemplate="footer">
+          <div class="col text-center">
+            <button (click)="AcceptRegion()" pButton pRipple type="button" label="Proceed"
+              class="p-button-success ta-proceed p-button-rounded"></button>
+          </div>
+        </ng-template>
+      </p-dialog>
+    </div>
   </nav>
 </div>
