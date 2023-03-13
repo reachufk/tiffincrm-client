@@ -56,17 +56,17 @@
                               </p>
                         </div>
                   </div>
-                  <div *ngIf="selected" class="card text-start ta-box landing-region-dialog">
-                        <p-dialog header="Confirn region" [(visible)]="showSelected" [modal]="true" position="top"
+                  <div *ngIf="selected" class="card text-center ta-box landing-region-dialog">
+                        <p-dialog header="Confirm region" [(visible)]="showSelected" [modal]="true" position="top"
                               [style]="{width: '100vw'}" [draggable]="false" (onHide)="closeDialog()">
                               <p>We are time based for our order timing!</p>
-                              <p class="text-secondary text-center fw-bold fs-2">{{selected?.label}}</p>
+                              <p class="text-dark text-center fw-bold fs-2">{{selected?.label}}</p>
                               <p class="fw-bold text-secondary">Lunch : {{selected?.lunch}}</p>
                               <p class="fw-bold text-secondary">Dinner : {{selected?.dinner}}</p>
                               <ng-template pTemplate="footer">
                                     <div class="col text-center">
                                           <button (click)="SetGo()" pButton pRipple type="button" label="Proceed"
-                                                class="p-button-success"></button>
+                                                class="p-button-success p-button-rounded"></button>
                                     </div>
                               </ng-template>
                         </p-dialog>
