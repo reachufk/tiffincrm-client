@@ -10,22 +10,26 @@ import { AdminOrdersService } from '../../services/admin-orders.service';
   providers: [MessageService]
 })
 export class OrderInvoiceComponent implements OnInit {
-  @ViewChild('invoice') invoice: ElementRef
+  @ViewChild('invoice') invoice: ElementRef;
   OrderDetails: any = {};
   adminOrderService = inject(AdminOrdersService);
   isAdminCreated: boolean = false;
-  isCompleted: boolean = false
+  isCompleted: boolean = false;
+
   constructor(public ref: DynamicDialogRef, public config: DynamicDialogConfig,
     private messageService: MessageService) {
     this.OrderDetails = this.config.data
   }
+  customOrderId: string = null;
 
   ngOnInit(): void {
-    if (this.config.data?.ref) {
-      this.isAdminCreated = true
-    }
-    if (this.config.data?.isCompleted) {
-      this.isCompleted = true
+    if (this.config?.data) {
+      const { ref, isCompleted, _id, userInfo: { phoneNumber, username } } = this.config?.data;
+      ref && (this.isAdminCreated = true);
+      isCompleted && (this.isCompleted = true);
+      if (_id && phoneNumber && username) {
+        this.customOrderId = `${username.substr(0, 2)}${_id.substr(-2)}${phoneNumber.substr(7, 2)}`;
+      }
     }
   }
 
