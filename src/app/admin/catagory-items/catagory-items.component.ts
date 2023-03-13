@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { Observable, map } from 'rxjs';
 import { FetchCatagoryItems } from 'src/app/shared/interfaces/fetch-catagory-items';
 import { validateAllFormFields } from 'src/app/shared/utils/formUtils';
@@ -11,7 +11,7 @@ import { AdminCatagoryService } from '../services/admin-catagory.service';
   selector: 'app-catagory-items',
   templateUrl: './catagory-items.component.html',
   styleUrls: ['./catagory-items.component.scss'],
-  providers: [MessageService]
+  providers: [ConfirmationService, MessageService]
 })
 export class CatagoryItemsComponent {
 
@@ -22,11 +22,11 @@ export class CatagoryItemsComponent {
   searchKeyword: FormControl = new FormControl(null);
   catagoryID: string;
   FetchModel: FetchCatagoryItems = { pageNo: 1, pageSize: 10, keyword: '', catagory: '' }
-  CurrentPage: number=1;
+  CurrentPage: number = 1;
   TotalPages: number;
   TotalRecords: number
   catagoryName: string;
-  constructor(private messageService: MessageService, private activatedRoute: ActivatedRoute) {
+  constructor(private confirmationService: ConfirmationService, private messageService: MessageService, private activatedRoute: ActivatedRoute) {
     this.catagoryID = this.activatedRoute.snapshot.paramMap.get('catagory');
     this.catagoryName = this.activatedRoute.snapshot.queryParamMap.get('catagoryName');
     this.FetchModel.catagory = this.catagoryID
@@ -39,7 +39,7 @@ export class CatagoryItemsComponent {
   GetCatagoryItems() {
     this.CatagoryItems = this.adminCatagoryService.GetCatagoryItems(this.FetchModel).pipe(map((res: { data: Array<any>, statusCode: number, totalPages: number, totalCount: number }) => {
       this.TotalPages = res?.totalPages
-      this.TotalRecords= res?.totalCount
+      this.TotalRecords = res?.totalCount
       return res?.data
     }))
   }
@@ -59,7 +59,6 @@ export class CatagoryItemsComponent {
     } else {
       this.displayCatagoryItemForm = true
     }
-
   }
 
   CreateForm() {
@@ -67,19 +66,19 @@ export class CatagoryItemsComponent {
       _id: new FormControl(null),
       catagory: new FormControl(this.catagoryID, [Validators.required]),
       itemName: new FormControl(null, [Validators.required]),
-      isVeg:new FormControl(false, [Validators.required]),
+      isVeg: new FormControl(false, [Validators.required]),
       itemPrice: new FormControl(null, [Validators.required]),
-      itemTypes:new FormArray([]),
+      itemTypes: new FormArray([]),
       selectedItemType: new FormControl(null),
-      itemDescription:new FormControl(null),
+      itemDescription: new FormControl(null),
       itemDiscount: new FormControl(null)
     })
   }
 
-  createItemTypeForm(){
+  createItemTypeForm() {
     return new FormGroup({
-      typeName:new FormControl(null,[Validators.required]),
-      typeValue:new FormControl(null,[Validators.required])
+      typeName: new FormControl(null, [Validators.required]),
+      typeValue: new FormControl(null, [Validators.required])
     })
   }
 
@@ -91,11 +90,10 @@ export class CatagoryItemsComponent {
     let ItemTypes = this.CatagoryItemForm.get('itemTypes') as FormArray;
     ItemTypes.push(this.createItemTypeForm())
   }
-  RemoveType(index:number) {
+  RemoveType(index: number) {
     let ItemTypes = this.CatagoryItemForm.get('itemTypes') as FormArray;
     ItemTypes.removeAt(index)
   }
-
 
   SaveItem() {
     validateAllFormFields(this.CatagoryItemForm)
@@ -127,11 +125,22 @@ export class CatagoryItemsComponent {
   }
 
   DeleteCatagoryItem(ID: string) {
-    this.adminCatagoryService.DeleteCatagoryItem(ID).subscribe((res: any) => {
-      if (res?.statusCode == 200) {
-        this.messageService.add({ severity: 'success', summary: 'Catagory deleted!' });
-        this.GetCatagoryItems()
+    this.confirmationService.confirm({
+      message: 'Do you want to delete this Item?',
+      header: 'Delete Confirmation',
+      icon: 'pi pi-info-circle',
+      accept: () => {
+        this.adminCatagoryService.DeleteCatagoryItem(ID).subscribe((res: any) => {
+          if (res?.statusCode == 200) {
+            this.messageService.add({ severity: 'success', summary: 'Catagory Item deleted!' });
+            this.GetCatagoryItems()
+          }
+        })
+      },
+      reject: () => {
+        return;
       }
-    })
+    });
+
   }
 }

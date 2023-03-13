@@ -1,10 +1,12 @@
 <div class="row">
       <div class="col-lg-12 text-end mt-2">
             <p-toast></p-toast>
-            <button printSectionId="invoice" ngxPrint pButton [useExistingCss]="true" label="Print"
+            <button printSectionId="invoice" icon="pi pi-print" ngxPrint pButton [useExistingCss]="true"
+                  label="Print KT" class="p-button-primary p-button-sm mr-3"></button>
+            <button printSectionId="invoice" icon="pi pi-print" ngxPrint pButton [useExistingCss]="true" label="Print"
                   class="p-button-primary p-button-sm mr-3"></button>
             <button *ngIf="!isCompleted" (click)="ProcessToComplete()" pButton class="p-button-success p-button-sm"
-                  label="Mark as complete"></button>
+                  icon="pi pi-check" label="complete"></button>
       </div>
       <!-- BEGIN INVOICE -->
       <div #invoice id="invoice" class="col-12">
@@ -33,7 +35,8 @@
                                           <abbr title="Email">Email : </abbr>
                                           {{isAdminCreated?
                                           (OrderDetails?.email?OrderDetails?.email:'Not available') :
-                                          (OrderDetails?.userInfo?.email?OrderDetails?.userInfo?.email:'not available')}}
+                                          (OrderDetails?.userInfo?.email?OrderDetails?.userInfo?.email:'not
+                                          available')}}
                                     </address>
                               </div>
                               <div class="col-6 text-end">

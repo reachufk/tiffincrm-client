@@ -4,7 +4,8 @@
       <a class="navbar-brand px-1" routerLink="/public/home">
         <img src="./../../../assets/img/tiifen-word-only.png" style="height: 30px;" alt="Tiffin Aww">
       </a>
-      <a class="navbar-brand px-2" *ngIf="!url?.includes('cart') && !url?.includes('checkout')">
+      <a class="navbar-brand px-2"
+        *ngIf="!url?.includes('cart') && !url?.includes('checkout') && !url?.includes('my-orders')">
         <p-dropdown [options]="regions" optionLabel="label" [filter]="true" filterBy="label" tooltipPosition="bottom"
           dropdownIcon="pi pi-globe" [formControl]="selectedRegion" placeholder="Select region">
         </p-dropdown>

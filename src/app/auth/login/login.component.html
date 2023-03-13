@@ -1,28 +1,27 @@
-<div class="container" style="height: 96vh;">
+<div class="container" style="height: 100vh;">
       <div class="row justify-content-md-center">
             <div class="col-md-5">
                   <div class="card  welcome-back tiffinaww-logo">
                         <div class="card-body">
                               <a routerLink="/">
-                                    <img style="height: 64px;" src="./../../../assets/img/logo_tiffin_aaw.webp" alt=""
+                                    <img style="height: 50px;" src="./../../../assets/img/logo_tiffin_aaw.webp" alt=""
                                           srcset="">
                               </a>
                         </div>
                   </div>
             </div>
       </div>
-      <div class="row justify-content-md-center text-center">
-            <h2 class="welcome-back text-center p-2">
-                  <span style="color: green;">
-                        Welcome <span class="text-dark">Back</span>
-                  </span>
-            </h2>
-      </div>
-      <div class="row justify-content-md-center align-items-center" style="height: 55vh;">
+
+      <div class="row justify-content-md-center align-items-center" style="height: 80vh;">
             <div class="col-md-5">
                   <div class="card login-pannel">
                         <div class="card-body">
-                              <p>Please login to continue</p>
+                              <h2 class="welcome-back text-center p-2">
+                                    <span style="color: green;">
+                                          Welcome <span class="text-dark">Back</span>
+                                    </span>
+                              </h2>
+                              <p>Please login to continue.</p>
                               <form [formGroup]="loginForm">
                                     <div class="row g-0">
                                           <div *ngIf="error" class="alert alert-danger p-2">
@@ -54,19 +53,14 @@
                                           <p-divider align="center" type="dashed">
                                                 <b>or</b>
                                           </p-divider>
-                                          <div class="my-2 text-center">
-                                                <a routerLink="/auth/signup" class="text-primary">Create new
-                                                      account?</a>
+                                          <div class="text-center">
+                                                <a routerLink="/auth/signup">Create new account?</a>
                                           </div>
                                     </div>
                               </form>
                         </div>
                   </div>
-            </div>
-      </div>
-      <div class="row justify-content-md-center my-2">
-            <div class="col-md-5 text-center">
-                  <app-ufklogo />
+                  <app-ufklogo class="text-center"></app-ufklogo>
             </div>
       </div>
 </div>

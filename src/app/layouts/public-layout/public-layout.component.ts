@@ -19,7 +19,7 @@ export class PublicLayoutComponent implements OnInit {
   url: string
 
   constructor(private activatedRoute: ActivatedRoute, private authService: AuthService, private router: Router) {
-    this.isCart = this.router.url.includes('cart') ||this.router.url.includes('checkout')  ? true : false
+    this.isCart = this.router.url.includes('cart') || this.router.url.includes('checkout') ? true : false
     this.url = this.router.url
   }
 
@@ -28,7 +28,7 @@ export class PublicLayoutComponent implements OnInit {
       if (event instanceof NavigationEnd) {
         this.url = event.url
         this.isCart = event.url.includes('cart') ? true : false
-        this.isCart = this.router.url.includes('cart') ||this.router.url.includes('checkout')  ? true : false
+        this.isCart = this.router.url.includes('cart') || this.router.url.includes('checkout') ? true : false
       }
     })
     this.authService.userCart.pipe(map((show) => {

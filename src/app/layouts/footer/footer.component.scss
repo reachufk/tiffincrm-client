@@ -104,14 +104,24 @@
     color: black;
 }
 
-.links{
+.links {
     font-size: 14px;
     color: rgb(92, 89, 89);
     font-weight: 400;
 }
-.links:hover{
+
+.links:hover {
     color: rgb(66, 83, 228);
     cursor: pointer;
     font-weight: 500;
-    transition:  0.2s all ease-in-out;
+    transition: 0.2s all ease-in-out;
+}
+
+.green-vl {
+    margin: 2px;
+}
+
+.green-vl::after {
+    content: '';
+    border: 1px solid green;
 }

@@ -108,14 +108,14 @@
                                                                   <div formArrayName="itemTypes" class="col-lg-12 mt-4">
                                                                         <div class="col-lg-12 mt-4">
                                                                               <p-button (click)="AddType()"
-                                                                                    icon="pi pi-plus"
-                                                                                    label="Add Type"
+                                                                                    icon="pi pi-plus" label="Add Type"
                                                                                     styleClass="p-button-success p-button-rounded"></p-button>
                                                                         </div>
                                                                         <div *ngFor="let type of getItemTypesControls(); let i = index;"
                                                                               class="row">
                                                                               <div [formGroupName]="i" class="row">
-                                                                                    <div class="col-lg-5 p-fluid my-3" [ngClass]="i == 0?'mt-4':''">
+                                                                                    <div class="col-lg-5 p-fluid py-2"
+                                                                                          [ngClass]="i == 0?'mt-4':''">
                                                                                           <span class="p-float-label">
                                                                                                 <input id="Type Name"
                                                                                                       type="text"
@@ -128,20 +128,25 @@
                                                                                           </span>
                                                                                     </div>
 
-                                                                                    <div class="col-lg-5 p-fluid my-3" [ngClass]="i == 0?'mt-4':''">
+                                                                                    <div class="col-lg-5 p-fluid py-2"
+                                                                                          [ngClass]="i == 0?'mt-4':''">
 
                                                                                           <span class="p-float-label">
-                                                                                                <p-inputNumber formControlName="typeValue"
-                                                                                                id="Type Value" inputId="Type Value"
-                                                                                                      mode="decimal" 
+                                                                                                <p-inputNumber
+                                                                                                      formControlName="typeValue"
+                                                                                                      id="Type Value"
+                                                                                                      inputId="Type Value"
+                                                                                                      mode="decimal"
                                                                                                       placeholder="Enter Type value to add for item..."
-                                                                                                       appFormErrorMessages>
+                                                                                                      appFormErrorMessages>
                                                                                                 </p-inputNumber>
-                                                                                                <label for="Type Value">Type Value</label>
+                                                                                                <label for="Type Value">Type
+                                                                                                      Value</label>
                                                                                           </span>
                                                                                     </div>
                                                                                     <div class="col-lg-2 my-auto">
-                                                                                          <i (click)="RemoveType(i)" class="pi pi-trash text-danger fs-4 my-auto"></i>
+                                                                                          <i (click)="RemoveType(i)"
+                                                                                                class="pi pi-trash text-danger fs-4 my-auto"></i>
                                                                                     </div>
                                                                               </div>
                                                                         </div>
@@ -172,7 +177,7 @@
 
                                           </div>
 
-                                          <div class="col-lg-12 mt-3">
+                                          <div class="col-lg-12 mt-2">
                                                 <app-paginator (JumpTo)="pageChanged($event)"
                                                       (PageChange)="pageChanged($event)" [TotalPages]="TotalPages"
                                                       [CurrentPage]="CurrentPage"
@@ -183,5 +188,7 @@
                         </div>
                   </div>
             </div>
+            <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"
+                  rejectButtonStyleClass="p-button-outlined"></p-confirmDialog>
       </div>
 </div>

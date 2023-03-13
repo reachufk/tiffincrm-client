@@ -20,20 +20,20 @@
                   </div>
             </div>
 
-            <div class="col-lg-12 py-3 bg-light text-center">
+            <div class="col-lg-12 py-2 bg-light text-center">
                   <h4><span class="active-category">{{categoryName}}</span></h4>
             </div>
 
             <div class="col-lg-12 bg-light">
                   <div class="row mx-auto">
                         <div *ngIf="empty"
-                              class="col-lg-12 col-sm-12 col-xs-12 px-2 my-3 text-muted py-2 mb-3 text-center">
+                              class="col-lg-12 col-sm-12 col-xs-12 px-2 py-2 text-muted py-2 mb-2 text-center">
                               <h5>
                                     Sorry! no items for {{categoryName}} for now
                               </h5>
                         </div>
                         <div *ngFor="let item of FilteredItems | async; index as i"
-                              class="col-lg-4 col-sm-6 col-xs-6 px-2 mb-3">
+                              class="col-lg-4 col-sm-6 col-xs-6 px-2 mb-2">
                               <div class="card p-2 h-100">
                                     <div class="row">
                                           <div class="col-8">
@@ -48,16 +48,17 @@
                                                 <p class="text-secondary pull-right">Starts From</p><br>
                                                 <p>{{item?.itemPrice | currency:'INR'}}</p>
                                                 <button (click)="OpenItemDialog(item)" pButton pRipple
-                                                      class="p-button-warning p-button-sm" label="Add"
+                                                      class="p-button-success p-button-rounded" label="Add"
                                                       icon="pi pi-plus">
                                                 </button>
-                                                <p *ngIf="i == 0" class="text-secondary  mt-2 customizable">
+                                                <p *ngIf="item?.itemTypes?.length"
+                                                      class="text-secondary mt-2 customizable">
                                                       Customizable</p>
                                           </div>
                                     </div>
                               </div>
                         </div>
-                        <div class="col-lg-12 mx-0">
+                        <div class="col-lg-12">
                               <p-dialog [(visible)]="displayAddItemDialog" [modal]="true" [draggable]="false"
                                     [resizable]="false" acceptButtonStyleClass="accept-button">
 
@@ -74,24 +75,22 @@
                                     <ng-template pTemplate="content">
 
                                           <div class="row">
-                                                <div *ngFor="let type of SelectedItem?.itemTypes" class="col-lg-12 my-2"
-                                                      [ngClass]="type == SelectedItem?.selectedItemType?'fw-bold':''">
+                                                <div *ngFor="let type of SelectedItem?.itemTypes" class="col-lg-12">
                                                       <span>{{type?.typeName}}</span>
-                                                      <span class="pull-right ms-2">
-                                                            <span class="mr-3">{{type?.typeValue |
+                                                      <span class="pull-right fw-bold">
+                                                            <span>{{type?.typeValue |
                                                                   currency:'INR'}}</span>
                                                             <p-radioButton [(ngModel)]="SelectedItem.selectedItemType"
                                                                   [value]="type"></p-radioButton>
                                                       </span>
                                                 </div>
-                                                <div class="col-lg-12 my-3 p-fluid">
+                                                <div class="col-lg-12 my-2 p-fluid">
                                                       <textarea rows="3" cols="30"
                                                             [(ngModel)]="SelectedItem.itemInstructions" pInputTextarea
-                                                            placeholder="add instructions"
+                                                            placeholder="Any special food instruction for chef, e.g less spicy, etc."
                                                             [autoResize]="true"></textarea>
                                                 </div>
                                           </div>
-
                                     </ng-template>
 
                                     <ng-template pTemplate="footer">
@@ -103,8 +102,8 @@
                                                             [min]="1" [(ngModel)]="SelectedItem.count"
                                                             buttonLayout="horizontal" inputId="horizontal"
                                                             spinnerMode="horizontal" [step]="1"
-                                                            decrementButtonClass="p-button-secondary p-buttonn-sm p-2"
-                                                            incrementButtonClass="p-button-secondary p-2"
+                                                            decrementButtonClass="p-button-secondary"
+                                                            incrementButtonClass="p-button-secondary"
                                                             incrementButtonIcon="pi pi-plus"
                                                             decrementButtonIcon="pi pi-minus">
                                                       </p-inputNumber>
@@ -112,7 +111,8 @@
                                                 <div class="col-lg-6 half">
                                                       <p-button (click)="AddToCart(SelectedItem)"
                                                             [label]="'Add'+' ' + ( (SelectedItem?.selectedItemType?.typeValue? SelectedItem?.selectedItemType?.typeValue *SelectedItem?.count : SelectedItem?.itemPrice * SelectedItem?.count) | currency:'INR') "
-                                                            styleClass="p-button-success" class="pull-right"></p-button>
+                                                            styleClass="p-button-success p-button-rounded"
+                                                            class="pull-right"></p-button>
                                                 </div>
                                           </div>
 

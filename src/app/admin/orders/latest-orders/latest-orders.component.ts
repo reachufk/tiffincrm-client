@@ -14,24 +14,22 @@ export class LatestOrdersComponent implements OnInit {
 
   @Input() inputLatestOrder: any = {}
   LatestOrders: Array<any> = []
-  FilterdLatestOrders: Array<any> =[];
+  FilterdLatestOrders: Array<any> = [];
   OrderTypes: Array<any> = [{ name: "Lunch", value: "lunch" }, { name: "Dinner", value: "dinner" }]
 
   constructor(private orderService: AdminOrdersService, private dialogService: DialogService,
-    private messageService : MessageService) {
+    private messageService: MessageService) {
   }
   ngOnInit(): void {
     this.orderService.connect()
     this.GetLatestOrders()
     this.orderService.FetchNewCreatedOrder().subscribe((order: any) => {
-      order.tag='new';
-      const currentDate  = new Date().toISOString().slice(0, 10);
-      const deliveryDate = order?.orderDeliveryTime?.slice(0,10)
-      if(deliveryDate == currentDate){
+      order.tag = 'new';
+      const currentDate = new Date().toISOString().slice(0, 10);
+      const deliveryDate = order?.orderDeliveryTime?.slice(0, 10)
+      if (deliveryDate == currentDate) {
         this.LatestOrders.push(order)
         this.FilterdLatestOrders.push(order)
-        // this.LatestOrders?.reverse()
-        // this.FilterdLatestOrders?.reverse()
       }
     })
   }
@@ -61,9 +59,9 @@ export class LatestOrdersComponent implements OnInit {
       data: order
     });
     ref.onClose.subscribe((result: any) => {
-      if(result){
-        this.messageService.add({severity:'success',summary:'Order processed'});
-        this.LatestOrders = this.LatestOrders.filter((orders:any)=> orders?._id !== order?._id);
+      if (result) {
+        this.messageService.add({ severity: 'success', summary: 'Order processed' });
+        this.LatestOrders = this.LatestOrders.filter((orders: any) => orders?._id !== order?._id);
         this.FilterdLatestOrders = this.LatestOrders
       }
     })

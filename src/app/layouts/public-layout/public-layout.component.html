@@ -1,7 +1,8 @@
 <public-nav></public-nav>
 <router-outlet></router-outlet>
-<app-footer *ngIf="!url?.includes('cart') && !url?.includes('checkout')"></app-footer>
+<app-footer
+      *ngIf="!url?.includes('cart') && !url?.includes('checkout') && !url?.includes('my-orders') && !url?.includes('profile')"></app-footer>
 <span class="cart-button" *ngIf="loggedIn && !isCart">
       <button pButton pRipple type="button" routerLink="/public/cart" icon="pi pi-shopping-cart"
-            class="p-button-rounded p-button-success"></button>
+            class="p-button-rounded p-button-warning"></button>
 </span>

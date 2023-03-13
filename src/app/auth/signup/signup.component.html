@@ -1,19 +1,19 @@
-<div class="container" style="height: 96vh;">
+<div class="container" style="height: 100vh;">
     <div class="row justify-content-md-center">
         <div class="col-md-5">
             <div class="card  welcome-back tiffinaww-logo">
                 <div class="card-body">
                     <a routerLink="/">
-                        <img style="height: 64px;" src="./../../../assets/img/logo_tiffin_aaw.webp" alt="" srcset="">
+                        <img style="height: 50px;" src="./../../../assets/img/logo_tiffin_aaw.webp" alt="" srcset="">
                     </a>
                 </div>
             </div>
         </div>
     </div>
-    <h2 class="welcome-back text-center p-2"><span style="color: green;">Get </span>Registered</h2>
-    <div class="row justify-content-md-center my-2  align-items-center" style="height: 64vh;">
+    <div class="row justify-content-md-center align-items-center" style="height: 90vh;">
         <div class="col-md-5">
             <div class="card login-pannel">
+                <h2 class="welcome-back text-center p-2"><span style="color: green;">Get </span>Registered</h2>
                 <div *ngIf="!showOtp" class="card-body">
                     <p>Enter details to get started now!</p>
                     <form [formGroup]="signupForm">
@@ -48,15 +48,17 @@
                                     <span (click)="showPassword = !showPassword" class="p-inputgroup-addon"><i
                                             class="pi pi-eye"></i></span>
                                 </div>
-                                <small class="text-secondary mt-2">Use 8 or more characters with a mix of lower-case,
-                                    upper-case letters & numbers</small>
+                                <div class="text-secondary my-2" style="line-height: 14px; font-size: 0.8rem;">Use 8 or
+                                    more characters with a mix of
+                                    lower-case,
+                                    upper-case letters & numbers</div>
                             </div>
                             <button pButton pRipple type="button" (click)="signupUser()" label="Sign up"
                                 class="p-button-raised p-button-success p-2"></button>
                             <p-divider align="center" type="dashed">
                                 <b>or</b>
                             </p-divider>
-                            <div class="my-2 text-center">
+                            <div class="text-center">
                                 <a routerLink="/auth/login">Already have an account?</a>
                             </div>
                         </div>
@@ -85,11 +87,7 @@
                     </form>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="row justify-content-md-center my-2">
-        <div class="col-md-5 text-center">
-            <app-ufklogo />
+            <app-ufklogo class="text-center"></app-ufklogo>
         </div>
     </div>
 </div>
