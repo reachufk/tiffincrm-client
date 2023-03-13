@@ -1,12 +1,12 @@
 <div class="row">
       <div class="col-lg-12 text-end mt-2">
             <p-toast></p-toast>
+            <button printSectionId="KOT" *ngIf="!isCompleted" icon="pi pi-print" ngxPrint pButton
+                  [useExistingCss]="true" label="Print KOT" class="p-button-secondary m-1"></button>
             <button printSectionId="invoice" icon="pi pi-print" ngxPrint pButton [useExistingCss]="true"
-                  label="Print KT" class="p-button-primary p-button-sm mr-3"></button>
-            <button printSectionId="invoice" icon="pi pi-print" ngxPrint pButton [useExistingCss]="true" label="Print"
-                  class="p-button-primary p-button-sm mr-3"></button>
-            <button *ngIf="!isCompleted" (click)="ProcessToComplete()" pButton class="p-button-success p-button-sm"
-                  icon="pi pi-check" label="complete"></button>
+                  label="Print Bill" class="p-button-primary m-1"></button>
+            <button *ngIf="!isCompleted" (click)="ProcessToComplete()" pButton class="p-button-success m-1"
+                  icon="pi pi-check" label="Mark as complete"></button>
       </div>
       <!-- BEGIN INVOICE -->
       <div #invoice id="invoice" class="col-12">
@@ -15,7 +15,7 @@
                         <div class="invoice-title">
                               <div class="row">
                                     <div class="col-xs-12">
-                                          <h2>Tiffin Aaw</h2>
+                                          <h2>Tiffin Aaw Bill for {{OrderDetails?.userInfo?.username}}</h2>
                                     </div>
                               </div>
                         </div>
@@ -42,7 +42,7 @@
                               <div class="col-6 text-end">
                                     <span><strong>Order ID :</strong></span>
                                     <br>
-                                    {{OrderDetails?._id}}
+                                    {{customOrderId}}
                                     <br>
                                     <span><strong>Order Date :</strong></span>
                                     <br>
@@ -107,4 +107,53 @@
             </div>
       </div>
       <!-- END INVOICE -->
-</div>
+      <!-- END KT -->
+      <div *ngIf="!isCompleted" #KOT id="KOT" class="col-12">
+            <div class="grid">
+                  <div class="grid-body">
+                        <div class="invoice-title">
+                              <div class="row">
+                                    <div class="col-xs-12">
+                                          <h2>Tiffin Aaw Bill for Kitchen</h2>
+                                    </div>
+                              </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                              <div class="col-12">
+                                    <p>Order ID: <span class="fw-bold m-0 text-dark">{{customOrderId}}</span>
+                                    <p>Order Date: <span class="fw-bold m-0 text-dark">{{OrderDetails?.createdAt |
+                                                date:"dd-MM-yyyy"}}</span></p>
+                                    <p>Ordered At: <span class="fw-bold m-0 text-dark">{{OrderDetails?.createdAt |
+                                                date:"hh:MM a"}}</span></p>
+                                    <p>Order For: <span class="fw-bold m-0 text-dark">{{OrderDetails?.orderType}}</span>
+                                    </p>
+                              </div>
+
+                              <hr>
+                              <div class="row mt-2">
+                                    <div class="col-12">
+                                          <h5>ORDER SUMMARY</h5>
+                                          <table class="table">
+                                                <thead>
+                                                      <tr class="line">
+                                                            <td><strong>#</strong></td>
+                                                            <td class="text-left"><strong>ITEM</strong></td>
+                                                            <td class="text-left"><strong>UNIT</strong></td>
+                                                      </tr>
+                                                </thead>
+                                                <tbody>
+                                                      <tr *ngFor="let item of OrderDetails?.orderItems;let i = index">
+                                                            <td>{{i+1}}</td>
+                                                            <td>{{item?.itemName}}</td>
+                                                            <td class="text-left">{{item?.count}}</td>
+                                                      </tr>
+                                                </tbody>
+                                          </table>
+                                    </div>
+                              </div>
+                        </div>
+                  </div>
+            </div>
+            <!-- END KT -->
+      </div>

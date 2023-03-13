@@ -17,7 +17,6 @@ export class CartItemsComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    debugger
     this.user = JSON.parse(localStorage.getItem('loggedInUser'));
     this.getCartItems();
   }
