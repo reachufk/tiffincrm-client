@@ -40,8 +40,6 @@
     }
 }
 
-
-
 ::ng-deep .p-button-success {
     padding: 1% 2% !important;
     border-radius: 0;
@@ -139,4 +137,13 @@
 .p-dialog-footer {
     padding: 1% !important;
     margin: 0% !important;
+}
+
+::ng-deep .p-button{
+    padding-inline: 10px !important;
+    font-weight: 500 !important;
+}
+
+::ng-deep .p-dropdown-panel .p-dropdown-items {
+     padding: 0.15rem 0.95rem; 
 }

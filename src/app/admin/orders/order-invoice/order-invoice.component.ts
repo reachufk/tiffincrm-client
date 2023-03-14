@@ -15,7 +15,8 @@ export class OrderInvoiceComponent implements OnInit {
   adminOrderService = inject(AdminOrdersService);
   isAdminCreated: boolean = false;
   isCompleted: boolean = false;
-
+  isPaid:boolean = false;
+  orderPaymentMode:string = 'online'
   constructor(public ref: DynamicDialogRef, public config: DynamicDialogConfig,
     private messageService: MessageService) {
     this.OrderDetails = this.config.data
@@ -24,13 +25,21 @@ export class OrderInvoiceComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.config?.data) {
-      const { ref, isCompleted, _id, userInfo: { phoneNumber, username } } = this.config?.data;
+      const { ref, isCompleted, _id, phoneNumber, username,orderPaymentMode } = this.config?.data;
       ref && (this.isAdminCreated = true);
       isCompleted && (this.isCompleted = true);
       if (_id && phoneNumber && username) {
         this.customOrderId = `${username.substr(0, 2)}${_id.substr(-2)}${phoneNumber.substr(7, 2)}`;
       }
+      if(this.isAdminCreated ){
+        this.orderPaymentMode = orderPaymentMode
+      }
+      if(this.isAdminCreated && this.orderPaymentMode == 'online'){
+        this.isPaid = false
+      }
     }
+    
+    
   }
 
   ProcessToComplete() {
@@ -51,7 +60,7 @@ export class OrderInvoiceComponent implements OnInit {
   }
 
   ProcessToCompleteAdminOrder() {
-    this.OrderDetails.orderPaymentStatus = 'completed'
+    this.OrderDetails.orderStatus = 'completed'
     delete this.OrderDetails.ref
     this.adminOrderService.UpdateAdminCreatedOrder(this.OrderDetails).subscribe((res: any) => {
       if (res.statusCode == 200) {

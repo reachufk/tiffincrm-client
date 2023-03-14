@@ -46,3 +46,7 @@
 .pull-right{
       float: right;
 }
+
+::ng-deep .p-button{
+      padding-inline: 10px !important;
+}

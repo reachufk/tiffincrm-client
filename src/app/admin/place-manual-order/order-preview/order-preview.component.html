@@ -2,11 +2,9 @@
       <div class="row">
             <div class="col-lg-12 mb-2">
                   <h5 class="text-success"><strong>Order Details</strong>
-                        <button class="pull-right p-button-success p-button-sm ms-2" pButton pRipple icon="pi pi-cart"
+                        <button class="pull-right p-button-success p-button ms-2" pButton pRipple icon="pi pi-cart"
                               [label]="isFutureOrder?.value? 'Place Future Order' : 'Place order' "
                               (click)="PlaceOrder()"></button>
-                        <button printSectionId="invoice" ngxPrint pButton [useExistingCss]="true"
-                              class="p-button-success p-button-sm pull-right ms-2" label="Print Order Slip"></button>
                   </h5>
             </div>
             <div class="col-lg-3 mt-4">
@@ -62,6 +60,9 @@
                                                 <br>
                                                 <span><strong>Payment Mode :</strong>
                                                       {{orderModeControl.value}}</span>
+                                                <br>
+                                                <span><strong>Payment Status :</strong>
+                                                      {{orderModeControl.value == 'online'? 'pending':'COD'}}</span>
                                           </div>
                                     </div>
                                     <hr>

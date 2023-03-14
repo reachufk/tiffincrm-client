@@ -3,7 +3,6 @@
       text-decoration: none;
 }
 
-
 .card {
       border: none;
 }
@@ -55,7 +54,6 @@
       width: 30px !important;
 }
 
-
 ::ng-deep .p-dialog .p-dialog-footer button {
       border: none !important;
       outline: none !important;
@@ -69,8 +67,7 @@
       line-height: 16px;
 }
 
-
-@media (max-width:768px) {
+@media (max-width: 768px) {
       .half {
             width: 50% !important;
       }
@@ -89,7 +86,6 @@
             margin: 2px 0px !important;
       }
 }
-
 
 ::ng-deep .p-dialog .p-dialog-header {
       padding: 2px !important;
@@ -114,7 +110,7 @@
 }
 
 ::ng-deep .p-button-success {
-      padding: 4px !important;
+      padding-inline: 10px !important;
 }
 
 .mr-3 {
@@ -146,4 +142,20 @@
       margin-top: 1px;
       font-size: x-small;
       line-height: 0.5px;
+}
+::ng-deep .cat-item .p-confirm-dialog .p-dialog-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+}
+
+::ng-deep .cat-item .p-dialog .p-dialog-footer {
+      padding-block: 10px !important;
+      text-align: center;
+      .p-button {
+            margin-inline: 5px !important;
+      }
+}
+::ng-deep .cat-item .p-dialog .p-dialog-header {
+      padding: 10px !important;
 }

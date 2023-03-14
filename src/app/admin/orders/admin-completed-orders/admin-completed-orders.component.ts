@@ -34,8 +34,8 @@ export class AdminCompletedOrdersComponent {
   GetAdminCompletedOrders() {
     this.orderService.GetAdminCompletedOrders(this.FetchModel).subscribe((res: any) => {
       if (res?.statusCode == 200) {
-        this.AdminOrders = res?.orders;
-        this.FilteredAdminOrders = res?.orders
+        this.AdminOrders = res?.data;
+        this.FilteredAdminOrders = res?.data
         this.TotalPages = res?.totalPages;
         this.TotalRecords = res?.totalCount
       }

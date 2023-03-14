@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { FormErrorMessagesDirective } from './directives/form-error-messages.directive';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext'
@@ -23,14 +23,16 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { UfklogoComponent } from '../layouts/ufklogo/ufklogo.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { IstDatePipe } from './pipes/ist-date.pipe';
 
 @NgModule({
+  providers:[DatePipe],
   declarations: [
     FormErrorMessagesDirective,
     PaginatorComponent,
     UfklogoComponent,
-    LoaderComponent
-
+    LoaderComponent,
+    IstDatePipe
   ],
   imports: [
     CommonModule,
@@ -62,7 +64,8 @@ import { LoaderComponent } from './components/loader/loader.component';
     ConfirmDialogModule,
     AutoCompleteModule,
     UfklogoComponent,
-    LoaderComponent
+    LoaderComponent,
+    IstDatePipe
   ]
 })
 export class SharedModule { }

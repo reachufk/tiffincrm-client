@@ -1,11 +1,18 @@
 <div class="row">
-      <div class="col-lg-12 text-end mt-2">
+      <div class="col-lg-4 mt-2">
+            <button pButton  *ngIf="!isCompleted && isAdminCreated && orderPaymentMode == 'online'"  
+            (click)="OrderDetails.orderPaymentMode ='offline';OrderDetails.orderPaymentStatus ='COD'"
+            label="Mark COD" class="p-button-secondary m-1"></button>
+            <button pButton  *ngIf="!isCompleted && isAdminCreated && OrderDetails.orderPaymentMode !='offline'" [disabled]="OrderDetails.orderPaymentStatus =='COD'" (click)="OrderDetails.orderPaymentStatus ='paid'"  label="Mark paid" class="p-button-success m-1"></button>
+      </div>
+      <div class="col-lg-8 text-end mt-2">
             <p-toast></p-toast>
+           
             <button printSectionId="KOT" *ngIf="!isCompleted" icon="pi pi-print" ngxPrint pButton
                   [useExistingCss]="true" label="Print KOT" class="p-button-secondary m-1"></button>
             <button printSectionId="invoice" icon="pi pi-print" ngxPrint pButton [useExistingCss]="true"
                   label="Print Bill" class="p-button-primary m-1"></button>
-            <button *ngIf="!isCompleted" (click)="ProcessToComplete()" pButton class="p-button-success m-1"
+            <button *ngIf="!isCompleted"  (click)="ProcessToComplete()" pButton class="p-button-success m-1"
                   icon="pi pi-check" label="Mark as complete"></button>
       </div>
       <!-- BEGIN INVOICE -->

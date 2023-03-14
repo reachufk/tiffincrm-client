@@ -26,6 +26,7 @@ import { LoaderComponent } from './shared/components/loader/loader.component';
 import { OrderPlacedComponent } from './public/order-placed/order-placed.component';
 import { NotFoundComponent } from './layouts/NotFound/notfound.component';
 import { DropdownModule } from 'primeng/dropdown';
+import { IstDatePipe } from './shared/pipes/ist-date.pipe';
 @NgModule({
   imports: [
     BrowserAnimationsModule,

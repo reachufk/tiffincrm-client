@@ -35,9 +35,10 @@ import { TermsConditionsComponent } from './legalize-components/terms-conditions
 import { CancellationRefundComponent } from './legalize-components/cancellation-refund/cancellation-refund.component';
 import { ShippingDeliveryComponent } from './legalize-components/shipping-delivery/shipping-delivery.component';
 import { ContactUsComponent } from './legalize-components/contact-us/contact-us.component';
+import { IstDatePipe } from '../shared/pipes/ist-date.pipe';
 
 @NgModule({
-  providers: [CatagoryService],
+  providers: [CatagoryService,IstDatePipe],
 
   declarations: [
     HomeComponent,

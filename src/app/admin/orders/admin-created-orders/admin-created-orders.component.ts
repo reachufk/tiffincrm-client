@@ -30,17 +30,6 @@ export class AdminCreatedOrdersComponent implements OnInit {
     this.FetchAdminLatestOrders()
   }
 
-  // GetAdminOrders() {
-  //   this.orderService.GetAdminCreatedOrders(this.FetchModel).subscribe((res: any) => {
-  //     if (res?.statusCode == 200) {
-  //       this.AdminOrders = res?.orders;
-  //       this.FilteredAdminOrders = res?.orders
-  //       this.TotalPages = res?.totalPages;
-  //       this.TotalRecords = res?.totalCount
-  //     }
-  //   })
-  // }
-
   orderTypeFilter(event) {
     if (!event?.value?.length) {
       this.FilteredAdminOrders = this.AdminOrders

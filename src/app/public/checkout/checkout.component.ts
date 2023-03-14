@@ -5,6 +5,7 @@ import { MessageService } from 'primeng/api';
 import { map, Observable } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { IloggedUser } from 'src/app/shared/interfaces/auth';
+import { IstDatePipe } from 'src/app/shared/pipes/ist-date.pipe';
 import { validateAllFormFields } from 'src/app/shared/utils/formUtils';
 import { CartService } from '../services/cart.service';
 import { OrdersService } from '../services/orders.service';
@@ -24,10 +25,9 @@ declare var Razorpay: any
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
   styleUrls: ['./checkout.component.scss'],
-  providers: [MessageService, OrdersService]
+  providers: [MessageService, OrdersService,IstDatePipe]
 })
 export class CheckoutComponent {
-
 
   Items: Observable<any>
   totalItems: number = 0;
@@ -49,7 +49,7 @@ export class CheckoutComponent {
   paymentModes: Array<any> = [{ label: "Online", value: "online" }, { label: "Offline", value: "offline" }];
   displayOrderPlaced: boolean = true;
   latestDate: any
-  constructor(private cartService: CartService, private authService: AuthService,
+  constructor(private cartService: CartService,private ISTDate:IstDatePipe,private authService:AuthService,
     private messageService: MessageService, private orderService: OrdersService,
     private router: Router) {
 
@@ -114,7 +114,9 @@ export class CheckoutComponent {
     if (!this.isFutureOrder.value) {
       this.OrderForm.get('orderDeliveryTime').setValue(this.latestDate)
     }
-    console.log(this.OrderForm.value);
+    const {value} = this.OrderForm.get('orderDeliveryTime')
+    const ist = this.ISTDate.transform(value);
+    this.OrderForm.get('orderDeliveryTime').setValue(ist);
     if (this.OrderForm.invalid) {
       return
     }

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Subject, takeUntil, map } from 'rxjs';
 import { AdminOrderModel } from 'src/app/shared/interfaces/admin-order-model';
+import { IstDatePipe } from 'src/app/shared/pipes/ist-date.pipe';
 import { AdminPlaceOrderService } from '../../services/admin-place-order.service';
 
 @Component({
@@ -24,8 +25,9 @@ export class OrderPreviewComponent implements OnInit, OnDestroy {
   deliveryTime:FormControl = new FormControl(null,[Validators.required]);
   orderModeControl:FormControl = new FormControl('offline',[Validators.required]);
   orderModes:Array<any> = [{label:'Online',value:'online'},{label:'Offline',value:'offline'}]
+  orderPaymentStatusControl:FormControl=new FormControl(null)
   constructor(private placeOrderService: AdminPlaceOrderService, private router: Router,
-    private messageService: MessageService,) {}
+    private messageService: MessageService,private ISTDate:IstDatePipe) {}
 
   ngOnDestroy(): void {
     this.Destroy.next();
@@ -39,7 +41,6 @@ export class OrderPreviewComponent implements OnInit, OnDestroy {
     const maxDate = new Date();
     maxDate.setDate(this.minDate.getDate() + 4);
     this.maxDate = maxDate;
-    console.log(this.latestDate);
     this.GetOrderDetails()
   }
 
@@ -53,17 +54,24 @@ export class OrderPreviewComponent implements OnInit, OnDestroy {
     AdminOrderModel.orderItems = this.OrderDetails?.items;
     AdminOrderModel.orderAmount = this.orderAmount;
     AdminOrderModel.orderMode = 'offline';
-    AdminOrderModel.orderPymentMode = this.orderModeControl.value;
-    AdminOrderModel.orderPaymentStatus = 'pending';
+    AdminOrderModel.orderPaymentMode = this.orderModeControl.value;
+    if(this.orderModeControl.value == 'online'){
+      AdminOrderModel.orderPaymentStatus = 'pending';
+    }else{
+      AdminOrderModel.orderPaymentStatus = 'COD';
+    }
     if(!this.isFutureOrder.value){
-      AdminOrderModel.orderDeliveryTime = this.latestDate
+      AdminOrderModel.orderDeliveryTime = this.latestDate;
     }else{
       if(!this.deliveryTime.valid){
         return
       }
-      const selectedDate = new Date(this.deliveryTime.value).toISOString()
-      AdminOrderModel.orderDeliveryTime = selectedDate
+      AdminOrderModel.orderDeliveryTime = this.deliveryTime.value
+      console.log(AdminOrderModel);
     }
+    console.log(AdminOrderModel);
+    const ist = this.ISTDate.transform(AdminOrderModel.orderDeliveryTime);
+    AdminOrderModel.orderDeliveryTime = ist
     this.placeOrderService.PlaceAdminOrder(AdminOrderModel).subscribe((res:any)=>{
       if(res?.statusCode==201){
         this.messageService.add({ severity: 'success', summary: 'Order Placed!' });
@@ -73,6 +81,14 @@ export class OrderPreviewComponent implements OnInit, OnDestroy {
   }
 
   GetOrderDetails() {
+    // if(!this.placeOrderService.CustomerInfoSubject.value){
+    //   this.router.navigate(['/admin/place-order/customer-info'])
+    //   return
+    // }
+    // if(!this.placeOrderService.ItemsSubject.value){
+    //   this.router.navigate(['/admin/place-order/items-selection'])
+    //   return
+    // }
     this.placeOrderService.CustomerInfoSubject.pipe(takeUntil(this.Destroy), map((info: any) => {
       this.OrderDetails.userInfo = info
     })).subscribe()

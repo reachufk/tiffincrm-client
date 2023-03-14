@@ -30,8 +30,9 @@ import { ChartModule } from "primeng/chart";
 import { CalendarModule } from "primeng/calendar";
 import { CheckboxModule } from "primeng/checkbox";
 import { AdminCompletedOrdersComponent } from './orders/admin-completed-orders/admin-completed-orders.component';
+import { IstDatePipe } from '../shared/pipes/ist-date.pipe';
 @NgModule({
-  providers: [AdminCatagoryService, AdminUserService, AdminOrdersService, MessageService],
+  providers: [AdminCatagoryService, AdminUserService, AdminOrdersService, MessageService,IstDatePipe],
   declarations: [DashboardComponent,
     OrdersComponent,
     UsersComponent,
