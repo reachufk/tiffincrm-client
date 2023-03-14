@@ -14,8 +14,9 @@
 
       <div class="row justify-content-md-center align-items-center" style="height: 80vh;">
             <div class="col-md-5">
+                  <p-toast position="top-center"></p-toast>
                   <div class="card login-pannel">
-                        <div class="card-body">
+                        <div *ngIf="!forgotScreen" class="card-body">
                               <h2 class="welcome-back text-center p-2">
                                     <span style="color: green;">
                                           Welcome <span class="text-dark">Back</span>
@@ -46,7 +47,7 @@
                                                 </div>
                                           </div>
                                           <div class="my-2 text-end">
-                                                <a href="">Forgotten password?</a>
+                                                <a class="show-cursor" (click)="forgotScreen = !forgotScreen">Forgotten password?</a>
                                           </div>
                                           <button pButton pRipple type="button" (click)="Login()" label="Log in"
                                                 class="p-button-raised p-button-success p-2"></button>
@@ -59,6 +60,53 @@
                                     </div>
                               </form>
                         </div>
+
+                        <div *ngIf="forgotScreen" class="card-body">
+                              <h2 class="welcome-back text-center p-2">
+                                    <span style="color: green;">
+                                          Welcome <span class="text-dark">Back</span>
+                                    </span>
+                              </h2>
+                              <p>Please login to continue.</p>
+                                    <div class="row g-0">
+                                          <div *ngIf="error" class="alert alert-danger p-2">
+                                                <i class="pi pi-times"></i>{{error}}
+                                          </div>
+                                          <div class="my-2">
+                                                <div *ngIf="!onVerify && !resetScreen"  class="p-inputgroup">
+                                                      <span class="p-inputgroup-addon">
+                                                            <i class="pi pi-mobile"></i></span>
+                                                      <input type="text" pInputText placeholder="Enter Registered Mobile" id="mobile"
+                                                            [formControl]="mobileNoForgotScreen">
+                                                </div>
+
+                                                <div *ngIf="onVerify && !resetScreen" class="p-inputgroup">
+                                                      <input type="text" pInputText placeholder="Enter OTP" id="OTP"
+                                                            [formControl]="optControl" appFormErrorMessages required>
+                                                </div>
+                                                <div *ngIf="resetScreen" class="p-inputgroup">
+                                                      <input type="text" pInputText placeholder="Enter new password" id="password"
+                                                            [formControl]="newPasswordControl" appFormErrorMessages required>
+                                                </div>
+
+                                          </div>
+                                          <button *ngIf="!onVerify && !resetScreen" pButton pRipple type="button" (click)="SendForgotOtp()" label="Send OTP"
+                                          class="p-button-raised p-button-success p-2"></button>
+                                          <button *ngIf="onVerify && !resetScreen" pButton pRipple type="button" (click)="VerifyForgotOtp()" label="Verify"
+                                                class="p-button-raised p-button-success p-2"></button>
+                                                <button *ngIf="resetScreen" pButton pRipple type="button" (click)="ResetPassword()" label="Reset Password"
+                                                class="p-button-raised p-button-success p-2"></button>
+                                                
+                                          <p-divider align="center" type="dashed">
+                                                <b>or</b>
+                                          </p-divider>
+                                          <div class="text-center">
+                                                <a routerLink="/auth/signup">Create new account?</a>
+                                          </div>
+                                    </div>
+                        </div>
+
+
                   </div>
                   <app-ufklogo class="text-center"></app-ufklogo>
             </div>

@@ -36,9 +36,17 @@ export class AuthService {
     this.userCart.next(false)
     localStorage.removeItem('loggedInUser')
   }
-
   SignupUser(phoneNumber: string) {
     return this.http.post(`${environment.server}User/RegisterUser`, phoneNumber);
+  }
+  SendForgotOTP(phoneNumber:any){
+    return this.http.get(`${environment.server}User/ForgotPassword/${phoneNumber}`);
+  }
+  VerifyForgotOTP(phoneNumber:any,otp:any) {
+    return this.http.post(`${environment.server}User/VerifyForgotOTP`, {phoneNumber,otp});
+  }
+  ResetPassword(phoneNumber:any,password:any) {
+    return this.http.post(`${environment.server}User/ResetPassword`, {phoneNumber,password});
   }
 
   VerifyOTP(data: IUser) {
