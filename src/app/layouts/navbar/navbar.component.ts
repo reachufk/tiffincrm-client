@@ -55,9 +55,9 @@ export class NavbarComponent implements OnInit {
                 const currentDate  = new Date().toISOString().slice(0, 10);
                 const deliveryDate = order?.orderDeliveryTime?.slice(0,10);
                 if(currentDate == deliveryDate){
-                    this.messageService.add({severity:'success',summary:`${order?.userInfo?.username?order?.userInfo?.username:'user'} has placed new nrder. check Latest Orders to process`,sticky:true,key:'notify'})
+                    this.messageService.add({severity:'success',summary:`${order?.userInfo?.username?order?.userInfo?.username:'user'} has placed new order. check Latest Orders to process`,sticky:false,key:'notify'})
                 }else{
-                    this.messageService.add({severity:'success',summary:`${order?.userInfo?.username?order?.userInfo?.username:'user'} has placed new nrder. check Future Orders to process`,sticky:true,key:'notify'})
+                    this.messageService.add({severity:'success',summary:`${order?.userInfo?.username?order?.userInfo?.username:'user'} has placed new order. check Future Orders to process`,sticky:false,key:'notify'})
                 }
                
             }

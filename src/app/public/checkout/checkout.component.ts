@@ -109,8 +109,8 @@ export class CheckoutComponent {
 
   CheckOut() {
     validateAllFormFields(this.OrderForm)
-    this.OrderForm.get('orderPaymentMode').setValue('cod')
-    this.OrderForm.get('orderPaymentStatus').setValue('offline-mode');
+    this.OrderForm.get('orderPaymentMode').setValue('COD')
+    this.OrderForm.get('orderPaymentStatus').setValue('COD');
     if (!this.isFutureOrder.value) {
       this.OrderForm.get('orderDeliveryTime').setValue(this.latestDate)
     }
